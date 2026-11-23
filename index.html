@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Em Dia - Gestão de Tarefas</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --ok: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    input, select, button, textarea {
+      font: inherit;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.15s ease;
+    }
+
+    button.primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    button.primary:hover {
+      background: var(--primary-hover);
+    }
+
+    button.danger {
+      color: var(--danger);
+      background: transparent;
+      border-color: transparent;
+      padding: 4px 8px;
+      font-size: 0.85rem;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      padding: 20px;
+      align-items: start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .column {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      min-height: 360px;
+    }
+
+    .column.drag-over {
+      outline: 2px dashed var(--primary);
+      background: #eff6ff;
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .col-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .count {
+      background: var(--border);
+      color: var(--text);
+      font-size: 0.78rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: grab;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    }
+
+    .card:active {
+      cursor: grabbing;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin: 0 0 6px;
+      font-size: 0.96rem;
+    }
+
+    .card-desc {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      white-space: pre-line;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.74rem;
+    }
+
+    .tag-alta { background: #fee2e2; color: #991b1b; }
+    .tag-media { background: #fef3c7; color: #92400e; }
+    .tag-baixa { background: #dcfce7; color: #166534; }
+
+    .move-btns {
+      display: flex;
+      gap: 4px;
+    }
+
+    .move-btns button {
+      padding: 3px 7px;
+      font-size: 0.75rem;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 24px 8px;
+    }
+
+    dialog {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 420px;
+      width: 92%;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .form-row label {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-badge">✓</div>
+      <h1>Em Dia - Gestão de Tarefas</h1>
+    </div>
+    <div class="controls">
+      <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
+      <select id="priorityFilter">
+        <option value="todas">Todas prioridades</option>
+        <option value="alta">Alta</option>
+        <option value="media">Média</option>
+        <option value="baixa">Baixa</option>
+      </select>
+      <button class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
+      <button id="resetDemoBtn">Restaurar exemplo</button>
+    </div>
+  </header>
+
+  <main class="board" id="board"></main>
+
+  <dialog id="taskDialog">
+    <form id="taskForm" method="dialog">
+      <h2 id="dialogTitle" style="margin-top:0;font-size:1.1rem;">Nova tarefa</h2>
+      <div class="form-row">
+        <label for="taskTitle">Título *</label>
+        <input id="taskTitle" required placeholder="Ex.: Revisar relatório semanal" />
+      </div>
+      <div class="form-row">
+        <label for="taskDesc">Descrição</label>
+        <textarea id="taskDesc" rows="3" placeholder="Detalhes importantes da tarefa..."></textarea>
+      </div>
+      <div class="form-row">
+        <label for="taskPriority">Prioridade</label>
+        <select id="taskPriority">
+          <option value="media">Média</option>
+          <option value="alta">Alta</option>
+          <option value="baixa">Baixa</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="taskCol">Coluna</label>
+        <select id="taskCol">
+          <option value="todo">A Fazer</option>
+          <option value="doing">Em Andamento</option>
+          <option value="done">Concluído</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancelTaskBtn">Cancelar</button>
+        <button type="submit" class="primary">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const STORAGE_KEY = "em_dia_tarefas_v1";
+    const COLUMNS = [
+      { id: "todo", title: "A Fazer" },
+      { id: "doing", title: "Em Andamento" },
+      { id: "done", title: "Concluído" }
+    ];
+
+    const DEFAULT_TASKS = [
+      {
+        id: "t1",
+        title: "Organizar prioridades da semana",
+        desc: "Listar entregas principais e definir prazos.",
+        priority: "alta",
+        col: "todo"
+      },
+      {
+        id: "t2",
+        title: "Publicar Em Dia no GitHub Pages",
+        desc: "Confirmar o arquivo index.html na raiz do repositório.",
+        priority: "media",
+        col: "doing"
+      },
+      {
+        id: "t3",
+        title: "Criar estrutura inicial do quadro",
+        desc: "Configurar colunas e cartões interativos.",
+        priority: "baixa",
+        col: "done"
+      }
+    ];
+
+    let tasks = loadTasks();
+    let editingId = null;
+
+    const boardEl = document.getElementById("board");
+    const searchEl = document.getElementById("searchInput");
+    const priorityEl = document.getElementById("priorityFilter");
+    const dialogEl = document.getElementById("taskDialog");
+    const formEl = document.getElementById("taskForm");
+
+    function loadTasks() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(DEFAULT_TASKS);
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : structuredClone(DEFAULT_TASKS);
+      } catch {
+        return structuredClone(DEFAULT_TASKS);
+      }
+    }
+
+    function saveTasks() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      } catch {}
+    }
+
+    function priorityLabel(p) {
+      if (p === "alta") return "Alta";
+      if (p === "baixa") return "Baixa";
+      return "Média";
+    }
+
+    function render() {
+      const term = searchEl.value.trim().toLowerCase();
+      const prio = priorityEl.value;
+
+      const filtered = tasks.filter((t) => {
+        const matchText =
+          !term ||
+          t.title.toLowerCase().includes(term) ||
+          (t.desc && t.desc.toLowerCase().includes(term));
+        const matchPrio = prio === "todas" || t.priority === prio;
+        return matchText && matchPrio;
+      });
+
+      boardEl.innerHTML = "";
+
+      COLUMNS.forEach((col, colIndex) => {
+        const colTasks = filtered.filter((t) => t.col === col.id);
+        const colDiv = document.createElement("section");
+        colDiv.className = "column";
+        colDiv.dataset.col = col.id;
+
+        colDiv.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          colDiv.classList.add("drag-over");
+        });
+
+        colDiv.addEventListener("dragleave", () => {
+          colDiv.classList.remove("drag-over");
+        });
+
+        colDiv.addEventListener("drop", (e) => {
+          e.preventDefault();
+          colDiv.classList.remove("drag-over");
+          const id = e.dataTransfer.getData("text/plain");
+          moveTask(id, col.id);
+        });
+
+        colDiv.innerHTML = `
+          <div class="col-header">
+            <div class="col-title">
+              <span>${col.title}</span>
+              <span class="count">${colTasks.length}</span>
+            </div>
+          </div>
+        `;
+
+        if (colTasks.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "empty";
+          empty.textContent = "Nenhuma tarefa nesta coluna.";
+          colDiv.appendChild(empty);
+        } else {
+          colTasks.forEach((task) => {
+            const card = document.createElement("article");
+            card.className = "card";
+            card.draggable = true;
+            card.dataset.id = task.id;
+
+            card.addEventListener("dragstart", (e) => {
+              e.dataTransfer.setData("text/plain", task.id);
+            });
+
+            const prevCol = colIndex > 0 ? COLUMNS[colIndex - 1].id : null;
+            const nextCol = colIndex < COLUMNS.length - 1 ? COLUMNS[colIndex + 1].id : null;
+
+            card.innerHTML = `
+              <div class="card-top">
+                <h3 class="card-title">${escapeHtml(task.title)}</h3>
+                <button class="danger" title="Excluir" data-delete="${task.id}">✕</button>
+              </div>
+              ${task.desc ? `<p class="card-desc">${escapeHtml(task.desc)}</p>` : ""}
+              <div class="card-footer">
+                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
+                <div class="move-btns">
+                  ${prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para esquerda">←</button>` : ""}
+                  <button data-edit="${task.id}" title="Editar">Editar</button>
+                  ${nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para direita">→</button>` : ""}
+                </div>
+              </div>
+            `;
+
+            colDiv.appendChild(card);
+          });
+        }
+
+        boardEl.appendChild(colDiv);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function moveTask(id, targetCol) {
+      const item = tasks.find((t) => t.id === id);
+      if (!item || item.col === targetCol) return;
+      item.col = targetCol;
+      saveTasks();
+      render();
+    }
+
+    function openModal(task = null) {
+      editingId = task ? task.id : null;
+      document.getElementById("dialogTitle").textContent = task ? "Editar tarefa" : "Nova tarefa";
+      document.getElementById("taskTitle").value = task ? task.title : "";
+      document.getElementById("taskDesc").value = task ? task.desc || "" : "";
+      document.getElementById("taskPriority").value = task ? task.priority : "media";
+      document.getElementById("taskCol").value = task ? task.col : "todo";
+      dialogEl.showModal();
+    }
+
+    document.getElementById("openNewTaskBtn").addEventListener("click", () => openModal());
+    document.getElementById("cancelTaskBtn").addEventListener("click", () => dialogEl.close());
+
+    formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const title = document.getElementById("taskTitle").value.trim();
+      if (!title) return;
+      const desc = document.getElementById("taskDesc").value.trim();
+      const priority = document.getElementById("taskPriority").value;
+      const col = document.getElementById("taskCol").value;
+
+      if (editingId) {
+        const existing = tasks.find((t) => t.id === editingId);
+        if (existing) {
+          existing.title = title;
+          existing.desc = desc;
+          existing.priority = priority;
+          existing.col = col;
+        }
+      } else {
+        tasks.unshift({
+          id: "t_" + Date.now(),
+          title,
+          desc,
+          priority,
+          col
+        });
+      }
+
+      saveTasks();
+      dialogEl.close();
+      render();
+    });
+
+    boardEl.addEventListener("click", (e) => {
+      const delId = e.target.dataset.delete;
+      if (delId) {
+        tasks = tasks.filter((t) => t.id !== delId);
+        saveTasks();
+        render();
+        return;
+      }
+
+      const editId = e.target.dataset.edit;
+      if (editId) {
+        const found = tasks.find((t) => t.id === editId);
+        if (found) openModal(found);
+        return;
+      }
+
+      const moveSpec = e.target.dataset.move;
+      if (moveSpec) {
+        const [id, targetCol] = moveSpec.split(":");
+        moveTask(id, targetCol);
+      }
+    });
+
+    document.getElementById("resetDemoBtn").addEventListener("click", () => {
+      tasks = structuredClone(DEFAULT_TASKS);
+      saveTasks();
+      render();
+    });
+
+    searchEl.addEventListener("input", render);
+    priorityEl.addEventListener("change", render);
+
+    render();
+  </script>
+</body>
+</html>
