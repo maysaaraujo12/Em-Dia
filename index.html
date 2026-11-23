@@ -17,6 +17,17 @@
       --danger: #dc2626;
       --ok: #16a34a;
       --warn: #d97706;
+      --active-tint: #eff6ff;
+    }
+
+    body.dark-theme {
+      --bg: #0b1120;
+      --surface: #111827;
+      --surface-2: #1e293b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: #334155;
+      --active-tint: #1e3a8a;
     }
 
     * { box-sizing: border-box; }
@@ -27,6 +38,7 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .hidden { display: none !important; }
@@ -39,6 +51,10 @@
       background: linear-gradient(135deg, #eff6ff 0%, #f1f5f9 55%, #e0e7ff 100%);
     }
 
+    body.dark-theme .auth-wrapper {
+      background: linear-gradient(135deg, #0f172a 0%, #0b1120 55%, #1e1b4b 100%);
+    }
+
     .auth-card {
       width: 100%;
       max-width: 470px;
@@ -46,7 +62,7 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
     }
 
     .auth-brand {
@@ -57,9 +73,9 @@
     }
 
     .welcome-banner {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e3a8a;
+      background: var(--active-tint);
+      border: 1px solid var(--border);
+      color: var(--text);
       border-radius: 12px;
       padding: 12px 14px;
       font-size: 0.86rem;
@@ -153,6 +169,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
 
     h1 { margin: 0; font-size: 1.08rem; }
@@ -187,7 +204,7 @@
       border-color: var(--primary);
     }
 
-    button.primary:hover:not(:disabled) { background: var(--primary-hover); }
+    button.primary:hover:not(:disabled) { opacity: 0.92; }
 
     button.ghost { background: transparent; }
     button.ghost:hover:not(:disabled) { background: var(--surface-2); }
@@ -205,7 +222,7 @@
       margin: 0 auto;
       padding: 20px;
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 265px 1fr;
       gap: 20px;
       align-items: start;
     }
@@ -252,7 +269,7 @@
     }
 
     .nav-btn.active {
-      background: #eff6ff;
+      background: var(--active-tint);
       border-color: var(--primary);
       color: var(--primary);
     }
@@ -352,9 +369,9 @@
     .insight-value { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
     .insight-meta { font-size: 0.78rem; color: var(--muted); }
 
-    .val-alta { color: #991b1b; }
-    .val-media { color: #92400e; }
-    .val-baixa { color: #166534; }
+    .val-alta { color: #ef4444; }
+    .val-media { color: #f59e0b; }
+    .val-baixa { color: #22c55e; }
 
     .charts-grid {
       display: grid;
@@ -373,7 +390,7 @@
     .bar-row { margin-bottom: 10px; }
     .bar-row:last-child { margin-bottom: 0; }
     .bar-label-line { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px; }
-    .bar-track { height: 10px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
+    .bar-track { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
 
     .mini-cal-grid {
@@ -392,7 +409,7 @@
     }
 
     .cal-day {
-      min-height: 44px;
+      min-height: 46px;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 6px;
@@ -404,14 +421,14 @@
     }
 
     .cal-day.empty-day { background: transparent; border-color: transparent; }
-    .cal-day.today-ring { outline: 2px solid var(--text); }
+    .cal-day.today-ring { outline: 2px solid var(--primary); }
     .cal-dots { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 4px; }
     .cal-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
     .boards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
     }
 
     .board-tile {
@@ -422,45 +439,27 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
     }
 
     .board-tile:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
     }
 
-    .board-tile.active {
-      border: 2px solid var(--primary);
-      background: #eff6ff;
-    }
-
-    .board-strip { height: 8px; width: 100%; }
-    .board-tile-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .board-tile-title { font-weight: 700; font-size: 0.94rem; margin: 0; }
-    .board-tile-desc { font-size: 0.8rem; color: var(--muted); margin: 0; }
+    .board-strip { height: 10px; width: 100%; }
+    .board-tile-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .board-tile-title { font-weight: 700; font-size: 0.96rem; margin: 0; }
+    .board-tile-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
     .board-tile-foot {
       margin-top: auto;
-      padding-top: 8px;
+      padding-top: 10px;
       display: flex;
       justify-content: space-between;
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .board-quick-menu {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
       align-items: center;
-    }
-
-    .board-quick-menu button {
-      padding: 4px 8px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
     .board-toolbar {
@@ -518,7 +517,7 @@
       min-height: 290px;
     }
 
-    .column.drag-over { outline: 2px dashed var(--primary); background: #eff6ff; }
+    .column.drag-over { outline: 2px dashed var(--primary); background: var(--active-tint); }
 
     .col-header {
       display: flex;
@@ -537,7 +536,7 @@
       overflow: hidden;
       margin-bottom: 10px;
       cursor: grab;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
     }
 
     .card:active { cursor: grabbing; }
@@ -572,12 +571,12 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      background: #f1f5f9;
+      background: var(--surface-2);
       border: 1px solid var(--border);
       padding: 2px 8px;
       border-radius: 999px;
       font-size: 0.74rem;
-      color: #334155;
+      color: var(--text);
       margin-bottom: 8px;
       text-decoration: none;
     }
@@ -590,7 +589,7 @@
       font-size: 0.78rem;
       color: var(--muted);
       padding-top: 6px;
-      border-top: 1px solid var(--surface-2);
+      border-top: 1px solid var(--border);
     }
 
     .tag { padding: 2px 8px; border-radius: 999px; font-weight: 600; font-size: 0.74rem; display: inline-block; }
@@ -603,8 +602,9 @@
       border-radius: 999px;
       font-size: 0.74rem;
       font-weight: 600;
-      background: #e2e8f0;
-      color: #1e293b;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
       display: inline-block;
     }
 
@@ -612,7 +612,7 @@
     .due-late { background: #fee2e2; color: #991b1b; }
     .due-today { background: #fef3c7; color: #92400e; }
     .due-upcoming { background: #dbeafe; color: #1e40af; }
-    .due-none { background: #f1f5f9; color: #64748b; }
+    .due-none { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
 
     .move-btns { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
     .move-btns button { padding: 3px 7px; font-size: 0.75rem; }
@@ -640,12 +640,14 @@
     tr:last-child td { border-bottom: none; }
 
     dialog {
+      background: var(--surface);
+      color: var(--text);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 20px;
       max-width: 520px;
       width: 94%;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.2);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.25);
     }
 
     .form-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
@@ -687,6 +689,7 @@
   </style>
 </head>
 <body>
+  <!-- TELA INICIAL: LOGIN / CRIAR CONTA -->
   <section id="authScreen" class="auth-wrapper">
     <div class="auth-card">
       <div class="auth-brand">
@@ -756,27 +759,22 @@
     </div>
   </section>
 
+  <!-- APLICAÇÃO APÓS LOGIN -->
   <div id="appShell" class="hidden">
     <header>
-      <div class="brand">
-        <div class="smiley-icon sm" title="Em Dia - Gestão de Tarefas">😊</div>
+      <div class="brand" id="goHomeBrandBtn" title="Voltar para a tela inicial de quadros">
+        <div class="smiley-icon sm">😊</div>
         <h1>Em Dia - Gestão de Tarefas</h1>
       </div>
 
       <div class="controls">
-        <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
-        <select id="priorityFilter">
-          <option value="todas">Todas prioridades</option>
-          <option value="alta">Alta</option>
-          <option value="media">Média</option>
-          <option value="baixa">Baixa</option>
-        </select>
-        <button class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
+        <button type="button" class="ghost hidden" id="backToBoardsHeaderBtn">← Meus Quadros</button>
         <button class="ghost" id="logoutBtn">Sair</button>
       </div>
     </header>
 
     <div class="app-layout">
+      <!-- LATERAL ESQUERDA: CONTA, SEGURANÇA, NOTIFICAÇÕES, PERSONALIZAÇÃO -->
       <aside class="sidebar" aria-label="Configurações da conta">
         <div class="sidebar-profile" id="sidebarProfile"></div>
 
@@ -847,156 +845,195 @@
 
         <div id="subsec-customization" class="subpanel hidden" style="margin:6px 0 0;">
           <div class="form-row">
+            <label for="customTheme">Tema da interface</label>
+            <select id="customTheme">
+              <option value="light">Tema Branco (Claro)</option>
+              <option value="dark">Tema Escuro</option>
+            </select>
+          </div>
+          <div class="form-row">
             <label for="customGreeting">Mensagem personalizada</label>
             <input id="customGreeting" type="text" placeholder="Que bom vê-lo novamente" />
           </div>
           <div class="form-row">
-            <label for="customAccent">Cor principal do app</label>
+            <label for="customAccent">Cor de destaque</label>
             <input id="customAccent" type="color" style="height:36px;padding:3px;" />
           </div>
           <button type="button" class="primary" style="width:100%;" id="saveCustomBtn">Salvar personalização</button>
         </div>
       </aside>
 
+      <!-- CONTEÚDO PRINCIPAL -->
       <main class="main-stack">
-        <div class="greeting-banner">
-          <div>
-            <strong style="font-size:1.05rem;" id="greetingTitle">Que bom vê-lo novamente 😊</strong>
-            <div class="section-sub" id="greetingSubtitle">Clique em um quadro para acessar o menu suspenso, gerenciar membros e editar informações.</div>
+        <!-- PÁGINA 1 (PÓS-LOGIN): SAUDAÇÃO, CALENDÁRIO E LISTA DE 10 QUADROS (SEM CONTEÚDO INTERNO DOS QUADROS) -->
+        <div id="homeDashboardView" class="main-stack">
+          <div class="greeting-banner">
+            <div>
+              <strong style="font-size:1.05rem;" id="greetingTitle">Que bom vê-lo novamente 😊</strong>
+              <div class="section-sub">Selecione um quadro abaixo para abrir suas tarefas, insights e configurações.</div>
+            </div>
           </div>
+
+          <section class="section-box" aria-label="Calendário geral">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2 class="section-title">Calendário</h2>
+                <span class="section-sub" id="calendarMonthLabel"></span>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <button type="button" id="prevMonthBtn">←</button>
+                <button type="button" id="nextMonthBtn">→</button>
+              </div>
+            </div>
+            <div class="mini-cal-grid" id="miniCalendarGrid"></div>
+          </section>
+
+          <section class="section-box" aria-label="Lista de quadros">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2 class="section-title">Meus Quadros</h2>
+                <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
+              </div>
+              <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
+            </div>
+            <div class="boards-grid" id="boardsList"></div>
+          </section>
         </div>
 
-        <section class="section-box" aria-label="Insights das tarefas">
-          <div class="section-header">
-            <div class="section-title-group">
-              <h2 class="section-title">Insights</h2>
-              <span class="section-sub" id="insightsSummaryText">Resumo do quadro atual</span>
-            </div>
-            <button type="button" id="toggleInsightsBtn">🙈 Ocultar insights</button>
-          </div>
-
-          <div id="insightsContent">
-            <div class="insights-grid" id="insightsGrid"></div>
-            <div class="charts-grid" id="chartsGrid"></div>
-          </div>
-        </section>
-
-        <section class="section-box" aria-label="Calendário de tarefas">
-          <div class="section-header">
-            <div class="section-title-group">
-              <h2 class="section-title">Calendário</h2>
-              <span class="section-sub" id="calendarMonthLabel"></span>
-            </div>
-            <div style="display:flex;gap:6px;">
-              <button type="button" id="prevMonthBtn">←</button>
-              <button type="button" id="nextMonthBtn">→</button>
-            </div>
-          </div>
-          <div class="mini-cal-grid" id="miniCalendarGrid"></div>
-        </section>
-
-        <section class="section-box" aria-label="Lista de quadros">
-          <div class="section-header">
-            <div class="section-title-group">
-              <h2 class="section-title">Meus Quadros</h2>
-              <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
-            </div>
-            <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
-          </div>
-          <div class="boards-grid" id="boardsList"></div>
-        </section>
-
-        <section class="section-box" aria-label="Quadro selecionado">
-          <div class="board-toolbar">
-            <div>
-              <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
-              <span class="section-sub" id="activeBoardDesc"></span>
-            </div>
-
-            <div class="controls">
-              <label for="viewModeSelect" class="section-sub" style="font-weight:600;">Metodologia:</label>
-              <select id="viewModeSelect">
-                <option value="kanban">Kanban</option>
-                <option value="cronograma">Cronograma</option>
-                <option value="tabela">Tabela</option>
-              </select>
-              <button type="button" id="toggleBoardEditBtn">Informações do quadro</button>
-              <button type="button" id="togglePermissionsBtn">Gerenciar membros</button>
-            </div>
-          </div>
-
-          <div id="boardEditPanel" class="subpanel hidden">
-            <h3 style="margin:0 0 10px;font-size:0.95rem;">Informações do quadro</h3>
-            <div class="two-col-grid">
-              <div class="form-row">
-                <label for="editBoardNameInput">Nome do quadro</label>
-                <input id="editBoardNameInput" type="text" />
+        <!-- PÁGINA 2 (AO CLICAR NO QUADRO): INSIGHTS, MENU SUSPENSO, GERENCIAR MEMBROS, INFO DO QUADRO E TAREFAS -->
+        <div id="boardDetailView" class="main-stack hidden">
+          <section class="section-box" aria-label="Cabeçalho do quadro">
+            <div class="board-toolbar">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <button type="button" id="backToBoardsBtn">← Voltar aos quadros</button>
+                <div>
+                  <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
+                  <span class="section-sub" id="activeBoardDesc"></span>
+                </div>
               </div>
-              <div class="form-row">
-                <label for="editBoardColorInput">Cor do quadro</label>
-                <input id="editBoardColorInput" type="color" style="height:38px;padding:4px;" />
+
+              <div class="controls">
+                <label for="viewModeSelect" class="section-sub" style="font-weight:600;">Metodologia:</label>
+                <select id="viewModeSelect">
+                  <option value="kanban">Kanban</option>
+                  <option value="cronograma">Cronograma</option>
+                  <option value="tabela">Tabela</option>
+                </select>
+                <button type="button" id="toggleBoardEditBtn">Informações do quadro</button>
+                <button type="button" id="togglePermissionsBtn">Gerenciar membros</button>
+                <button type="button" class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
               </div>
             </div>
-            <div class="form-row">
-              <label for="editBoardDescInput">Descrição</label>
-              <input id="editBoardDescInput" type="text" />
-            </div>
-            <div style="display:flex;gap:8px;justify-content:flex-end;">
-              <button type="button" id="closeBoardEditBtn">Fechar</button>
-              <button type="button" class="primary" id="saveBoardInfoBtn">Salvar quadro</button>
-            </div>
-          </div>
 
-          <div id="permissionsPanel" class="subpanel hidden">
-            <h3 style="margin:0 0 6px;font-size:0.95rem;">Gerenciar membros e permissões</h3>
-            <p class="section-sub" style="margin:0 0 12px;">
-              Perfis disponíveis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>.
-            </p>
-
-            <div class="two-col-grid" style="margin-bottom:10px;">
-              <div class="form-row" style="margin-bottom:0;">
-                <label for="newMemberName">Nome do membro</label>
-                <input id="newMemberName" type="text" placeholder="Ex.: João Pedro" />
-              </div>
-              <div class="form-row" style="margin-bottom:0;">
-                <label for="newMemberRole">Permissão</label>
-                <select id="newMemberRole">
-                  <option value="Administrador">Administrador</option>
-                  <option value="Membro" selected>Membro</option>
-                  <option value="Analista">Analista</option>
+            <!-- Filtros internos do quadro -->
+            <div class="controls" style="justify-content:space-between;">
+              <div class="controls">
+                <input id="searchInput" type="search" placeholder="Buscar tarefa neste quadro..." />
+                <select id="priorityFilter">
+                  <option value="todas">Todas prioridades</option>
+                  <option value="alta">Alta</option>
+                  <option value="media">Média</option>
+                  <option value="baixa">Baixa</option>
                 </select>
               </div>
-            </div>
-            <div style="margin-bottom:12px;">
-              <button type="button" class="primary" id="addMemberBtn">+ Adicionar membro</button>
+              <span class="section-sub" id="boardRoleIndicator"></span>
             </div>
 
-            <div id="membersList"></div>
-          </div>
+            <!-- Visível apenas quando clicado: Informações do quadro -->
+            <div id="boardEditPanel" class="subpanel hidden" style="margin-top:14px;margin-bottom:0;">
+              <h3 style="margin:0 0 10px;font-size:0.95rem;">Informações do quadro</h3>
+              <div class="two-col-grid">
+                <div class="form-row">
+                  <label for="editBoardNameInput">Nome do quadro</label>
+                  <input id="editBoardNameInput" type="text" />
+                </div>
+                <div class="form-row">
+                  <label for="editBoardColorInput">Cor do quadro</label>
+                  <input id="editBoardColorInput" type="color" style="height:38px;padding:4px;" />
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="editBoardDescInput">Descrição</label>
+                <input id="editBoardDescInput" type="text" />
+              </div>
+              <div style="display:flex;gap:8px;justify-content:flex-end;">
+                <button type="button" id="closeBoardEditBtn">Fechar</button>
+                <button type="button" class="primary" id="saveBoardInfoBtn">Salvar quadro</button>
+              </div>
+            </div>
 
-          <div id="viewKanban" class="board"></div>
-          <div id="viewCronograma" class="schedule-list hidden"></div>
-          <div id="viewTabela" class="table-wrap hidden">
-            <table>
-              <thead>
-                <tr>
-                  <th>Tarefa</th>
-                  <th>Responsável</th>
-                  <th>Coluna</th>
-                  <th>Prioridade</th>
-                  <th>Prazo</th>
-                  <th>Anexo</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody id="tasksTableBody"></tbody>
-            </table>
-          </div>
-        </section>
+            <!-- Visível apenas quando clicado: Gerenciar membros e permissões + foto -->
+            <div id="permissionsPanel" class="subpanel hidden" style="margin-top:14px;margin-bottom:0;">
+              <h3 style="margin:0 0 6px;font-size:0.95rem;">Gerenciar membros e permissões</h3>
+              <p class="section-sub" style="margin:0 0 12px;">
+                Perfis disponíveis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>.
+              </p>
+
+              <div class="two-col-grid" style="margin-bottom:10px;">
+                <div class="form-row" style="margin-bottom:0;">
+                  <label for="newMemberName">Nome do membro</label>
+                  <input id="newMemberName" type="text" placeholder="Ex.: João Pedro" />
+                </div>
+                <div class="form-row" style="margin-bottom:0;">
+                  <label for="newMemberRole">Permissão</label>
+                  <select id="newMemberRole">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Membro" selected>Membro</option>
+                    <option value="Analista">Analista</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-bottom:12px;">
+                <button type="button" class="primary" id="addMemberBtn">+ Adicionar membro</button>
+              </div>
+
+              <div id="membersList"></div>
+            </div>
+          </section>
+
+          <!-- INSIGHTS DO QUADRO ABERTO -->
+          <section class="section-box" aria-label="Insights do quadro">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2 class="section-title">Insights do Quadro</h2>
+                <span class="section-sub" id="insightsSummaryText">Resumo do quadro</span>
+              </div>
+              <button type="button" id="toggleInsightsBtn">🙈 Ocultar insights</button>
+            </div>
+
+            <div id="insightsContent">
+              <div class="insights-grid" id="insightsGrid"></div>
+              <div class="charts-grid" id="chartsGrid"></div>
+            </div>
+          </section>
+
+          <!-- CONTEÚDO DAS METODOLOGIAS (KANBAN, CRONOGRAMA, TABELA) -->
+          <section class="section-box" aria-label="Atividades do quadro">
+            <div id="viewKanban" class="board"></div>
+            <div id="viewCronograma" class="schedule-list hidden"></div>
+            <div id="viewTabela" class="table-wrap hidden">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tarefa</th>
+                    <th>Responsável</th>
+                    <th>Coluna</th>
+                    <th>Prioridade</th>
+                    <th>Prazo</th>
+                    <th>Anexo</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tasksTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   </div>
 
+  <!-- MODAL: CRIAR / EDITAR TAREFA -->
   <dialog id="taskDialog">
     <form id="taskForm" method="dialog">
       <h2 id="dialogTitle" style="margin-top:0;font-size:1.1rem;">Nova tarefa</h2>
@@ -1056,7 +1093,7 @@
       </div>
 
       <div id="coverColorRow" class="form-row hidden">
-        <label for="taskCoverColor">Cor do card (também reflete no calendário)</label>
+        <label for="taskCoverColor">Cor do card (reflete no calendário)</label>
         <input id="taskCoverColor" type="color" value="#2563eb" style="height:38px;padding:4px;" />
       </div>
 
@@ -1080,7 +1117,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v4";
+    const DB_KEY = "em_dia_workspace_v5";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const COLUMNS = [
@@ -1111,6 +1148,7 @@
       const today = getTodayIso();
       return {
         isAuthenticated: false,
+        screen: "home", // "home" ou "board"
         user: {
           name: "Maysa Araújo",
           email: "maysa@emdia.app",
@@ -1119,7 +1157,11 @@
           pin: "",
           avatarUrl: "",
           notifications: { push: true, email: true, desktop: false },
-          customization: { greeting: "Que bom vê-lo novamente", accent: "#2563eb" }
+          customization: {
+            theme: "light", // "light" ou "dark"
+            greeting: "Que bom vê-lo novamente",
+            accent: "#2563eb"
+          }
         },
         insightsVisible: true,
         calendarOffsetMonths: 0,
@@ -1216,8 +1258,10 @@
       } catch {}
     }
 
-    function applyAccentColor() {
+    function applyThemeAndAccent() {
+      const theme = state.user.customization?.theme || "light";
       const accent = state.user.customization?.accent || "#2563eb";
+      document.body.classList.toggle("dark-theme", theme === "dark");
       document.documentElement.style.setProperty("--primary", accent);
     }
 
@@ -1299,6 +1343,7 @@
       return `<span class="${sizeClass}">${escapeHtml(getInitials(name))}</span>`;
     }
 
+    /* AUTH */
     const authScreenEl = document.getElementById("authScreen");
     const appShellEl = document.getElementById("appShell");
     const tabLoginBtn = document.getElementById("tabLoginBtn");
@@ -1307,7 +1352,7 @@
     const registerFormEl = document.getElementById("registerForm");
 
     function updateAuthVisibility() {
-      applyAccentColor();
+      applyThemeAndAccent();
       if (state.isAuthenticated) {
         authScreenEl.classList.add("hidden");
         appShellEl.classList.remove("hidden");
@@ -1338,6 +1383,7 @@
       if (!state.user.name) state.user.name = "Usuário Google";
       if (!state.user.email) state.user.email = "usuario.google@gmail.com";
       state.isAuthenticated = true;
+      state.screen = "home";
       saveState();
       updateAuthVisibility();
     });
@@ -1353,6 +1399,7 @@
       }
       state.user.email = document.getElementById("loginEmail").value.trim() || state.user.email;
       state.isAuthenticated = true;
+      state.screen = "home";
       saveState();
       updateAuthVisibility();
     });
@@ -1369,6 +1416,7 @@
       state.user.role = role;
       state.user.password = password;
       state.isAuthenticated = true;
+      state.screen = "home";
 
       const board = getActiveBoard();
       if (board && !board.members.some((m) => m.name.toLowerCase() === name.toLowerCase())) {
@@ -1390,6 +1438,29 @@
       updateAuthVisibility();
     });
 
+    /* NAVIGATION BETWEEN HOME (POST-LOGIN) AND OPEN BOARD PAGE */
+    function goHome() {
+      state.screen = "home";
+      boardEditPanelEl.classList.add("hidden");
+      permissionsPanelEl.classList.add("hidden");
+      saveState();
+      renderAll();
+    }
+
+    function openBoardPage(boardId) {
+      state.activeBoardId = boardId;
+      state.screen = "board";
+      boardEditPanelEl.classList.add("hidden");
+      permissionsPanelEl.classList.add("hidden");
+      saveState();
+      renderAll();
+    }
+
+    document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
+    document.getElementById("backToBoardsHeaderBtn").addEventListener("click", goHome);
+    document.getElementById("backToBoardsBtn").addEventListener("click", goHome);
+
+    /* LEFT SIDEBAR SETTINGS */
     const sections = ["profile", "security", "notifications", "customization"];
     document.querySelectorAll(".nav-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -1411,6 +1482,7 @@
       document.getElementById("notifPush").checked = Boolean(state.user.notifications?.push);
       document.getElementById("notifEmail").checked = Boolean(state.user.notifications?.email);
       document.getElementById("notifDesktop").checked = Boolean(state.user.notifications?.desktop);
+      document.getElementById("customTheme").value = state.user.customization?.theme || "light";
       document.getElementById("customGreeting").value = state.user.customization?.greeting || "Que bom vê-lo novamente";
       document.getElementById("customAccent").value = state.user.customization?.accent || "#2563eb";
     }
@@ -1455,14 +1527,136 @@
 
     document.getElementById("saveCustomBtn").addEventListener("click", () => {
       state.user.customization = {
+        theme: document.getElementById("customTheme").value || "light",
         greeting: document.getElementById("customGreeting").value.trim() || "Que bom vê-lo novamente",
         accent: document.getElementById("customAccent").value || "#2563eb"
       };
-      applyAccentColor();
+      applyThemeAndAccent();
       saveState();
       renderAll();
     });
 
+    /* MINI CALENDAR (HOME DASHBOARD - COLORED BY ALL CARDS' COLORS) */
+    document.getElementById("prevMonthBtn").addEventListener("click", () => {
+      state.calendarOffsetMonths -= 1;
+      saveState();
+      renderMiniCalendar();
+    });
+
+    document.getElementById("nextMonthBtn").addEventListener("click", () => {
+      state.calendarOffsetMonths += 1;
+      saveState();
+      renderMiniCalendar();
+    });
+
+    function getCardColorForCalendar(task, board) {
+      if (task.coverType === "color" && task.coverColor) return task.coverColor;
+      if (task.priority === "alta") return "#dc2626";
+      if (task.priority === "media") return "#d97706";
+      if (task.priority === "baixa") return "#16a34a";
+      return board.color || "#2563eb";
+    }
+
+    function renderMiniCalendar() {
+      const base = new Date();
+      base.setDate(1);
+      base.setMonth(base.getMonth() + (state.calendarOffsetMonths || 0));
+
+      const year = base.getFullYear();
+      const month = base.getMonth();
+      const firstWeekday = base.getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayIso = getTodayIso();
+
+      const monthName = base.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+      document.getElementById("calendarMonthLabel").textContent =
+        monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+      const tasksByDate = {};
+      state.boards.forEach((b) => {
+        (b.tasks || []).forEach((t) => {
+          if (!t.dueDate) return;
+          if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = [];
+          tasksByDate[t.dueDate].push(getCardColorForCalendar(t, b));
+        });
+      });
+
+      const dows = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      let html = dows.map((d) => `<div class="cal-dow">${d}</div>`).join("");
+
+      for (let i = 0; i < firstWeekday; i++) {
+        html += `<div class="cal-day empty-day"></div>`;
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const mm = String(month + 1).padStart(2, "0");
+        const dd = String(day).padStart(2, "0");
+        const iso = `${year}-${mm}-${dd}`;
+        const colors = tasksByDate[iso] || [];
+        const isToday = iso === todayIso;
+        const primaryDayColor = colors[0] || "";
+
+        html += `
+          <div class="cal-day ${isToday ? "today-ring" : ""}" style="${primaryDayColor ? `border-color:${primaryDayColor};` : ""}">
+            <strong>${day}</strong>
+            <div class="cal-dots">
+              ${colors.map((c) => `<span class="cal-dot" style="background:${escapeHtml(c)};"></span>`).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById("miniCalendarGrid").innerHTML = html;
+    }
+
+    /* BOARDS LIST ON HOME (UP TO 10 BOARDS, NO INTERNAL CONTENT SHOWN HERE) */
+    document.getElementById("createBoardBtn").addEventListener("click", () => {
+      if (state.boards.length >= MAX_BOARDS) {
+        alert(`Limite máximo de ${MAX_BOARDS} quadros atingido.`);
+        return;
+      }
+      const n = state.boards.length + 1;
+      const newBoard = {
+        id: "b_" + Date.now(),
+        name: `Quadro ${n}`,
+        desc: "Clique para abrir e gerenciar tarefas deste quadro.",
+        color: state.user.customization?.accent || "#2563eb",
+        members: [
+          { id: "m_" + Date.now(), name: state.user.name || "Você", role: "Administrador", avatarUrl: state.user.avatarUrl || "" }
+        ],
+        tasks: []
+      };
+      state.boards.push(newBoard);
+      saveState();
+      renderAll();
+    });
+
+    function renderBoardsList() {
+      document.getElementById("boardsLimitText").textContent = `${state.boards.length} / ${MAX_BOARDS} quadros`;
+      document.getElementById("boardsList").innerHTML = state.boards
+        .map((b) => `
+          <div class="board-tile" data-open-board="${b.id}">
+            <div class="board-strip" style="background:${escapeHtml(b.color || "#2563eb")};"></div>
+            <div class="board-tile-body">
+              <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
+              <p class="board-tile-desc">${escapeHtml(b.desc || "Clique para abrir este quadro")}</p>
+              <div class="board-tile-foot">
+                <span>${(b.members || []).length} membro(s)</span>
+                <span style="color:var(--primary);font-weight:700;">Abrir quadro →</span>
+              </div>
+            </div>
+          </div>
+        `)
+        .join("");
+    }
+
+    document.getElementById("boardsList").addEventListener("click", (e) => {
+      const tile = e.target.closest("[data-open-board]");
+      if (!tile) return;
+      openBoardPage(tile.dataset.openBoard);
+    });
+
+    /* INSIGHTS INSIDE OPEN BOARD PAGE */
     const insightsContentEl = document.getElementById("insightsContent");
     const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
 
@@ -1502,7 +1696,7 @@
       const doneCount = filtered.filter((t) => t.col === "done").length;
 
       document.getElementById("insightsSummaryText").textContent =
-        `Quadro "${board.name}" • ${total} tarefa(s)`;
+        `${total} tarefa(s) exibida(s) em "${board.name}"`;
 
       document.getElementById("insightsGrid").innerHTML = `
         <div class="insight-card">
@@ -1564,196 +1758,21 @@
       `;
     }
 
-    document.getElementById("prevMonthBtn").addEventListener("click", () => {
-      state.calendarOffsetMonths -= 1;
-      saveState();
-      renderMiniCalendar();
-    });
-
-    document.getElementById("nextMonthBtn").addEventListener("click", () => {
-      state.calendarOffsetMonths += 1;
-      saveState();
-      renderMiniCalendar();
-    });
-
-    function getCardColorForCalendar(task, board) {
-      if (task.coverType === "color" && task.coverColor) return task.coverColor;
-      if (task.priority === "alta") return "#dc2626";
-      if (task.priority === "media") return "#d97706";
-      if (task.priority === "baixa") return "#16a34a";
-      return board.color || "#2563eb";
-    }
-
-    function renderMiniCalendar() {
-      const board = getActiveBoard();
-      const base = new Date();
-      base.setDate(1);
-      base.setMonth(base.getMonth() + (state.calendarOffsetMonths || 0));
-
-      const year = base.getFullYear();
-      const month = base.getMonth();
-      const firstWeekday = base.getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const todayIso = getTodayIso();
-
-      const monthName = base.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-      document.getElementById("calendarMonthLabel").textContent =
-        monthName.charAt(0).toUpperCase() + monthName.slice(1);
-
-      const tasksByDate = {};
-      (board.tasks || []).forEach((t) => {
-        if (!t.dueDate) return;
-        if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = [];
-        tasksByDate[t.dueDate].push(getCardColorForCalendar(t, board));
-      });
-
-      const dows = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-      let html = dows.map((d) => `<div class="cal-dow">${d}</div>`).join("");
-
-      for (let i = 0; i < firstWeekday; i++) {
-        html += `<div class="cal-day empty-day"></div>`;
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const mm = String(month + 1).padStart(2, "0");
-        const dd = String(day).padStart(2, "0");
-        const iso = `${year}-${mm}-${dd}`;
-        const colors = tasksByDate[iso] || [];
-        const isToday = iso === todayIso;
-        const primaryDayColor = colors[0] || "";
-
-        html += `
-          <div class="cal-day ${isToday ? "today-ring" : ""}" style="${primaryDayColor ? `border-color:${primaryDayColor};` : ""}">
-            <strong>${day}</strong>
-            <div class="cal-dots">
-              ${colors.map((c) => `<span class="cal-dot" style="background:${escapeHtml(c)};"></span>`).join("")}
-            </div>
-          </div>
-        `;
-      }
-
-      document.getElementById("miniCalendarGrid").innerHTML = html;
-    }
-
+    /* BOARD EDIT & MEMBERS/PERMISSIONS INSIDE BOARD PAGE */
     const boardEditPanelEl = document.getElementById("boardEditPanel");
     const permissionsPanelEl = document.getElementById("permissionsPanel");
 
-    function openBoardInfoPanel(board) {
+    document.getElementById("toggleBoardEditBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
       if (!canManageBoard(board)) {
         alert("Apenas Administradores podem editar as informações do quadro.");
         return;
       }
       permissionsPanelEl.classList.add("hidden");
-      boardEditPanelEl.classList.remove("hidden");
+      boardEditPanelEl.classList.toggle("hidden");
       document.getElementById("editBoardNameInput").value = board.name;
       document.getElementById("editBoardDescInput").value = board.desc || "";
       document.getElementById("editBoardColorInput").value = board.color || "#2563eb";
-    }
-
-    function openBoardMembersPanel() {
-      boardEditPanelEl.classList.add("hidden");
-      permissionsPanelEl.classList.remove("hidden");
-      renderMembersPanel();
-    }
-
-    document.getElementById("createBoardBtn").addEventListener("click", () => {
-      if (state.boards.length >= MAX_BOARDS) {
-        alert(`Limite máximo de ${MAX_BOARDS} quadros atingido.`);
-        return;
-      }
-      const n = state.boards.length + 1;
-      const newBoard = {
-        id: "b_" + Date.now(),
-        name: `Quadro ${n}`,
-        desc: "Novo quadro de tarefas.",
-        color: state.user.customization?.accent || "#2563eb",
-        members: [
-          { id: "m_" + Date.now(), name: state.user.name || "Você", role: "Administrador", avatarUrl: state.user.avatarUrl || "" }
-        ],
-        tasks: []
-      };
-      state.boards.push(newBoard);
-      state.activeBoardId = newBoard.id;
-      saveState();
-      renderAll();
-    });
-
-    function renderBoardsList() {
-      document.getElementById("boardsLimitText").textContent = `${state.boards.length} / ${MAX_BOARDS} quadros`;
-      const activeId = getActiveBoard().id;
-      document.getElementById("boardsList").innerHTML = state.boards
-        .map((b) => {
-          const isActive = b.id === activeId;
-          return `
-            <div class="board-tile ${isActive ? "active" : ""}" data-select-board="${b.id}">
-              <div class="board-strip" style="background:${escapeHtml(b.color || "#2563eb")};"></div>
-              <div class="board-tile-body">
-                <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
-                <p class="board-tile-desc">${escapeHtml(b.desc || "Sem descrição")}</p>
-                <div class="board-tile-foot">
-                  <span>${(b.tasks || []).length} tarefa(s)</span>
-                  <span>${(b.members || []).length} membro(s)</span>
-                </div>
-                ${isActive ? `
-                  <div class="board-quick-menu" onclick="event.stopPropagation()">
-                    <select data-board-quick-view="${b.id}" style="padding:4px 6px;font-size:0.75rem;">
-                      <option value="kanban" ${state.viewMode === "kanban" ? "selected" : ""}>Kanban</option>
-                      <option value="cronograma" ${state.viewMode === "cronograma" ? "selected" : ""}>Cronograma</option>
-                      <option value="tabela" ${state.viewMode === "tabela" ? "selected" : ""}>Tabela</option>
-                    </select>
-                    <button type="button" data-board-quick-members="${b.id}">Membros</button>
-                    <button type="button" data-board-quick-info="${b.id}">Informações</button>
-                  </div>
-                ` : ""}
-              </div>
-            </div>
-          `;
-        })
-        .join("");
-    }
-
-    document.getElementById("boardsList").addEventListener("click", (e) => {
-      const membersBoardId = e.target.dataset.boardQuickMembers;
-      if (membersBoardId) {
-        state.activeBoardId = membersBoardId;
-        saveState();
-        renderAll();
-        openBoardMembersPanel();
-        return;
-      }
-
-      const infoBoardId = e.target.dataset.boardQuickInfo;
-      if (infoBoardId) {
-        state.activeBoardId = infoBoardId;
-        saveState();
-        renderAll();
-        openBoardInfoPanel(getActiveBoard());
-        return;
-      }
-
-      const tile = e.target.closest("[data-select-board]");
-      if (!tile) return;
-      state.activeBoardId = tile.dataset.selectBoard;
-      saveState();
-      renderAll();
-    });
-
-    document.getElementById("boardsList").addEventListener("change", (e) => {
-      const quickViewBoardId = e.target.dataset.boardQuickView;
-      if (!quickViewBoardId) return;
-      state.activeBoardId = quickViewBoardId;
-      state.viewMode = e.target.value;
-      saveState();
-      renderAll();
-    });
-
-    document.getElementById("toggleBoardEditBtn").addEventListener("click", () => {
-      const board = getActiveBoard();
-      if (!boardEditPanelEl.classList.contains("hidden")) {
-        boardEditPanelEl.classList.add("hidden");
-        return;
-      }
-      openBoardInfoPanel(board);
     });
 
     document.getElementById("closeBoardEditBtn").addEventListener("click", () => {
@@ -1774,11 +1793,9 @@
     });
 
     document.getElementById("togglePermissionsBtn").addEventListener("click", () => {
-      if (!permissionsPanelEl.classList.contains("hidden")) {
-        permissionsPanelEl.classList.add("hidden");
-        return;
-      }
-      openBoardMembersPanel();
+      boardEditPanelEl.classList.add("hidden");
+      permissionsPanelEl.classList.toggle("hidden");
+      renderMembersPanel();
     });
 
     document.getElementById("addMemberBtn").addEventListener("click", () => {
@@ -1867,12 +1884,12 @@
       renderMembersPanel();
     });
 
+    /* METHODOLOGY VIEW SWITCHER */
     const viewModeSelectEl = document.getElementById("viewModeSelect");
     viewModeSelectEl.addEventListener("change", () => {
       state.viewMode = viewModeSelectEl.value;
       saveState();
       renderActiveView();
-      renderBoardsList();
     });
 
     function findMember(board, assigneeId) {
@@ -2085,6 +2102,7 @@
         .join("");
     }
 
+    /* TASK MODAL */
     const taskDialogEl = document.getElementById("taskDialog");
     const taskFormEl = document.getElementById("taskForm");
     const taskDueDateEl = document.getElementById("taskDueDate");
@@ -2298,34 +2316,43 @@
     document.getElementById("searchInput").addEventListener("input", renderAll);
     document.getElementById("priorityFilter").addEventListener("change", renderAll);
 
+    /* MAIN RENDER */
     function renderAll() {
+      applyThemeAndAccent();
       const board = getActiveBoard();
       const myRole = getCurrentUserRole(board);
       const customGreeting = state.user.customization?.greeting || "Que bom vê-lo novamente";
+      const isBoardPage = state.screen === "board";
 
       document.getElementById("sidebarProfile").innerHTML = `
         ${renderAvatarHtml(state.user.name, state.user.avatarUrl, "avatar-md")}
         <div>
           <div style="font-weight:700;font-size:0.92rem;">${escapeHtml(state.user.name)}</div>
-          <div class="section-sub">${escapeHtml(myRole)} • ${escapeHtml(state.user.email)}</div>
+          <div class="section-sub">${escapeHtml(state.user.email)}</div>
         </div>
       `;
 
-      document.getElementById("greetingTitle").textContent = `${customGreeting} 😊`;
-      document.getElementById("greetingSubtitle").textContent =
-        `Quadro ativo: "${board.name}" (${myRole}).`;
-
-      document.getElementById("openNewTaskBtn").disabled = !canEditTasks(board);
-      document.getElementById("activeBoardTitle").textContent = board.name;
-      document.getElementById("activeBoardDesc").textContent = board.desc || "Sem descrição";
-
       syncSettingsInputs();
-      renderInsightsAndCharts();
-      renderMiniCalendar();
-      renderBoardsList();
-      renderActiveView();
-      if (!permissionsPanelEl.classList.contains("hidden")) {
-        renderMembersPanel();
+
+      document.getElementById("homeDashboardView").classList.toggle("hidden", isBoardPage);
+      document.getElementById("boardDetailView").classList.toggle("hidden", !isBoardPage);
+      document.getElementById("backToBoardsHeaderBtn").classList.toggle("hidden", !isBoardPage);
+
+      if (!isBoardPage) {
+        document.getElementById("greetingTitle").textContent = `${customGreeting} 😊`;
+        renderMiniCalendar();
+        renderBoardsList();
+      } else {
+        document.getElementById("openNewTaskBtn").disabled = !canEditTasks(board);
+        document.getElementById("activeBoardTitle").textContent = board.name;
+        document.getElementById("activeBoardDesc").textContent = board.desc || "Sem descrição";
+        document.getElementById("boardRoleIndicator").textContent = `Seu perfil neste quadro: ${myRole}`;
+
+        renderInsightsAndCharts();
+        renderActiveView();
+        if (!permissionsPanelEl.classList.contains("hidden")) {
+          renderMembersPanel();
+        }
       }
     }
 
