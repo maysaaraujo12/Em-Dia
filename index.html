@@ -16,6 +16,7 @@
       --border: #e2e8f0;
       --danger: #dc2626;
       --ok: #16a34a;
+      --warn: #d97706;
     }
 
     * { box-sizing: border-box; }
@@ -104,14 +105,84 @@
       font-size: 0.85rem;
     }
 
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .section-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .insight-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .insight-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .insight-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .insight-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .val-alta { color: #991b1b; }
+    .val-media { color: #92400e; }
+    .val-baixa { color: #166534; }
+
     .board {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 16px;
-      padding: 20px;
       align-items: start;
-      max-width: 1300px;
-      margin: 0 auto;
     }
 
     .column {
@@ -119,7 +190,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 14px;
-      min-height: 360px;
+      min-height: 320px;
     }
 
     .column.drag-over {
@@ -184,6 +255,13 @@
       white-space: pre-line;
     }
 
+    .card-date {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
     .card-footer {
       display: flex;
       justify-content: space-between;
@@ -198,15 +276,40 @@
       border-radius: 999px;
       font-weight: 600;
       font-size: 0.74rem;
+      display: inline-block;
     }
 
     .tag-alta { background: #fee2e2; color: #991b1b; }
     .tag-media { background: #fef3c7; color: #92400e; }
     .tag-baixa { background: #dcfce7; color: #166534; }
 
+    .status-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      background: #e2e8f0;
+      color: #1e293b;
+      display: inline-block;
+    }
+
+    .due-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .due-late { background: #fee2e2; color: #991b1b; }
+    .due-today { background: #fef3c7; color: #92400e; }
+    .due-upcoming { background: #dbeafe; color: #1e40af; }
+    .due-none { background: #f1f5f9; color: #64748b; }
+
     .move-btns {
       display: flex;
       gap: 4px;
+      flex-wrap: wrap;
     }
 
     .move-btns button {
@@ -219,6 +322,67 @@
       color: var(--muted);
       font-size: 0.85rem;
       padding: 24px 8px;
+    }
+
+    .schedule-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .schedule-item {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface-2);
+    }
+
+    .schedule-main {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .schedule-date {
+      font-weight: 700;
+      font-size: 0.84rem;
+      min-width: 96px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    th {
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
     }
 
     dialog {
@@ -269,7 +433,52 @@
     </div>
   </header>
 
-  <main class="board" id="board"></main>
+  <main class="container">
+    <section class="section-box" aria-label="Insights das tarefas">
+      <div class="section-header">
+        <h2 class="section-title">Insights</h2>
+        <span class="section-sub" id="insightsSummaryText">Resumo geral das tarefas</span>
+      </div>
+      <div class="insights-grid" id="insightsGrid"></div>
+    </section>
+
+    <section class="section-box" aria-label="Quadro de tarefas">
+      <div class="section-header">
+        <h2 class="section-title">Quadro de Tarefas</h2>
+        <span class="section-sub">Arraste os cartões entre colunas ou use as setas</span>
+      </div>
+      <div class="board" id="board"></div>
+    </section>
+
+    <section class="section-box" aria-label="Cronograma">
+      <div class="section-header">
+        <h2 class="section-title">Cronograma</h2>
+        <span class="section-sub">Ordenado por data prevista (tarefas sem data ficam por último)</span>
+      </div>
+      <div class="schedule-list" id="scheduleList"></div>
+    </section>
+
+    <section class="section-box" aria-label="Tabela de tarefas">
+      <div class="section-header">
+        <h2 class="section-title">Tabela de Tarefas</h2>
+        <span class="section-sub">Visão completa em linha para consulta e edição rápida</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarefa</th>
+              <th>Coluna</th>
+              <th>Prioridade</th>
+              <th>Prazo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tasksTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 
   <dialog id="taskDialog">
     <form id="taskForm" method="dialog">
@@ -289,6 +498,10 @@
           <option value="alta">Alta</option>
           <option value="baixa">Baixa</option>
         </select>
+      </div>
+      <div class="form-row">
+        <label for="taskDueDate">Data prevista</label>
+        <input id="taskDueDate" type="date" />
       </div>
       <div class="form-row">
         <label for="taskCol">Coluna</label>
@@ -313,34 +526,69 @@
       { id: "done", title: "Concluído" }
     ];
 
-    const DEFAULT_TASKS = [
-      {
-        id: "t1",
-        title: "Organizar prioridades da semana",
-        desc: "Listar entregas principais e definir prazos.",
-        priority: "alta",
-        col: "todo"
-      },
-      {
-        id: "t2",
-        title: "Publicar Em Dia no GitHub Pages",
-        desc: "Confirmar o arquivo index.html na raiz do repositório.",
-        priority: "media",
-        col: "doing"
-      },
-      {
-        id: "t3",
-        title: "Criar estrutura inicial do quadro",
-        desc: "Configurar colunas e cartões interativos.",
-        priority: "baixa",
-        col: "done"
-      }
-    ];
+    function getTodayIso() {
+      const now = new Date();
+      const offsetMs = now.getTimezoneOffset() * 60000;
+      return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
+    }
+
+    function addDaysIso(days) {
+      const now = new Date();
+      now.setDate(now.getDate() + days);
+      const offsetMs = now.getTimezoneOffset() * 60000;
+      return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
+    }
+
+    function getDefaultTasks() {
+      return [
+        {
+          id: "t1",
+          title: "Organizar prioridades da semana",
+          desc: "Listar entregas principais e definir prazos.",
+          priority: "alta",
+          dueDate: getTodayIso(),
+          col: "todo"
+        },
+        {
+          id: "t2",
+          title: "Publicar Em Dia no GitHub Pages",
+          desc: "Confirmar o arquivo index.html na raiz do repositório.",
+          priority: "media",
+          dueDate: addDaysIso(2),
+          col: "doing"
+        },
+        {
+          id: "t3",
+          title: "Criar estrutura inicial do quadro",
+          desc: "Configurar colunas e cartões interativos.",
+          priority: "baixa",
+          dueDate: addDaysIso(-1),
+          col: "done"
+        }
+      ];
+    }
+
+    function normalizeTask(item) {
+      const validPriority = ["alta", "media", "baixa"].includes(item?.priority) ? item.priority : "media";
+      const validCol = ["todo", "doing", "done"].includes(item?.col) ? item.col : "todo";
+      return {
+        id: String(item?.id || ("t_" + Math.random().toString(36).slice(2, 8))),
+        title: String(item?.title || "Tarefa sem título"),
+        desc: String(item?.desc || ""),
+        priority: validPriority,
+        dueDate: typeof item?.dueDate === "string" ? item.dueDate : "",
+        col: validCol
+      };
+    }
 
     let tasks = loadTasks();
     let editingId = null;
 
     const boardEl = document.getElementById("board");
+    const insightsGridEl = document.getElementById("insightsGrid");
+    const insightsSummaryEl = document.getElementById("insightsSummaryText");
+    const scheduleListEl = document.getElementById("scheduleList");
+    const tableBodyEl = document.getElementById("tasksTableBody");
     const searchEl = document.getElementById("searchInput");
     const priorityEl = document.getElementById("priorityFilter");
     const dialogEl = document.getElementById("taskDialog");
@@ -349,11 +597,12 @@
     function loadTasks() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return structuredClone(DEFAULT_TASKS);
+        if (!raw) return getDefaultTasks();
         const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) ? parsed : structuredClone(DEFAULT_TASKS);
+        if (!Array.isArray(parsed)) return getDefaultTasks();
+        return parsed.map(normalizeTask);
       } catch {
-        return structuredClone(DEFAULT_TASKS);
+        return getDefaultTasks();
       }
     }
 
@@ -369,11 +618,48 @@
       return "Média";
     }
 
-    function render() {
+    function columnLabel(colId) {
+      const found = COLUMNS.find((c) => c.id === colId);
+      return found ? found.title : "A Fazer";
+    }
+
+    function formatDateBr(isoDate) {
+      if (!isoDate) return "Sem data";
+      const parts = isoDate.split("-");
+      if (parts.length !== 3) return isoDate;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    function getDueStatus(task) {
+      if (!task.dueDate) {
+        return { label: "Sem prazo", className: "due-none" };
+      }
+      if (task.col === "done") {
+        return { label: "Concluída", className: "due-none" };
+      }
+      const today = getTodayIso();
+      if (task.dueDate < today) {
+        return { label: "Atrasada", className: "due-late" };
+      }
+      if (task.dueDate === today) {
+        return { label: "Hoje", className: "due-today" };
+      }
+      return { label: "Agendada", className: "due-upcoming" };
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function getFilteredTasks() {
       const term = searchEl.value.trim().toLowerCase();
       const prio = priorityEl.value;
 
-      const filtered = tasks.filter((t) => {
+      return tasks.filter((t) => {
         const matchText =
           !term ||
           t.title.toLowerCase().includes(term) ||
@@ -381,7 +667,43 @@
         const matchPrio = prio === "todas" || t.priority === prio;
         return matchText && matchPrio;
       });
+    }
 
+    function renderInsights(filtered) {
+      const total = filtered.length;
+      const altaCount = filtered.filter((t) => t.priority === "alta").length;
+      const mediaCount = filtered.filter((t) => t.priority === "media").length;
+      const baixaCount = filtered.filter((t) => t.priority === "baixa").length;
+      const doneCount = filtered.filter((t) => t.col === "done").length;
+
+      insightsSummaryEl.textContent =
+        `Exibindo ${total} de ${tasks.length} tarefa(s) • ${doneCount} concluída(s)`;
+
+      insightsGridEl.innerHTML = `
+        <div class="insight-card">
+          <span class="insight-label">Total de Tarefas</span>
+          <span class="insight-value">${total}</span>
+          <span class="insight-meta">${tasks.length} no total geral</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Alta</span>
+          <span class="insight-value val-alta">${altaCount}</span>
+          <span class="insight-meta">Exigem atenção imediata</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Média</span>
+          <span class="insight-value val-media">${mediaCount}</span>
+          <span class="insight-meta">Em acompanhamento regular</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Baixa</span>
+          <span class="insight-value val-baixa">${baixaCount}</span>
+          <span class="insight-meta">Planejamento e melhorias</span>
+        </div>
+      `;
+    }
+
+    function renderBoard(filtered) {
       boardEl.innerHTML = "";
 
       COLUMNS.forEach((col, colIndex) => {
@@ -440,6 +762,7 @@
                 <button class="danger" title="Excluir" data-delete="${task.id}">✕</button>
               </div>
               ${task.desc ? `<p class="card-desc">${escapeHtml(task.desc)}</p>` : ""}
+              ${task.dueDate ? `<span class="card-date">Prazo: ${formatDateBr(task.dueDate)}</span>` : ""}
               <div class="card-footer">
                 <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
                 <div class="move-btns">
@@ -458,12 +781,79 @@
       });
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+    function renderSchedule(filtered) {
+      if (filtered.length === 0) {
+        scheduleListEl.innerHTML = `<div class="empty">Nenhuma tarefa encontrada para o cronograma.</div>`;
+        return;
+      }
+
+      const sorted = [...filtered].sort((a, b) => {
+        if (!a.dueDate && !b.dueDate) return 0;
+        if (!a.dueDate) return 1;
+        if (!b.dueDate) return -1;
+        return a.dueDate.localeCompare(b.dueDate);
+      });
+
+      scheduleListEl.innerHTML = sorted
+        .map((task) => {
+          const due = getDueStatus(task);
+          return `
+            <div class="schedule-item">
+              <div class="schedule-main">
+                <span class="schedule-date">${formatDateBr(task.dueDate)}</span>
+                <strong>${escapeHtml(task.title)}</strong>
+                <span class="due-badge ${due.className}">${due.label}</span>
+                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
+              </div>
+              <div class="move-btns">
+                <span class="status-badge">${columnLabel(task.col)}</span>
+                <button data-edit="${task.id}">Editar</button>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function renderTable(filtered) {
+      if (filtered.length === 0) {
+        tableBodyEl.innerHTML = `<tr><td colspan="5" class="empty">Nenhuma tarefa encontrada para exibir na tabela.</td></tr>`;
+        return;
+      }
+
+      tableBodyEl.innerHTML = filtered
+        .map((task) => {
+          const due = getDueStatus(task);
+          return `
+            <tr>
+              <td>
+                <strong>${escapeHtml(task.title)}</strong>
+                ${task.desc ? `<div style="font-size:0.78rem;color:var(--muted);">${escapeHtml(task.desc)}</div>` : ""}
+              </td>
+              <td><span class="status-badge">${columnLabel(task.col)}</span></td>
+              <td><span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span></td>
+              <td>
+                ${formatDateBr(task.dueDate)}
+                <span class="due-badge ${due.className}" style="margin-left:6px;">${due.label}</span>
+              </td>
+              <td>
+                <div class="move-btns">
+                  <button data-edit="${task.id}">Editar</button>
+                  <button class="danger" data-delete="${task.id}">Excluir</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function render() {
+      const filtered = getFilteredTasks();
+      renderInsights(filtered);
+      renderBoard(filtered);
+      renderSchedule(filtered);
+      renderTable(filtered);
     }
 
     function moveTask(id, targetCol) {
@@ -480,6 +870,7 @@
       document.getElementById("taskTitle").value = task ? task.title : "";
       document.getElementById("taskDesc").value = task ? task.desc || "" : "";
       document.getElementById("taskPriority").value = task ? task.priority : "media";
+      document.getElementById("taskDueDate").value = task ? task.dueDate || "" : "";
       document.getElementById("taskCol").value = task ? task.col : "todo";
       dialogEl.showModal();
     }
@@ -493,6 +884,7 @@
       if (!title) return;
       const desc = document.getElementById("taskDesc").value.trim();
       const priority = document.getElementById("taskPriority").value;
+      const dueDate = document.getElementById("taskDueDate").value;
       const col = document.getElementById("taskCol").value;
 
       if (editingId) {
@@ -501,6 +893,7 @@
           existing.title = title;
           existing.desc = desc;
           existing.priority = priority;
+          existing.dueDate = dueDate;
           existing.col = col;
         }
       } else {
@@ -509,6 +902,7 @@
           title,
           desc,
           priority,
+          dueDate,
           col
         });
       }
@@ -518,7 +912,7 @@
       render();
     });
 
-    boardEl.addEventListener("click", (e) => {
+    function handleActionClick(e) {
       const delId = e.target.dataset.delete;
       if (delId) {
         tasks = tasks.filter((t) => t.id !== delId);
@@ -539,10 +933,14 @@
         const [id, targetCol] = moveSpec.split(":");
         moveTask(id, targetCol);
       }
-    });
+    }
+
+    boardEl.addEventListener("click", handleActionClick);
+    scheduleListEl.addEventListener("click", handleActionClick);
+    tableBodyEl.addEventListener("click", handleActionClick);
 
     document.getElementById("resetDemoBtn").addEventListener("click", () => {
-      tasks = structuredClone(DEFAULT_TASKS);
+      tasks = getDefaultTasks();
       saveTasks();
       render();
     });
