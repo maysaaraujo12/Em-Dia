@@ -118,7 +118,7 @@
       font-size: 0.85rem;
     }
 
-    /* CABEÇALHO EDITORIAL INSPIRADO NA REFERÊNCIA */
+    /* CABEÇALHO EDITORIAL */
     .landing-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -167,7 +167,7 @@
 
     .hero-editorial {
       max-width: 680px;
-      margin-bottom: 32px;
+      margin-bottom: 12px;
     }
 
     .hero-editorial h1 {
@@ -190,20 +190,6 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-    }
-
-    .hero-banner-strip {
-      width: 100%;
-      height: 190px;
-      background: var(--surface-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      margin-bottom: 56px;
-      gap: 16px;
     }
 
     .editorial-block {
@@ -249,7 +235,6 @@
       line-height: 1.6;
     }
 
-    /* SOBRE A DESENVOLVEDORA */
     .dev-layout {
       display: grid;
       grid-template-columns: 230px 1fr;
@@ -282,7 +267,6 @@
       line-height: 1.6;
     }
 
-    /* CONTATO + FORMULÁRIO INSPIRADO NO BLOCO LATERAL DA REFERÊNCIA */
     .contact-split {
       display: grid;
       grid-template-columns: 1fr minmax(300px, 380px);
@@ -303,7 +287,6 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
     }
 
-    /* RODAPÉ ESTILO REFERÊNCIA */
     .landing-footer {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -654,11 +637,19 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      padding: 8px 10px;
+      padding: 9px 12px;
       border-radius: 6px;
       background: var(--surface);
       border: 1px solid var(--border);
       font-size: 0.84rem;
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    }
+
+    .reminder-item:hover {
+      border-color: var(--primary);
+      background: var(--active-tint);
+      transform: translateY(-1px);
     }
 
     .insights-grid {
@@ -699,12 +690,44 @@
       padding: 14px;
     }
 
-    .chart-title { font-size: 0.88rem; font-weight: 700; margin: 0 0 10px; }
+    .chart-title { font-size: 0.88rem; font-weight: 700; margin: 0 0 12px; }
     .bar-row { margin-bottom: 10px; }
     .bar-row:last-child { margin-bottom: 0; }
     .bar-label-line { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px; }
     .bar-track { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
+
+    .pie-layout {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .pie-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-width: 140px;
+      font-size: 0.82rem;
+    }
+
+    .pie-legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .pie-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
 
     .boards-grid {
       display: grid;
@@ -809,6 +832,12 @@
       overflow: hidden;
       margin-bottom: 10px;
       cursor: grab;
+      transition: box-shadow 0.2s ease, outline 0.2s ease;
+    }
+
+    .card.target-highlight {
+      outline: 3px solid var(--primary);
+      box-shadow: 0 0 0 5px rgba(20, 20, 20, 0.12);
     }
 
     .card:active { cursor: grabbing; }
@@ -920,41 +949,109 @@
       gap: 10px;
     }
 
-    .gantt-list { display: flex; flex-direction: column; gap: 10px; }
-    .gantt-row {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 12px;
-      background: var(--surface-2);
-      display: grid;
-      grid-template-columns: minmax(180px, 260px) 1fr;
-      gap: 12px;
-      align-items: center;
-    }
-    @media (max-width: 680px) {
-      .gantt-row { grid-template-columns: 1fr; }
-    }
-
-    .gantt-track {
-      position: relative;
-      height: 24px;
+    /* DIAGRAMA DE GANTT ESTILO GRADE TABULAR DE REFERÊNCIA */
+    .gantt-sheet-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      overflow: hidden;
     }
 
-    .gantt-bar {
-      height: 100%;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      font-size: 0.72rem;
-      font-weight: 700;
+    .gantt-sheet {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    .gantt-sheet th.gantt-head-dark {
+      background: #172042;
       color: #ffffff;
+      border: 1px solid #2b3866;
+      padding: 8px 6px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .gantt-sheet th.gantt-day-cell {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      padding: 4px 2px;
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      min-width: 26px;
+    }
+
+    body.dark-theme .gantt-sheet th.gantt-day-cell {
+      background: var(--surface-2);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .gantt-sheet td.gantt-task-cell {
+      border: 1px solid #cbd5e1;
+      padding: 7px 10px;
+      font-weight: 600;
       white-space: nowrap;
-      min-width: 18%;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gantt-sheet td.gantt-meta-cell {
+      border: 1px solid #cbd5e1;
+      padding: 7px 8px;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 0.76rem;
+    }
+
+    .gantt-sheet td.gantt-grid-cell {
+      border: 1px solid #e2e8f0;
+      padding: 0;
+      height: 28px;
+      position: relative;
+    }
+
+    body.dark-theme .gantt-sheet td.gantt-task-cell,
+    body.dark-theme .gantt-sheet td.gantt-meta-cell,
+    body.dark-theme .gantt-sheet td.gantt-grid-cell {
+      border-color: var(--border);
+    }
+
+    .gantt-bar-segment {
+      display: block;
+      width: 100%;
+      height: 18px;
+      margin-top: 5px;
+      border-radius: 2px;
+    }
+
+    .gantt-legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      align-items: center;
+    }
+
+    .gantt-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gantt-legend-swatch {
+      width: 18px;
+      height: 12px;
+      border-radius: 2px;
+      display: inline-block;
     }
 
     dialog {
@@ -1022,9 +1119,8 @@
       </div>
     </nav>
 
-    <!-- PÁGINA INICIAL SOBRE O APLICATIVO -->
     <main id="landingPageView">
-      <div class="editorial-container" style="padding-bottom:0;">
+      <div class="editorial-container">
         <section id="inicio" class="hero-editorial">
           <h1>Em Dia. 😊</h1>
           <p>
@@ -1035,14 +1131,7 @@
             <a href="#sobre-desenvolvedora"><button type="button" class="outline-dark">Sobre quem criou</button></a>
           </div>
         </section>
-      </div>
 
-      <div class="hero-banner-strip" aria-hidden="true">
-        <span style="font-size:0.84rem;font-weight:600;color:var(--muted);">EM DIA — GESTÃO DE TAREFAS</span>
-        <span style="font-size:0.82rem;color:var(--muted);">KANBAN • CRONOGRAMA • TABELA • GANTT</span>
-      </div>
-
-      <div class="editorial-container" style="padding-top:0;">
         <section class="editorial-block">
           <h2>Sobre o aplicativo.</h2>
           <p class="editorial-lead">
@@ -1139,7 +1228,6 @@
       </div>
     </main>
 
-    <!-- TELA DE LOGIN / CRIAR CONTA -->
     <section id="authScreen" class="auth-wrapper hidden">
       <div class="auth-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
@@ -1367,7 +1455,7 @@
 
               <div class="reminder-box">
                 <strong style="font-size:0.9rem;">Lembretes — tarefas quase vencendo</strong>
-                <div class="section-sub">Prazo de hoje até os próximos 3 dias</div>
+                <div class="section-sub">Clique em um card para ir direto até onde está a tarefa</div>
                 <div class="reminder-list" id="dueSoonRemindersList"></div>
               </div>
             </div>
@@ -1479,7 +1567,13 @@
                 <h2 class="section-title">Insights</h2>
                 <span class="section-sub" id="insightsSummaryText"></span>
               </div>
-              <button type="button" id="toggleInsightsBtn">🙈 Ocultar insights</button>
+              <div class="controls">
+                <select id="chartStyleSelect" aria-label="Estilo dos gráficos">
+                  <option value="pie">Formato Pizza</option>
+                  <option value="bar">Formato Barras</option>
+                </select>
+                <button type="button" id="toggleInsightsBtn">🙈 Ocultar insights</button>
+              </div>
             </div>
 
             <div id="insightsContent">
@@ -1488,7 +1582,7 @@
             </div>
           </section>
 
-          <section class="section-box" aria-label="Modo de visualização">
+          <section id="tasksWorkspaceSection" class="section-box" aria-label="Modo de visualização">
             <div id="viewKanban" class="board"></div>
             <div id="viewCronograma" class="schedule-list hidden"></div>
 
@@ -1522,7 +1616,7 @@
               </div>
             </div>
 
-            <div id="viewGantt" class="gantt-list hidden"></div>
+            <div id="viewGantt" class="hidden"></div>
           </section>
         </div>
       </main>
@@ -1613,7 +1707,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v7";
+    const DB_KEY = "em_dia_workspace_v8";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const CONTACT_EMAIL = "maysavieiradearaujo@gmail.com";
@@ -1623,7 +1717,6 @@
       { id: "done", title: "Concluído" }
     ];
 
-    /* RETRATO DE MAYSA ARAÚJO INSERIDO NA PÁGINA INICIAL */
     function renderDeveloperPortraitSvg() {
       const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800">
@@ -1643,7 +1736,6 @@
           <rect x="0" y="340" width="130" height="240" fill="#c9bfa9"/>
           <rect x="0" y="380" width="115" height="22" fill="#e6dec8"/>
           <rect x="0" y="425" width="115" height="22" fill="#efe9d8"/>
-          <!-- Cabelo crespo volumoso -->
           <path d="M165 255 C140 165, 225 75, 335 90 C440 105, 485 195, 455 295 C445 335, 405 355, 375 345 L215 345 C180 340, 170 295, 165 255 Z" fill="#181615"/>
           <circle cx="205" cy="145" r="46" fill="#181615"/>
           <circle cx="265" cy="105" r="52" fill="#181615"/>
@@ -1651,31 +1743,24 @@
           <circle cx="395" cy="130" r="48" fill="#181615"/>
           <circle cx="425" cy="195" r="44" fill="#181615"/>
           <circle cx="185" cy="215" r="40" fill="#181615"/>
-          <!-- Pescoço e ombros -->
           <path d="M275 370 L375 370 L385 450 L265 450 Z" fill="#6d4732"/>
           <path d="M135 545 C145 455, 220 420, 295 420 L385 420 C465 420, 525 465, 540 620 L125 620 Z" fill="#1b1c20"/>
-          <!-- Rosto -->
           <path d="M245 215 C255 155, 395 155, 415 225 C428 275, 415 350, 365 385 C335 405, 295 402, 270 375 C242 342, 236 270, 245 215 Z" fill="#774e36"/>
-          <!-- Mecha frontal e sobrancelhas -->
           <path d="M250 205 C270 175, 315 172, 335 192 C315 205, 285 218, 265 245 Z" fill="#181615"/>
           <path d="M275 232 Q305 222 332 232" stroke="#1f1510" stroke-width="5" fill="none" stroke-linecap="round"/>
           <path d="M368 232 Q395 224 415 234" stroke="#1f1510" stroke-width="5" fill="none" stroke-linecap="round"/>
-          <!-- Olhos -->
           <ellipse cx="305" cy="252" rx="14" ry="9" fill="#231712"/>
           <circle cx="308" cy="250" r="3" fill="#ffffff" opacity="0.7"/>
           <ellipse cx="388" cy="254" rx="14" ry="9" fill="#231712"/>
           <circle cx="391" cy="252" r="3" fill="#ffffff" opacity="0.7"/>
-          <!-- Óculos grandes redondos -->
           <circle cx="306" cy="254" r="44" fill="#d9ecff" fill-opacity="0.16" stroke="#d8b89a" stroke-width="4.5"/>
           <circle cx="390" cy="256" r="44" fill="#d9ecff" fill-opacity="0.16" stroke="#d8b89a" stroke-width="4.5"/>
           <path d="M350 253 Q348 247 346 253" stroke="#d8b89a" stroke-width="4" fill="none"/>
           <path d="M262 252 L242 246" stroke="#d8b89a" stroke-width="3.5" fill="none"/>
           <path d="M434 256 L452 248" stroke="#d8b89a" stroke-width="3.5" fill="none"/>
-          <!-- Nariz e lábios -->
           <path d="M352 258 L346 302 Q356 312 368 304" stroke="#5b3926" stroke-width="4" fill="none" stroke-linecap="round"/>
           <path d="M326 338 Q352 330 378 338 Q354 356 326 338 Z" fill="#8b5942"/>
           <path d="M328 338 Q352 341 376 338" stroke="#4d2c1d" stroke-width="2.5" fill="none"/>
-          <!-- Braço e mesa -->
           <path d="M475 510 C515 535, 555 585, 585 645 L535 670 C505 620, 475 585, 445 565 Z" fill="#6d4732"/>
           <rect x="0" y="655" width="600" height="145" fill="url(#deskGrad)"/>
           <rect x="0" y="652" width="600" height="6" fill="#e6cfab"/>
@@ -1727,8 +1812,10 @@
           }
         },
         insightsVisible: true,
+        chartStyle: "pie",
         calendarOffsetMonths: 0,
         activeBoardId: "b1",
+        highlightedTaskId: null,
         viewMode: "kanban",
         selectedTableTaskId: null,
         boards: [
@@ -1749,10 +1836,11 @@
                 desc: "Conferir prioridades e datas de entrega.",
                 priority: "alta",
                 dueDate: addDaysIso(-1),
+                durationDays: 3,
                 col: "todo",
                 assigneeId: "m1",
                 coverType: "color",
-                coverColor: "#dc2626",
+                coverColor: "#f87171",
                 coverImage: "",
                 attachment: null
               },
@@ -1762,10 +1850,11 @@
                 desc: "Ajustar cronograma e tabela de entregas.",
                 priority: "media",
                 dueDate: addDaysIso(2),
+                durationDays: 4,
                 col: "doing",
                 assigneeId: "m2",
                 coverType: "color",
-                coverColor: "#d97706",
+                coverColor: "#1e2952",
                 coverImage: "",
                 attachment: null
               },
@@ -1775,10 +1864,11 @@
                 desc: "Validar entregas do dia.",
                 priority: "baixa",
                 dueDate: today,
+                durationDays: 2,
                 col: "done",
                 assigneeId: "m3",
                 coverType: "color",
-                coverColor: "#16a34a",
+                coverColor: "#6384ff",
                 coverImage: "",
                 attachment: null
               }
@@ -1826,7 +1916,7 @@
     function applyThemeAndAccent() {
       const theme = state.user.customization?.theme || "light";
       const accent = state.user.customization?.accent || "#141414";
-      const wallpaper = state.user.customization?.wallpaper || "";
+      const wallpaper = state.isAuthenticated ? (state.user.customization?.wallpaper || "") : "";
       document.body.classList.toggle("dark-theme", theme === "dark");
       document.documentElement.style.setProperty("--primary", accent);
       document.body.style.backgroundImage = wallpaper ? `url("${wallpaper}")` : "";
@@ -2063,6 +2153,7 @@
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
       state.isAuthenticated = false;
+      state.highlightedTaskId = null;
       loginPrivacyEl.checked = false;
       regPrivacyEl.checked = false;
       saveState();
@@ -2074,20 +2165,36 @@
     function goHome() {
       state.screen = "home";
       state.selectedTableTaskId = null;
+      state.highlightedTaskId = null;
       boardEditPanelEl.classList.add("hidden");
       permissionsPanelEl.classList.add("hidden");
       saveState();
       renderAll();
     }
 
-    function openBoardPage(boardId) {
+    function openBoardPage(boardId, focusTaskId = null) {
       state.activeBoardId = boardId;
       state.screen = "board";
-      state.selectedTableTaskId = null;
+      state.selectedTableTaskId = focusTaskId || null;
+      state.highlightedTaskId = focusTaskId || null;
+      if (focusTaskId) {
+        state.viewMode = "kanban";
+      }
       boardEditPanelEl.classList.add("hidden");
       permissionsPanelEl.classList.add("hidden");
       saveState();
       renderAll();
+
+      if (focusTaskId) {
+        setTimeout(() => {
+          const targetCard = document.querySelector(`[data-task-card-id="${focusTaskId}"]`);
+          const workspace = document.getElementById("tasksWorkspaceSection");
+          const elToScroll = targetCard || workspace;
+          if (elToScroll) {
+            elToScroll.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }, 80);
+      }
     }
 
     document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
@@ -2194,7 +2301,7 @@
       renderAll();
     });
 
-    /* CALENDÁRIO PEQUENO + LEMBRETES QUASE VENCENDO */
+    /* CALENDÁRIO PEQUENO + LEMBRETES CLICÁVEIS */
     document.getElementById("prevMonthBtn").addEventListener("click", () => {
       state.calendarOffsetMonths -= 1;
       saveState();
@@ -2302,10 +2409,10 @@
           }
 
           return `
-            <div class="reminder-item">
+            <div class="reminder-item" data-reminder-board="${board.id}" data-reminder-task="${task.id}" role="button" tabindex="0">
               <div>
                 <strong>${escapeHtml(task.title)}</strong>
-                <div class="section-sub">${escapeHtml(board.name)} • ${formatDateBr(task.dueDate)}</div>
+                <div class="section-sub">${escapeHtml(board.name)} • ${escapeHtml(columnLabel(task.col))} • ${formatDateBr(task.dueDate)}</div>
               </div>
               <span class="due-badge ${cls}">${escapeHtml(label)}</span>
             </div>
@@ -2313,6 +2420,12 @@
         })
         .join("");
     }
+
+    document.getElementById("dueSoonRemindersList").addEventListener("click", (e) => {
+      const item = e.target.closest("[data-reminder-board][data-reminder-task]");
+      if (!item) return;
+      openBoardPage(item.dataset.reminderBoard, item.dataset.reminderTask);
+    });
 
     /* ATÉ 10 QUADROS */
     document.getElementById("createBoardBtn").addEventListener("click", () => {
@@ -2361,9 +2474,16 @@
       openBoardPage(tile.dataset.openBoard);
     });
 
-    /* INSIGHTS */
+    /* INSIGHTS: FORMATO PIZZA E BARRAS */
     const insightsContentEl = document.getElementById("insightsContent");
     const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
+    const chartStyleSelectEl = document.getElementById("chartStyleSelect");
+
+    chartStyleSelectEl.addEventListener("change", () => {
+      state.chartStyle = chartStyleSelectEl.value;
+      saveState();
+      renderInsightsAndCharts();
+    });
 
     toggleInsightsBtn.addEventListener("click", () => {
       state.insightsVisible = !state.insightsVisible;
@@ -2384,7 +2504,82 @@
       });
     }
 
+    function buildPieChartSvg(segments, total) {
+      if (!total) {
+        return `
+          <svg width="112" height="112" viewBox="0 0 112 112" aria-hidden="true">
+            <circle cx="56" cy="56" r="46" fill="#e5e7eb" />
+          </svg>
+        `;
+      }
+
+      const cx = 56;
+      const cy = 56;
+      const r = 46;
+      let currentAngle = -90;
+      const paths = [];
+
+      segments.forEach((seg) => {
+        if (!seg.value) return;
+        const sliceAngle = (seg.value / total) * 360;
+        if (sliceAngle >= 359.99) {
+          paths.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${seg.color}" />`);
+          return;
+        }
+        const startRad = (currentAngle * Math.PI) / 180;
+        const endRad = ((currentAngle + sliceAngle) * Math.PI) / 180;
+        const x1 = cx + r * Math.cos(startRad);
+        const y1 = cy + r * Math.sin(startRad);
+        const x2 = cx + r * Math.cos(endRad);
+        const y2 = cy + r * Math.sin(endRad);
+        const largeArc = sliceAngle > 180 ? 1 : 0;
+
+        paths.push(
+          `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${seg.color}" />`
+        );
+        currentAngle += sliceAngle;
+      });
+
+      return `<svg width="112" height="112" viewBox="0 0 112 112" aria-hidden="true">${paths.join("")}</svg>`;
+    }
+
+    function renderChartCard(title, segments, total) {
+      const pct = (val) => (total ? Math.round((val / total) * 100) : 0);
+
+      if (state.chartStyle === "pie") {
+        return `
+          <div class="chart-box">
+            <h3 class="chart-title">${escapeHtml(title)} (Pizza)</h3>
+            <div class="pie-layout">
+              ${buildPieChartSvg(segments, total)}
+              <div class="pie-legend">
+                ${segments.map((s) => `
+                  <div class="pie-legend-item">
+                    <span><span class="pie-swatch" style="background:${s.color};"></span>${escapeHtml(s.label)}</span>
+                    <strong>${s.value} (${pct(s.value)}%)</strong>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="chart-box">
+          <h3 class="chart-title">${escapeHtml(title)} (Barras)</h3>
+          ${segments.map((s) => `
+            <div class="bar-row">
+              <div class="bar-label-line"><span>${escapeHtml(s.label)}</span><strong>${s.value} (${pct(s.value)}%)</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${pct(s.value)}%;background:${s.color};"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
     function renderInsightsAndCharts() {
+      chartStyleSelectEl.value = state.chartStyle || "pie";
       toggleInsightsBtn.textContent = state.insightsVisible ? "🙈 Ocultar insights" : "👁️ Mostrar insights";
       insightsContentEl.classList.toggle("hidden", !state.insightsVisible);
       if (!state.insightsVisible) return;
@@ -2425,41 +2620,21 @@
         </div>
       `;
 
-      const pct = (val) => (total ? Math.round((val / total) * 100) : 0);
+      const prioSegments = [
+        { label: "Alta", value: alta, color: "#dc2626" },
+        { label: "Média", value: media, color: "#d97706" },
+        { label: "Baixa", value: baixa, color: "#16a34a" }
+      ];
 
-      document.getElementById("chartsGrid").innerHTML = `
-        <div class="chart-box">
-          <h3 class="chart-title">Prioridade</h3>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>Alta</span><strong>${alta} (${pct(alta)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(alta)}%;background:#dc2626;"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>Média</span><strong>${media} (${pct(media)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(media)}%;background:#d97706;"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>Baixa</span><strong>${baixa} (${pct(baixa)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(baixa)}%;background:#16a34a;"></div></div>
-          </div>
-        </div>
+      const stageSegments = [
+        { label: "A Fazer", value: todoCount, color: "#1e2952" },
+        { label: "Em Andamento", value: doingCount, color: "#7c3aed" },
+        { label: "Concluído", value: doneCount, color: "#059669" }
+      ];
 
-        <div class="chart-box">
-          <h3 class="chart-title">Etapa</h3>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>A Fazer</span><strong>${todoCount} (${pct(todoCount)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(todoCount)}%;background:var(--primary);"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>Em Andamento</span><strong>${doingCount} (${pct(doingCount)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(doingCount)}%;background:#7c3aed;"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-label-line"><span>Concluído</span><strong>${doneCount} (${pct(doneCount)}%)</strong></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${pct(doneCount)}%;background:#059669;"></div></div>
-          </div>
-        </div>
-      `;
+      document.getElementById("chartsGrid").innerHTML =
+        renderChartCard("Prioridade", prioSegments, total) +
+        renderChartCard("Etapa", stageSegments, total);
     }
 
     /* INFORMAÇÕES DO QUADRO & GERENCIAR MEMBROS */
@@ -2675,9 +2850,11 @@
             const deadline = getDeadlineInfo(task);
             const prevCol = colIndex > 0 ? COLUMNS[colIndex - 1].id : null;
             const nextCol = colIndex < COLUMNS.length - 1 ? COLUMNS[colIndex + 1].id : null;
+            const isHighlighted = state.highlightedTaskId === task.id;
 
             const card = document.createElement("article");
-            card.className = "card";
+            card.className = `card${isHighlighted ? " target-highlight" : ""}`;
+            card.dataset.taskCardId = task.id;
             card.draggable = canEdit;
             card.addEventListener("dragstart", (e) => {
               if (!canEdit) return;
@@ -2864,6 +3041,7 @@
       renderAll();
     });
 
+    /* DIAGRAMA DE GANTT ESTILO GRADE TABULAR */
     function renderGantt(board, filtered) {
       const ganttEl = document.getElementById("viewGantt");
       if (!filtered.length) {
@@ -2871,36 +3049,96 @@
         return;
       }
 
-      const dated = filtered.filter((t) => t.dueDate);
-      const minDiff = dated.length ? Math.min(0, ...dated.map((t) => diffDaysFromToday(t.dueDate))) : 0;
-      const maxDiff = dated.length ? Math.max(7, ...dated.map((t) => diffDaysFromToday(t.dueDate))) : 7;
-      const span = Math.max(1, maxDiff - minDiff);
+      const startAnchor = new Date();
+      startAnchor.setDate(startAnchor.getDate() - 2);
+      const totalDaysCols = 18;
+      const dayColumns = [];
 
-      ganttEl.innerHTML = filtered
-        .map((task) => {
-          const diff = task.dueDate ? diffDaysFromToday(task.dueDate) : 0;
-          const posPct = task.dueDate ? Math.max(0, Math.min(82, ((diff - minDiff) / span) * 82)) : 0;
-          const widthPct = task.col === "done" ? 32 : 24;
+      for (let i = 0; i < totalDaysCols; i++) {
+        const d = new Date(startAnchor);
+        d.setDate(startAnchor.getDate() + i);
+        const offsetMs = d.getTimezoneOffset() * 60000;
+        const iso = new Date(d.getTime() - offsetMs).toISOString().slice(0, 10);
+        const monthShort = d.toLocaleDateString("pt-BR", { month: "short" });
+        dayColumns.push({
+          iso,
+          dayNum: d.getDate(),
+          monthLabel: monthShort.charAt(0).toUpperCase() + monthShort.slice(1)
+        });
+      }
+
+      // Agrupar cabeçalhos de mês na linha superior
+      const monthSpans = [];
+      dayColumns.forEach((col) => {
+        const last = monthSpans[monthSpans.length - 1];
+        if (last && last.label === col.monthLabel) {
+          last.span += 1;
+        } else {
+          monthSpans.push({ label: col.monthLabel, span: 1 });
+        }
+      });
+
+      const rowsHtml = filtered
+        .map((task, idx) => {
+          const member = findMember(board, task.assigneeId);
+          const durationDays = Math.max(1, Number(task.durationDays) || 3);
+          const rawStartIdx = task.dueDate
+            ? dayColumns.findIndex((c) => c.iso === task.dueDate)
+            : (idx * 2) % (totalDaysCols - 2);
+          const startIdx = rawStartIdx >= 0 ? rawStartIdx : idx % Math.max(1, totalDaysCols - durationDays);
+          const endIdx = Math.min(totalDaysCols - 1, startIdx + durationDays - 1);
+
           const barColor =
             (task.coverType === "color" && task.coverColor) ||
-            (task.priority === "alta" ? "#dc2626" : task.priority === "media" ? "#d97706" : "#16a34a");
-          const deadline = getDeadlineInfo(task);
+            (task.priority === "alta" ? "#f87171" : task.priority === "media" ? "#1e2952" : "#6384ff");
+
+          const dayCells = dayColumns
+            .map((_, cIdx) => {
+              const active = cIdx >= startIdx && cIdx <= endIdx;
+              return `
+                <td class="gantt-grid-cell">
+                  ${active ? `<span class="gantt-bar-segment" style="background:${escapeHtml(barColor)};"></span>` : ""}
+                </td>
+              `;
+            })
+            .join("");
 
           return `
-            <div class="gantt-row">
-              <div>
-                <strong style="font-size:0.88rem;">${escapeHtml(task.title)}</strong>
-                <div class="section-sub">${formatDateBr(task.dueDate)} • ${escapeHtml(deadline.text)}</div>
-              </div>
-              <div class="gantt-track">
-                <div class="gantt-bar" style="margin-left:${posPct}%;width:${widthPct}%;background:${escapeHtml(barColor)};">
-                  ${escapeHtml(columnLabel(task.col))}
-                </div>
-              </div>
-            </div>
+            <tr>
+              <td class="gantt-task-cell" title="${escapeHtml(task.title)}">${escapeHtml(task.title)}</td>
+              <td class="gantt-meta-cell">${escapeHtml(member ? member.name : "—")}</td>
+              <td class="gantt-meta-cell">${durationDays} ${durationDays === 1 ? "dia" : "dias"}</td>
+              ${dayCells}
+            </tr>
           `;
         })
         .join("");
+
+      ganttEl.innerHTML = `
+        <div class="gantt-sheet-wrap">
+          <table class="gantt-sheet">
+            <thead>
+              <tr>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:180px;">Tarefa</th>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:110px;">Responsável</th>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:76px;">Duração</th>
+                ${monthSpans.map((m) => `<th class="gantt-head-dark" colspan="${m.span}">${escapeHtml(m.label)}</th>`).join("")}
+              </tr>
+              <tr>
+                ${dayColumns.map((c) => `<th class="gantt-day-cell">${c.dayNum}</th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+        <div class="gantt-legend-row">
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#f87171;"></span> Alta / Grupo 1</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#1e2952;"></span> Média / Grupo 2</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#6384ff;"></span> Baixa / Grupo 3</span>
+        </div>
+      `;
     }
 
     /* MODAL DE TAREFA */
@@ -3067,7 +3305,7 @@
         const existing = board.tasks.find((t) => t.id === editingTaskId);
         if (existing) Object.assign(existing, payload);
       } else {
-        board.tasks.unshift({ id: "t_" + Date.now(), ...payload });
+        board.tasks.unshift({ id: "t_" + Date.now(), durationDays: 3, ...payload });
       }
 
       saveState();
@@ -3092,6 +3330,7 @@
         if (!canEditTasks(board)) return;
         board.tasks = board.tasks.filter((t) => t.id !== delId);
         if (state.selectedTableTaskId === delId) state.selectedTableTaskId = null;
+        if (state.highlightedTaskId === delId) state.highlightedTaskId = null;
         saveState();
         renderAll();
         return;
