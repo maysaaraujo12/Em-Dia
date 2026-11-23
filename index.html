@@ -6,33 +6,38 @@
   <title>Em Dia - Gestão de Tarefas</title>
   <style>
     :root {
-      --bg: #F4EFE8;
-      --surface: #FAF7F2;
-      --surface-2: #EDE8DF;
-      --topic-card-bg: #F2EFEA;
-      --text: #2A312B;
-      --muted: #6C746D;
-      --primary: #6B7F6E;
-      --primary-hover: #586B5B;
-      --accent-soft: #A7B8A7;
-      --mist: #D9E1D9;
-      --sand: #C9BDAF;
-      --border: #DDD5C9;
-      --danger: #B35E57;
-      --ok: #5E7D63;
-      --warn: #B0894E;
-      --active-tint: #E4ECE4;
+      --bg: #FFFFFF;
+      --surface: #FFFFFF;
+      --surface-2: #F7F7F7;
+      --topic-card-bg: #FAFAFA;
+      --text: #111111;
+      --muted: #555555;
+      --primary: #111111;
+      --primary-hover: #2C2C2C;
+      --accent-soft: #E5E5E5;
+      --mist: #EFEFEF;
+      --sand: #CCCCCC;
+      --border: #E2E2E2;
+      --danger: #111111;
+      --ok: #111111;
+      --warn: #111111;
+      --active-tint: #F2F2F2;
     }
 
     body.dark-theme {
-      --bg: #181D19;
-      --surface: #212822;
-      --surface-2: #2A332B;
-      --topic-card-bg: #2D362E;
-      --text: #F4EFE8;
-      --muted: #A7B8A7;
-      --border: #3B473D;
-      --active-tint: #323E34;
+      --bg: #0E0E0E;
+      --surface: #141414;
+      --surface-2: #1E1E1E;
+      --topic-card-bg: #191919;
+      --text: #FFFFFF;
+      --muted: #B3B3B3;
+      --primary: #FFFFFF;
+      --primary-hover: #E5E5E5;
+      --accent-soft: #2A2A2A;
+      --mist: #262626;
+      --sand: #444444;
+      --border: #2C2C2C;
+      --active-tint: #242424;
     }
 
     html {
@@ -50,7 +55,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: background 0.18s ease, color 0.18s ease;
       overflow-x: hidden;
     }
 
@@ -61,7 +66,7 @@
       height: 38px;
       border-radius: 10px;
       background: var(--primary);
-      color: #F4EFE8;
+      color: var(--bg);
       display: grid;
       place-items: center;
       font-size: 1.2rem;
@@ -94,9 +99,15 @@
     button:disabled { opacity: 0.45; cursor: not-allowed; }
 
     button.primary {
-      background: var(--primary);
-      color: #F4EFE8;
-      border-color: var(--primary);
+      background: #111111;
+      color: #FFFFFF;
+      border-color: #111111;
+    }
+
+    body.dark-theme button.primary {
+      background: #FFFFFF;
+      color: #111111;
+      border-color: #FFFFFF;
     }
 
     button.primary:hover:not(:disabled) {
@@ -107,7 +118,7 @@
     button.outline-dark {
       background: transparent;
       color: var(--text);
-      border: 1px solid var(--sand);
+      border: 1px solid var(--text);
     }
 
     button.outline-dark:hover:not(:disabled) {
@@ -118,11 +129,15 @@
     button.ghost:hover:not(:disabled) { background: var(--surface-2); }
 
     button.danger {
-      color: var(--danger);
+      color: var(--text);
       background: transparent;
-      border-color: transparent;
+      border-color: var(--border);
       padding: 4px 8px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
+    }
+
+    button.danger:hover:not(:disabled) {
+      background: var(--surface-2);
     }
 
     /* CABEÇALHO EDITORIAL */
@@ -163,7 +178,7 @@
     }
 
     .landing-nav a:hover {
-      opacity: 0.72;
+      opacity: 0.65;
     }
 
     .editorial-container {
@@ -299,7 +314,6 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 22px;
-      box-shadow: 0 6px 20px rgba(42, 49, 43, 0.04);
     }
 
     .landing-footer {
@@ -338,7 +352,7 @@
     }
 
     .social-links a:hover {
-      opacity: 0.72;
+      opacity: 0.65;
     }
 
     /* LOGIN / CRIAR CONTA */
@@ -356,7 +370,6 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 22px;
-      box-shadow: 0 10px 24px rgba(42, 49, 43, 0.06);
     }
 
     .auth-tabs {
@@ -382,6 +395,7 @@
     .auth-tab.active {
       background: var(--surface);
       color: var(--text);
+      border: 1px solid var(--border);
     }
 
     .google-btn {
@@ -436,7 +450,6 @@
       align-items: center;
     }
 
-    /* Desktop (> 1024px) */
     .app-layout {
       max-width: 1400px;
       margin: 0 auto;
@@ -447,7 +460,6 @@
       align-items: start;
     }
 
-    /* Tablet (768px a 1024px) */
     @media (max-width: 1024px) {
       .app-layout {
         grid-template-columns: 1fr;
@@ -466,7 +478,6 @@
       }
     }
 
-    /* Mobile (<= 767px) */
     @media (max-width: 767px) {
       .landing-header {
         padding: 12px 16px;
@@ -589,7 +600,7 @@
 
     .nav-btn.active {
       background: var(--active-tint);
-      border-color: var(--primary);
+      border-color: var(--text);
     }
 
     .main-stack {
@@ -602,9 +613,22 @@
     .greeting-banner {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--primary);
+      border-left: 4px solid var(--text);
       border-radius: 12px;
       padding: 14px 18px;
+    }
+
+    .mindset-banner {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--text);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
 
     .section-box {
@@ -680,9 +704,9 @@
     }
 
     .cal-day.empty-day { background: transparent; border-color: transparent; }
-    .cal-day.today-ring { outline: 2px solid var(--primary); }
+    .cal-day.today-ring { outline: 2px solid var(--text); }
     .cal-dots { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 2px; }
-    .cal-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+    .cal-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; background: var(--text); }
 
     .reminder-box {
       border: 1px solid var(--border);
@@ -714,7 +738,7 @@
     }
 
     .reminder-item:hover {
-      border-color: var(--primary);
+      border-color: var(--text);
       background: var(--active-tint);
       transform: translateY(-1px);
     }
@@ -740,10 +764,6 @@
     .insight-value { font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
     .insight-meta { font-size: 0.78rem; color: var(--muted); }
 
-    .val-alta { color: #B35E57; }
-    .val-media { color: #B0894E; }
-    .val-baixa { color: #6B7F6E; }
-
     .charts-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -764,6 +784,44 @@
     .bar-track { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
 
+    .pie-chart-layout {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pie-svg {
+      width: 128px;
+      height: 128px;
+      flex-shrink: 0;
+    }
+
+    .pie-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+      min-width: 130px;
+      font-size: 0.82rem;
+    }
+
+    .pie-legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .pie-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+      border: 1px solid var(--text);
+      flex-shrink: 0;
+    }
+
     .boards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
@@ -783,10 +841,10 @@
 
     .board-tile:hover {
       transform: translateY(-2px);
-      border-color: var(--primary);
+      border-color: var(--text);
     }
 
-    .board-strip { height: 8px; width: 100%; }
+    .board-strip { height: 6px; width: 100%; background: var(--text); }
     .board-tile-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
     .board-tile-title { font-weight: 700; font-size: 0.96rem; margin: 0; }
     .board-tile-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
@@ -842,14 +900,14 @@
 
     .board {
       display: grid;
-      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, minmax(290px, 1fr));
       gap: 16px;
       align-items: start;
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: 1024px) {
       .board {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
     }
 
@@ -868,31 +926,31 @@
       min-width: 0;
     }
 
-    .column.drag-over { outline: 2px dashed var(--primary); background: var(--active-tint); }
+    .column.drag-over { outline: 2px dashed var(--text); background: var(--active-tint); }
     .col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .col-title { font-weight: 700; font-size: 0.96rem; display: flex; align-items: center; gap: 8px; }
-    .count { background: var(--mist); color: var(--text); font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; }
+    .count { background: var(--mist); color: var(--text); font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       cursor: grab;
       transition: box-shadow 0.2s ease, outline 0.2s ease;
       max-width: 100%;
     }
 
     .card.target-highlight {
-      outline: 3px solid var(--primary);
-      box-shadow: 0 0 0 5px rgba(107, 127, 110, 0.2);
+      outline: 3px solid var(--text);
+      box-shadow: 0 0 0 4px var(--active-tint);
     }
 
     .card:active { cursor: grabbing; }
-    .card-cover-color { height: 9px; width: 100%; }
-    .card-cover-img { width: 100%; height: 110px; object-fit: cover; display: block; }
-    .card-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .card-cover-color { height: 7px; width: 100%; }
+    .card-cover-img { width: 100%; height: 105px; object-fit: cover; display: block; }
+    .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .card-title { font-weight: 600; margin: 0; font-size: 0.95rem; word-break: break-word; }
     .card-desc { margin: 0; color: var(--muted); font-size: 0.84rem; white-space: pre-line; word-break: break-word; }
@@ -901,6 +959,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 6px;
       background: var(--surface-2);
       border: 1px solid var(--border);
@@ -942,13 +1001,51 @@
       white-space: nowrap;
     }
 
+    /* ÁREA INTERNA DO CARD: FERRAMENTAS À ESQUERDA + COMENTÁRIO AO LADO DENTRO DO CARD */
+    .card-workspace-split {
+      display: grid;
+      grid-template-columns: minmax(118px, 0.85fr) minmax(145px, 1.15fr);
+      gap: 8px;
+      align-items: stretch;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 420px) {
+      .card-workspace-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card-tools-rail {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .card-tools-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+    }
+
     .comments-box {
-      margin-top: 2px;
       padding: 8px;
       border-radius: 8px;
       background: var(--surface-2);
       border: 1px solid var(--border);
-      width: 100%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .comments-list {
@@ -964,15 +1061,22 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 5px 8px;
-      font-size: 0.78rem;
+      padding: 6px 8px;
+      font-size: 0.76rem;
       line-height: 1.35;
       word-break: break-word;
     }
 
+    .comment-date-meta {
+      display: block;
+      font-size: 0.69rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
     .comment-form-inline {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       align-items: center;
       width: 100%;
     }
@@ -980,33 +1084,24 @@
     .comment-form-inline input {
       flex: 1 1 auto;
       padding: 6px 8px;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       min-width: 0;
     }
 
     .comment-form-inline button {
       flex: 0 0 auto;
-      padding: 6px 10px;
-      font-size: 0.76rem;
+      padding: 6px 9px;
+      font-size: 0.74rem;
     }
 
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.78rem;
-      color: var(--muted);
-      padding-top: 8px;
-      margin-top: 2px;
-      border-top: 1px solid var(--border);
-    }
+    .tag { padding: 2px 8px; border-radius: 999px; font-weight: 600; font-size: 0.74rem; display: inline-block; border: 1px solid var(--border); }
+    .tag-alta { background: #111111; color: #FFFFFF; border-color: #111111; }
+    .tag-media { background: #E6E6E6; color: #111111; border-color: #BDBDBD; }
+    .tag-baixa { background: #F7F7F7; color: #111111; border-color: #D0D0D0; }
 
-    .tag { padding: 2px 8px; border-radius: 999px; font-weight: 600; font-size: 0.74rem; display: inline-block; }
-    .tag-alta { background: #F2DFDC; color: #7B2E28; }
-    .tag-media { background: #EFE4CE; color: #725423; }
-    .tag-baixa { background: #DCE5DC; color: #364A39; }
+    body.dark-theme .tag-alta { background: #FFFFFF; color: #111111; border-color: #FFFFFF; }
+    body.dark-theme .tag-media { background: #383838; color: #FFFFFF; border-color: #555555; }
+    body.dark-theme .tag-baixa { background: #222222; color: #E5E5E5; border-color: #3A3A3A; }
 
     .status-badge {
       padding: 2px 8px;
@@ -1019,14 +1114,18 @@
       display: inline-block;
     }
 
-    .due-badge { padding: 2px 8px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; display: inline-block; }
-    .due-late { background: #F2DFDC; color: #7B2E28; }
-    .due-today { background: #EFE4CE; color: #725423; }
-    .due-upcoming { background: #DCE5DC; color: #364A39; }
+    .due-badge { padding: 2px 8px; border-radius: 999px; font-size: 0.73rem; font-weight: 700; display: inline-block; border: 1px solid var(--border); }
+    .due-late { background: #111111; color: #FFFFFF; border-color: #111111; }
+    .due-today { background: #E5E5E5; color: #111111; border-color: #B5B5B5; }
+    .due-upcoming { background: #F4F4F4; color: #111111; border-color: #CCCCCC; }
     .due-none { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
 
+    body.dark-theme .due-late { background: #FFFFFF; color: #111111; border-color: #FFFFFF; }
+    body.dark-theme .due-today { background: #383838; color: #FFFFFF; border-color: #555555; }
+    body.dark-theme .due-upcoming { background: #242424; color: #FFFFFF; border-color: #3D3D3D; }
+
     .move-btns { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
-    .move-btns button { padding: 3px 7px; font-size: 0.75rem; }
+    .move-btns button { padding: 4px 8px; font-size: 0.75rem; }
     .empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 8px; }
 
     .schedule-list { display: flex; flex-direction: column; gap: 8px; }
@@ -1077,7 +1176,7 @@
     }
 
     .date-trigger-btn:hover {
-      border-color: var(--primary);
+      border-color: var(--text);
       background: var(--active-tint);
     }
 
@@ -1103,7 +1202,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
-      box-shadow: 0 12px 28px rgba(42, 49, 43, 0.16);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
     }
 
     .popover-cal-grid {
@@ -1124,12 +1223,12 @@
 
     .popover-day-btn:hover {
       background: var(--active-tint);
-      border-color: var(--primary);
+      border-color: var(--text);
     }
 
     .popover-day-btn.selected-day {
-      background: var(--primary);
-      color: #F4EFE8;
+      background: #111111;
+      color: #FFFFFF;
     }
 
     /* DIAGRAMA DE GANTT ESTILO GRADE TABULAR */
@@ -1149,9 +1248,9 @@
     }
 
     .gantt-sheet th.gantt-head-dark {
-      background: #4E5E50;
-      color: #F4EFE8;
-      border: 1px solid #6B7F6E;
+      background: #1A1A1A;
+      color: #FFFFFF;
+      border: 1px solid #3A3A3A;
       padding: 8px 6px;
       text-align: center;
       font-weight: 700;
@@ -1223,6 +1322,7 @@
       height: 12px;
       border-radius: 3px;
       display: inline-block;
+      border: 1px solid var(--text);
     }
 
     dialog {
@@ -1271,6 +1371,123 @@
       margin-top: 4px;
       font-size: 0.84rem;
     }
+
+    /* ASSISTENTE IA SOL - CANTO INFERIOR DIREITO */
+    .sol-widget-root {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 80;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .sol-fab-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #111111;
+      color: #FFFFFF;
+      border: 1px solid #111111;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    body.dark-theme .sol-fab-btn {
+      background: #FFFFFF;
+      color: #111111;
+      border-color: #FFFFFF;
+    }
+
+    .sol-chat-panel {
+      width: 340px;
+      max-width: calc(100vw - 32px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sol-chat-header {
+      background: #111111;
+      color: #FFFFFF;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    body.dark-theme .sol-chat-header {
+      background: #1F1F1F;
+      color: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sol-chat-messages {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 290px;
+      overflow-y: auto;
+      background: var(--surface-2);
+    }
+
+    .sol-msg {
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      max-width: 90%;
+      word-break: break-word;
+    }
+
+    .sol-msg.bot {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .sol-msg.user {
+      align-self: flex-end;
+      background: #111111;
+      color: #FFFFFF;
+    }
+
+    body.dark-theme .sol-msg.user {
+      background: #FFFFFF;
+      color: #111111;
+    }
+
+    .sol-chat-form {
+      display: flex;
+      gap: 6px;
+      padding: 10px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .sol-chat-form input {
+      flex: 1 1 auto;
+      padding: 7px 10px;
+      font-size: 0.82rem;
+      min-width: 0;
+    }
+
+    .sol-chat-form button {
+      padding: 7px 11px;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
@@ -1295,7 +1512,7 @@
         <section id="inicio" class="hero-editorial">
           <h1>Em Dia. 😊</h1>
           <p>
-            Organização clara e sem ruído para o seu dia a dia. Um espaço clean para acompanhar quadros, prazos, lembretes e tarefas com simplicidade.
+            Organização clara e sem ruído para o seu dia a dia. Um espaço minimalista em preto e branco para acompanhar quadros, prazos, lembretes e tarefas com simplicidade.
           </p>
           <div class="hero-actions">
             <button type="button" class="primary" id="heroStartBtn">Começar agora</button>
@@ -1312,7 +1529,7 @@
           <div class="topics-grid">
             <div class="topic-card">
               <h3>O que é o aplicativo</h3>
-              <p>É um gestor de tarefas clean que reúne até 10 quadros, calendário colorido, lembretes, gráficos e modos de visualização em um só lugar.</p>
+              <p>É um gestor de tarefas minimalista que reúne até 10 quadros, calendário colorido, lembretes, dashboard com gráficos e modos de visualização em um só lugar.</p>
             </div>
             <div class="topic-card">
               <h3>Para que foi feito</h3>
@@ -1493,7 +1710,6 @@
       </div>
 
       <div class="controls">
-        <button type="button" class="ghost hidden" id="backToBoardsHeaderBtn">← Quadros</button>
         <button class="ghost" id="logoutBtn">Sair</button>
       </div>
     </header>
@@ -1581,13 +1797,9 @@
           <div class="form-row">
             <label for="customTheme">Tema</label>
             <select id="customTheme">
-              <option value="light">Tema Claro Calm</option>
-              <option value="dark">Tema Escuro Calm</option>
+              <option value="light">Preto e Branco Claro</option>
+              <option value="dark">Preto e Branco Escuro</option>
             </select>
-          </div>
-          <div class="form-row">
-            <label for="customAccent">Cor de destaque</label>
-            <input id="customAccent" type="color" style="height:36px;padding:3px;" />
           </div>
           <div class="form-row">
             <label for="customWallpaper">Papel de parede (fundo)</label>
@@ -1641,12 +1853,9 @@
         <div id="boardDetailView" class="main-stack hidden">
           <section class="section-box" aria-label="Cabeçalho do quadro">
             <div class="board-toolbar">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-                <button type="button" id="backToBoardsBtn">← Quadros</button>
-                <div>
-                  <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
-                  <span class="section-sub" id="activeBoardDesc"></span>
-                </div>
+              <div>
+                <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
+                <span class="section-sub" id="activeBoardDesc"></span>
               </div>
 
               <div class="controls">
@@ -1663,7 +1872,15 @@
               </div>
             </div>
 
-            <div class="controls" style="justify-content:space-between;">
+            <div class="mindset-banner" id="tenhaEmMenteBox" aria-label="Tenha em Mente">
+              <div>
+                <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);">Tenha em Mente</div>
+                <div style="font-size:0.95rem;font-weight:600;margin-top:3px;" id="tenhaEmMenteMessage"></div>
+              </div>
+              <span class="status-badge" id="tenhaEmMenteContext"></span>
+            </div>
+
+            <div class="controls" style="justify-content:space-between;margin-top:14px;">
               <div class="controls">
                 <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
                 <select id="priorityFilter">
@@ -1684,13 +1901,9 @@
                   <input id="editBoardNameInput" type="text" />
                 </div>
                 <div class="form-row">
-                  <label for="editBoardColorInput">Cor do quadro</label>
-                  <input id="editBoardColorInput" type="color" style="height:38px;padding:4px;" />
+                  <label for="editBoardDescInput">Descrição</label>
+                  <input id="editBoardDescInput" type="text" />
                 </div>
-              </div>
-              <div class="form-row">
-                <label for="editBoardDescInput">Descrição</label>
-                <input id="editBoardDescInput" type="text" />
               </div>
               <div style="display:flex;gap:8px;justify-content:flex-end;">
                 <button type="button" id="closeBoardEditBtn">Fechar</button>
@@ -1726,13 +1939,13 @@
             </div>
           </section>
 
-          <section class="section-box" aria-label="Insights do quadro">
+          <section class="section-box" aria-label="Dashboard do quadro">
             <div class="section-header">
               <div class="section-title-group">
-                <h2 class="section-title">Insights</h2>
+                <h2 class="section-title">Dashboard</h2>
                 <span class="section-sub" id="insightsSummaryText"></span>
               </div>
-              <button type="button" id="toggleInsightsBtn">🙈 Ocultar insights</button>
+              <button type="button" id="toggleInsightsBtn">🙈 Ocultar Dashboard</button>
             </div>
 
             <div id="insightsContent">
@@ -1754,7 +1967,7 @@
                     <th>Status</th>
                     <th>Prioridade</th>
                     <th>Prazo</th>
-                    <th>Anexo</th>
+                    <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody id="tasksTableBody"></tbody>
@@ -1763,7 +1976,7 @@
               <div id="tableRowActionPanel" class="table-action-panel hidden">
                 <span id="tableSelectedTaskLabel" style="font-weight:700;font-size:0.88rem;"></span>
                 <div class="move-btns">
-                  <button type="button" id="tableEditModalBtn">Editar detalhes</button>
+                  <button type="button" id="tableEditModalBtn">Abrir</button>
                   <button type="button" class="danger" id="tableDeleteTaskBtn">Excluir</button>
                 </div>
               </div>
@@ -1774,6 +1987,28 @@
         </div>
       </main>
     </div>
+  </div>
+
+  <!-- ASSISTENTE IA SOL - CANTO INFERIOR DIREITO -->
+  <div class="sol-widget-root" id="solWidgetRoot">
+    <div class="sol-chat-panel hidden" id="solChatPanel" role="dialog" aria-label="Assistente Sol">
+      <div class="sol-chat-header">
+        <div>
+          <strong style="font-size:0.9rem;">Sol • Assistente IA</strong>
+          <div style="font-size:0.72rem;opacity:0.8;">Em Dia</div>
+        </div>
+        <button type="button" id="closeSolChatBtn" style="padding:3px 8px;font-size:0.76rem;background:transparent;color:inherit;border-color:currentColor;">✕</button>
+      </div>
+      <div class="sol-chat-messages" id="solChatMessages"></div>
+      <form class="sol-chat-form" id="solChatForm">
+        <input id="solChatInput" type="text" placeholder="Pergunte sobre o Em Dia..." required />
+        <button type="submit" class="primary">Enviar</button>
+      </form>
+    </div>
+
+    <button type="button" class="sol-fab-btn" id="toggleSolChatBtn" aria-label="Conversar com Sol">
+      Sol
+    </button>
   </div>
 
   <!-- POPOVER MINI CALENDÁRIO PARA PRAZO NA TABELA -->
@@ -1804,10 +2039,6 @@
         <label for="newBoardDescInput">Descrição</label>
         <input id="newBoardDescInput" type="text" placeholder="Objetivo ou contexto do quadro" />
       </div>
-      <div class="form-row">
-        <label for="newBoardColorInput">Cor do quadro</label>
-        <input id="newBoardColorInput" type="color" value="#6B7F6E" style="height:38px;padding:4px;" />
-      </div>
       <div class="modal-actions">
         <button type="button" id="cancelCreateBoardBtn">Cancelar</button>
         <button type="submit" class="primary">Criar quadro</button>
@@ -1815,10 +2046,10 @@
     </form>
   </dialog>
 
-  <!-- MODAL: CRIAR / EDITAR TAREFA -->
+  <!-- MODAL: ABRIR / EDITAR TAREFA -->
   <dialog id="taskDialog">
     <form id="taskForm" method="dialog">
-      <h2 id="dialogTitle" style="margin-top:0;font-size:1.1rem;">Nova tarefa</h2>
+      <h2 id="dialogTitle" style="margin-top:0;font-size:1.1rem;">Abrir tarefa</h2>
 
       <div class="form-row">
         <label for="taskTitle">Título *</label>
@@ -1869,14 +2100,18 @@
         <label for="taskCoverType">Capa do card</label>
         <select id="taskCoverType">
           <option value="none">Sem capa</option>
-          <option value="color">Cor do card</option>
+          <option value="color">Faixa de destaque</option>
           <option value="image">Upload de imagem</option>
         </select>
       </div>
 
       <div id="coverColorRow" class="form-row hidden">
-        <label for="taskCoverColor">Cor do card</label>
-        <input id="taskCoverColor" type="color" value="#6B7F6E" style="height:38px;padding:4px;" />
+        <label for="taskCoverColor">Tom da faixa</label>
+        <select id="taskCoverColor">
+          <option value="#111111">Preto</option>
+          <option value="#555555">Cinza Escuro</option>
+          <option value="#9E9E9E">Cinza Médio</option>
+        </select>
       </div>
 
       <div id="coverImageRow" class="form-row hidden">
@@ -1899,7 +2134,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v11";
+    const DB_KEY = "em_dia_workspace_v12";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const CONTACT_EMAIL = "maysavieiradearaujo@gmail.com";
@@ -1969,6 +2204,17 @@
       return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
     }
 
+    function getNowDateTimeLabel() {
+      const now = new Date();
+      return now.toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
     function addDaysIso(days) {
       const now = new Date();
       now.setDate(now.getDate() + days);
@@ -1999,7 +2245,6 @@
           notifications: { push: true, email: true, desktop: false },
           customization: {
             theme: "light",
-            accent: "#6B7F6E",
             wallpaper: ""
           }
         },
@@ -2014,7 +2259,7 @@
             id: "b1",
             name: "Quadro Principal",
             desc: "Organização diária de tarefas e prazos.",
-            color: "#6B7F6E",
+            color: "#111111",
             members: [
               { id: "m1", name: "Maysa Araújo", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
               { id: "m2", name: "Rafael Costa", role: "Membro", avatarUrl: "" },
@@ -2031,11 +2276,11 @@
                 col: "todo",
                 assigneeId: "m1",
                 coverType: "color",
-                coverColor: "#B35E57",
+                coverColor: "#111111",
                 coverImage: "",
                 attachment: null,
                 comments: [
-                  { id: "c1", author: "Maysa Araújo", text: "Priorizar entregas da semana." }
+                  { id: "c1", author: "Maysa Araújo", text: "Priorizar entregas da semana.", dateLabel: getNowDateTimeLabel() }
                 ]
               },
               {
@@ -2048,7 +2293,7 @@
                 col: "doing",
                 assigneeId: "m2",
                 coverType: "color",
-                coverColor: "#6B7F6E",
+                coverColor: "#555555",
                 coverImage: "",
                 attachment: null,
                 comments: []
@@ -2063,7 +2308,7 @@
                 col: "done",
                 assigneeId: "m3",
                 coverType: "color",
-                coverColor: "#A7B8A7",
+                coverColor: "#9E9E9E",
                 coverImage: "",
                 attachment: null,
                 comments: []
@@ -2094,7 +2339,12 @@
                 ...b,
                 tasks: (b.tasks || []).map((t) => ({
                   ...t,
-                  comments: Array.isArray(t.comments) ? t.comments : []
+                  comments: Array.isArray(t.comments)
+                    ? t.comments.map((c) => ({
+                        ...c,
+                        dateLabel: c.dateLabel || getNowDateTimeLabel()
+                      }))
+                    : []
                 }))
               }))
             : def.boards
@@ -2119,10 +2369,8 @@
 
     function applyThemeAndAccent() {
       const theme = state.user.customization?.theme || "light";
-      const accent = state.user.customization?.accent || "#6B7F6E";
       const wallpaper = state.isAuthenticated ? (state.user.customization?.wallpaper || "") : "";
       document.body.classList.toggle("dark-theme", theme === "dark");
-      document.documentElement.style.setProperty("--primary", accent);
       document.body.style.backgroundImage = wallpaper ? `url("${wallpaper}")` : "";
     }
 
@@ -2394,8 +2642,6 @@
     }
 
     document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
-    document.getElementById("backToBoardsHeaderBtn").addEventListener("click", goHome);
-    document.getElementById("backToBoardsBtn").addEventListener("click", goHome);
 
     /* MENU LATERAL ESQUERDO */
     const moodSelectEl = document.getElementById("moodSelect");
@@ -2427,7 +2673,6 @@
       document.getElementById("notifEmail").checked = Boolean(state.user.notifications?.email);
       document.getElementById("notifDesktop").checked = Boolean(state.user.notifications?.desktop);
       document.getElementById("customTheme").value = state.user.customization?.theme || "light";
-      document.getElementById("customAccent").value = state.user.customization?.accent || "#6B7F6E";
       tempWallpaperData = state.user.customization?.wallpaper || "";
     }
 
@@ -2489,7 +2734,6 @@
     document.getElementById("saveCustomBtn").addEventListener("click", () => {
       state.user.customization = {
         theme: document.getElementById("customTheme").value || "light",
-        accent: document.getElementById("customAccent").value || "#6B7F6E",
         wallpaper: tempWallpaperData
       };
       applyThemeAndAccent();
@@ -2510,14 +2754,6 @@
       renderMiniCalendar();
     });
 
-    function getCardColorForCalendar(task, board) {
-      if (task.coverType === "color" && task.coverColor) return task.coverColor;
-      if (task.priority === "alta") return "#B35E57";
-      if (task.priority === "media") return "#B0894E";
-      if (task.priority === "baixa") return "#6B7F6E";
-      return board.color || "#6B7F6E";
-    }
-
     function renderMiniCalendar() {
       const base = new Date();
       base.setDate(1);
@@ -2537,8 +2773,8 @@
       state.boards.forEach((b) => {
         (b.tasks || []).forEach((t) => {
           if (!t.dueDate) return;
-          if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = [];
-          tasksByDate[t.dueDate].push(getCardColorForCalendar(t, b));
+          if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = 0;
+          tasksByDate[t.dueDate] += 1;
         });
       });
 
@@ -2553,15 +2789,14 @@
         const mm = String(month + 1).padStart(2, "0");
         const dd = String(day).padStart(2, "0");
         const iso = `${year}-${mm}-${dd}`;
-        const colors = tasksByDate[iso] || [];
+        const count = tasksByDate[iso] || 0;
         const isToday = iso === todayIso;
-        const primaryDayColor = colors[0] || "";
 
         html += `
-          <div class="cal-day ${isToday ? "today-ring" : ""}" style="${primaryDayColor ? `border-color:${primaryDayColor};` : ""}">
+          <div class="cal-day ${isToday ? "today-ring" : ""}">
             <span>${day}</span>
             <div class="cal-dots">
-              ${colors.map((c) => `<span class="cal-dot" style="background:${escapeHtml(c)};"></span>`).join("")}
+              ${Array.from({ length: Math.min(count, 4) }).map(() => `<span class="cal-dot"></span>`).join("")}
             </div>
           </div>
         `;
@@ -2634,7 +2869,6 @@
       }
       document.getElementById("newBoardNameInput").value = "";
       document.getElementById("newBoardDescInput").value = "";
-      document.getElementById("newBoardColorInput").value = state.user.customization?.accent || "#6B7F6E";
       createBoardDialogEl.showModal();
       document.getElementById("newBoardNameInput").focus();
     });
@@ -2649,13 +2883,12 @@
       const name = document.getElementById("newBoardNameInput").value.trim();
       if (!name) return;
       const desc = document.getElementById("newBoardDescInput").value.trim() || "Clique para abrir.";
-      const color = document.getElementById("newBoardColorInput").value || "#6B7F6E";
 
       const newBoard = {
         id: "b_" + Date.now(),
         name,
         desc,
-        color,
+        color: "#111111",
         members: [
           { id: "m_" + Date.now(), name: state.user.name || "Você", role: "Administrador", avatarUrl: state.user.avatarUrl || "" }
         ],
@@ -2672,7 +2905,7 @@
       document.getElementById("boardsList").innerHTML = state.boards
         .map((b) => `
           <div class="board-tile" data-open-board="${b.id}">
-            <div class="board-strip" style="background:${escapeHtml(b.color || "#6B7F6E")};"></div>
+            <div class="board-strip"></div>
             <div class="board-tile-body">
               <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
               <p class="board-tile-desc">${escapeHtml(b.desc || "Clique para abrir")}</p>
@@ -2692,7 +2925,35 @@
       openBoardPage(tile.dataset.openBoard);
     });
 
-    /* INSIGHTS: BARRAS + GRÁFICO DE STATUS COM ATRASADO */
+    /* TÓPICO "TENHA EM MENTE" DENTRO DO QUADRO */
+    function renderTenhaEmMente(board) {
+      const tasks = board.tasks || [];
+      const atrasadas = tasks.filter((t) => isTaskOverdue(t)).length;
+      const concluidas = tasks.filter((t) => t.col === "done").length;
+      const emAndamento = tasks.filter((t) => t.col === "doing").length;
+
+      let message = "";
+      let context = "";
+
+      if (atrasadas > concluidas) {
+        message = "Respire fundo com serenidade: cada passo calmo e bem planejado coloca o seu dia nos trilhos, sem pressa excessiva, apenas com organização e constância.";
+        context = `Atrasadas: ${atrasadas} • Concluídas: ${concluidas}`;
+      } else if (concluidas > atrasadas) {
+        message = "continue acreditando que é capaz de fazer";
+        context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
+      } else if (emAndamento >= 2 || (emAndamento > 0 && atrasadas === concluidas)) {
+        message = "confie no processo";
+        context = `Em andamento: ${emAndamento}`;
+      } else {
+        message = "confie no processo";
+        context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
+      }
+
+      document.getElementById("tenhaEmMenteMessage").textContent = message;
+      document.getElementById("tenhaEmMenteContext").textContent = context;
+    }
+
+    /* DASHBOARD: GRÁFICO DE PIZZA PARA PRIORIDADES + GRÁFICO DE BARRAS PARA STATUS */
     const insightsContentEl = document.getElementById("insightsContent");
     const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
 
@@ -2730,8 +2991,70 @@
       `;
     }
 
+    function renderPieChartCard(title, segments, total) {
+      const cx = 64;
+      const cy = 64;
+      const r = 52;
+      let startAngle = -90;
+      let slicesSvg = "";
+
+      if (!total) {
+        slicesSvg = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--border)" />`;
+      } else {
+        segments.forEach((seg) => {
+          if (!seg.value) return;
+          const angle = (seg.value / total) * 360;
+          if (angle >= 359.99) {
+            slicesSvg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${seg.color}" stroke="var(--surface)" stroke-width="1.5" />`;
+          } else {
+            const endAngle = startAngle + angle;
+            const startRad = (startAngle * Math.PI) / 180;
+            const endRad = (endAngle * Math.PI) / 180;
+            const x1 = cx + r * Math.cos(startRad);
+            const y1 = cy + r * Math.sin(startRad);
+            const x2 = cx + r * Math.cos(endRad);
+            const y2 = cy + r * Math.sin(endRad);
+            const largeArc = angle > 180 ? 1 : 0;
+            slicesSvg += `
+              <path
+                d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z"
+                fill="${seg.color}"
+                stroke="var(--surface)"
+                stroke-width="1.5"
+              />
+            `;
+            startAngle = endAngle;
+          }
+        });
+      }
+
+      const pct = (val) => (total ? Math.round((val / total) * 100) : 0);
+
+      return `
+        <div class="chart-box">
+          <h3 class="chart-title">${escapeHtml(title)}</h3>
+          <div class="pie-chart-layout">
+            <svg class="pie-svg" viewBox="0 0 128 128" role="img" aria-label="${escapeHtml(title)}">
+              ${slicesSvg}
+            </svg>
+            <div class="pie-legend">
+              ${segments.map((s) => `
+                <div class="pie-legend-row">
+                  <span style="display:inline-flex;align-items:center;gap:6px;">
+                    <span class="pie-swatch" style="background:${s.color};"></span>
+                    <span>${escapeHtml(s.label)}</span>
+                  </span>
+                  <strong>${s.value} (${pct(s.value)}%)</strong>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderInsightsAndCharts() {
-      toggleInsightsBtn.textContent = state.insightsVisible ? "🙈 Ocultar insights" : "👁️ Mostrar insights";
+      toggleInsightsBtn.textContent = state.insightsVisible ? "🙈 Ocultar Dashboard" : "👁️ Mostrar Dashboard";
       insightsContentEl.classList.toggle("hidden", !state.insightsVisible);
       if (!state.insightsVisible) return;
 
@@ -2757,37 +3080,38 @@
         </div>
         <div class="insight-card">
           <span class="insight-label">Prioridade Alta</span>
-          <span class="insight-value val-alta">${alta}</span>
+          <span class="insight-value">${alta}</span>
           <span class="insight-meta">Alta</span>
         </div>
         <div class="insight-card">
           <span class="insight-label">Prioridade Média</span>
-          <span class="insight-value val-media">${media}</span>
+          <span class="insight-value">${media}</span>
           <span class="insight-meta">Média</span>
         </div>
         <div class="insight-card">
           <span class="insight-label">Prioridade Baixa</span>
-          <span class="insight-value val-baixa">${baixa}</span>
+          <span class="insight-value">${baixa}</span>
           <span class="insight-meta">Baixa</span>
         </div>
       `;
 
+      const isDark = document.body.classList.contains("dark-theme");
       const prioSegments = [
-        { label: "Alta", value: alta, color: "#B35E57" },
-        { label: "Média", value: media, color: "#B0894E" },
-        { label: "Baixa", value: baixa, color: "#6B7F6E" }
+        { label: "Alta", value: alta, color: isDark ? "#FFFFFF" : "#111111" },
+        { label: "Média", value: media, color: isDark ? "#8A8A8A" : "#666666" },
+        { label: "Baixa", value: baixa, color: isDark ? "#444444" : "#CCCCCC" }
       ];
 
       const statusSegments = [
-        { label: "A Fazer", value: todoCount, color: "#6B7F6E" },
-        { label: "Em Andamento", value: doingCount, color: "#8B9E8E" },
-        { label: "Concluído", value: doneCount, color: "#A7B8A7" },
-        { label: "Atrasado", value: overdueCount, color: "#B35E57" }
+        { label: "A Fazer", value: todoCount, color: isDark ? "#FFFFFF" : "#111111" },
+        { label: "Em Andamento", value: doingCount, color: isDark ? "#9A9A9A" : "#555555" },
+        { label: "Concluído", value: doneCount, color: isDark ? "#666666" : "#999999" },
+        { label: "Atrasado", value: overdueCount, color: isDark ? "#D4D4D4" : "#2B2B2B" }
       ];
 
       document.getElementById("chartsGrid").innerHTML =
-        renderBarChartCard("Prioridade", prioSegments, total) +
-        renderBarChartCard("Status", statusSegments, total);
+        renderPieChartCard("Prioridade (Gráfico de Pizza)", prioSegments, total) +
+        renderBarChartCard("Status (Gráfico de Barras)", statusSegments, total);
     }
 
     /* INFORMAÇÕES DO QUADRO & GERENCIAR MEMBROS */
@@ -2804,7 +3128,6 @@
       boardEditPanelEl.classList.toggle("hidden");
       document.getElementById("editBoardNameInput").value = board.name;
       document.getElementById("editBoardDescInput").value = board.desc || "";
-      document.getElementById("editBoardColorInput").value = board.color || "#6B7F6E";
     });
 
     document.getElementById("closeBoardEditBtn").addEventListener("click", () => {
@@ -2818,7 +3141,6 @@
       if (!name) return;
       board.name = name;
       board.desc = document.getElementById("editBoardDescInput").value.trim();
-      board.color = document.getElementById("editBoardColorInput").value;
       saveState();
       boardEditPanelEl.classList.add("hidden");
       renderAll();
@@ -2948,26 +3270,44 @@
       `;
     }
 
-    function renderCommentsHtml(task, canEdit) {
+    function renderCardToolsAndCommentsHtml(task, canEdit, prevCol, nextCol) {
       const comments = Array.isArray(task.comments) ? task.comments : [];
       const listItems = comments.length
         ? comments.map((c) => `
             <div class="comment-entry">
-              <strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}
+              <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}</div>
+              <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
             </div>
           `).join("")
         : `<div class="section-sub" style="margin-bottom:6px;">Sem comentários.</div>`;
 
       return `
-        <div class="comments-box">
-          <div style="font-size:0.76rem;font-weight:700;margin-bottom:6px;">Comentários (${comments.length})</div>
-          <div class="comments-list">${listItems}</div>
-          ${canEdit ? `
-            <form class="comment-form-inline" data-comment-form="${task.id}">
-              <input type="text" name="commentText" placeholder="Escrever comentário..." required />
-              <button type="submit" class="primary">Enviar</button>
-            </form>
-          ` : ""}
+        <div class="card-workspace-split">
+          <div class="card-tools-rail">
+            <div>
+              <div class="card-tools-label">Ferramentas</div>
+              <div style="margin-top:6px;">
+                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
+              </div>
+            </div>
+
+            <div class="move-btns">
+              ${canEdit && prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para coluna anterior">←</button>` : ""}
+              ${canEdit ? `<button data-edit="${task.id}">Abrir</button>` : `<button data-edit="${task.id}">Abrir</button>`}
+              ${canEdit && nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para próxima coluna">→</button>` : ""}
+            </div>
+          </div>
+
+          <div class="comments-box">
+            <div style="font-size:0.74rem;font-weight:700;margin-bottom:6px;">Comentários (${comments.length})</div>
+            <div class="comments-list">${listItems}</div>
+            ${canEdit ? `
+              <form class="comment-form-inline" data-comment-form="${task.id}">
+                <input type="text" name="commentText" placeholder="Comentar..." required />
+                <button type="submit" class="primary">Enviar</button>
+              </form>
+            ` : ""}
+          </div>
         </div>
       `;
     }
@@ -3060,15 +3400,7 @@
                   ` : ""}
                 </div>
                 ${renderAttachmentHtml(task)}
-                ${renderCommentsHtml(task, canEdit)}
-                <div class="card-footer">
-                  <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
-                  <div class="move-btns">
-                    ${canEdit && prevCol ? `<button data-move="${task.id}:${prevCol}">←</button>` : ""}
-                    ${canEdit ? `<button data-edit="${task.id}">Editar</button>` : ""}
-                    ${canEdit && nextCol ? `<button data-move="${task.id}:${nextCol}">→</button>` : ""}
-                  </div>
-                </div>
+                ${renderCardToolsAndCommentsHtml(task, canEdit, prevCol, nextCol)}
               </div>
             `;
             colDiv.appendChild(card);
@@ -3095,7 +3427,8 @@
       task.comments.push({
         id: "c_" + Date.now(),
         author: state.user.name || "Você",
-        text
+        text,
+        dateLabel: getNowDateTimeLabel()
       });
       saveState();
       renderAll();
@@ -3136,7 +3469,7 @@
               </div>
               <div class="move-btns">
                 <span class="status-badge">${columnLabel(task.col)}</span>
-                ${canEdit ? `<button data-edit="${task.id}">Editar</button>` : ""}
+                ${canEdit ? `<button data-edit="${task.id}">Abrir</button>` : `<button data-edit="${task.id}">Abrir</button>`}
               </div>
             </div>
           `;
@@ -3314,7 +3647,9 @@
                   <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
                 </div>
               </td>
-              <td>${task.attachment ? renderAttachmentHtml(task) : `<span class="section-sub">—</span>`}</td>
+              <td>
+                <button type="button" data-table-open-card="${task.id}">Abrir</button>
+              </td>
             </tr>
           `;
         })
@@ -3332,6 +3667,15 @@
     const tasksTableBodyEl = document.getElementById("tasksTableBody");
 
     tasksTableBodyEl.addEventListener("click", (e) => {
+      const openBtn = e.target.closest("[data-table-open-card]");
+      if (openBtn) {
+        e.stopPropagation();
+        const board = getActiveBoard();
+        const found = board.tasks.find((t) => t.id === openBtn.dataset.tableOpenCard);
+        if (found) openTaskModal(found);
+        return;
+      }
+
       const dateBtn = e.target.closest("[data-table-date-btn]");
       if (dateBtn) {
         e.stopPropagation();
@@ -3365,6 +3709,7 @@
           saveState();
           renderInsightsAndCharts();
           renderDueSoonReminders();
+          renderTenhaEmMente(board);
         }
         return;
       }
@@ -3387,6 +3732,7 @@
           saveState();
           renderInsightsAndCharts();
           renderDueSoonReminders();
+          renderTenhaEmMente(board);
         }
         return;
       }
@@ -3453,6 +3799,8 @@
         }
       });
 
+      const isDark = document.body.classList.contains("dark-theme");
+
       const rowsHtml = filtered
         .map((task, idx) => {
           const member = findMember(board, task.assigneeId);
@@ -3464,15 +3812,18 @@
           const endIdx = Math.min(totalDaysCols - 1, startIdx + durationDays - 1);
 
           const barColor =
-            (task.coverType === "color" && task.coverColor) ||
-            (task.priority === "alta" ? "#B35E57" : task.priority === "media" ? "#6B7F6E" : "#A7B8A7");
+            task.priority === "alta"
+              ? (isDark ? "#FFFFFF" : "#111111")
+              : task.priority === "media"
+              ? (isDark ? "#9A9A9A" : "#666666")
+              : (isDark ? "#555555" : "#BDBDBD");
 
           const dayCells = dayColumns
             .map((_, cIdx) => {
               const active = cIdx >= startIdx && cIdx <= endIdx;
               return `
                 <td class="gantt-grid-cell">
-                  ${active ? `<span class="gantt-bar-segment" style="background:${escapeHtml(barColor)};"></span>` : ""}
+                  ${active ? `<span class="gantt-bar-segment" style="background:${barColor};"></span>` : ""}
                 </td>
               `;
             })
@@ -3509,9 +3860,9 @@
           </table>
         </div>
         <div class="gantt-legend-row">
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#B35E57;"></span> Alta</span>
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#6B7F6E;"></span> Média</span>
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#A7B8A7;"></span> Baixa</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#FFFFFF" : "#111111"};"></span> Alta</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#9A9A9A" : "#666666"};"></span> Média</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#555555" : "#BDBDBD"};"></span> Baixa</span>
         </div>
       `;
     }
@@ -3626,7 +3977,7 @@
       }
 
       editingTaskId = task ? task.id : null;
-      document.getElementById("dialogTitle").textContent = task ? "Editar tarefa" : "Nova tarefa";
+      document.getElementById("dialogTitle").textContent = task ? "Abrir tarefa" : "Nova tarefa";
       document.getElementById("taskTitle").value = task ? task.title : "";
       document.getElementById("taskDesc").value = task ? task.desc || "" : "";
       document.getElementById("taskPriority").value = task ? task.priority : "media";
@@ -3639,7 +3990,8 @@
       taskAssigneeEl.value = task?.assigneeId || board.members?.[0]?.id || "";
 
       taskCoverTypeEl.value = task?.coverType || "none";
-      document.getElementById("taskCoverColor").value = task?.coverColor || "#6B7F6E";
+      const validColors = ["#111111", "#555555", "#9E9E9E"];
+      document.getElementById("taskCoverColor").value = validColors.includes(task?.coverColor) ? task.coverColor : "#111111";
       tempCoverImageData = task?.coverImage || "";
       document.getElementById("taskCoverFile").value = "";
 
@@ -3731,6 +4083,82 @@
     document.getElementById("searchInput").addEventListener("input", renderAll);
     document.getElementById("priorityFilter").addEventListener("change", renderAll);
 
+    /* ASSISTENTE IA SOL */
+    const solChatPanelEl = document.getElementById("solChatPanel");
+    const solChatMessagesEl = document.getElementById("solChatMessages");
+    const solChatFormEl = document.getElementById("solChatForm");
+    const solChatInputEl = document.getElementById("solChatInput");
+    let solOpenedOnce = false;
+
+    function appendSolMessage(sender, text) {
+      const div = document.createElement("div");
+      div.className = `sol-msg ${sender}`;
+      div.textContent = text;
+      solChatMessagesEl.appendChild(div);
+      solChatMessagesEl.scrollTop = solChatMessagesEl.scrollHeight;
+    }
+
+    function openSolPanel() {
+      solChatPanelEl.classList.remove("hidden");
+      if (!solOpenedOnce) {
+        solOpenedOnce = true;
+        appendSolMessage("bot", "Oi, tudo bem?! Em que posso te ajudar?");
+      }
+      solChatInputEl.focus();
+    }
+
+    function generateSolReply(rawQuestion) {
+      const q = rawQuestion.toLowerCase();
+      const board = getActiveBoard();
+      const totalBoards = state.boards.length;
+      const atrasadas = (board?.tasks || []).filter((t) => isTaskOverdue(t)).length;
+      const concluidas = (board?.tasks || []).filter((t) => t.col === "done").length;
+
+      if (q.includes("criou") || q.includes("maysa") || q.includes("quem") || q.includes("sobre") || q.includes("aplicativo") || q.includes("propósito") || q.includes("público")) {
+        return "O Em Dia foi criado por Maysa Araújo, moradora do Rio de Janeiro, graduada em Administração Pública e assessora de imprensa no Instituto Força Jovem Bushido há 3 anos. O aplicativo reúne até 10 quadros, calendário, lembretes, Dashboard, Tenha em Mente e diferentes modos de visualização para dar clareza às prioridades sem ruído.";
+      }
+
+      if (q.includes("modo") || q.includes("kanban") || q.includes("cronograma") || q.includes("tabela") || q.includes("gantt") || q.includes("funcionalidade") || q.includes("como funciona")) {
+        return "No Em Dia você pode criar até 10 quadros, acompanhar o calendário e lembretes, gerenciar membros (Administrador, Membro e Analista) e alternar entre os modos Kanban, Cronograma, Tabela e Diagrama de Gantt. Cada card mostra a data, permite comentários datados ao lado das ferramentas e conta com o botão Abrir.";
+      }
+
+      if (q.includes("dashboard") || q.includes("gráfico") || q.includes("pizza") || q.includes("barra") || q.includes("prioridade") || q.includes("status")) {
+        return "O Dashboard mostra o resumo das tarefas, um gráfico de pizza para Prioridade (Alta, Média e Baixa) e um gráfico de barras para Status (A Fazer, Em Andamento, Concluído e Atrasado).";
+      }
+
+      if (q.includes("tenha em mente") || q.includes("mensagem") || q.includes("atrasad") || q.includes("concluíd")) {
+        return `No tópico Tenha em Mente, se houver mais atividades atrasadas do que concluídas aparece uma mensagem serena e organizadora; se houver mais concluídas do que atrasadas, aparece "continue acreditando que é capaz de fazer"; e em atividades em andamento, "confie no processo". Atualmente no quadro "${board.name}" há ${atrasadas} atrasada(s) e ${concluidas} concluída(s).`;
+      }
+
+      if (q.includes("contato") || q.includes("email") || q.includes("e-mail")) {
+        return `Você pode falar diretamente pelo e-mail ${CONTACT_EMAIL} ou usar o formulário de contato na página inicial. Hoje você tem ${totalBoards} de ${MAX_BOARDS} quadros criados.`;
+      }
+
+      return `Sou a Sol! Posso te explicar o que é o Em Dia, quem criou o aplicativo (Maysa Araújo), como funcionam os quadros, Kanban, Cronograma, Tabela, Diagrama de Gantt, Dashboard, comentários nos cards e o tópico Tenha em Mente. O que você gostaria de saber?`;
+    }
+
+    document.getElementById("toggleSolChatBtn").addEventListener("click", () => {
+      if (solChatPanelEl.classList.contains("hidden")) {
+        openSolPanel();
+      } else {
+        solChatPanelEl.classList.add("hidden");
+      }
+    });
+
+    document.getElementById("closeSolChatBtn").addEventListener("click", () => {
+      solChatPanelEl.classList.add("hidden");
+    });
+
+    solChatFormEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = solChatInputEl.value.trim();
+      if (!text) return;
+      appendSolMessage("user", text);
+      solChatInputEl.value = "";
+      const reply = generateSolReply(text);
+      setTimeout(() => appendSolMessage("bot", reply), 120);
+    });
+
     /* RENDER PRINCIPAL */
     function renderAll() {
       applyThemeAndAccent();
@@ -3750,7 +4178,6 @@
 
       document.getElementById("homeDashboardView").classList.toggle("hidden", isBoardPage);
       document.getElementById("boardDetailView").classList.toggle("hidden", !isBoardPage);
-      document.getElementById("backToBoardsHeaderBtn").classList.toggle("hidden", !isBoardPage);
 
       if (!isBoardPage) {
         document.getElementById("greetingMoodSubtitle").textContent =
@@ -3764,6 +4191,7 @@
         document.getElementById("activeBoardDesc").textContent = board.desc || "";
         document.getElementById("boardRoleIndicator").textContent = `Perfil: ${myRole}`;
 
+        renderTenhaEmMente(board);
         renderInsightsAndCharts();
         renderActiveView();
         if (!permissionsPanelEl.classList.contains("hidden")) {
