@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Em Dia - Gestão de Tarefas</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><circle cx='50' cy='50' r='34' fill='%23facc15'/><circle cx='39' cy='43' r='4.5' fill='%230f172a'/><circle cx='61' cy='43' r='4.5' fill='%230f172a'/><path d='M35 56 Q50 70 65 56' stroke='%230f172a' stroke-width='5' fill='none' stroke-linecap='round'/></svg>" />
   <style>
     :root {
       --bg: #f1f5f9;
@@ -29,6 +30,8 @@
       min-height: 100vh;
     }
 
+    .hidden { display: none !important; }
+
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -40,7 +43,7 @@
       justify-content: space-between;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
     .brand {
@@ -50,19 +53,23 @@
     }
 
     .brand-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       background: var(--primary);
-      color: #fff;
       display: grid;
       place-items: center;
-      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .brand-badge svg {
+      width: 26px;
+      height: 26px;
     }
 
     h1 {
       margin: 0;
-      font-size: 1.1rem;
+      font-size: 1.12rem;
     }
 
     .controls {
@@ -84,7 +91,11 @@
     button {
       cursor: pointer;
       font-weight: 600;
-      transition: background 0.15s ease;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    button:hover {
+      border-color: #cbd5e1;
     }
 
     button.primary {
@@ -97,6 +108,21 @@
       background: var(--primary-hover);
     }
 
+    button.google-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 10px 14px;
+    }
+
+    button.google-btn:hover {
+      background: #f8fafc;
+    }
+
     button.danger {
       color: var(--danger);
       background: transparent;
@@ -105,8 +131,99 @@
       font-size: 0.85rem;
     }
 
+    /* Tela de Login / Cadastro */
+    .auth-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f1f5f9 60%, #e2e8f0 100%);
+    }
+
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .auth-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--primary);
+      display: inline-grid;
+      place-items: center;
+      margin-bottom: 10px;
+    }
+
+    .auth-logo svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--surface-2);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .auth-tab {
+      border: none;
+      background: transparent;
+      padding: 8px;
+      border-radius: 7px;
+      color: var(--muted);
+    }
+
+    .auth-tab.active {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 14px 0;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth-error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+    }
+
+    /* Layout Principal */
     .container {
-      max-width: 1300px;
+      max-width: 1320px;
       margin: 0 auto;
       padding: 20px;
       display: flex;
@@ -118,7 +235,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
+      padding: 18px;
     }
 
     .section-header {
@@ -126,13 +243,13 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 14px;
     }
 
     .section-title {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 700;
     }
 
@@ -141,10 +258,12 @@
       color: var(--muted);
     }
 
+    /* Insights e Gráficos */
     .insights-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
       gap: 12px;
+      margin-bottom: 16px;
     }
 
     .insight-card {
@@ -164,7 +283,7 @@
     }
 
     .insight-value {
-      font-size: 1.5rem;
+      font-size: 1.55rem;
       font-weight: 700;
       line-height: 1.1;
     }
@@ -174,10 +293,189 @@
       color: var(--muted);
     }
 
-    .val-alta { color: #991b1b; }
-    .val-media { color: #92400e; }
-    .val-baixa { color: #166534; }
+    .val-alta { color: #dc2626; }
+    .val-media { color: #d97706; }
+    .val-baixa { color: #16a34a; }
 
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .chart-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .chart-title {
+      margin: 0 0 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .donut {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .donut-hole {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.84rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .bars-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+
+    .bar-top {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    /* Lista de 10 Quadros */
+    .boards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 14px;
+    }
+
+    .board-item-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .board-item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    }
+
+    .board-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .board-item-title {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .board-item-desc {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .board-item-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.76rem;
+    }
+
+    /* Caixa de Seleção de Metodologias */
+    .method-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .method-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .method-check input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Kanban */
     .board {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -225,7 +523,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 12px;
+      overflow: hidden;
       margin-bottom: 10px;
       cursor: grab;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -233,6 +531,22 @@
 
     .card:active {
       cursor: grabbing;
+    }
+
+    .card-cover-color {
+      height: 12px;
+      width: 100%;
+    }
+
+    .card-cover-img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 12px;
     }
 
     .card-top {
@@ -251,15 +565,42 @@
     .card-desc {
       margin: 0 0 10px;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       white-space: pre-line;
     }
 
-    .card-date {
+    .card-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .assignee-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 2px 8px 2px 3px;
+      border-radius: 999px;
       font-size: 0.76rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-      display: inline-block;
+      font-weight: 600;
+    }
+
+    .avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #dbeafe;
+      color: #1e40af;
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
     .card-footer {
@@ -310,6 +651,7 @@
       display: flex;
       gap: 4px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .move-btns button {
@@ -324,6 +666,7 @@
       padding: 24px 8px;
     }
 
+    /* Cronograma */
     .schedule-list {
       display: flex;
       flex-direction: column;
@@ -352,9 +695,10 @@
     .schedule-date {
       font-weight: 700;
       font-size: 0.84rem;
-      min-width: 96px;
+      min-width: 92px;
     }
 
+    /* Tabela */
     .table-wrap {
       width: 100%;
       overflow-x: auto;
@@ -385,13 +729,14 @@
       border-bottom: none;
     }
 
+    /* Modais */
     dialog {
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 20px;
-      max-width: 420px;
-      width: 92%;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
+      max-width: 480px;
+      width: 94%;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.2);
     }
 
     .form-row {
@@ -402,8 +747,85 @@
     }
 
     .form-row label {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .date-alert {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .date-alert.late {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .date-alert.ok {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .assignee-picker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-preview {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px dashed #94a3b8;
+      background: var(--surface-2);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .avatar-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover-options {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      padding: 0;
+    }
+
+    .swatch.active {
+      border-color: #0f172a;
+      transform: scale(1.1);
+    }
+
+    .cover-preview-box {
+      margin-top: 6px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
 
     .modal-actions {
@@ -412,105 +834,344 @@
       gap: 8px;
       margin-top: 16px;
     }
+
+    .user-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="brand-badge">✓</div>
-      <h1>Em Dia - Gestão de Tarefas</h1>
+
+  <!-- TELA 1: LOGIN E CRIAÇÃO DE CONTA -->
+  <section id="authView" class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="38" fill="#facc15" />
+            <circle cx="38" cy="42" r="5" fill="#0f172a" />
+            <circle cx="62" cy="42" r="5" fill="#0f172a" />
+            <path d="M33 56 Q50 72 67 56" stroke="#0f172a" stroke-width="6" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h1 style="font-size:1.3rem;">Em Dia - Gestão de Tarefas</h1>
+        <p style="margin:6px 0 0;color:var(--muted);font-size:0.88rem;">Organize seus quadros, prazos e prioridades em um só lugar.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLoginBtn">Entrar</button>
+        <button type="button" class="auth-tab" id="tabRegisterBtn">Criar conta</button>
+      </div>
+
+      <div id="authErrorBox" class="auth-error hidden"></div>
+
+      <!-- Formulário de Login -->
+      <form id="loginForm">
+        <div class="form-row">
+          <label for="loginEmail">E-mail</label>
+          <input id="loginEmail" type="email" required placeholder="seuemail@exemplo.com" />
+        </div>
+        <div class="form-row">
+          <label for="loginPassword">Senha</label>
+          <input id="loginPassword" type="password" required placeholder="Sua senha" />
+        </div>
+        <button type="submit" class="primary" style="width:100%;padding:10px;">Entrar com E-mail</button>
+
+        <div class="divider">ou</div>
+
+        <button type="button" class="google-btn" id="googleLoginBtn">
+          <svg width="18" height="18" viewBox="0 0 48 48">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          <span>Continuar com Google</span>
+        </button>
+      </form>
+
+      <!-- Formulário de Criar Conta -->
+      <form id="registerForm" class="hidden">
+        <div class="form-row">
+          <label for="regName">Nome completo *</label>
+          <input id="regName" required placeholder="Ex.: Maysa Araújo" />
+        </div>
+        <div class="form-row">
+          <label for="regEmail">E-mail *</label>
+          <input id="regEmail" type="email" required placeholder="nome@exemplo.com" />
+        </div>
+        <div class="form-row">
+          <label for="regRole">Área ou objetivo</label>
+          <input id="regRole" placeholder="Ex.: Marketing, Estudos, Pessoal" />
+        </div>
+        <div class="form-row">
+          <label for="regPassword">Criar senha *</label>
+          <input id="regPassword" type="password" required minlength="4" placeholder="Mínimo 4 caracteres" />
+        </div>
+        <button type="submit" class="primary" style="width:100%;padding:10px;">Criar conta e entrar</button>
+      </form>
     </div>
-    <div class="controls">
-      <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
-      <select id="priorityFilter">
-        <option value="todas">Todas prioridades</option>
-        <option value="alta">Alta</option>
-        <option value="media">Média</option>
-        <option value="baixa">Baixa</option>
-      </select>
-      <button class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
-      <button id="resetDemoBtn">Restaurar exemplo</button>
-    </div>
-  </header>
+  </section>
 
-  <main class="container">
-    <section class="section-box" aria-label="Insights das tarefas">
-      <div class="section-header">
-        <h2 class="section-title">Insights</h2>
-        <span class="section-sub" id="insightsSummaryText">Resumo geral das tarefas</span>
+  <!-- TELA 2: DASHBOARD INICIAL (INSIGHTS GERAIS + LISTA DE 10 QUADROS) -->
+  <section id="homeView" class="hidden">
+    <header>
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="38" fill="#facc15" />
+            <circle cx="38" cy="42" r="5" fill="#0f172a" />
+            <circle cx="62" cy="42" r="5" fill="#0f172a" />
+            <path d="M33 56 Q50 72 67 56" stroke="#0f172a" stroke-width="6" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div>
+          <h1>Em Dia - Gestão de Tarefas</h1>
+          <span style="font-size:0.78rem;color:var(--muted);">Painel Geral e Quadros</span>
+        </div>
       </div>
-      <div class="insights-grid" id="insightsGrid"></div>
-    </section>
+      <div class="controls">
+        <span class="user-chip" id="homeUserChip">😊 Usuário</span>
+        <button class="primary" id="openNewBoardBtn">+ Novo Quadro</button>
+        <button id="logoutBtn1">Sair</button>
+      </div>
+    </header>
 
-    <section class="section-box" aria-label="Quadro de tarefas">
-      <div class="section-header">
-        <h2 class="section-title">Quadro de Tarefas</h2>
-        <span class="section-sub">Arraste os cartões entre colunas ou use as setas</span>
-      </div>
-      <div class="board" id="board"></div>
-    </section>
+    <main class="container">
+      <section class="section-box">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Insights Gerais</h2>
+            <span class="section-sub" id="globalInsightsSub">Consolidado de todos os quadros</span>
+          </div>
+        </div>
+        <div class="insights-grid" id="globalInsightsGrid"></div>
+        <div class="charts-grid" id="globalChartsGrid"></div>
+      </section>
 
-    <section class="section-box" aria-label="Cronograma">
-      <div class="section-header">
-        <h2 class="section-title">Cronograma</h2>
-        <span class="section-sub">Ordenado por data prevista (tarefas sem data ficam por último)</span>
-      </div>
-      <div class="schedule-list" id="scheduleList"></div>
-    </section>
+      <section class="section-box">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Meus Quadros (<span id="boardsCountLabel">0</span>/10)</h2>
+            <span class="section-sub">Crie e gerencie até 10 quadros com Kanban, Cronograma e Tabela</span>
+          </div>
+          <button class="primary" id="openNewBoardBtn2">+ Criar Quadro</button>
+        </div>
+        <div class="boards-grid" id="boardsGrid"></div>
+      </section>
+    </main>
+  </section>
 
-    <section class="section-box" aria-label="Tabela de tarefas">
-      <div class="section-header">
-        <h2 class="section-title">Tabela de Tarefas</h2>
-        <span class="section-sub">Visão completa em linha para consulta e edição rápida</span>
+  <!-- TELA 3: DENTRO DE UM QUADRO -->
+  <section id="boardDetailView" class="hidden">
+    <header>
+      <div class="brand">
+        <button id="backToHomeBtn" title="Voltar para lista de quadros">← Quadros</button>
+        <div class="brand-badge" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="38" fill="#facc15" />
+            <circle cx="38" cy="42" r="5" fill="#0f172a" />
+            <circle cx="62" cy="42" r="5" fill="#0f172a" />
+            <path d="M33 56 Q50 72 67 56" stroke="#0f172a" stroke-width="6" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div>
+          <h1 id="currentBoardTitle">Quadro</h1>
+          <span id="currentBoardDesc" style="font-size:0.78rem;color:var(--muted);"></span>
+        </div>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Tarefa</th>
-              <th>Coluna</th>
-              <th>Prioridade</th>
-              <th>Prazo</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tasksTableBody"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
 
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
+        <select id="priorityFilter">
+          <option value="todas">Todas prioridades</option>
+          <option value="alta">Alta</option>
+          <option value="media">Média</option>
+          <option value="baixa">Baixa</option>
+        </select>
+        <button class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
+        <button id="logoutBtn2">Sair</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Caixa de Seleção das Metodologias -->
+      <section class="section-box">
+        <div class="section-header" style="margin-bottom:8px;">
+          <h2 class="section-title">Visualizações do Quadro</h2>
+          <span class="section-sub">Marque ou desmarque as metodologias que deseja exibir na tela</span>
+        </div>
+        <div class="method-bar">
+          <label class="method-check">
+            <input type="checkbox" id="chkKanban" checked />
+            <span>Kanban</span>
+          </label>
+          <label class="method-check">
+            <input type="checkbox" id="chkSchedule" checked />
+            <span>Cronograma</span>
+          </label>
+          <label class="method-check">
+            <input type="checkbox" id="chkTable" checked />
+            <span>Tabela</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Insights + Gráficos do Quadro -->
+      <section class="section-box">
+        <div class="section-header">
+          <h2 class="section-title">Insights do Quadro</h2>
+          <span class="section-sub" id="boardInsightsSub">Resumo das tarefas</span>
+        </div>
+        <div class="insights-grid" id="boardInsightsGrid"></div>
+        <div class="charts-grid" id="boardChartsGrid"></div>
+      </section>
+
+      <!-- Metodologia Kanban -->
+      <section class="section-box" id="kanbanSection">
+        <div class="section-header">
+          <h2 class="section-title">Kanban</h2>
+          <span class="section-sub">Arraste os cartões entre colunas ou use as setas</span>
+        </div>
+        <div class="board" id="board"></div>
+      </section>
+
+      <!-- Metodologia Cronograma -->
+      <section class="section-box" id="scheduleSection">
+        <div class="section-header">
+          <h2 class="section-title">Cronograma</h2>
+          <span class="section-sub">Ordenado por prazo de entrega</span>
+        </div>
+        <div class="schedule-list" id="scheduleList"></div>
+      </section>
+
+      <!-- Metodologia Tabela -->
+      <section class="section-box" id="tableSection">
+        <div class="section-header">
+          <h2 class="section-title">Tabela</h2>
+          <span class="section-sub">Visão completa em linhas</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tarefa</th>
+                <th>Responsável</th>
+                <th>Coluna</th>
+                <th>Prioridade</th>
+                <th>Prazo e Contagem</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tasksTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- MODAL: CRIAR / EDITAR QUADRO -->
+  <dialog id="boardDialog">
+    <form id="boardForm" method="dialog">
+      <h2 id="boardDialogTitle" style="margin-top:0;font-size:1.1rem;">Novo Quadro</h2>
+      <div class="form-row">
+        <label for="boardNameInput">Nome do quadro *</label>
+        <input id="boardNameInput" required placeholder="Ex.: Marketing, Pessoal, Projetos 2026" />
+      </div>
+      <div class="form-row">
+        <label for="boardDescInput">Descrição breve</label>
+        <input id="boardDescInput" placeholder="Objetivo deste quadro..." />
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancelBoardBtn">Cancelar</button>
+        <button type="submit" class="primary">Salvar Quadro</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: CRIAR / EDITAR TAREFA -->
   <dialog id="taskDialog">
     <form id="taskForm" method="dialog">
       <h2 id="dialogTitle" style="margin-top:0;font-size:1.1rem;">Nova tarefa</h2>
+
       <div class="form-row">
         <label for="taskTitle">Título *</label>
         <input id="taskTitle" required placeholder="Ex.: Revisar relatório semanal" />
       </div>
+
       <div class="form-row">
         <label for="taskDesc">Descrição</label>
-        <textarea id="taskDesc" rows="3" placeholder="Detalhes importantes da tarefa..."></textarea>
+        <textarea id="taskDesc" rows="2" placeholder="Detalhes importantes da tarefa..."></textarea>
       </div>
+
+      <!-- Responsável com ícone para colocar foto -->
       <div class="form-row">
-        <label for="taskPriority">Prioridade</label>
-        <select id="taskPriority">
-          <option value="media">Média</option>
-          <option value="alta">Alta</option>
-          <option value="baixa">Baixa</option>
-        </select>
+        <label>Pessoa responsável e foto</label>
+        <div class="assignee-picker">
+          <label class="avatar-preview" for="assigneePhotoInput" title="Clique para enviar a foto da pessoa responsável" id="avatarPreviewBox">
+            📷
+          </label>
+          <input id="assigneePhotoInput" type="file" accept="image/*" class="hidden" />
+          <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+            <input id="assigneeNameInput" placeholder="Nome do responsável (ex.: Ana)" />
+            <div style="display:flex;gap:6px;align-items:center;">
+              <button type="button" id="pickPhotoBtn" style="padding:4px 8px;font-size:0.78rem;">📷 Colocar foto</button>
+              <button type="button" id="removePhotoBtn" class="danger hidden">Remover foto</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label for="taskPriority">Prioridade</label>
+          <select id="taskPriority">
+            <option value="media">Média</option>
+            <option value="alta">Alta</option>
+            <option value="baixa">Baixa</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="taskCol">Coluna</label>
+          <select id="taskCol">
+            <option value="todo">A Fazer</option>
+            <option value="doing">Em Andamento</option>
+            <option value="done">Concluído</option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-row">
-        <label for="taskDueDate">Data prevista</label>
+        <label for="taskDueDate">Data de conclusão prevista</label>
         <input id="taskDueDate" type="date" />
+        <div id="liveDateFeedback" class="date-alert hidden"></div>
       </div>
+
+      <!-- Capa do Card: Cor ou Upload de Imagem -->
       <div class="form-row">
-        <label for="taskCol">Coluna</label>
-        <select id="taskCol">
-          <option value="todo">A Fazer</option>
-          <option value="doing">Em Andamento</option>
-          <option value="done">Concluído</option>
-        </select>
+        <label>Capa do cartão (cor ou imagem)</label>
+        <div class="cover-options">
+          <button type="button" class="swatch" data-color="" style="background:#ffffff;border:1px solid #cbd5e1;" title="Sem capa"></button>
+          <button type="button" class="swatch" data-color="#2563eb" style="background:#2563eb;" title="Azul"></button>
+          <button type="button" class="swatch" data-color="#16a34a" style="background:#16a34a;" title="Verde"></button>
+          <button type="button" class="swatch" data-color="#f59e0b" style="background:#f59e0b;" title="Amarelo"></button>
+          <button type="button" class="swatch" data-color="#dc2626" style="background:#dc2626;" title="Vermelho"></button>
+          <button type="button" class="swatch" data-color="#7c3aed" style="background:#7c3aed;" title="Roxo"></button>
+          <button type="button" id="pickCoverImgBtn" style="padding:5px 10px;font-size:0.8rem;">🖼️ Upload de capa</button>
+          <input id="coverImageInput" type="file" accept="image/*" class="hidden" />
+          <button type="button" id="clearCoverBtn" class="danger hidden">Limpar capa</button>
+        </div>
+        <div id="coverPreviewBox" class="cover-preview-box hidden"></div>
       </div>
+
       <div class="modal-actions">
         <button type="button" id="cancelTaskBtn">Cancelar</button>
         <button type="submit" class="primary">Salvar</button>
@@ -519,7 +1180,11 @@
   </dialog>
 
   <script>
-    const STORAGE_KEY = "em_dia_tarefas_v1";
+    const USERS_KEY = "em_dia_users_v2";
+    const SESSION_KEY = "em_dia_session_v2";
+    const BOARDS_KEY = "em_dia_boards_v2";
+    const MAX_BOARDS = 10;
+
     const COLUMNS = [
       { id: "todo", title: "A Fazer" },
       { id: "doing", title: "Em Andamento" },
@@ -539,77 +1204,147 @@
       return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
     }
 
-    function getDefaultTasks() {
+    function diffDaysFromToday(isoDate) {
+      if (!isoDate) return null;
+      const todayParts = getTodayIso().split("-").map(Number);
+      const targetParts = isoDate.split("-").map(Number);
+      if (targetParts.length !== 3) return null;
+      const todayUtc = Date.UTC(todayParts[0], todayParts[1] - 1, todayParts[2]);
+      const targetUtc = Date.UTC(targetParts[0], targetParts[1] - 1, targetParts[2]);
+      return Math.round((targetUtc - todayUtc) / 86400000);
+    }
+
+    function getDueInfo(task) {
+      if (!task.dueDate) {
+        return {
+          statusText: "Sem prazo definido",
+          countdownText: "Sem data",
+          badgeClass: "due-none",
+          isLate: false
+        };
+      }
+      const diff = diffDaysFromToday(task.dueDate);
+      if (task.col === "done") {
+        return {
+          statusText: "Concluída",
+          countdownText: "Concluída",
+          badgeClass: "due-none",
+          isLate: false
+        };
+      }
+      if (diff < 0) {
+        const atraso = Math.abs(diff);
+        return {
+          statusText: `Atrasada há ${atraso} ${atraso === 1 ? "dia" : "dias"}`,
+          countdownText: `⚠️ Atrasada (${atraso}d)`,
+          badgeClass: "due-late",
+          isLate: true
+        };
+      }
+      if (diff === 0) {
+        return {
+          statusText: "Vence hoje (faltam 0 dias)",
+          countdownText: "Vence hoje",
+          badgeClass: "due-today",
+          isLate: false
+        };
+      }
+      return {
+        statusText: `Faltam ${diff} ${diff === 1 ? "dia" : "dias"} para conclusão`,
+        countdownText: `Faltam ${diff} ${diff === 1 ? "dia" : "dias"}`,
+        badgeClass: "due-upcoming",
+        isLate: false
+      };
+    }
+
+    function getDefaultBoards() {
       return [
         {
-          id: "t1",
-          title: "Organizar prioridades da semana",
-          desc: "Listar entregas principais e definir prazos.",
-          priority: "alta",
-          dueDate: getTodayIso(),
-          col: "todo"
-        },
-        {
-          id: "t2",
-          title: "Publicar Em Dia no GitHub Pages",
-          desc: "Confirmar o arquivo index.html na raiz do repositório.",
-          priority: "media",
-          dueDate: addDaysIso(2),
-          col: "doing"
-        },
-        {
-          id: "t3",
-          title: "Criar estrutura inicial do quadro",
-          desc: "Configurar colunas e cartões interativos.",
-          priority: "baixa",
-          dueDate: addDaysIso(-1),
-          col: "done"
+          id: "b_principal",
+          name: "Planejamento Geral",
+          desc: "Acompanhamento de demandas e entregas da semana",
+          views: { kanban: true, schedule: true, table: true },
+          tasks: [
+            {
+              id: "t1",
+              title: "Organizar prioridades da semana",
+              desc: "Definir entregas principais e responsáveis.",
+              priority: "alta",
+              dueDate: addDaysIso(3),
+              col: "todo",
+              assigneeName: "Maysa",
+              assigneePhoto: "",
+              coverType: "color",
+              coverValue: "#2563eb"
+            },
+            {
+              id: "t2",
+              title: "Revisar cronograma de atividades",
+              desc: "Conferir prazos e status das tarefas em andamento.",
+              priority: "media",
+              dueDate: addDaysIso(-2),
+              col: "doing",
+              assigneeName: "Equipe",
+              assigneePhoto: "",
+              coverType: "color",
+              coverValue: "#f59e0b"
+            },
+            {
+              id: "t3",
+              title: "Publicar app Em Dia no GitHub",
+              desc: "Configurar arquivo index.html no repositório.",
+              priority: "baixa",
+              dueDate: getTodayIso(),
+              col: "done",
+              assigneeName: "Maysa",
+              assigneePhoto: "",
+              coverType: "color",
+              coverValue: "#16a34a"
+            }
+          ]
         }
       ];
     }
 
-    function normalizeTask(item) {
-      const validPriority = ["alta", "media", "baixa"].includes(item?.priority) ? item.priority : "media";
-      const validCol = ["todo", "doing", "done"].includes(item?.col) ? item.col : "todo";
-      return {
-        id: String(item?.id || ("t_" + Math.random().toString(36).slice(2, 8))),
-        title: String(item?.title || "Tarefa sem título"),
-        desc: String(item?.desc || ""),
-        priority: validPriority,
-        dueDate: typeof item?.dueDate === "string" ? item.dueDate : "",
-        col: validCol
-      };
+    // Estado da Aplicação
+    let users = loadJson(USERS_KEY, []);
+    let currentUser = loadJson(SESSION_KEY, null);
+    let boards = loadJson(BOARDS_KEY, null);
+    if (!Array.isArray(boards) || boards.length === 0) {
+      boards = getDefaultBoards();
+      saveJson(BOARDS_KEY, boards);
     }
 
-    let tasks = loadTasks();
-    let editingId = null;
+    let currentBoardId = null;
+    let editingBoardId = null;
+    let editingTaskId = null;
+    let draftAssigneePhoto = "";
+    let draftCoverType = "";
+    let draftCoverValue = "";
 
-    const boardEl = document.getElementById("board");
-    const insightsGridEl = document.getElementById("insightsGrid");
-    const insightsSummaryEl = document.getElementById("insightsSummaryText");
-    const scheduleListEl = document.getElementById("scheduleList");
-    const tableBodyEl = document.getElementById("tasksTableBody");
-    const searchEl = document.getElementById("searchInput");
-    const priorityEl = document.getElementById("priorityFilter");
-    const dialogEl = document.getElementById("taskDialog");
-    const formEl = document.getElementById("taskForm");
-
-    function loadTasks() {
+    function loadJson(key, fallback) {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return getDefaultTasks();
-        const parsed = JSON.parse(raw);
-        if (!Array.isArray(parsed)) return getDefaultTasks();
-        return parsed.map(normalizeTask);
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
       } catch {
-        return getDefaultTasks();
+        return fallback;
       }
     }
 
-    function saveTasks() {
+    function saveJson(key, value) {
       try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-      } catch {}
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        alert("Aviso: limite de armazenamento local atingido. Use imagens menores para capas e fotos.");
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
     }
 
     function priorityLabel(p) {
@@ -630,80 +1365,414 @@
       return `${parts[2]}/${parts[1]}/${parts[0]}`;
     }
 
-    function getDueStatus(task) {
-      if (!task.dueDate) {
-        return { label: "Sem prazo", className: "due-none" };
+    // --- AUTENTICAÇÃO ---
+    const authView = document.getElementById("authView");
+    const homeView = document.getElementById("homeView");
+    const boardDetailView = document.getElementById("boardDetailView");
+    const authErrorBox = document.getElementById("authErrorBox");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    function showAuthError(msg) {
+      if (!msg) {
+        authErrorBox.classList.add("hidden");
+        authErrorBox.textContent = "";
+        return;
       }
-      if (task.col === "done") {
-        return { label: "Concluída", className: "due-none" };
-      }
-      const today = getTodayIso();
-      if (task.dueDate < today) {
-        return { label: "Atrasada", className: "due-late" };
-      }
-      if (task.dueDate === today) {
-        return { label: "Hoje", className: "due-today" };
-      }
-      return { label: "Agendada", className: "due-upcoming" };
+      authErrorBox.textContent = msg;
+      authErrorBox.classList.remove("hidden");
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;");
+    document.getElementById("tabLoginBtn").addEventListener("click", () => {
+      document.getElementById("tabLoginBtn").classList.add("active");
+      document.getElementById("tabRegisterBtn").classList.remove("active");
+      loginForm.classList.remove("hidden");
+      registerForm.classList.add("hidden");
+      showAuthError("");
+    });
+
+    document.getElementById("tabRegisterBtn").addEventListener("click", () => {
+      document.getElementById("tabRegisterBtn").classList.add("active");
+      document.getElementById("tabLoginBtn").classList.remove("active");
+      registerForm.classList.remove("hidden");
+      loginForm.classList.add("hidden");
+      showAuthError("");
+    });
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value;
+      const found = users.find((u) => u.email === email && u.password === password);
+      if (!found) {
+        showAuthError("E-mail ou senha não encontrados. Crie uma conta na aba 'Criar conta' ou entre com Google.");
+        return;
+      }
+      currentUser = { name: found.name, email: found.email, role: found.role || "" };
+      saveJson(SESSION_KEY, currentUser);
+      showAuthError("");
+      enterApp();
+    });
+
+    document.getElementById("googleLoginBtn").addEventListener("click", () => {
+      const emailInput = document.getElementById("loginEmail").value.trim();
+      const email = emailInput || "usuario.google@gmail.com";
+      const name = email.split("@")[0].replaceAll(".", " ");
+      currentUser = {
+        name: name.charAt(0).toUpperCase() + name.slice(1),
+        email,
+        role: "Conta Google"
+      };
+      saveJson(SESSION_KEY, currentUser);
+      showAuthError("");
+      enterApp();
+    });
+
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim().toLowerCase();
+      const role = document.getElementById("regRole").value.trim();
+      const password = document.getElementById("regPassword").value;
+
+      if (users.some((u) => u.email === email)) {
+        showAuthError("Este e-mail já está cadastrado. Volte para a aba 'Entrar'.");
+        return;
+      }
+
+      const newUser = { name, email, role, password };
+      users.push(newUser);
+      saveJson(USERS_KEY, users);
+      currentUser = { name, email, role };
+      saveJson(SESSION_KEY, currentUser);
+      showAuthError("");
+      enterApp();
+    });
+
+    function logout() {
+      currentUser = null;
+      currentBoardId = null;
+      localStorage.removeItem(SESSION_KEY);
+      homeView.classList.add("hidden");
+      boardDetailView.classList.add("hidden");
+      authView.classList.remove("hidden");
     }
 
-    function getFilteredTasks() {
-      const term = searchEl.value.trim().toLowerCase();
-      const prio = priorityEl.value;
+    document.getElementById("logoutBtn1").addEventListener("click", logout);
+    document.getElementById("logoutBtn2").addEventListener("click", logout);
 
-      return tasks.filter((t) => {
+    // --- INSIGHTS E GRÁFICOS REUTILIZÁVEIS ---
+    function renderInsightsAndCharts(taskList, gridEl, chartsEl, subEl, contextLabel) {
+      const total = taskList.length;
+      const alta = taskList.filter((t) => t.priority === "alta").length;
+      const media = taskList.filter((t) => t.priority === "media").length;
+      const baixa = taskList.filter((t) => t.priority === "baixa").length;
+
+      const todo = taskList.filter((t) => t.col === "todo").length;
+      const doing = taskList.filter((t) => t.col === "doing").length;
+      const done = taskList.filter((t) => t.col === "done").length;
+      const late = taskList.filter((t) => getDueInfo(t).isLate).length;
+
+      if (subEl) {
+        subEl.textContent = `${contextLabel} • ${done} concluída(s) • ${late} atrasada(s)`;
+      }
+
+      gridEl.innerHTML = `
+        <div class="insight-card">
+          <span class="insight-label">Total de Tarefas</span>
+          <span class="insight-value">${total}</span>
+          <span class="insight-meta">${done} concluída(s)</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Alta</span>
+          <span class="insight-value val-alta">${alta}</span>
+          <span class="insight-meta">Atenção imediata</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Média</span>
+          <span class="insight-value val-media">${media}</span>
+          <span class="insight-meta">Fluxo regular</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Baixa</span>
+          <span class="insight-value val-baixa">${baixa}</span>
+          <span class="insight-meta">Planejamento</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Atrasadas</span>
+          <span class="insight-value val-alta">${late}</span>
+          <span class="insight-meta">Prazo vencido</span>
+        </div>
+      `;
+
+      // Gráfico de Rosca (Prioridades)
+      const pAlta = total ? Math.round((alta / total) * 100) : 0;
+      const pMedia = total ? Math.round((media / total) * 100) : 0;
+      const deg1 = total ? (alta / total) * 360 : 0;
+      const deg2 = total ? ((alta + media) / total) * 360 : 0;
+      const donutBg = total
+        ? `conic-gradient(#dc2626 0deg ${deg1}deg, #f59e0b ${deg1}deg ${deg2}deg, #16a34a ${deg2}deg 360deg)`
+        : `conic-gradient(#e2e8f0 0deg 360deg)`;
+
+      // Barras por Etapa
+      const wTodo = total ? Math.round((todo / total) * 100) : 0;
+      const wDoing = total ? Math.round((doing / total) * 100) : 0;
+      const wDone = total ? Math.round((done / total) * 100) : 0;
+
+      chartsEl.innerHTML = `
+        <div class="chart-card">
+          <h3 class="chart-title">Gráfico por Prioridade</h3>
+          <div class="donut-wrap">
+            <div class="donut" style="background:${donutBg};">
+              <div class="donut-hole">${total}</div>
+            </div>
+            <div class="legend">
+              <div class="legend-item"><span class="dot" style="background:#dc2626;"></span>Alta: <strong>${alta}</strong> (${pAlta}%)</div>
+              <div class="legend-item"><span class="dot" style="background:#f59e0b;"></span>Média: <strong>${media}</strong> (${pMedia}%)</div>
+              <div class="legend-item"><span class="dot" style="background:#16a34a;"></span>Baixa: <strong>${baixa}</strong> (${total ? 100 - pAlta - pMedia : 0}%)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Gráfico por Etapa do Fluxo</h3>
+          <div class="bars-list">
+            <div class="bar-row">
+              <div class="bar-top"><span>A Fazer</span><span>${todo} (${wTodo}%)</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${wTodo}%;background:#64748b;"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-top"><span>Em Andamento</span><span>${doing} (${wDoing}%)</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${wDoing}%;background:#2563eb;"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-top"><span>Concluído</span><span>${done} (${wDone}%)</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${wDone}%;background:#16a34a;"></div></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // --- TELA PRINCIPAL (DASHBOARD COM 10 QUADROS) ---
+    function enterApp() {
+      authView.classList.add("hidden");
+      boardDetailView.classList.add("hidden");
+      homeView.classList.remove("hidden");
+      document.getElementById("homeUserChip").textContent = `😊 ${currentUser.name}`;
+      renderHome();
+    }
+
+    function renderHome() {
+      const allTasks = boards.flatMap((b) => b.tasks || []);
+      renderInsightsAndCharts(
+        allTasks,
+        document.getElementById("globalInsightsGrid"),
+        document.getElementById("globalChartsGrid"),
+        document.getElementById("globalInsightsSub"),
+        `${boards.length} quadro(s) ativo(s)`
+      );
+
+      document.getElementById("boardsCountLabel").textContent = boards.length;
+      const boardsGrid = document.getElementById("boardsGrid");
+
+      boardsGrid.innerHTML = boards
+        .map((b) => {
+          const bTasks = b.tasks || [];
+          const done = bTasks.filter((t) => t.col === "done").length;
+          const late = bTasks.filter((t) => getDueInfo(t).isLate).length;
+          return `
+            <article class="board-item-card">
+              <div>
+                <div class="board-item-top">
+                  <h3 class="board-item-title">${escapeHtml(b.name)}</h3>
+                  <div class="move-btns">
+                    <button data-edit-board="${b.id}" title="Renomear quadro">✎</button>
+                    <button class="danger" data-del-board="${b.id}" title="Excluir quadro">✕</button>
+                  </div>
+                </div>
+                <p class="board-item-desc">${escapeHtml(b.desc || "Sem descrição")}</p>
+              </div>
+              <div>
+                <div class="board-item-stats" style="margin-bottom:10px;">
+                  <span class="status-badge">${bTasks.length} tarefas</span>
+                  <span class="tag tag-baixa">${done} concluídas</span>
+                  ${late > 0 ? `<span class="tag tag-alta">${late} atrasadas</span>` : ""}
+                </div>
+                <button class="primary" style="width:100%;" data-open-board="${b.id}">Abrir Quadro</button>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+    }
+
+    const boardDialog = document.getElementById("boardDialog");
+    function openBoardModal(board = null) {
+      if (!board && boards.length >= MAX_BOARDS) {
+        alert("Você já atingiu o limite máximo de 10 quadros.");
+        return;
+      }
+      editingBoardId = board ? board.id : null;
+      document.getElementById("boardDialogTitle").textContent = board ? "Editar Quadro" : "Novo Quadro";
+      document.getElementById("boardNameInput").value = board ? board.name : "";
+      document.getElementById("boardDescInput").value = board ? board.desc || "" : "";
+      boardDialog.showModal();
+    }
+
+    document.getElementById("openNewBoardBtn").addEventListener("click", () => openBoardModal());
+    document.getElementById("openNewBoardBtn2").addEventListener("click", () => openBoardModal());
+    document.getElementById("cancelBoardBtn").addEventListener("click", () => boardDialog.close());
+
+    document.getElementById("boardForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("boardNameInput").value.trim();
+      if (!name) return;
+      const desc = document.getElementById("boardDescInput").value.trim();
+
+      if (editingBoardId) {
+        const found = boards.find((b) => b.id === editingBoardId);
+        if (found) {
+          found.name = name;
+          found.desc = desc;
+        }
+      } else {
+        boards.push({
+          id: "b_" + Date.now(),
+          name,
+          desc,
+          views: { kanban: true, schedule: true, table: true },
+          tasks: []
+        });
+      }
+
+      saveJson(BOARDS_KEY, boards);
+      boardDialog.close();
+      renderHome();
+    });
+
+    document.getElementById("boardsGrid").addEventListener("click", (e) => {
+      const openId = e.target.dataset.openBoard;
+      if (openId) {
+        openBoardDetail(openId);
+        return;
+      }
+      const editId = e.target.dataset.editBoard;
+      if (editId) {
+        const found = boards.find((b) => b.id === editId);
+        if (found) openBoardModal(found);
+        return;
+      }
+      const delId = e.target.dataset.delBoard;
+      if (delId) {
+        if (boards.length <= 1) {
+          alert("Mantenha pelo menos 1 quadro ativo.");
+          return;
+        }
+        boards = boards.filter((b) => b.id !== delId);
+        saveJson(BOARDS_KEY, boards);
+        renderHome();
+      }
+    });
+
+    // --- TELA DO QUADRO (KANBAN + CRONOGRAMA + TABELA COM CHECKBOX) ---
+    function getCurrentBoard() {
+      return boards.find((b) => b.id === currentBoardId);
+    }
+
+    function openBoardDetail(boardId) {
+      currentBoardId = boardId;
+      const board = getCurrentBoard();
+      if (!board) return;
+
+      if (!board.views) {
+        board.views = { kanban: true, schedule: true, table: true };
+      }
+
+      homeView.classList.add("hidden");
+      boardDetailView.classList.remove("hidden");
+
+      document.getElementById("currentBoardTitle").textContent = board.name;
+      document.getElementById("currentBoardDesc").textContent = board.desc || "";
+      document.getElementById("chkKanban").checked = !!board.views.kanban;
+      document.getElementById("chkSchedule").checked = !!board.views.schedule;
+      document.getElementById("chkTable").checked = !!board.views.table;
+
+      applyMethodologyVisibility();
+      renderBoardDetail();
+    }
+
+    document.getElementById("backToHomeBtn").addEventListener("click", () => {
+      currentBoardId = null;
+      enterApp();
+    });
+
+    function applyMethodologyVisibility() {
+      const board = getCurrentBoard();
+      if (!board) return;
+      board.views = {
+        kanban: document.getElementById("chkKanban").checked,
+        schedule: document.getElementById("chkSchedule").checked,
+        table: document.getElementById("chkTable").checked
+      };
+      saveJson(BOARDS_KEY, boards);
+
+      document.getElementById("kanbanSection").classList.toggle("hidden", !board.views.kanban);
+      document.getElementById("scheduleSection").classList.toggle("hidden", !board.views.schedule);
+      document.getElementById("tableSection").classList.toggle("hidden", !board.views.table);
+    }
+
+    document.getElementById("chkKanban").addEventListener("change", applyMethodologyVisibility);
+    document.getElementById("chkSchedule").addEventListener("change", applyMethodologyVisibility);
+    document.getElementById("chkTable").addEventListener("change", applyMethodologyVisibility);
+
+    function getFilteredBoardTasks() {
+      const board = getCurrentBoard();
+      if (!board) return [];
+      const term = document.getElementById("searchInput").value.trim().toLowerCase();
+      const prio = document.getElementById("priorityFilter").value;
+
+      return (board.tasks || []).filter((t) => {
         const matchText =
           !term ||
           t.title.toLowerCase().includes(term) ||
-          (t.desc && t.desc.toLowerCase().includes(term));
+          (t.desc && t.desc.toLowerCase().includes(term)) ||
+          (t.assigneeName && t.assigneeName.toLowerCase().includes(term));
         const matchPrio = prio === "todas" || t.priority === prio;
         return matchText && matchPrio;
       });
     }
 
-    function renderInsights(filtered) {
-      const total = filtered.length;
-      const altaCount = filtered.filter((t) => t.priority === "alta").length;
-      const mediaCount = filtered.filter((t) => t.priority === "media").length;
-      const baixaCount = filtered.filter((t) => t.priority === "baixa").length;
-      const doneCount = filtered.filter((t) => t.col === "done").length;
-
-      insightsSummaryEl.textContent =
-        `Exibindo ${total} de ${tasks.length} tarefa(s) • ${doneCount} concluída(s)`;
-
-      insightsGridEl.innerHTML = `
-        <div class="insight-card">
-          <span class="insight-label">Total de Tarefas</span>
-          <span class="insight-value">${total}</span>
-          <span class="insight-meta">${tasks.length} no total geral</span>
-        </div>
-        <div class="insight-card">
-          <span class="insight-label">Prioridade Alta</span>
-          <span class="insight-value val-alta">${altaCount}</span>
-          <span class="insight-meta">Exigem atenção imediata</span>
-        </div>
-        <div class="insight-card">
-          <span class="insight-label">Prioridade Média</span>
-          <span class="insight-value val-media">${mediaCount}</span>
-          <span class="insight-meta">Em acompanhamento regular</span>
-        </div>
-        <div class="insight-card">
-          <span class="insight-label">Prioridade Baixa</span>
-          <span class="insight-value val-baixa">${baixaCount}</span>
-          <span class="insight-meta">Planejamento e melhorias</span>
-        </div>
-      `;
+    function renderAssigneeBadge(task) {
+      if (!task.assigneeName && !task.assigneePhoto) return "";
+      const name = task.assigneeName || "Responsável";
+      const initial = name.charAt(0).toUpperCase();
+      const avatarHtml = task.assigneePhoto
+        ? `<img class="avatar" src="${task.assigneePhoto}" alt="${escapeHtml(name)}" />`
+        : `<span class="avatar">${escapeHtml(initial)}</span>`;
+      return `<span class="assignee-pill">${avatarHtml}<span>${escapeHtml(name)}</span></span>`;
     }
 
-    function renderBoard(filtered) {
+    function renderBoardDetail() {
+      const board = getCurrentBoard();
+      if (!board) return;
+      const filtered = getFilteredBoardTasks();
+
+      renderInsightsAndCharts(
+        filtered,
+        document.getElementById("boardInsightsGrid"),
+        document.getElementById("boardChartsGrid"),
+        document.getElementById("boardInsightsSub"),
+        `Quadro "${board.name}"`
+      );
+
+      renderKanban(filtered);
+      renderSchedule(filtered);
+      renderTable(filtered);
+    }
+
+    function renderKanban(filtered) {
+      const boardEl = document.getElementById("board");
       boardEl.innerHTML = "";
 
       COLUMNS.forEach((col, colIndex) => {
@@ -753,22 +1822,36 @@
               e.dataTransfer.setData("text/plain", task.id);
             });
 
+            let coverHtml = "";
+            if (task.coverType === "image" && task.coverValue) {
+              coverHtml = `<img class="card-cover-img" src="${task.coverValue}" alt="Capa" />`;
+            } else if (task.coverType === "color" && task.coverValue) {
+              coverHtml = `<div class="card-cover-color" style="background:${escapeHtml(task.coverValue)};"></div>`;
+            }
+
+            const due = getDueInfo(task);
             const prevCol = colIndex > 0 ? COLUMNS[colIndex - 1].id : null;
             const nextCol = colIndex < COLUMNS.length - 1 ? COLUMNS[colIndex + 1].id : null;
 
             card.innerHTML = `
-              <div class="card-top">
-                <h3 class="card-title">${escapeHtml(task.title)}</h3>
-                <button class="danger" title="Excluir" data-delete="${task.id}">✕</button>
-              </div>
-              ${task.desc ? `<p class="card-desc">${escapeHtml(task.desc)}</p>` : ""}
-              ${task.dueDate ? `<span class="card-date">Prazo: ${formatDateBr(task.dueDate)}</span>` : ""}
-              <div class="card-footer">
-                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
-                <div class="move-btns">
-                  ${prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para esquerda">←</button>` : ""}
-                  <button data-edit="${task.id}" title="Editar">Editar</button>
-                  ${nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para direita">→</button>` : ""}
+              ${coverHtml}
+              <div class="card-body">
+                <div class="card-top">
+                  <h3 class="card-title">${escapeHtml(task.title)}</h3>
+                  <button class="danger" title="Excluir" data-delete="${task.id}">✕</button>
+                </div>
+                ${task.desc ? `<p class="card-desc">${escapeHtml(task.desc)}</p>` : ""}
+                <div class="card-meta-row">
+                  ${renderAssigneeBadge(task)}
+                  ${task.dueDate ? `<span class="due-badge ${due.badgeClass}" title="${escapeHtml(due.statusText)}">${formatDateBr(task.dueDate)} • ${due.countdownText}</span>` : ""}
+                </div>
+                <div class="card-footer">
+                  <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
+                  <div class="move-btns">
+                    ${prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para esquerda">←</button>` : ""}
+                    <button data-edit="${task.id}" title="Editar">Editar</button>
+                    ${nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para direita">→</button>` : ""}
+                  </div>
                 </div>
               </div>
             `;
@@ -782,6 +1865,7 @@
     }
 
     function renderSchedule(filtered) {
+      const scheduleListEl = document.getElementById("scheduleList");
       if (filtered.length === 0) {
         scheduleListEl.innerHTML = `<div class="empty">Nenhuma tarefa encontrada para o cronograma.</div>`;
         return;
@@ -796,13 +1880,14 @@
 
       scheduleListEl.innerHTML = sorted
         .map((task) => {
-          const due = getDueStatus(task);
+          const due = getDueInfo(task);
           return `
             <div class="schedule-item">
               <div class="schedule-main">
                 <span class="schedule-date">${formatDateBr(task.dueDate)}</span>
                 <strong>${escapeHtml(task.title)}</strong>
-                <span class="due-badge ${due.className}">${due.label}</span>
+                ${renderAssigneeBadge(task)}
+                <span class="due-badge ${due.badgeClass}">${due.statusText}</span>
                 <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
               </div>
               <div class="move-btns">
@@ -816,25 +1901,27 @@
     }
 
     function renderTable(filtered) {
+      const tableBodyEl = document.getElementById("tasksTableBody");
       if (filtered.length === 0) {
-        tableBodyEl.innerHTML = `<tr><td colspan="5" class="empty">Nenhuma tarefa encontrada para exibir na tabela.</td></tr>`;
+        tableBodyEl.innerHTML = `<tr><td colspan="6" class="empty">Nenhuma tarefa encontrada na tabela.</td></tr>`;
         return;
       }
 
       tableBodyEl.innerHTML = filtered
         .map((task) => {
-          const due = getDueStatus(task);
+          const due = getDueInfo(task);
           return `
             <tr>
               <td>
                 <strong>${escapeHtml(task.title)}</strong>
                 ${task.desc ? `<div style="font-size:0.78rem;color:var(--muted);">${escapeHtml(task.desc)}</div>` : ""}
               </td>
+              <td>${renderAssigneeBadge(task) || '<span style="color:var(--muted);font-size:0.8rem;">Não definido</span>'}</td>
               <td><span class="status-badge">${columnLabel(task.col)}</span></td>
               <td><span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span></td>
               <td>
-                ${formatDateBr(task.dueDate)}
-                <span class="due-badge ${due.className}" style="margin-left:6px;">${due.label}</span>
+                <div><strong>${formatDateBr(task.dueDate)}</strong></div>
+                <span class="due-badge ${due.badgeClass}">${due.statusText}</span>
               </td>
               <td>
                 <div class="move-btns">
@@ -848,83 +1935,226 @@
         .join("");
     }
 
-    function render() {
-      const filtered = getFilteredTasks();
-      renderInsights(filtered);
-      renderBoard(filtered);
-      renderSchedule(filtered);
-      renderTable(filtered);
-    }
-
     function moveTask(id, targetCol) {
-      const item = tasks.find((t) => t.id === id);
+      const board = getCurrentBoard();
+      if (!board) return;
+      const item = board.tasks.find((t) => t.id === id);
       if (!item || item.col === targetCol) return;
       item.col = targetCol;
-      saveTasks();
-      render();
+      saveJson(BOARDS_KEY, boards);
+      renderBoardDetail();
     }
 
-    function openModal(task = null) {
-      editingId = task ? task.id : null;
+    // --- MODAL DE TAREFA (FOTO RESPONSÁVEL, AVISO DE DATA, CAPA) ---
+    const taskDialog = document.getElementById("taskDialog");
+    const taskDueDateInput = document.getElementById("taskDueDate");
+    const liveDateFeedback = document.getElementById("liveDateFeedback");
+
+    function updateLiveDateFeedback() {
+      const val = taskDueDateInput.value;
+      if (!val) {
+        liveDateFeedback.classList.add("hidden");
+        return;
+      }
+      const diff = diffDaysFromToday(val);
+      liveDateFeedback.classList.remove("hidden", "late", "ok");
+      if (diff < 0) {
+        const atraso = Math.abs(diff);
+        liveDateFeedback.classList.add("late");
+        liveDateFeedback.textContent = `⚠️ Aviso: Esta data é anterior ao dia atual. A tarefa está atrasada há ${atraso} ${atraso === 1 ? "dia" : "dias"}!`;
+      } else if (diff === 0) {
+        liveDateFeedback.classList.add("ok");
+        liveDateFeedback.textContent = "📅 O prazo vence hoje (faltam 0 dias para a conclusão).";
+      } else {
+        liveDateFeedback.classList.add("ok");
+        liveDateFeedback.textContent = `⏳ Faltam ${diff} ${diff === 1 ? "dia" : "dias"} para a conclusão desta tarefa.`;
+      }
+    }
+
+    taskDueDateInput.addEventListener("input", updateLiveDateFeedback);
+    taskDueDateInput.addEventListener("change", updateLiveDateFeedback);
+
+    function refreshAvatarPreview() {
+      const box = document.getElementById("avatarPreviewBox");
+      const removeBtn = document.getElementById("removePhotoBtn");
+      if (draftAssigneePhoto) {
+        box.innerHTML = `<img src="${draftAssigneePhoto}" alt="Responsável" />`;
+        removeBtn.classList.remove("hidden");
+      } else {
+        box.textContent = "📷";
+        removeBtn.classList.add("hidden");
+      }
+    }
+
+    function refreshCoverPreview() {
+      const previewBox = document.getElementById("coverPreviewBox");
+      const clearBtn = document.getElementById("clearCoverBtn");
+      document.querySelectorAll(".swatch").forEach((btn) => {
+        const isMatch = draftCoverType === "color" && btn.dataset.color === draftCoverValue;
+        btn.classList.toggle("active", isMatch);
+      });
+
+      if (draftCoverType === "image" && draftCoverValue) {
+        previewBox.innerHTML = `<img src="${draftCoverValue}" style="width:100%;height:80px;object-fit:cover;display:block;" alt="Capa" />`;
+        previewBox.classList.remove("hidden");
+        clearBtn.classList.remove("hidden");
+      } else if (draftCoverType === "color" && draftCoverValue) {
+        previewBox.innerHTML = `<div style="height:18px;background:${draftCoverValue};"></div>`;
+        previewBox.classList.remove("hidden");
+        clearBtn.classList.remove("hidden");
+      } else {
+        previewBox.innerHTML = "";
+        previewBox.classList.add("hidden");
+        clearBtn.classList.add("hidden");
+      }
+    }
+
+    function readImageResized(file, maxWidth, callback) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const scale = Math.min(1, maxWidth / img.width);
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          callback(canvas.toDataURL("image/jpeg", 0.8));
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    document.getElementById("pickPhotoBtn").addEventListener("click", () => {
+      document.getElementById("assigneePhotoInput").click();
+    });
+
+    document.getElementById("assigneePhotoInput").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      readImageResized(file, 160, (dataUrl) => {
+        draftAssigneePhoto = dataUrl;
+        refreshAvatarPreview();
+      });
+    });
+
+    document.getElementById("removePhotoBtn").addEventListener("click", () => {
+      draftAssigneePhoto = "";
+      document.getElementById("assigneePhotoInput").value = "";
+      refreshAvatarPreview();
+    });
+
+    document.querySelectorAll(".swatch").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const color = btn.dataset.color;
+        if (!color) {
+          draftCoverType = "";
+          draftCoverValue = "";
+        } else {
+          draftCoverType = "color";
+          draftCoverValue = color;
+        }
+        refreshCoverPreview();
+      });
+    });
+
+    document.getElementById("pickCoverImgBtn").addEventListener("click", () => {
+      document.getElementById("coverImageInput").click();
+    });
+
+    document.getElementById("coverImageInput").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      readImageResized(file, 600, (dataUrl) => {
+        draftCoverType = "image";
+        draftCoverValue = dataUrl;
+        refreshCoverPreview();
+      });
+    });
+
+    document.getElementById("clearCoverBtn").addEventListener("click", () => {
+      draftCoverType = "";
+      draftCoverValue = "";
+      document.getElementById("coverImageInput").value = "";
+      refreshCoverPreview();
+    });
+
+    function openTaskModal(task = null) {
+      editingTaskId = task ? task.id : null;
       document.getElementById("dialogTitle").textContent = task ? "Editar tarefa" : "Nova tarefa";
       document.getElementById("taskTitle").value = task ? task.title : "";
       document.getElementById("taskDesc").value = task ? task.desc || "" : "";
+      document.getElementById("assigneeNameInput").value = task ? task.assigneeName || "" : "";
       document.getElementById("taskPriority").value = task ? task.priority : "media";
-      document.getElementById("taskDueDate").value = task ? task.dueDate || "" : "";
       document.getElementById("taskCol").value = task ? task.col : "todo";
-      dialogEl.showModal();
+      document.getElementById("taskDueDate").value = task ? task.dueDate || "" : "";
+
+      draftAssigneePhoto = task ? task.assigneePhoto || "" : "";
+      draftCoverType = task ? task.coverType || "" : "";
+      draftCoverValue = task ? task.coverValue || "" : "";
+
+      refreshAvatarPreview();
+      refreshCoverPreview();
+      updateLiveDateFeedback();
+      taskDialog.showModal();
     }
 
-    document.getElementById("openNewTaskBtn").addEventListener("click", () => openModal());
-    document.getElementById("cancelTaskBtn").addEventListener("click", () => dialogEl.close());
+    document.getElementById("openNewTaskBtn").addEventListener("click", () => openTaskModal());
+    document.getElementById("cancelTaskBtn").addEventListener("click", () => taskDialog.close());
 
-    formEl.addEventListener("submit", (e) => {
+    document.getElementById("taskForm").addEventListener("submit", (e) => {
       e.preventDefault();
+      const board = getCurrentBoard();
+      if (!board) return;
+
       const title = document.getElementById("taskTitle").value.trim();
       if (!title) return;
-      const desc = document.getElementById("taskDesc").value.trim();
-      const priority = document.getElementById("taskPriority").value;
-      const dueDate = document.getElementById("taskDueDate").value;
-      const col = document.getElementById("taskCol").value;
 
-      if (editingId) {
-        const existing = tasks.find((t) => t.id === editingId);
-        if (existing) {
-          existing.title = title;
-          existing.desc = desc;
-          existing.priority = priority;
-          existing.dueDate = dueDate;
-          existing.col = col;
-        }
+      const payload = {
+        title,
+        desc: document.getElementById("taskDesc").value.trim(),
+        assigneeName: document.getElementById("assigneeNameInput").value.trim(),
+        assigneePhoto: draftAssigneePhoto,
+        priority: document.getElementById("taskPriority").value,
+        col: document.getElementById("taskCol").value,
+        dueDate: document.getElementById("taskDueDate").value,
+        coverType: draftCoverType,
+        coverValue: draftCoverValue
+      };
+
+      if (editingTaskId) {
+        const existing = board.tasks.find((t) => t.id === editingTaskId);
+        if (existing) Object.assign(existing, payload);
       } else {
-        tasks.unshift({
+        board.tasks.unshift({
           id: "t_" + Date.now(),
-          title,
-          desc,
-          priority,
-          dueDate,
-          col
+          ...payload
         });
       }
 
-      saveTasks();
-      dialogEl.close();
-      render();
+      saveJson(BOARDS_KEY, boards);
+      taskDialog.close();
+      renderBoardDetail();
     });
 
-    function handleActionClick(e) {
+    function handleTaskActionClick(e) {
+      const board = getCurrentBoard();
+      if (!board) return;
+
       const delId = e.target.dataset.delete;
       if (delId) {
-        tasks = tasks.filter((t) => t.id !== delId);
-        saveTasks();
-        render();
+        board.tasks = board.tasks.filter((t) => t.id !== delId);
+        saveJson(BOARDS_KEY, boards);
+        renderBoardDetail();
         return;
       }
 
       const editId = e.target.dataset.edit;
       if (editId) {
-        const found = tasks.find((t) => t.id === editId);
-        if (found) openModal(found);
+        const found = board.tasks.find((t) => t.id === editId);
+        if (found) openTaskModal(found);
         return;
       }
 
@@ -935,20 +2165,19 @@
       }
     }
 
-    boardEl.addEventListener("click", handleActionClick);
-    scheduleListEl.addEventListener("click", handleActionClick);
-    tableBodyEl.addEventListener("click", handleActionClick);
+    document.getElementById("board").addEventListener("click", handleTaskActionClick);
+    document.getElementById("scheduleList").addEventListener("click", handleTaskActionClick);
+    document.getElementById("tasksTableBody").addEventListener("click", handleTaskActionClick);
 
-    document.getElementById("resetDemoBtn").addEventListener("click", () => {
-      tasks = getDefaultTasks();
-      saveTasks();
-      render();
-    });
+    document.getElementById("searchInput").addEventListener("input", renderBoardDetail);
+    document.getElementById("priorityFilter").addEventListener("change", renderBoardDetail);
 
-    searchEl.addEventListener("input", render);
-    priorityEl.addEventListener("change", render);
-
-    render();
+    // Inicialização
+    if (currentUser) {
+      enterApp();
+    } else {
+      authView.classList.remove("hidden");
+    }
   </script>
 </body>
 </html>
