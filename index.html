@@ -457,8 +457,7 @@
       gap: 10px;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
+      position: relative;
       z-index: 20;
     }
 
@@ -476,32 +475,29 @@
       align-items: center;
     }
 
-    .app-layout {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 285px minmax(0, 1fr);
-      gap: 20px;
-      align-items: start;
+    .header-icon-btn {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1rem;
     }
 
-    @media (max-width: 1024px) {
-      .app-layout {
-        grid-template-columns: 1fr;
-        padding: 16px;
-        gap: 16px;
-      }
+    .header-icon-btn:hover,
+    .header-icon-btn.active {
+      background: var(--active-tint);
+      border-color: var(--text);
+    }
 
-      .sidebar {
-        position: static;
-      }
-
-      .sidebar-nav-row {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-      }
+    .app-container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
     @media (max-width: 767px) {
@@ -518,13 +514,8 @@
         padding: 28px 16px 44px;
       }
 
-      .app-layout {
+      .app-container {
         padding: 12px;
-        gap: 14px;
-      }
-
-      .sidebar-nav-row {
-        grid-template-columns: 1fr;
       }
 
       .board-toolbar .controls {
@@ -536,41 +527,17 @@
       }
     }
 
-    .sidebar {
+    .account-drawer-panel {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: sticky;
-      top: 74px;
-    }
-
-    .sidebar-nav-row {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .sidebar-profile-card {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .profile-top-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      margin-bottom: 18px;
     }
 
     .avatar-lg {
-      width: 62px;
-      height: 62px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       object-fit: cover;
       background: var(--active-tint);
@@ -578,7 +545,7 @@
       border: 1px solid var(--border);
       display: inline-grid;
       place-items: center;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -611,24 +578,6 @@
       flex-shrink: 0;
     }
 
-    .nav-btn {
-      width: 100%;
-      text-align: left;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-btn.active {
-      background: var(--active-tint);
-      border-color: var(--text);
-    }
-
     .main-stack {
       display: flex;
       flex-direction: column;
@@ -647,6 +596,13 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+    }
+
+    .greeting-right-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
 
     .minimal-digital-clock {
@@ -800,34 +756,11 @@
       transform: translateY(-1px);
     }
 
-    .boards-notepad-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.9fr);
-      gap: 16px;
-      align-items: start;
-    }
-
-    @media (max-width: 860px) {
-      .boards-notepad-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .notepad-box {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      background: var(--surface-2);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
     .notepad-box textarea {
       width: 100%;
-      min-height: 150px;
+      min-height: 140px;
       resize: vertical;
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       line-height: 1.5;
     }
 
@@ -932,13 +865,13 @@
       height: 10px;
       border-radius: 2px;
       display: inline-block;
-      border: 1px solid var(--text);
+      border: 1px solid rgba(0, 0, 0, 0.15);
       flex-shrink: 0;
     }
 
     .boards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 14px;
     }
 
@@ -1067,7 +1000,6 @@
     .card-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
     .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
     .card-title { font-weight: 600; margin: 0; font-size: 0.95rem; word-break: break-word; }
-    .card-desc { margin: 0; color: var(--muted); font-size: 0.84rem; white-space: pre-line; word-break: break-word; }
 
     .card-date-banner {
       display: flex;
@@ -1098,57 +1030,19 @@
       font-weight: 600;
     }
 
-    .attachment-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      color: var(--text);
-      text-decoration: none;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    /* ÁREA INTERNA DO CARD: FERRAMENTAS + COMENTÁRIO AO LADO */
-    .card-workspace-split {
+    .card-inline-side {
       display: grid;
-      grid-template-columns: minmax(118px, 0.85fr) minmax(145px, 1.15fr);
+      grid-template-columns: auto minmax(135px, 1fr);
       gap: 8px;
-      align-items: stretch;
+      align-items: start;
       padding-top: 8px;
       border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 420px) {
-      .card-workspace-split {
+    @media (max-width: 400px) {
+      .card-inline-side {
         grid-template-columns: 1fr;
       }
-    }
-
-    .card-tools-rail {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
-      min-width: 0;
-    }
-
-    .card-tools-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--muted);
     }
 
     .comments-box {
@@ -1157,17 +1051,13 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       min-width: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
     .comments-list {
       display: flex;
       flex-direction: column;
       gap: 5px;
-      margin-bottom: 8px;
-      max-height: 110px;
+      max-height: 95px;
       overflow-y: auto;
     }
 
@@ -1176,56 +1066,16 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 6px 8px;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       line-height: 1.35;
       word-break: break-word;
     }
 
     .comment-date-meta {
       display: block;
-      font-size: 0.69rem;
+      font-size: 0.68rem;
       color: var(--muted);
-      margin-top: 3px;
-    }
-
-    .comment-form-inline {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-      width: 100%;
-    }
-
-    .comment-form-inline input {
-      flex: 1 1 auto;
-      padding: 6px 8px;
-      font-size: 0.76rem;
-      min-width: 0;
-    }
-
-    .comment-form-inline button {
-      flex: 0 0 auto;
-      padding: 6px 9px;
-      font-size: 0.74rem;
-    }
-
-    .tag { padding: 2px 8px; border-radius: 999px; font-weight: 600; font-size: 0.74rem; display: inline-block; border: 1px solid var(--border); }
-    .tag-alta { background: #111111; color: #FFFFFF; border-color: #111111; }
-    .tag-media { background: #E6E6E6; color: #111111; border-color: #BDBDBD; }
-    .tag-baixa { background: #F7F7F7; color: #111111; border-color: #D0D0D0; }
-
-    body.dark-theme .tag-alta { background: #FFFFFF; color: #111111; border-color: #FFFFFF; }
-    body.dark-theme .tag-media { background: #383838; color: #FFFFFF; border-color: #555555; }
-    body.dark-theme .tag-baixa { background: #222222; color: #E5E5E5; border-color: #3A3A3A; }
-
-    .status-badge {
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 600;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      display: inline-block;
+      margin-top: 2px;
     }
 
     .due-badge { padding: 2px 8px; border-radius: 999px; font-size: 0.73rem; font-weight: 700; display: inline-block; border: 1px solid var(--border); }
@@ -1239,7 +1089,7 @@
     body.dark-theme .due-upcoming { background: #242424; color: #FFFFFF; border-color: #3D3D3D; }
 
     .move-btns { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
-    .move-btns button { padding: 4px 8px; font-size: 0.75rem; }
+    .move-btns button { padding: 4px 9px; font-size: 0.75rem; }
     .empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 20px 8px; }
 
     .schedule-list { display: flex; flex-direction: column; gap: 8px; }
@@ -1436,7 +1286,7 @@
       height: 12px;
       border-radius: 3px;
       display: inline-block;
-      border: 1px solid var(--text);
+      border: 1px solid rgba(0, 0, 0, 0.15);
     }
 
     dialog {
@@ -1445,7 +1295,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 20px;
-      max-width: 520px;
+      max-width: 560px;
       width: 94%;
     }
 
@@ -1454,6 +1304,80 @@
     .form-check { display: flex; align-items: flex-start; gap: 8px; font-size: 0.84rem; margin-bottom: 10px; }
     .form-check input[type="checkbox"] { width: 16px; height: 16px; padding: 0; margin-top: 2px; flex-shrink: 0; }
     .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+    .label-options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .selectable-tag-btn {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .selectable-tag-btn.selected {
+      background: #111111;
+      color: #FFFFFF;
+      border-color: #111111;
+    }
+
+    body.dark-theme .selectable-tag-btn.selected {
+      background: #FFFFFF;
+      color: #111111;
+      border-color: #FFFFFF;
+    }
+
+    .color-strip-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .color-choice-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      font-size: 0.78rem;
+    }
+
+    .color-choice-btn.selected {
+      border-color: var(--text);
+      outline: 2px solid var(--text);
+    }
+
+    .color-dot-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-comments-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+
+    .modal-comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 120px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+    }
 
     .cover-preview-box {
       margin-top: 6px;
@@ -1709,7 +1633,7 @@
               <form id="contactMessageForm">
                 <div class="form-row">
                   <label for="contactName">Seu nome *</label>
-                  <input id="contactName" type="text" required placeholder="Nome completo" />
+                  <input id="contactName" type="text" required placeholder="Nome completo" data-spellcheck="true" />
                 </div>
                 <div class="form-row">
                   <label for="contactEmail">Seu e-mail *</label>
@@ -1717,7 +1641,7 @@
                 </div>
                 <div class="form-row">
                   <label for="contactMessage">Mensagem *</label>
-                  <textarea id="contactMessage" rows="3" required placeholder="Escreva sua mensagem..."></textarea>
+                  <textarea id="contactMessage" rows="3" required placeholder="Escreva sua mensagem..." data-spellcheck="true"></textarea>
                 </div>
                 <button type="submit" class="primary" style="width:100%;">Enviar mensagem</button>
                 <div id="contactFeedback" class="section-sub" style="margin-top:10px;"></div>
@@ -1771,7 +1695,7 @@
         <form id="registerForm" class="hidden">
           <div class="form-row">
             <label for="regName">Nome *</label>
-            <input id="regName" required placeholder="Seu nome" />
+            <input id="regName" required placeholder="Seu nome" data-spellcheck="true" />
           </div>
           <div class="form-row">
             <label for="regEmail">E-mail *</label>
@@ -1813,7 +1737,7 @@
     </footer>
   </div>
 
-  <!-- APLICAÇÃO APÓS LOGIN -->
+  <!-- APLICAÇÃO APÓS LOGIN (SEM LATERAL FIXA NO ZOOM; ÍCONES DE MENU PERTO DE SAIR) -->
   <div id="appShell" class="hidden">
     <header>
       <div class="brand" id="goHomeBrandBtn" title="Voltar para a tela inicial de quadros">
@@ -1821,95 +1745,84 @@
         <strong>Em Dia - Gestão de Tarefas</strong>
       </div>
 
-      <div class="controls">
-        <button class="ghost" id="logoutBtn">Sair</button>
+      <div class="controls" aria-label="Menu da conta e sair">
+        <button type="button" class="header-icon-btn" data-account-menu="profile" title="Editar informações da conta" aria-label="Editar informações da conta">👤</button>
+        <button type="button" class="header-icon-btn" data-account-menu="security" title="Segurança e dispositivos conectados" aria-label="Segurança e dispositivos conectados">🔒</button>
+        <button type="button" class="header-icon-btn" data-account-menu="notifications" title="Notificações" aria-label="Notificações">🔔</button>
+        <button type="button" class="header-icon-btn" data-account-menu="customization" title="Personalização" aria-label="Personalização">🎨</button>
+        <button class="ghost" id="logoutBtn" title="Sair da conta">Sair</button>
       </div>
     </header>
 
-    <div class="app-layout">
-      <aside class="sidebar" aria-label="Conta e configurações">
-        <div class="sidebar-profile-card">
-          <div class="profile-top-row" id="sidebarProfile"></div>
-          <div class="form-row" style="margin-bottom:0;">
-            <label for="moodSelect">Humor do dia</label>
-            <select id="moodSelect">
-              <option value="😊 Motivado(a)">😊 Motivado(a)</option>
-              <option value="😌 Tranquilo(a)">😌 Tranquilo(a)</option>
-              <option value="⚡ Focado(a)">⚡ Focado(a)</option>
-              <option value="😅 Corrido(a)">😅 Corrido(a)</option>
-              <option value="😴 Cansado(a)">😴 Cansado(a)</option>
-            </select>
+    <div class="app-container">
+      <!-- PAINEL RECOLHÍVEL DE CONTA E CONFIGURAÇÕES (NÃO FIXO NO ZOOM) -->
+      <section id="accountDrawerPanel" class="account-drawer-panel hidden" aria-label="Configurações da conta">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:12px;" id="accountSummaryHeader"></div>
+          <button type="button" class="ghost" id="closeAccountDrawerBtn" title="Fechar configurações">✕ Fechar</button>
+        </div>
+
+        <div id="subsec-profile" class="subpanel" style="margin:0;">
+          <div class="two-col-grid">
+            <div class="form-row">
+              <label for="profName">Nome</label>
+              <input id="profName" type="text" data-spellcheck="true" />
+            </div>
+            <div class="form-row">
+              <label for="profUsername">Nome do Usuário (até 12 caracteres, números e símbolos)</label>
+              <input id="profUsername" type="text" maxlength="12" placeholder="ex.: maysa_01!@#" />
+            </div>
+          </div>
+          <div class="two-col-grid">
+            <div class="form-row">
+              <label for="profEmail">E-mail</label>
+              <input id="profEmail" type="email" />
+            </div>
+            <div class="form-row">
+              <label for="profVisibility">Visibilidade do perfil</label>
+              <select id="profVisibility">
+                <option value="Público">Público</option>
+                <option value="Privado">Privado</option>
+              </select>
+            </div>
+          </div>
+          <div class="two-col-grid">
+            <div class="form-row">
+              <label for="profAbout">Sobre</label>
+              <textarea id="profAbout" rows="2" placeholder="Escreva um resumo sobre você..." data-spellcheck="true"></textarea>
+            </div>
+            <div class="form-row">
+              <label for="profAvatar">Foto da conta</label>
+              <input id="profAvatar" type="file" accept="image/*" />
+              <span class="section-sub">Podem te adicionar como membro pelo e-mail ou nome do usuário.</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;">
+            <button type="button" class="primary" id="saveProfileBtn">Salvar conta</button>
           </div>
         </div>
 
-        <div class="sidebar-nav-row">
-          <button type="button" class="nav-btn active" data-settings-section="profile">
-            <span>Editar informações da conta</span>
-            <span>›</span>
-          </button>
-          <button type="button" class="nav-btn" data-settings-section="security">
-            <span>Segurança</span>
-            <span>›</span>
-          </button>
-          <button type="button" class="nav-btn" data-settings-section="notifications">
-            <span>Notificações</span>
-            <span>›</span>
-          </button>
-          <button type="button" class="nav-btn" data-settings-section="customization">
-            <span>Personalização</span>
-            <span>›</span>
-          </button>
-        </div>
-
-        <div id="subsec-profile" class="subpanel" style="margin:6px 0 0;">
-          <div class="form-row">
-            <label for="profName">Nome</label>
-            <input id="profName" type="text" data-spellcheck="true" />
-          </div>
-          <div class="form-row">
-            <label for="profUsername">Nome do Usuário (até 8 caracteres, números e símbolos)</label>
-            <input id="profUsername" type="text" maxlength="8" placeholder="ex.: maysa_1!" />
-            <span class="section-sub">Podem te adicionar no quadro pelo seu e-mail ou nome do usuário.</span>
-          </div>
-          <div class="form-row">
-            <label for="profEmail">E-mail</label>
-            <input id="profEmail" type="email" />
-          </div>
-          <div class="form-row">
-            <label for="profAbout">Sobre</label>
-            <textarea id="profAbout" rows="2" placeholder="Escreva um resumo sobre você..." data-spellcheck="true"></textarea>
-          </div>
-          <div class="form-row">
-            <label for="profVisibility">Visibilidade do perfil</label>
-            <select id="profVisibility">
-              <option value="Público">Público</option>
-              <option value="Privado">Privado</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="profAvatar">Foto da conta</label>
-            <input id="profAvatar" type="file" accept="image/*" />
-          </div>
-          <button type="button" class="primary" style="width:100%;" id="saveProfileBtn">Salvar conta</button>
-        </div>
-
-        <div id="subsec-security" class="subpanel hidden" style="margin:6px 0 0;">
-          <div class="form-row">
-            <label for="secPassword">Nova senha</label>
-            <input id="secPassword" type="password" placeholder="Nova senha" />
-          </div>
-          <div class="form-row">
-            <label for="secPin">PIN de acesso (4 a 6 dígitos)</label>
-            <input id="secPin" type="password" maxlength="6" placeholder="Ex.: 1234" />
+        <div id="subsec-security" class="subpanel hidden" style="margin:0;">
+          <div class="two-col-grid">
+            <div class="form-row">
+              <label for="secPassword">Nova senha</label>
+              <input id="secPassword" type="password" placeholder="Nova senha" />
+            </div>
+            <div class="form-row">
+              <label for="secPin">PIN de acesso (4 a 6 dígitos)</label>
+              <input id="secPin" type="password" maxlength="6" placeholder="Ex.: 1234" />
+            </div>
           </div>
           <div class="form-row">
             <label>Dispositivos conectados à conta</label>
             <div id="connectedDevicesList" style="display:flex;flex-direction:column;gap:6px;"></div>
           </div>
-          <button type="button" class="primary" style="width:100%;" id="saveSecurityBtn">Salvar segurança</button>
+          <div style="display:flex;justify-content:flex-end;">
+            <button type="button" class="primary" id="saveSecurityBtn">Salvar segurança</button>
+          </div>
         </div>
 
-        <div id="subsec-notifications" class="subpanel hidden" style="margin:6px 0 0;">
+        <div id="subsec-notifications" class="subpanel hidden" style="margin:0;">
           <div class="form-check">
             <input id="notifPush" type="checkbox" />
             <label for="notifPush" style="margin:0;">Notificações Push</label>
@@ -1922,32 +1835,40 @@
             <input id="notifDesktop" type="checkbox" />
             <label for="notifDesktop" style="margin:0;">Notificações Desktop</label>
           </div>
-          <button type="button" class="primary" style="width:100%;" id="saveNotifBtn">Salvar notificações</button>
+          <div style="display:flex;justify-content:flex-end;">
+            <button type="button" class="primary" id="saveNotifBtn">Salvar notificações</button>
+          </div>
         </div>
 
-        <div id="subsec-customization" class="subpanel hidden" style="margin:6px 0 0;">
-          <div class="form-row">
-            <label for="customTheme">Tema</label>
-            <select id="customTheme">
-              <option value="light">Tema Claro</option>
-              <option value="dark">Tema Escuro</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label>Cores de destaque</label>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-              <input id="customColorPicker" type="color" value="#111111" style="width:46px;height:36px;padding:2px;" />
-              <input id="customColorCode" type="text" placeholder="#111111" style="flex:1;min-width:110px;" />
+        <div id="subsec-customization" class="subpanel hidden" style="margin:0;">
+          <div class="two-col-grid">
+            <div class="form-row">
+              <label for="customTheme">Tema</label>
+              <select id="customTheme">
+                <option value="light">Tema Claro</option>
+                <option value="dark">Tema Escuro</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Cores de destaque (seletor e código)</label>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <input id="customColorPicker" type="color" value="#111111" style="width:46px;height:36px;padding:2px;" />
+                <input id="customColorCode" type="text" placeholder="#111111" style="flex:1;min-width:110px;" />
+              </div>
             </div>
           </div>
           <div class="form-row">
             <label for="customWallpaper">Papel de parede (fundo)</label>
-            <input id="customWallpaper" type="file" accept="image/*" />
-            <button type="button" class="ghost" style="padding:5px 8px;font-size:0.78rem;" id="clearWallpaperBtn">Remover papel de parede</button>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input id="customWallpaper" type="file" accept="image/*" />
+              <button type="button" class="ghost" style="padding:6px 10px;font-size:0.78rem;" id="clearWallpaperBtn">Remover papel de parede</button>
+            </div>
           </div>
-          <button type="button" class="primary" style="width:100%;" id="saveCustomBtn">Salvar personalização</button>
+          <div style="display:flex;justify-content:flex-end;">
+            <button type="button" class="primary" id="saveCustomBtn">Salvar personalização</button>
+          </div>
         </div>
-      </aside>
+      </section>
 
       <main class="main-stack">
         <div id="homeDashboardView" class="main-stack">
@@ -1956,7 +1877,16 @@
               <strong style="font-size:1.05rem;">Que bom vê-lo novamente 😊</strong>
               <div class="section-sub" id="greetingMoodSubtitle"></div>
             </div>
-            <div class="minimal-digital-clock" id="minimalDigitalClock" aria-label="Relógio digital minimalista">00:00:00</div>
+            <div class="greeting-right-group">
+              <select id="moodSelect" aria-label="Humor do dia" title="Humor do dia">
+                <option value="😊 Motivado(a)">😊 Motivado(a)</option>
+                <option value="😌 Tranquilo(a)">😌 Tranquilo(a)</option>
+                <option value="⚡ Focado(a)">⚡ Focado(a)</option>
+                <option value="😅 Corrido(a)">😅 Corrido(a)</option>
+                <option value="😴 Cansado(a)">😴 Cansado(a)</option>
+              </select>
+              <div class="minimal-digital-clock" id="minimalDigitalClock" aria-label="Relógio digital minimalista">00:00:00</div>
+            </div>
           </div>
 
           <section class="section-box" aria-label="Calendário e lembretes">
@@ -1971,10 +1901,10 @@
                 </div>
                 <div class="mini-cal-grid" id="miniCalendarGrid"></div>
                 <div class="cal-status-legend">
-                  <span><i class="cal-dot" style="background:#2563EB;"></i> A Fazer</span>
-                  <span><i class="cal-dot" style="background:#D97706;"></i> Em Andamento</span>
-                  <span><i class="cal-dot" style="background:#16A34A;"></i> Concluído</span>
-                  <span><i class="cal-dot" style="background:#DC2626;"></i> Atrasado</span>
+                  <span><i class="cal-dot" style="background:#2563EB;"></i> Pendentes</span>
+                  <span><i class="cal-dot" style="background:#EAB308;"></i> Em andamento</span>
+                  <span><i class="cal-dot" style="background:#16A34A;"></i> Concluídas</span>
+                  <span><i class="cal-dot" style="background:#DC2626;"></i> Atrasados</span>
                 </div>
               </div>
 
@@ -1986,37 +1916,36 @@
             </div>
           </section>
 
-          <section class="section-box" aria-label="Meus Quadros e Bloco de Notas">
-            <div class="boards-notepad-grid">
-              <div>
-                <div class="section-header">
-                  <div class="section-title-group">
-                    <h2 class="section-title">Meus Quadros</h2>
-                    <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
-                  </div>
-                  <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
-                </div>
-                <div class="boards-grid" id="boardsList"></div>
+          <!-- SEÇÃO SEPARADA: MEUS QUADROS -->
+          <section class="section-box" aria-label="Meus Quadros">
+            <div class="section-header">
+              <div class="section-title-group">
+                <h2 class="section-title">Meus Quadros</h2>
+                <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
               </div>
-
-              <div class="notepad-box" aria-label="Bloco de Notas">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-                  <h2 class="section-title">Bloco de Notas</h2>
-                  <span class="section-sub" id="notepadSavedStatus">Salvo</span>
-                </div>
-                <textarea id="quickNotepadTextarea" placeholder="Anote ideias rápidas, lembretes livres ou rascunhos..." data-spellcheck="true"></textarea>
-                <div style="display:flex;justify-content:flex-end;">
-                  <button type="button" class="primary" style="padding:6px 12px;font-size:0.8rem;" id="saveNotepadBtn">Salvar nota</button>
-                </div>
-              </div>
+              <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
             </div>
+            <div class="boards-grid" id="boardsList"></div>
           </section>
 
+          <!-- SEÇÃO SEPARADA: BLOCO DE NOTAS -->
+          <section class="section-box notepad-box" aria-label="Bloco de Notas">
+            <div class="section-header" style="margin-bottom:8px;">
+              <div class="section-title-group">
+                <h2 class="section-title">Bloco de Notas</h2>
+                <span class="section-sub" id="notepadSavedStatus">Salvo</span>
+              </div>
+              <button type="button" class="primary" style="padding:6px 12px;font-size:0.8rem;" id="saveNotepadBtn">Salvar nota</button>
+            </div>
+            <textarea id="quickNotepadTextarea" placeholder="Anote ideias rápidas, lembretes livres ou rascunhos..." data-spellcheck="true"></textarea>
+          </section>
+
+          <!-- DICAS ESSENCIAIS (SEM NUMERAÇÃO, OCULTÁVEL) -->
           <section class="section-box" aria-label="Dicas Essenciais">
             <div class="section-header">
               <div class="section-title-group">
                 <h2 class="section-title">Dicas Essenciais</h2>
-                <span class="section-sub">5 modelos de organização e saúde nos estudos e trabalho</span>
+                <span class="section-sub">Modelos de organização de tarefas e saúde nos estudos e trabalho</span>
               </div>
               <button type="button" id="toggleEssentialTipsBtn">🙈 Ocultar Dicas Essenciais</button>
             </div>
@@ -2024,28 +1953,28 @@
             <div id="essentialTipsContent">
               <div class="tips-grid">
                 <div class="tip-card">
-                  <h4>1. Matriz de Prioridades (Alta / Média / Baixa)</h4>
+                  <h4>Matriz de Prioridades</h4>
                   <p>Classifique cada tarefa pela urgência e impacto antes de iniciar o dia para evitar gastar energia em itens secundários.</p>
                 </div>
                 <div class="tip-card">
-                  <h4>2. Blocos de Tempo (Timeboxing)</h4>
+                  <h4>Blocos de Tempo</h4>
                   <p>Reserve janelas fixas de 45 a 60 minutos para foco profundo, protegendo o horário de interrupções constantes.</p>
                 </div>
                 <div class="tip-card">
-                  <h4>3. Regra dos 3 Focos Diários</h4>
-                  <p>Escolha até 3 entregas essenciais por dia; concluir o núcleo principal gera clareza e sensação real de avanço.</p>
+                  <h4>Focos do Dia</h4>
+                  <p>Defina até três entregas principais por dia; concluir o núcleo essencial gera clareza e avanço constante.</p>
                 </div>
                 <div class="tip-card">
-                  <h4>4. Revisão Semanal de Prazo</h4>
-                  <p>Reserve 15 minutos no fim da semana para atualizar status, reprogramar datas e alinhar prioridades do próximo ciclo.</p>
+                  <h4>Revisão Semanal de Prazos</h4>
+                  <p>Reserve 15 minutos no fim da semana para atualizar status, ajustar datas e alinhar o próximo ciclo.</p>
                 </div>
                 <div class="tip-card">
-                  <h4>5. Divisão em Etapas Curtas</h4>
-                  <p>Quebre tarefas grandes em passos de até 25 minutos para reduzir a procrastinação e facilitar o início.</p>
+                  <h4>Etapas Curtas</h4>
+                  <p>Divida atividades extensas em passos simples de até 25 minutos para facilitar o início e manter o ritmo.</p>
                 </div>
                 <div class="tip-card">
                   <h4>Saúde nos Estudos e Trabalho</h4>
-                  <p>Faça pausas a cada 50 minutos, aplique a regra 20-20-20 para os olhos, mantenha hidratação, boa postura e sono regular.</p>
+                  <p>Faça pausas curtas a cada 50 minutos, descanse a visão com a regra 20-20-20, hidrate-se, cuide da postura e durma bem.</p>
                 </div>
               </div>
             </div>
@@ -2082,7 +2011,7 @@
                 <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);">Tenha em Mente</div>
                 <div style="font-size:0.95rem;font-weight:600;margin-top:3px;" id="tenhaEmMenteMessage"></div>
               </div>
-              <span class="status-badge" id="tenhaEmMenteContext"></span>
+              <span class="due-badge due-none" id="tenhaEmMenteContext"></span>
             </div>
 
             <div class="controls" style="justify-content:space-between;margin-top:14px;">
@@ -2119,13 +2048,13 @@
             <div id="permissionsPanel" class="subpanel hidden" style="margin-top:14px;margin-bottom:0;">
               <h3 style="margin:0 0 6px;font-size:0.95rem;">Gerenciar membros e permissões</h3>
               <p class="section-sub" style="margin:0 0 12px;">
-                Perfis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>. Adicione por nome, nome de usuário (até 8 caracteres) ou e-mail.
+                Perfis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>. Adicione por nome, nome de usuário (até 12 caracteres) ou e-mail.
               </p>
 
               <div class="two-col-grid" style="margin-bottom:10px;">
                 <div class="form-row" style="margin-bottom:0;">
                   <label for="newMemberName">Nome, @usuário ou e-mail</label>
-                  <input id="newMemberName" type="text" placeholder="Ex.: maysa_1! ou email@exemplo.com" />
+                  <input id="newMemberName" type="text" placeholder="Ex.: maysa_01!@# ou email@exemplo.com" />
                 </div>
                 <div class="form-row" style="margin-bottom:0;">
                   <label for="newMemberRole">Permissão</label>
@@ -2169,9 +2098,7 @@
                   <tr>
                     <th>Tarefa</th>
                     <th>Responsável</th>
-                    <th>Status</th>
-                    <th>Prioridade</th>
-                    <th>Prazo</th>
+                    <th>Prazo e Atraso</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
@@ -2284,9 +2211,27 @@
         <input id="taskTitle" required placeholder="Título da tarefa" data-spellcheck="true" />
       </div>
 
+      <div class="two-col-grid">
+        <div class="form-row">
+          <label for="taskActivityType">Tipo de atividade</label>
+          <input id="taskActivityType" type="text" placeholder="Ex.: Estudo, Imprensa, Reunião" data-spellcheck="true" />
+        </div>
+
+        <div class="form-row">
+          <label for="taskDesc">Descrição</label>
+          <input id="taskDesc" type="text" placeholder="Detalhes da atividade..." data-spellcheck="true" />
+        </div>
+      </div>
+
       <div class="form-row">
-        <label for="taskDesc">Descrição</label>
-        <textarea id="taskDesc" rows="2" placeholder="Detalhes..." data-spellcheck="true"></textarea>
+        <label>Etiquetas selecionáveis</label>
+        <div class="label-options-row" id="selectableTagsRow">
+          <button type="button" class="selectable-tag-btn" data-tag-option="Urgente">Urgente</button>
+          <button type="button" class="selectable-tag-btn" data-tag-option="Foco">Foco</button>
+          <button type="button" class="selectable-tag-btn" data-tag-option="Revisão">Revisão</button>
+          <button type="button" class="selectable-tag-btn" data-tag-option="Entrega">Entrega</button>
+          <button type="button" class="selectable-tag-btn" data-tag-option="Planejamento">Planejamento</button>
+        </div>
       </div>
 
       <div class="two-col-grid">
@@ -2328,18 +2273,30 @@
         <label for="taskCoverType">Capa do card</label>
         <select id="taskCoverType">
           <option value="none">Sem capa</option>
-          <option value="color">Faixa de destaque</option>
+          <option value="color">Faixa de destaque (opções de cores)</option>
           <option value="image">Upload de imagem</option>
         </select>
       </div>
 
       <div id="coverColorRow" class="form-row hidden">
-        <label for="taskCoverColor">Tom da faixa</label>
-        <select id="taskCoverColor">
-          <option value="#111111">Preto</option>
-          <option value="#555555">Cinza Escuro</option>
-          <option value="#9E9E9E">Cinza Médio</option>
-        </select>
+        <label>Opções de cores da faixa de destaque</label>
+        <div class="color-strip-options" id="colorStripOptions">
+          <button type="button" class="color-choice-btn selected" data-cover-color="#111111">
+            <span class="color-dot-preview" style="background:#111111;"></span> Preto
+          </button>
+          <button type="button" class="color-choice-btn" data-cover-color="#2563EB">
+            <span class="color-dot-preview" style="background:#2563EB;"></span> Azul
+          </button>
+          <button type="button" class="color-choice-btn" data-cover-color="#16A34A">
+            <span class="color-dot-preview" style="background:#16A34A;"></span> Verde
+          </button>
+          <button type="button" class="color-choice-btn" data-cover-color="#EAB308">
+            <span class="color-dot-preview" style="background:#EAB308;"></span> Amarelo
+          </button>
+          <button type="button" class="color-choice-btn" data-cover-color="#DC2626">
+            <span class="color-dot-preview" style="background:#DC2626;"></span> Vermelho
+          </button>
+        </div>
       </div>
 
       <div id="coverImageRow" class="form-row hidden">
@@ -2354,6 +2311,16 @@
         <span class="section-sub" id="taskAttachmentHint">Nenhum arquivo anexado</span>
       </div>
 
+      <!-- COMENTÁRIOS DENTRO DO MODAL AO ABRIR O CARD -->
+      <div class="modal-comments-box">
+        <div style="font-size:0.84rem;font-weight:700;margin-bottom:6px;">Comentários do card</div>
+        <div class="modal-comments-list" id="modalCommentsList"></div>
+        <div style="display:flex;gap:6px;">
+          <input id="modalNewCommentInput" type="text" placeholder="Escrever comentário..." style="flex:1;" data-spellcheck="true" />
+          <button type="button" id="modalAddCommentBtn">Adicionar</button>
+        </div>
+      </div>
+
       <div class="modal-actions">
         <button type="button" id="cancelTaskBtn">Cancelar</button>
         <button type="submit" class="primary">Salvar</button>
@@ -2362,7 +2329,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v13";
+    const DB_KEY = "em_dia_workspace_v14";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const CONTACT_EMAIL = "maysavieiradearaujo@gmail.com";
@@ -2507,7 +2474,7 @@
         screen: "home",
         user: {
           name: "Maysa Araújo",
-          username: "maysa_1!",
+          username: "maysa_01!@#",
           email: "maysa@emdia.app",
           about: "Criadora do Em Dia e assessora de imprensa no Rio de Janeiro.",
           visibility: "Público",
@@ -2543,15 +2510,17 @@
             desc: "Organização diária de tarefas e prazos.",
             color: "#111111",
             members: [
-              { id: "m1", name: "Maysa Araújo", handle: "maysa_1!", email: "maysa@emdia.app", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
-              { id: "m2", name: "Rafael Costa", handle: "rafael_2", email: "rafael@emdia.app", role: "Membro", avatarUrl: "" },
-              { id: "m3", name: "Ana Paula", handle: "ana_pa#3", email: "ana@emdia.app", role: "Analista", avatarUrl: "" }
+              { id: "m1", name: "Maysa Araújo", handle: "maysa_01!@#", email: "maysa@emdia.app", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
+              { id: "m2", name: "Rafael Costa", handle: "rafael_02!", email: "rafael@emdia.app", role: "Membro", avatarUrl: "" },
+              { id: "m3", name: "Ana Paula", handle: "ana_pa#03", email: "ana@emdia.app", role: "Analista", avatarUrl: "" }
             ],
             tasks: [
               {
                 id: "t1",
                 title: "Revisar cronograma semanal",
+                activityType: "Planejamento",
                 desc: "Conferir prioridades e datas de entrega.",
+                tags: ["Urgente", "Planejamento"],
                 priority: "alta",
                 dueDate: addDaysIso(-1),
                 durationDays: 3,
@@ -2568,14 +2537,16 @@
               {
                 id: "t2",
                 title: "Preparar pauta de imprensa",
+                activityType: "Comunicação",
                 desc: "Ajustar cronograma e tabela de entregas.",
+                tags: ["Foco", "Entrega"],
                 priority: "media",
                 dueDate: addDaysIso(2),
                 durationDays: 4,
                 col: "doing",
                 assigneeId: "m2",
                 coverType: "color",
-                coverColor: "#555555",
+                coverColor: "#2563EB",
                 coverImage: "",
                 attachment: null,
                 comments: []
@@ -2583,14 +2554,16 @@
               {
                 id: "t3",
                 title: "Confirmar checklist de hoje",
+                activityType: "Rotina",
                 desc: "Validar entregas do dia.",
+                tags: ["Revisão"],
                 priority: "baixa",
                 dueDate: today,
                 durationDays: 2,
                 col: "done",
                 assigneeId: "m3",
                 coverType: "color",
-                coverColor: "#9E9E9E",
+                coverColor: "#16A34A",
                 coverImage: "",
                 attachment: null,
                 comments: []
@@ -2613,7 +2586,7 @@
           user: {
             ...def.user,
             ...(parsed.user || {}),
-            username: String((parsed.user?.username ?? def.user.username)).slice(0, 8),
+            username: String((parsed.user?.username ?? def.user.username)).slice(0, 12),
             notifications: { ...def.user.notifications, ...(parsed.user?.notifications || {}) },
             customization: { ...def.user.customization, ...(parsed.user?.customization || {}) },
             connectedDevices: Array.isArray(parsed.user?.connectedDevices) && parsed.user.connectedDevices.length
@@ -2625,6 +2598,8 @@
                 ...b,
                 tasks: (b.tasks || []).map((t) => ({
                   ...t,
+                  tags: Array.isArray(t.tags) ? t.tags : [],
+                  activityType: t.activityType || "",
                   comments: Array.isArray(t.comments)
                     ? t.comments.map((c) => ({
                         ...c,
@@ -2643,6 +2618,9 @@
     let state = loadState();
     let editingTaskId = null;
     let tempCoverImageData = "";
+    let tempCoverColor = "#111111";
+    let tempSelectedTags = [];
+    let tempModalComments = [];
     let tempAttachmentObj = null;
     let tempUserAvatar = "";
     let tempWallpaperData = "";
@@ -2721,12 +2699,6 @@
         return { text: "Entrega hoje (0 dias)", className: "due-today" };
       }
       return { text: `Faltam ${diff} ${diff === 1 ? "dia" : "dias"}`, className: "due-upcoming" };
-    }
-
-    function priorityLabel(p) {
-      if (p === "alta") return "Alta";
-      if (p === "baixa") return "Baixa";
-      return "Média";
     }
 
     function columnLabel(colId) {
@@ -2999,25 +2971,43 @@
     document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
     document.getElementById("backFromBoardBtn").addEventListener("click", goHome);
 
-    /* MENU LATERAL ESQUERDO */
+    /* MENU DE ÍCONES DA CONTA PERTO DE SAIR (NÃO FIXO NO ZOOM) */
+    const accountDrawerEl = document.getElementById("accountDrawerPanel");
+    const accountSections = ["profile", "security", "notifications", "customization"];
+    let activeAccountSection = "profile";
+
+    function openAccountSection(secName) {
+      const sameSection = !accountDrawerEl.classList.contains("hidden") && activeAccountSection === secName;
+      if (sameSection) {
+        accountDrawerEl.classList.add("hidden");
+        document.querySelectorAll(".header-icon-btn").forEach((b) => b.classList.remove("active"));
+        return;
+      }
+      activeAccountSection = secName;
+      accountDrawerEl.classList.remove("hidden");
+      document.querySelectorAll(".header-icon-btn").forEach((b) => {
+        b.classList.toggle("active", b.dataset.accountMenu === secName);
+      });
+      accountSections.forEach((sec) => {
+        document.getElementById(`subsec-${sec}`).classList.toggle("hidden", sec !== secName);
+      });
+      syncSettingsInputs();
+    }
+
+    document.querySelectorAll(".header-icon-btn[data-account-menu]").forEach((btn) => {
+      btn.addEventListener("click", () => openAccountSection(btn.dataset.accountMenu));
+    });
+
+    document.getElementById("closeAccountDrawerBtn").addEventListener("click", () => {
+      accountDrawerEl.classList.add("hidden");
+      document.querySelectorAll(".header-icon-btn").forEach((b) => b.classList.remove("active"));
+    });
+
     const moodSelectEl = document.getElementById("moodSelect");
     moodSelectEl.addEventListener("change", () => {
       state.user.mood = moodSelectEl.value;
       saveState();
       renderAll();
-    });
-
-    const sections = ["profile", "security", "notifications", "customization"];
-    document.querySelectorAll(".nav-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.dataset.settingsSection;
-        document.querySelectorAll(".nav-btn").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        sections.forEach((sec) => {
-          document.getElementById(`subsec-${sec}`).classList.toggle("hidden", sec !== target);
-        });
-        syncSettingsInputs();
-      });
     });
 
     function renderConnectedDevices() {
@@ -3047,7 +3037,7 @@
     function syncSettingsInputs() {
       moodSelectEl.value = state.user.mood || "😊 Motivado(a)";
       document.getElementById("profName").value = state.user.name || "";
-      document.getElementById("profUsername").value = String(state.user.username || "").slice(0, 8);
+      document.getElementById("profUsername").value = String(state.user.username || "").slice(0, 12);
       document.getElementById("profEmail").value = state.user.email || "";
       document.getElementById("profAbout").value = state.user.about || "";
       document.getElementById("profVisibility").value = state.user.visibility || "Público";
@@ -3075,8 +3065,8 @@
     });
 
     document.getElementById("profUsername").addEventListener("input", (e) => {
-      if (e.target.value.length > 8) {
-        e.target.value = e.target.value.slice(0, 8);
+      if (e.target.value.length > 12) {
+        e.target.value = e.target.value.slice(0, 12);
       }
     });
 
@@ -3092,7 +3082,7 @@
 
     document.getElementById("saveProfileBtn").addEventListener("click", () => {
       state.user.name = document.getElementById("profName").value.trim() || state.user.name;
-      state.user.username = document.getElementById("profUsername").value.trim().slice(0, 8);
+      state.user.username = document.getElementById("profUsername").value.trim().slice(0, 12);
       state.user.email = document.getElementById("profEmail").value.trim() || state.user.email;
       state.user.about = document.getElementById("profAbout").value.trim();
       state.user.visibility = document.getElementById("profVisibility").value || "Público";
@@ -3206,7 +3196,7 @@
     function getStatusColorForTask(task) {
       if (isTaskOverdue(task)) return "#DC2626";
       if (task.col === "done") return "#16A34A";
-      if (task.col === "doing") return "#D97706";
+      if (task.col === "doing") return "#EAB308";
       return "#2563EB";
     }
 
@@ -3299,7 +3289,7 @@
             <div class="reminder-item" data-reminder-board="${board.id}" data-reminder-task="${task.id}" role="button" tabindex="0">
               <div>
                 <strong>${escapeHtml(task.title)}</strong>
-                <div class="section-sub">${escapeHtml(board.name)} • ${escapeHtml(columnLabel(task.col))} • ${formatDateBr(task.dueDate)}</div>
+                <div class="section-sub">${escapeHtml(board.name)} • ${formatDateBr(task.dueDate)}</div>
               </div>
               <span class="due-badge ${cls}">${escapeHtml(label)}</span>
             </div>
@@ -3392,6 +3382,7 @@
     function renderTenhaEmMente(board) {
       const tasks = board.tasks || [];
       const atrasadas = tasks.filter((t) => isTaskOverdue(t)).length;
+      const aFazer = tasks.filter((t) => t.col === "todo").length;
       const concluidas = tasks.filter((t) => t.col === "done").length;
       const emAndamento = tasks.filter((t) => t.col === "doing").length;
 
@@ -3404,19 +3395,19 @@
       } else if (concluidas > atrasadas) {
         message = "Continue acreditando que você é capaz de fazer acontecer.";
         context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
-      } else if (emAndamento >= 2 || (emAndamento > 0 && atrasadas === concluidas)) {
-        message = "Confie no processo";
+      } else if (emAndamento > aFazer && emAndamento > concluidas) {
+        message = "Confie no processo.";
         context = `Em andamento: ${emAndamento}`;
       } else {
-        message = "Confie no processo";
-        context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
+        message = "Confie no processo.";
+        context = `Em andamento: ${emAndamento} • A fazer: ${aFazer} • Concluídas: ${concluidas}`;
       }
 
       document.getElementById("tenhaEmMenteMessage").textContent = message;
       document.getElementById("tenhaEmMenteContext").textContent = context;
     }
 
-    /* DASHBOARD: GRÁFICO DE PIZZA PARA PRIORIDADES + GRÁFICO DE BARRAS PARA STATUS */
+    /* DASHBOARD: GRÁFICO DE PIZZA PARA PRIORIDADES (CORES VARIADAS) + GRÁFICO DE BARRAS PARA STATUS (VERDE, AMARELO, VERMELHO, AZUL) */
     const insightsContentEl = document.getElementById("insightsContent");
     const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
 
@@ -3433,7 +3424,8 @@
         const matchText =
           !term ||
           t.title.toLowerCase().includes(term) ||
-          (t.desc && t.desc.toLowerCase().includes(term));
+          (t.desc && t.desc.toLowerCase().includes(term)) ||
+          (t.activityType && t.activityType.toLowerCase().includes(term));
         const matchPrio = prio === "todas" || t.priority === prio;
         return matchText && matchPrio;
       });
@@ -3558,18 +3550,17 @@
         </div>
       `;
 
-      const isDark = document.body.classList.contains("dark-theme");
       const prioSegments = [
-        { label: "Alta", value: alta, color: isDark ? "#FFFFFF" : "#111111" },
-        { label: "Média", value: media, color: isDark ? "#8A8A8A" : "#666666" },
-        { label: "Baixa", value: baixa, color: isDark ? "#444444" : "#CCCCCC" }
+        { label: "Alta", value: alta, color: "#E11D48" },
+        { label: "Média", value: media, color: "#7C3AED" },
+        { label: "Baixa", value: baixa, color: "#0EA5E9" }
       ];
 
       const statusSegments = [
-        { label: "A Fazer", value: todoCount, color: isDark ? "#FFFFFF" : "#111111" },
-        { label: "Em Andamento", value: doingCount, color: isDark ? "#9A9A9A" : "#555555" },
-        { label: "Concluído", value: doneCount, color: isDark ? "#666666" : "#999999" },
-        { label: "Atrasado", value: overdueCount, color: isDark ? "#D4D4D4" : "#2B2B2B" }
+        { label: "Tarefas Concluídas", value: doneCount, color: "#16A34A" },
+        { label: "Tarefas em Andamento", value: doingCount, color: "#EAB308" },
+        { label: "Atrasados", value: overdueCount, color: "#DC2626" },
+        { label: "Tarefas Pendentes", value: todoCount, color: "#2563EB" }
       ];
 
       document.getElementById("chartsGrid").innerHTML =
@@ -3633,7 +3624,7 @@
       const memberName = isMeByHandleOrEmail ? state.user.name : rawInput;
       const memberHandle = isMeByHandleOrEmail
         ? state.user.username
-        : (!rawInput.includes("@") ? rawInput.slice(0, 8) : "");
+        : (!rawInput.includes("@") ? rawInput.slice(0, 12) : "");
       const memberEmail = rawInput.includes("@")
         ? rawInput
         : (isMeByHandleOrEmail ? state.user.email : "");
@@ -3749,52 +3740,20 @@
       return "";
     }
 
-    function renderAttachmentHtml(task) {
-      if (!task.attachment || !task.attachment.name) return "";
-      return `
-        <a class="attachment-chip" href="${task.attachment.dataUrl}" download="${escapeHtml(task.attachment.name)}" onclick="event.stopPropagation()">
-          📎 ${escapeHtml(task.attachment.name)}
-        </a>
-      `;
-    }
-
-    function renderCardToolsAndCommentsHtml(task, canEdit, prevCol, nextCol) {
+    function renderCardCommentsBoxHtml(task) {
       const comments = Array.isArray(task.comments) ? task.comments : [];
-      const listItems = comments.length
-        ? comments.map((c) => `
-            <div class="comment-entry">
-              <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}</div>
-              <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
-            </div>
-          `).join("")
-        : `<div class="section-sub" style="margin-bottom:6px;">Sem comentários.</div>`;
-
+      if (!comments.length) {
+        return `<div class="comments-box"><span class="section-sub">Sem comentários</span></div>`;
+      }
       return `
-        <div class="card-workspace-split">
-          <div class="card-tools-rail">
-            <div>
-              <div class="card-tools-label">Ferramentas</div>
-              <div style="margin-top:6px;">
-                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
+        <div class="comments-box">
+          <div class="comments-list">
+            ${comments.map((c) => `
+              <div class="comment-entry">
+                <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}</div>
+                <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
               </div>
-            </div>
-
-            <div class="move-btns">
-              ${canEdit && prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para coluna anterior">←</button>` : ""}
-              <button data-edit="${task.id}">Abrir</button>
-              ${canEdit && nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para próxima coluna">→</button>` : ""}
-            </div>
-          </div>
-
-          <div class="comments-box">
-            <div style="font-size:0.74rem;font-weight:700;margin-bottom:6px;">Comentários (${comments.length})</div>
-            <div class="comments-list">${listItems}</div>
-            ${canEdit ? `
-              <form class="comment-form-inline" data-comment-form="${task.id}">
-                <input type="text" name="commentText" placeholder="Comentar..." required data-spellcheck="true" />
-                <button type="submit" class="primary">Enviar</button>
-              </form>
-            ` : ""}
+            `).join("")}
           </div>
         </div>
       `;
@@ -3812,7 +3771,7 @@
       document.getElementById("viewGantt").classList.toggle("hidden", state.viewMode !== "gantt");
 
       if (state.viewMode === "kanban") renderKanban(board, filtered, canEdit);
-      else if (state.viewMode === "cronograma") renderCronograma(board, filtered, canEdit);
+      else if (state.viewMode === "cronograma") renderCronograma(board, filtered);
       else if (state.viewMode === "tabela") renderTabela(board, filtered, canEdit);
       else renderGantt(board, filtered);
     }
@@ -3821,7 +3780,7 @@
       const boardEl = document.getElementById("viewKanban");
       boardEl.innerHTML = "";
 
-      COLUMNS.forEach((col, colIndex) => {
+      COLUMNS.forEach((col) => {
         const colTasks = filtered.filter((t) => t.col === col.id);
         const colDiv = document.createElement("section");
         colDiv.className = "column";
@@ -3854,8 +3813,6 @@
           colTasks.forEach((task) => {
             const member = findMember(board, task.assigneeId);
             const deadline = getDeadlineInfo(task);
-            const prevCol = colIndex > 0 ? COLUMNS[colIndex - 1].id : null;
-            const nextCol = colIndex < COLUMNS.length - 1 ? COLUMNS[colIndex + 1].id : null;
             const isHighlighted = state.highlightedTaskId === task.id;
 
             const card = document.createElement("article");
@@ -3874,9 +3831,8 @@
                   <h3 class="card-title">${escapeHtml(task.title)}</h3>
                   ${canEdit ? `<button class="danger" title="Excluir" data-delete="${task.id}">✕</button>` : ""}
                 </div>
-                ${task.desc ? `<p class="card-desc">${escapeHtml(task.desc)}</p>` : ""}
                 <div class="card-date-banner">
-                  <span>📅 Data: ${formatDateBr(task.dueDate)}</span>
+                  <span>📅 ${formatDateBr(task.dueDate)}</span>
                   <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
                 </div>
                 <div class="card-meta-row">
@@ -3885,10 +3841,14 @@
                       ${renderAvatarHtml(member.name, member.avatarUrl, "avatar-sm")}
                       <span>${escapeHtml(member.name)}</span>
                     </span>
-                  ` : ""}
+                  ` : `<span class="section-sub">Sem responsável</span>`}
                 </div>
-                ${renderAttachmentHtml(task)}
-                ${renderCardToolsAndCommentsHtml(task, canEdit, prevCol, nextCol)}
+                <div class="card-inline-side">
+                  <div class="move-btns">
+                    <button data-edit="${task.id}">Abrir</button>
+                  </div>
+                  ${renderCardCommentsBoxHtml(task)}
+                </div>
               </div>
             `;
             colDiv.appendChild(card);
@@ -3898,31 +3858,7 @@
       });
     }
 
-    document.getElementById("viewKanban").addEventListener("submit", (e) => {
-      const form = e.target.closest("[data-comment-form]");
-      if (!form) return;
-      e.preventDefault();
-      const board = getActiveBoard();
-      if (!canEditTasks(board)) return;
-      const taskId = form.dataset.commentForm;
-      const input = form.querySelector('input[name="commentText"]');
-      const text = input?.value.trim();
-      if (!text) return;
-
-      const task = board.tasks.find((t) => t.id === taskId);
-      if (!task) return;
-      task.comments = Array.isArray(task.comments) ? task.comments : [];
-      task.comments.push({
-        id: "c_" + Date.now(),
-        author: state.user.name || "Você",
-        text,
-        dateLabel: getNowDateTimeLabel()
-      });
-      saveState();
-      renderAll();
-    });
-
-    function renderCronograma(board, filtered, canEdit) {
+    function renderCronograma(board, filtered) {
       const listEl = document.getElementById("viewCronograma");
       if (!filtered.length) {
         listEl.innerHTML = `<div class="empty">Nenhuma tarefa.</div>`;
@@ -3946,17 +3882,14 @@
                 <span class="schedule-date">📅 ${formatDateBr(task.dueDate)}</span>
                 <strong>${escapeHtml(task.title)}</strong>
                 <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
-                <span class="tag tag-${task.priority}">${priorityLabel(task.priority)}</span>
                 ${member ? `
                   <span class="assignee-chip">
                     ${renderAvatarHtml(member.name, member.avatarUrl, "avatar-sm")}
                     <span>${escapeHtml(member.name)}</span>
                   </span>
-                ` : ""}
-                ${renderAttachmentHtml(task)}
+                ` : `<span class="section-sub">Sem responsável</span>`}
               </div>
               <div class="move-btns">
-                <span class="status-badge">${columnLabel(task.col)}</span>
                 <button data-edit="${task.id}">Abrir</button>
               </div>
             </div>
@@ -3965,7 +3898,7 @@
         .join("");
     }
 
-    /* TABELA EDITÁVEL COM MENUS SUSPENSOS E MINI CALENDÁRIO NO PRAZO */
+    /* TABELA */
     const tableActionPanelEl = document.getElementById("tableRowActionPanel");
     const datePopoverEl = document.getElementById("tableDatePopover");
     let datePopoverTaskId = null;
@@ -4084,7 +4017,7 @@
     function renderTabela(board, filtered, canEdit) {
       const tbody = document.getElementById("tasksTableBody");
       if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="empty">Nenhuma tarefa encontrada.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="empty">Nenhuma tarefa encontrada.</td></tr>`;
         tableActionPanelEl.classList.add("hidden");
         return;
       }
@@ -4113,21 +4046,7 @@
                 </select>
               </td>
               <td>
-                <select class="table-inline-select" data-table-status="${task.id}" ${canEdit ? "" : "disabled"}>
-                  ${COLUMNS.map((c) => `
-                    <option value="${c.id}" ${task.col === c.id ? "selected" : ""}>${c.title}</option>
-                  `).join("")}
-                </select>
-              </td>
-              <td>
-                <select class="table-inline-select" data-table-priority="${task.id}" ${canEdit ? "" : "disabled"}>
-                  <option value="alta" ${task.priority === "alta" ? "selected" : ""}>Alta</option>
-                  <option value="media" ${task.priority === "media" ? "selected" : ""}>Média</option>
-                  <option value="baixa" ${task.priority === "baixa" ? "selected" : ""}>Baixa</option>
-                </select>
-              </td>
-              <td>
-                <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;">
+                <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
                   <button type="button" class="date-trigger-btn" data-table-date-btn="${task.id}" ${canEdit ? "" : "disabled"}>
                     <span>📅</span>
                     <span>${formatDateBr(task.dueDate)}</span>
@@ -4210,31 +4129,6 @@
           task.assigneeId = e.target.value;
           saveState();
         }
-        return;
-      }
-
-      const statusId = e.target.dataset.tableStatus;
-      if (statusId) {
-        const task = board.tasks.find((t) => t.id === statusId);
-        if (task) {
-          task.col = e.target.value;
-          saveState();
-          renderInsightsAndCharts();
-          renderDueSoonReminders();
-          renderTenhaEmMente(board);
-          renderMiniCalendar();
-        }
-        return;
-      }
-
-      const prioId = e.target.dataset.tablePriority;
-      if (prioId) {
-        const task = board.tasks.find((t) => t.id === prioId);
-        if (task) {
-          task.priority = e.target.value;
-          saveState();
-          renderInsightsAndCharts();
-        }
       }
     });
 
@@ -4289,8 +4183,6 @@
         }
       });
 
-      const isDark = document.body.classList.contains("dark-theme");
-
       const rowsHtml = filtered
         .map((task, idx) => {
           const member = findMember(board, task.assigneeId);
@@ -4303,10 +4195,10 @@
 
           const barColor =
             task.priority === "alta"
-              ? (isDark ? "#FFFFFF" : "#111111")
+              ? "#E11D48"
               : task.priority === "media"
-              ? (isDark ? "#9A9A9A" : "#666666")
-              : (isDark ? "#555555" : "#BDBDBD");
+              ? "#7C3AED"
+              : "#0EA5E9";
 
           const dayCells = dayColumns
             .map((_, cIdx) => {
@@ -4350,14 +4242,14 @@
           </table>
         </div>
         <div class="gantt-legend-row">
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#FFFFFF" : "#111111"};"></span> Alta</span>
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#9A9A9A" : "#666666"};"></span> Média</span>
-          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:${isDark ? "#555555" : "#BDBDBD"};"></span> Baixa</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#E11D48;"></span> Alta</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#7C3AED;"></span> Média</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#0EA5E9;"></span> Baixa</span>
         </div>
       `;
     }
 
-    /* MODAL DE TAREFA */
+    /* MODAL DE TAREFA (ABRIR / EDITAR) */
     const taskDialogEl = document.getElementById("taskDialog");
     const taskFormEl = document.getElementById("taskForm");
     const taskDueDateEl = document.getElementById("taskDueDate");
@@ -4366,6 +4258,68 @@
     const coverColorRowEl = document.getElementById("coverColorRow");
     const coverImageRowEl = document.getElementById("coverImageRow");
     const coverImagePreviewBoxEl = document.getElementById("coverImagePreviewBox");
+    const modalCommentsListEl = document.getElementById("modalCommentsList");
+
+    function renderSelectableTagsButtons() {
+      document.querySelectorAll("#selectableTagsRow .selectable-tag-btn").forEach((btn) => {
+        const tag = btn.dataset.tagOption;
+        btn.classList.toggle("selected", tempSelectedTags.includes(tag));
+      });
+    }
+
+    document.getElementById("selectableTagsRow").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-tag-option]");
+      if (!btn) return;
+      const tag = btn.dataset.tagOption;
+      if (tempSelectedTags.includes(tag)) {
+        tempSelectedTags = tempSelectedTags.filter((t) => t !== tag);
+      } else {
+        tempSelectedTags.push(tag);
+      }
+      renderSelectableTagsButtons();
+    });
+
+    function renderColorStripButtons() {
+      document.querySelectorAll("#colorStripOptions .color-choice-btn").forEach((btn) => {
+        btn.classList.toggle("selected", btn.dataset.coverColor === tempCoverColor);
+      });
+    }
+
+    document.getElementById("colorStripOptions").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-cover-color]");
+      if (!btn) return;
+      tempCoverColor = btn.dataset.coverColor;
+      renderColorStripButtons();
+    });
+
+    function renderModalCommentsList() {
+      if (!tempModalComments.length) {
+        modalCommentsListEl.innerHTML = `<div class="section-sub">Nenhum comentário ainda.</div>`;
+        return;
+      }
+      modalCommentsListEl.innerHTML = tempModalComments
+        .map((c) => `
+          <div class="comment-entry">
+            <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}</div>
+            <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
+          </div>
+        `)
+        .join("");
+    }
+
+    document.getElementById("modalAddCommentBtn").addEventListener("click", () => {
+      const input = document.getElementById("modalNewCommentInput");
+      const text = input.value.trim();
+      if (!text) return;
+      tempModalComments.push({
+        id: "c_" + Date.now(),
+        author: state.user.name || "Você",
+        text,
+        dateLabel: getNowDateTimeLabel()
+      });
+      input.value = "";
+      renderModalCommentsList();
+    });
 
     function updateTaskDateHint() {
       const val = taskDueDateEl.value;
@@ -4469,7 +4423,11 @@
       editingTaskId = task ? task.id : null;
       document.getElementById("dialogTitle").textContent = task ? "Abrir tarefa" : "Nova tarefa";
       document.getElementById("taskTitle").value = task ? task.title : "";
+      document.getElementById("taskActivityType").value = task ? (task.activityType || "") : "";
       document.getElementById("taskDesc").value = task ? task.desc || "" : "";
+      tempSelectedTags = task && Array.isArray(task.tags) ? [...task.tags] : [];
+      renderSelectableTagsButtons();
+
       document.getElementById("taskPriority").value = task ? task.priority : "media";
       document.getElementById("taskCol").value = task ? task.col : "todo";
       taskDueDateEl.value = task ? task.dueDate || "" : "";
@@ -4480,13 +4438,19 @@
       taskAssigneeEl.value = task?.assigneeId || board.members?.[0]?.id || "";
 
       taskCoverTypeEl.value = task?.coverType || "none";
-      const validColors = ["#111111", "#555555", "#9E9E9E"];
-      document.getElementById("taskCoverColor").value = validColors.includes(task?.coverColor) ? task.coverColor : "#111111";
+      tempCoverColor = task?.coverColor || "#111111";
+      renderColorStripButtons();
       tempCoverImageData = task?.coverImage || "";
       document.getElementById("taskCoverFile").value = "";
 
       tempAttachmentObj = task?.attachment ? { ...task.attachment } : null;
       document.getElementById("taskAttachmentFile").value = "";
+
+      tempModalComments = task && Array.isArray(task.comments)
+        ? task.comments.map((c) => ({ ...c, dateLabel: c.dateLabel || getNowDateTimeLabel() }))
+        : [];
+      document.getElementById("modalNewCommentInput").value = "";
+      renderModalCommentsList();
 
       updateTaskDateHint();
       updateAssigneePreview();
@@ -4505,24 +4469,37 @@
       const title = document.getElementById("taskTitle").value.trim();
       if (!title) return;
 
+      const pendingComment = document.getElementById("modalNewCommentInput").value.trim();
+      if (pendingComment) {
+        tempModalComments.push({
+          id: "c_" + Date.now(),
+          author: state.user.name || "Você",
+          text: pendingComment,
+          dateLabel: getNowDateTimeLabel()
+        });
+      }
+
       const payload = {
         title,
+        activityType: document.getElementById("taskActivityType").value.trim(),
         desc: document.getElementById("taskDesc").value.trim(),
+        tags: [...tempSelectedTags],
         priority: document.getElementById("taskPriority").value,
         col: document.getElementById("taskCol").value,
         dueDate: taskDueDateEl.value,
         assigneeId: taskAssigneeEl.value,
         coverType: taskCoverTypeEl.value,
-        coverColor: document.getElementById("taskCoverColor").value,
+        coverColor: tempCoverColor,
         coverImage: taskCoverTypeEl.value === "image" ? tempCoverImageData : "",
-        attachment: tempAttachmentObj
+        attachment: tempAttachmentObj,
+        comments: [...tempModalComments]
       };
 
       if (editingTaskId) {
         const existing = board.tasks.find((t) => t.id === editingTaskId);
         if (existing) Object.assign(existing, payload);
       } else {
-        board.tasks.unshift({ id: "t_" + Date.now(), durationDays: 3, comments: [], ...payload });
+        board.tasks.unshift({ id: "t_" + Date.now(), durationDays: 3, ...payload });
       }
 
       saveState();
@@ -4557,13 +4534,6 @@
       if (editId) {
         const found = board.tasks.find((t) => t.id === editId);
         if (found) openTaskModal(found);
-        return;
-      }
-
-      const moveSpec = e.target.dataset.move;
-      if (moveSpec) {
-        const [taskId, targetCol] = moveSpec.split(":");
-        moveTask(taskId, targetCol);
       }
     }
 
@@ -4611,26 +4581,26 @@
       }
 
       if (lower.includes("o que é") || lower.includes("propósito") || lower.includes("público") || lower.includes("finalidade") || lower.includes("site") || lower.includes("página inicial")) {
-        return "Na página inicial, o Em Dia é apresentado como um gestor de tarefas minimalista em branco e preto feito para dar clareza visual às prioridades, atender profissionais, estudantes e equipes, e transformar planos em progresso contínuo.";
+        return "Na página inicial, o Em Dia é um gestor de tarefas minimalista em branco e preto criado para dar clareza visual às prioridades, atender profissionais, estudantes e equipes, e transformar planos em progresso contínuo.";
       }
 
       if (lower.includes("tenha em mente") || lower.includes("mensagem") || lower.includes("atrasad") || lower.includes("concluíd") || lower.includes("processo")) {
-        return `O tópico Tenha em Mente exibe uma mensagem serena e organizadora quando há mais atrasadas do que concluídas; "Continue acreditando que você é capaz de fazer acontecer." quando há mais concluídas do que atrasadas; e "Confie no processo" quando há muitas atividades em andamento. No quadro "${board.name}", temos ${atrasadas} atrasada(s), ${concluidas} concluída(s) e ${emAndamento} em andamento.`;
+        return `No tópico Tenha em Mente, se houver mais atividades atrasadas do que concluídas aparece uma mensagem serena e organizadora; se houver mais concluídas do que atrasadas aparece "Continue acreditando que você é capaz de fazer acontecer."; e quando há mais atividades em andamento do que a fazer e concluídas aparece "Confie no processo.". No quadro "${board.name}", temos ${atrasadas} atrasada(s), ${concluidas} concluída(s) e ${emAndamento} em andamento.`;
       }
 
-      if (lower.includes("dashboard") || lower.includes("pizza") || lower.includes("barra") || lower.includes("prioridade") || lower.includes("status")) {
-        return "O Dashboard reúne indicadores, um gráfico de pizza para Prioridade (Alta, Média e Baixa) e um gráfico de barras para Status (A Fazer, Em Andamento, Concluído e Atrasado).";
+      if (lower.includes("dashboard") || lower.includes("pizza") || lower.includes("barra") || lower.includes("prioridade") || lower.includes("status") || lower.includes("cor")) {
+        return "No Dashboard, o gráfico de barras exibe o status com verde para tarefas concluídas, amarelo para tarefas em andamento, vermelho para atrasados e azul para tarefas pendentes, enquanto o gráfico de pizza mostra as prioridades com cores variadas.";
       }
 
-      if (lower.includes("calendário") || lower.includes("bloco de notas") || lower.includes("dicas") || lower.includes("relógio") || lower.includes("cor")) {
-        return "O aplicativo conta com calendário colorido por status das tarefas, Bloco de Notas ao lado de Meus Quadros, Dicas Essenciais (5 modelos de organização e saúde nos estudos e trabalho), relógio digital minimalista, Tema Claro/Escuro, seletor e código de cor na personalização, nome de usuário de até 8 caracteres, dispositivos conectados e visibilidade Público/Privado.";
+      if (lower.includes("calendário") || lower.includes("bloco de notas") || lower.includes("dicas") || lower.includes("relógio") || lower.includes("usuário") || lower.includes("dispositivo")) {
+        return "O Em Dia reúne calendário colorido por status, lembretes clicáveis, Meus Quadros, Bloco de Notas separado, Dicas Essenciais (modelos de organização e saúde nos estudos e trabalho), relógio digital minimalista, nome de usuário de até 12 caracteres com números e símbolos, dispositivos conectados e perfil Público ou Privado.";
       }
 
       if (lower.includes("contato") || lower.includes("email") || lower.includes("e-mail")) {
         return `O e-mail de contato na página inicial é ${CONTACT_EMAIL}. Você tem ${totalBoards} de ${MAX_BOARDS} quadros criados.`;
       }
 
-      return `Analisando sua pergunta sobre "${q}": sou a Sol e posso esclarecer qualquer ponto da página inicial ou das funcionalidades do Em Dia — como criação de até 10 quadros, modos Kanban, Cronograma, Tabela e Gantt, Dashboard, Tenha em Mente, calendário por status, Bloco de Notas, Dicas Essenciais e configurações da conta. Qual dúvida específica você quer explorar?`;
+      return `Considerando sua pergunta ("${q}"): sou a Sol e posso explicar todas as informações da página inicial e das funcionalidades do Em Dia — quadros, Kanban, Cronograma, Tabela e Gantt, Dashboard, Tenha em Mente, calendário por status, Bloco de Notas, Dicas Essenciais e configurações da conta. Como posso te ajudar neste ponto?`;
     }
 
     document.getElementById("toggleSolChatBtn").addEventListener("click", () => {
@@ -4665,12 +4635,12 @@
       const handleLabel = state.user.username ? ` • @${state.user.username}` : "";
       const visLabel = state.user.visibility ? ` • ${state.user.visibility}` : "";
 
-      document.getElementById("sidebarProfile").innerHTML = `
+      document.getElementById("accountSummaryHeader").innerHTML = `
         ${renderAvatarHtml(state.user.name, state.user.avatarUrl, "avatar-lg")}
         <div style="min-width:0;">
-          <div style="font-weight:700;font-size:0.95rem;">${escapeHtml(state.user.name)}</div>
+          <div style="font-weight:700;font-size:0.98rem;">${escapeHtml(state.user.name)}</div>
           <div class="section-sub" style="word-break:break-word;">${escapeHtml(state.user.email)}${escapeHtml(handleLabel)}${escapeHtml(visLabel)}</div>
-          ${state.user.about ? `<div class="section-sub" style="margin-top:4px;">${escapeHtml(state.user.about)}</div>` : ""}
+          ${state.user.about ? `<div class="section-sub" style="margin-top:3px;">${escapeHtml(state.user.about)}</div>` : ""}
         </div>
       `;
 
