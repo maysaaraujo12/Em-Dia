@@ -495,7 +495,7 @@
     }
 
     .app-container {
-      max-width: 1260px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 20px;
     }
@@ -525,14 +525,6 @@
       .board-toolbar .controls > * {
         flex: 1 1 auto;
       }
-    }
-
-    .account-drawer-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 18px;
     }
 
     .avatar-lg {
@@ -756,9 +748,33 @@
       transform: translateY(-1px);
     }
 
-    .notepad-box textarea {
+    /* MEUS QUADROS | BLOCO DE NOTAS SEPARADOS POR RETA VERTICAL */
+    .split-boards-notepad {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) 1px minmax(260px, 0.9fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .split-boards-notepad {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .vertical-divider-line {
+        display: none;
+      }
+    }
+
+    .vertical-divider-line {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+    }
+
+    .notepad-column textarea {
       width: 100%;
-      min-height: 140px;
+      min-height: 155px;
       resize: vertical;
       font-size: 0.88rem;
       line-height: 1.5;
@@ -891,7 +907,8 @@
       border-color: var(--text);
     }
 
-    .board-strip { height: 6px; width: 100%; background: var(--accent-color, var(--text)); }
+    .board-strip { height: 6px; width: 100%; }
+    .board-cover-img { width: 100%; height: 76px; object-fit: cover; display: block; }
     .board-tile-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
     .board-tile-title { font-weight: 700; font-size: 0.96rem; margin: 0; }
     .board-tile-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
@@ -1030,52 +1047,11 @@
       font-weight: 600;
     }
 
-    .card-inline-side {
-      display: grid;
-      grid-template-columns: auto minmax(135px, 1fr);
-      gap: 8px;
-      align-items: start;
+    .card-footer-open {
       padding-top: 8px;
       border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 400px) {
-      .card-inline-side {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .comments-box {
-      padding: 8px;
-      border-radius: 8px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      min-width: 0;
-    }
-
-    .comments-list {
       display: flex;
-      flex-direction: column;
-      gap: 5px;
-      max-height: 95px;
-      overflow-y: auto;
-    }
-
-    .comment-entry {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 8px;
-      font-size: 0.75rem;
-      line-height: 1.35;
-      word-break: break-word;
-    }
-
-    .comment-date-meta {
-      display: block;
-      font-size: 0.68rem;
-      color: var(--muted);
-      margin-top: 2px;
+      justify-content: flex-start;
     }
 
     .due-badge { padding: 2px 8px; border-radius: 999px; font-size: 0.73rem; font-weight: 700; display: inline-block; border: 1px solid var(--border); }
@@ -1295,7 +1271,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 20px;
-      max-width: 560px;
+      max-width: 580px;
       width: 94%;
     }
 
@@ -1305,61 +1281,42 @@
     .form-check input[type="checkbox"] { width: 16px; height: 16px; padding: 0; margin-top: 2px; flex-shrink: 0; }
     .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 
-    .label-options-row {
+    .auto-grow-textarea {
+      width: 100%;
+      min-height: 58px;
+      resize: none;
+      overflow-y: hidden;
+      line-height: 1.45;
+    }
+
+    .label-manager-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 6px;
+      margin-top: 8px;
     }
 
-    .selectable-tag-btn {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-    }
-
-    .selectable-tag-btn.selected {
-      background: #111111;
-      color: #FFFFFF;
-      border-color: #111111;
-    }
-
-    body.dark-theme .selectable-tag-btn.selected {
-      background: #FFFFFF;
-      color: #111111;
-      border-color: #FFFFFF;
-    }
-
-    .color-strip-options {
+    .label-item-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .color-choice-btn {
-      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      gap: 8px;
       padding: 6px 10px;
       border-radius: 8px;
       border: 1px solid var(--border);
       background: var(--surface-2);
+    }
+
+    .label-chip-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
       font-size: 0.78rem;
-    }
-
-    .color-choice-btn.selected {
-      border-color: var(--text);
-      outline: 2px solid var(--text);
-    }
-
-    .color-dot-preview {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      display: inline-block;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      color: #FFFFFF;
     }
 
     .modal-comments-box {
@@ -1377,6 +1334,23 @@
       max-height: 120px;
       overflow-y: auto;
       margin-bottom: 8px;
+    }
+
+    .comment-entry {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 0.76rem;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .comment-date-meta {
+      display: block;
+      font-size: 0.69rem;
+      color: var(--muted);
+      margin-top: 2px;
     }
 
     .cover-preview-box {
@@ -1737,7 +1711,7 @@
     </footer>
   </div>
 
-  <!-- APLICAÇÃO APÓS LOGIN (SEM LATERAL FIXA NO ZOOM; ÍCONES DE MENU PERTO DE SAIR) -->
+  <!-- APLICAÇÃO APÓS LOGIN -->
   <div id="appShell" class="hidden">
     <header>
       <div class="brand" id="goHomeBrandBtn" title="Voltar para a tela inicial de quadros">
@@ -1750,122 +1724,139 @@
         <button type="button" class="header-icon-btn" data-account-menu="security" title="Segurança e dispositivos conectados" aria-label="Segurança e dispositivos conectados">🔒</button>
         <button type="button" class="header-icon-btn" data-account-menu="notifications" title="Notificações" aria-label="Notificações">🔔</button>
         <button type="button" class="header-icon-btn" data-account-menu="customization" title="Personalização" aria-label="Personalização">🎨</button>
+        <button type="button" class="header-icon-btn" id="openSettingsPageBtn" title="Configuração dos menus (página própria)" aria-label="Configuração dos menus">⚙️</button>
         <button class="ghost" id="logoutBtn" title="Sair da conta">Sair</button>
       </div>
     </header>
 
     <div class="app-container">
-      <!-- PAINEL RECOLHÍVEL DE CONTA E CONFIGURAÇÕES (NÃO FIXO NO ZOOM) -->
-      <section id="accountDrawerPanel" class="account-drawer-panel hidden" aria-label="Configurações da conta">
-        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:12px;" id="accountSummaryHeader"></div>
-          <button type="button" class="ghost" id="closeAccountDrawerBtn" title="Fechar configurações">✕ Fechar</button>
-        </div>
-
-        <div id="subsec-profile" class="subpanel" style="margin:0;">
-          <div class="two-col-grid">
-            <div class="form-row">
-              <label for="profName">Nome</label>
-              <input id="profName" type="text" data-spellcheck="true" />
-            </div>
-            <div class="form-row">
-              <label for="profUsername">Nome do Usuário (até 12 caracteres, números e símbolos)</label>
-              <input id="profUsername" type="text" maxlength="12" placeholder="ex.: maysa_01!@#" />
-            </div>
-          </div>
-          <div class="two-col-grid">
-            <div class="form-row">
-              <label for="profEmail">E-mail</label>
-              <input id="profEmail" type="email" />
-            </div>
-            <div class="form-row">
-              <label for="profVisibility">Visibilidade do perfil</label>
-              <select id="profVisibility">
-                <option value="Público">Público</option>
-                <option value="Privado">Privado</option>
-              </select>
-            </div>
-          </div>
-          <div class="two-col-grid">
-            <div class="form-row">
-              <label for="profAbout">Sobre</label>
-              <textarea id="profAbout" rows="2" placeholder="Escreva um resumo sobre você..." data-spellcheck="true"></textarea>
-            </div>
-            <div class="form-row">
-              <label for="profAvatar">Foto da conta</label>
-              <input id="profAvatar" type="file" accept="image/*" />
-              <span class="section-sub">Podem te adicionar como membro pelo e-mail ou nome do usuário.</span>
-            </div>
-          </div>
-          <div style="display:flex;justify-content:flex-end;">
-            <button type="button" class="primary" id="saveProfileBtn">Salvar conta</button>
-          </div>
-        </div>
-
-        <div id="subsec-security" class="subpanel hidden" style="margin:0;">
-          <div class="two-col-grid">
-            <div class="form-row">
-              <label for="secPassword">Nova senha</label>
-              <input id="secPassword" type="password" placeholder="Nova senha" />
-            </div>
-            <div class="form-row">
-              <label for="secPin">PIN de acesso (4 a 6 dígitos)</label>
-              <input id="secPin" type="password" maxlength="6" placeholder="Ex.: 1234" />
-            </div>
-          </div>
-          <div class="form-row">
-            <label>Dispositivos conectados à conta</label>
-            <div id="connectedDevicesList" style="display:flex;flex-direction:column;gap:6px;"></div>
-          </div>
-          <div style="display:flex;justify-content:flex-end;">
-            <button type="button" class="primary" id="saveSecurityBtn">Salvar segurança</button>
-          </div>
-        </div>
-
-        <div id="subsec-notifications" class="subpanel hidden" style="margin:0;">
-          <div class="form-check">
-            <input id="notifPush" type="checkbox" />
-            <label for="notifPush" style="margin:0;">Notificações Push</label>
-          </div>
-          <div class="form-check">
-            <input id="notifEmail" type="checkbox" />
-            <label for="notifEmail" style="margin:0;">Notificações por E-mail</label>
-          </div>
-          <div class="form-check">
-            <input id="notifDesktop" type="checkbox" />
-            <label for="notifDesktop" style="margin:0;">Notificações Desktop</label>
-          </div>
-          <div style="display:flex;justify-content:flex-end;">
-            <button type="button" class="primary" id="saveNotifBtn">Salvar notificações</button>
-          </div>
-        </div>
-
-        <div id="subsec-customization" class="subpanel hidden" style="margin:0;">
-          <div class="two-col-grid">
-            <div class="form-row">
-              <label for="customTheme">Tema</label>
-              <select id="customTheme">
-                <option value="light">Tema Claro</option>
-                <option value="dark">Tema Escuro</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <label>Cores de destaque (seletor e código)</label>
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-                <input id="customColorPicker" type="color" value="#111111" style="width:46px;height:36px;padding:2px;" />
-                <input id="customColorCode" type="text" placeholder="#111111" style="flex:1;min-width:110px;" />
+      <!-- PÁGINA PRÓPRIA DE CONFIGURAÇÃO DOS MENUS -->
+      <section id="settingsPageView" class="main-stack hidden" aria-label="Página de configuração">
+        <div class="section-box">
+          <div class="section-header">
+            <div class="section-title-group">
+              <button type="button" id="backFromSettingsPageBtn">← Voltar</button>
+              <div>
+                <h2 class="section-title">Configurações</h2>
+                <span class="section-sub">Página de configuração da conta e preferências do menu</span>
               </div>
             </div>
           </div>
-          <div class="form-row">
-            <label for="customWallpaper">Papel de parede (fundo)</label>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-              <input id="customWallpaper" type="file" accept="image/*" />
-              <button type="button" class="ghost" style="padding:6px 10px;font-size:0.78rem;" id="clearWallpaperBtn">Remover papel de parede</button>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist" aria-label="Abas de configuração">
+            <button type="button" class="header-icon-btn" data-account-menu="profile" title="Editar informações da conta" aria-label="Editar informações da conta">👤</button>
+            <button type="button" class="header-icon-btn" data-account-menu="security" title="Segurança e dispositivos conectados" aria-label="Segurança e dispositivos conectados">🔒</button>
+            <button type="button" class="header-icon-btn" data-account-menu="notifications" title="Notificações" aria-label="Notificações">🔔</button>
+            <button type="button" class="header-icon-btn" data-account-menu="customization" title="Personalização" aria-label="Personalização">🎨</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--border);" id="accountSummaryHeader"></div>
+
+          <div id="subsec-profile" class="subpanel" style="margin:0;">
+            <div class="two-col-grid">
+              <div class="form-row">
+                <label for="profName">Nome</label>
+                <input id="profName" type="text" data-spellcheck="true" />
+              </div>
+              <div class="form-row">
+                <label for="profUsername">Nome do Usuário (até 12 caracteres, números e símbolos)</label>
+                <input id="profUsername" type="text" maxlength="12" placeholder="ex.: maysa_01!@#" />
+              </div>
+            </div>
+            <div class="two-col-grid">
+              <div class="form-row">
+                <label for="profEmail">E-mail</label>
+                <input id="profEmail" type="email" />
+              </div>
+              <div class="form-row">
+                <label for="profVisibility">Visibilidade do perfil</label>
+                <select id="profVisibility">
+                  <option value="Público">Público</option>
+                  <option value="Privado">Privado</option>
+                </select>
+              </div>
+            </div>
+            <div class="two-col-grid">
+              <div class="form-row">
+                <label for="profAbout">Sobre</label>
+                <textarea id="profAbout" rows="2" placeholder="Escreva um resumo sobre você..." data-spellcheck="true"></textarea>
+              </div>
+              <div class="form-row">
+                <label for="profAvatar">Foto da conta</label>
+                <input id="profAvatar" type="file" accept="image/*" />
+                <span class="section-sub">Podem te adicionar como membro pelo e-mail ou nome do usuário.</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+              <button type="button" class="primary" id="saveProfileBtn">Salvar conta</button>
             </div>
           </div>
-          <div style="display:flex;justify-content:flex-end;">
-            <button type="button" class="primary" id="saveCustomBtn">Salvar personalização</button>
+
+          <div id="subsec-security" class="subpanel hidden" style="margin:0;">
+            <div class="two-col-grid">
+              <div class="form-row">
+                <label for="secPassword">Nova senha</label>
+                <input id="secPassword" type="password" placeholder="Nova senha" />
+              </div>
+              <div class="form-row">
+                <label for="secPin">PIN de acesso (4 a 6 dígitos)</label>
+                <input id="secPin" type="password" maxlength="6" placeholder="Ex.: 1234" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label>Dispositivos conectados à conta</label>
+              <div id="connectedDevicesList" style="display:flex;flex-direction:column;gap:6px;"></div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+              <button type="button" class="primary" id="saveSecurityBtn">Salvar segurança</button>
+            </div>
+          </div>
+
+          <div id="subsec-notifications" class="subpanel hidden" style="margin:0;">
+            <div class="form-check">
+              <input id="notifPush" type="checkbox" />
+              <label for="notifPush" style="margin:0;">Notificações Push</label>
+            </div>
+            <div class="form-check">
+              <input id="notifEmail" type="checkbox" />
+              <label for="notifEmail" style="margin:0;">Notificações por E-mail</label>
+            </div>
+            <div class="form-check">
+              <input id="notifDesktop" type="checkbox" />
+              <label for="notifDesktop" style="margin:0;">Notificações Desktop</label>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+              <button type="button" class="primary" id="saveNotifBtn">Salvar notificações</button>
+            </div>
+          </div>
+
+          <div id="subsec-customization" class="subpanel hidden" style="margin:0;">
+            <div class="two-col-grid">
+              <div class="form-row">
+                <label for="customTheme">Tema</label>
+                <select id="customTheme">
+                  <option value="light">Tema Claro</option>
+                  <option value="dark">Tema Escuro</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Cores de destaque (seletor e código)</label>
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                  <input id="customColorPicker" type="color" value="#111111" style="width:46px;height:36px;padding:2px;" />
+                  <input id="customColorCode" type="text" placeholder="#111111" style="flex:1;min-width:110px;" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="customWallpaper">Papel de parede (fundo)</label>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <input id="customWallpaper" type="file" accept="image/*" />
+                <button type="button" class="ghost" style="padding:6px 10px;font-size:0.78rem;" id="clearWallpaperBtn">Remover papel de parede</button>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+              <button type="button" class="primary" id="saveCustomBtn">Salvar personalização</button>
+            </div>
           </div>
         </div>
       </section>
@@ -1916,28 +1907,33 @@
             </div>
           </section>
 
-          <!-- SEÇÃO SEPARADA: MEUS QUADROS -->
-          <section class="section-box" aria-label="Meus Quadros">
-            <div class="section-header">
-              <div class="section-title-group">
-                <h2 class="section-title">Meus Quadros</h2>
-                <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
+          <!-- MEUS QUADROS | BLOCO DE NOTAS SEPARADOS POR RETA VERTICAL -->
+          <section class="section-box" aria-label="Meus Quadros e Bloco de Notas">
+            <div class="split-boards-notepad">
+              <div>
+                <div class="section-header">
+                  <div class="section-title-group">
+                    <h2 class="section-title">Meus Quadros</h2>
+                    <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
+                  </div>
+                  <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
+                </div>
+                <div class="boards-grid" id="boardsList"></div>
               </div>
-              <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
-            </div>
-            <div class="boards-grid" id="boardsList"></div>
-          </section>
 
-          <!-- SEÇÃO SEPARADA: BLOCO DE NOTAS -->
-          <section class="section-box notepad-box" aria-label="Bloco de Notas">
-            <div class="section-header" style="margin-bottom:8px;">
-              <div class="section-title-group">
-                <h2 class="section-title">Bloco de Notas</h2>
-                <span class="section-sub" id="notepadSavedStatus">Salvo</span>
+              <div class="vertical-divider-line" aria-hidden="true"></div>
+
+              <div class="notepad-column" aria-label="Bloco de Notas">
+                <div class="section-header" style="margin-bottom:8px;">
+                  <div class="section-title-group">
+                    <h2 class="section-title">Bloco de Notas</h2>
+                    <span class="section-sub" id="notepadSavedStatus">Salvo</span>
+                  </div>
+                  <button type="button" class="primary" style="padding:6px 12px;font-size:0.8rem;" id="saveNotepadBtn">Salvar nota</button>
+                </div>
+                <textarea id="quickNotepadTextarea" placeholder="Anote ideias rápidas, lembretes livres ou rascunhos..." data-spellcheck="true"></textarea>
               </div>
-              <button type="button" class="primary" style="padding:6px 12px;font-size:0.8rem;" id="saveNotepadBtn">Salvar nota</button>
             </div>
-            <textarea id="quickNotepadTextarea" placeholder="Anote ideias rápidas, lembretes livres ou rascunhos..." data-spellcheck="true"></textarea>
           </section>
 
           <!-- DICAS ESSENCIAIS (SEM NUMERAÇÃO, OCULTÁVEL) -->
@@ -2027,6 +2023,7 @@
               <span class="section-sub" id="boardRoleIndicator"></span>
             </div>
 
+            <!-- INFORMAÇÕES DO QUADRO COM COR E CAPA -->
             <div id="boardEditPanel" class="subpanel hidden" style="margin-top:14px;margin-bottom:0;">
               <h3 style="margin:0 0 10px;font-size:0.95rem;">Informações do quadro</h3>
               <div class="two-col-grid">
@@ -2037,6 +2034,20 @@
                 <div class="form-row">
                   <label for="editBoardDescInput">Descrição</label>
                   <input id="editBoardDescInput" type="text" data-spellcheck="true" />
+                </div>
+              </div>
+              <div class="two-col-grid">
+                <div class="form-row">
+                  <label for="editBoardColorInput">Cor do quadro</label>
+                  <div style="display:flex;gap:8px;align-items:center;">
+                    <input id="editBoardColorInput" type="color" value="#111111" style="width:48px;height:36px;padding:2px;" />
+                    <span class="section-sub" id="editBoardColorHex">#111111</span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <label for="editBoardCoverInput">Capa do quadro (imagem)</label>
+                  <input id="editBoardCoverInput" type="file" accept="image/*" />
+                  <div class="cover-preview-box" id="boardCoverPreviewBox">Nenhuma capa selecionada.</div>
                 </div>
               </div>
               <div style="display:flex;gap:8px;justify-content:flex-end;">
@@ -2211,26 +2222,26 @@
         <input id="taskTitle" required placeholder="Título da tarefa" data-spellcheck="true" />
       </div>
 
-      <div class="two-col-grid">
-        <div class="form-row">
-          <label for="taskActivityType">Tipo de atividade</label>
-          <input id="taskActivityType" type="text" placeholder="Ex.: Estudo, Imprensa, Reunião" data-spellcheck="true" />
-        </div>
-
-        <div class="form-row">
-          <label for="taskDesc">Descrição</label>
-          <input id="taskDesc" type="text" placeholder="Detalhes da atividade..." data-spellcheck="true" />
-        </div>
+      <div class="form-row">
+        <label for="taskDesc">Descrição</label>
+        <textarea id="taskDesc" class="auto-grow-textarea" rows="2" placeholder="Escreva os detalhes da tarefa..." data-spellcheck="true"></textarea>
       </div>
 
+      <!-- ETIQUETAS EM LISTA SUSPENSA: ESCREVER, MUDAR COR E EXCLUIR -->
       <div class="form-row">
-        <label>Etiquetas selecionáveis</label>
-        <div class="label-options-row" id="selectableTagsRow">
-          <button type="button" class="selectable-tag-btn" data-tag-option="Urgente">Urgente</button>
-          <button type="button" class="selectable-tag-btn" data-tag-option="Foco">Foco</button>
-          <button type="button" class="selectable-tag-btn" data-tag-option="Revisão">Revisão</button>
-          <button type="button" class="selectable-tag-btn" data-tag-option="Entrega">Entrega</button>
-          <button type="button" class="selectable-tag-btn" data-tag-option="Planejamento">Planejamento</button>
+        <label for="toggleLabelDropdownBtn">Etiquetas</label>
+        <button type="button" id="toggleLabelDropdownBtn" style="text-align:left;display:flex;justify-content:space-between;align-items:center;">
+          <span>Gerenciar etiquetas do card</span>
+          <span>▾</span>
+        </button>
+
+        <div id="labelDropdownPanel" class="subpanel hidden" style="margin:4px 0 0;padding:10px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            <input id="newLabelNameInput" type="text" placeholder="Escreva a etiqueta..." style="flex:1;min-width:140px;padding:6px 8px;" data-spellcheck="true" />
+            <input id="newLabelColorInput" type="color" value="#2563EB" title="Cor da etiqueta" style="width:42px;height:34px;padding:2px;" />
+            <button type="button" class="primary" style="padding:6px 10px;font-size:0.78rem;" id="addLabelItemBtn">Adicionar</button>
+          </div>
+          <div class="label-manager-list" id="modalLabelsList"></div>
         </div>
       </div>
 
@@ -2273,29 +2284,16 @@
         <label for="taskCoverType">Capa do card</label>
         <select id="taskCoverType">
           <option value="none">Sem capa</option>
-          <option value="color">Faixa de destaque (opções de cores)</option>
+          <option value="color">Faixa de destaque (palheta de cores)</option>
           <option value="image">Upload de imagem</option>
         </select>
       </div>
 
       <div id="coverColorRow" class="form-row hidden">
-        <label>Opções de cores da faixa de destaque</label>
-        <div class="color-strip-options" id="colorStripOptions">
-          <button type="button" class="color-choice-btn selected" data-cover-color="#111111">
-            <span class="color-dot-preview" style="background:#111111;"></span> Preto
-          </button>
-          <button type="button" class="color-choice-btn" data-cover-color="#2563EB">
-            <span class="color-dot-preview" style="background:#2563EB;"></span> Azul
-          </button>
-          <button type="button" class="color-choice-btn" data-cover-color="#16A34A">
-            <span class="color-dot-preview" style="background:#16A34A;"></span> Verde
-          </button>
-          <button type="button" class="color-choice-btn" data-cover-color="#EAB308">
-            <span class="color-dot-preview" style="background:#EAB308;"></span> Amarelo
-          </button>
-          <button type="button" class="color-choice-btn" data-cover-color="#DC2626">
-            <span class="color-dot-preview" style="background:#DC2626;"></span> Vermelho
-          </button>
+        <label for="taskCoverPaletteInput">Gerador de palheta de cores da faixa de destaque</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="taskCoverPaletteInput" type="color" value="#111111" style="width:52px;height:38px;padding:2px;" />
+          <span class="section-sub" id="taskCoverPaletteHex">#111111</span>
         </div>
       </div>
 
@@ -2329,7 +2327,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v14";
+    const DB_KEY = "em_dia_workspace_v15";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const CONTACT_EMAIL = "maysavieiradearaujo@gmail.com";
@@ -2380,7 +2378,9 @@
       essenciais: "essenciais",
       acontecer: "acontecer",
       confie: "confie",
-      processo: "processo"
+      processo: "processo",
+      etiqueta: "etiqueta",
+      etiquetas: "etiquetas"
     };
 
     function renderDeveloperPortraitSvg() {
@@ -2509,6 +2509,7 @@
             name: "Quadro Principal",
             desc: "Organização diária de tarefas e prazos.",
             color: "#111111",
+            coverImage: "",
             members: [
               { id: "m1", name: "Maysa Araújo", handle: "maysa_01!@#", email: "maysa@emdia.app", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
               { id: "m2", name: "Rafael Costa", handle: "rafael_02!", email: "rafael@emdia.app", role: "Membro", avatarUrl: "" },
@@ -2518,9 +2519,8 @@
               {
                 id: "t1",
                 title: "Revisar cronograma semanal",
-                activityType: "Planejamento",
                 desc: "Conferir prioridades e datas de entrega.",
-                tags: ["Urgente", "Planejamento"],
+                tags: [{ id: "l1", name: "Urgente", color: "#DC2626" }],
                 priority: "alta",
                 dueDate: addDaysIso(-1),
                 durationDays: 3,
@@ -2537,9 +2537,8 @@
               {
                 id: "t2",
                 title: "Preparar pauta de imprensa",
-                activityType: "Comunicação",
                 desc: "Ajustar cronograma e tabela de entregas.",
-                tags: ["Foco", "Entrega"],
+                tags: [{ id: "l2", name: "Foco", color: "#2563EB" }],
                 priority: "media",
                 dueDate: addDaysIso(2),
                 durationDays: 4,
@@ -2554,9 +2553,8 @@
               {
                 id: "t3",
                 title: "Confirmar checklist de hoje",
-                activityType: "Rotina",
                 desc: "Validar entregas do dia.",
-                tags: ["Revisão"],
+                tags: [{ id: "l3", name: "Revisão", color: "#16A34A" }],
                 priority: "baixa",
                 dueDate: today,
                 durationDays: 2,
@@ -2572,6 +2570,20 @@
           }
         ]
       };
+    }
+
+    function normalizeTaskTags(rawTags) {
+      if (!Array.isArray(rawTags)) return [];
+      return rawTags.map((item, idx) => {
+        if (typeof item === "string") {
+          return { id: "l_" + idx + "_" + Date.now(), name: item, color: "#2563EB" };
+        }
+        return {
+          id: item.id || ("l_" + idx + "_" + Date.now()),
+          name: String(item.name || "Etiqueta"),
+          color: /^#[0-9A-Fa-f]{6}$/.test(item.color || "") ? item.color : "#2563EB"
+        };
+      });
     }
 
     function loadState() {
@@ -2596,10 +2608,11 @@
           boards: Array.isArray(parsed.boards) && parsed.boards.length
             ? parsed.boards.slice(0, MAX_BOARDS).map((b) => ({
                 ...b,
+                color: /^#[0-9A-Fa-f]{6}$/.test(b.color || "") ? b.color : "#111111",
+                coverImage: b.coverImage || "",
                 tasks: (b.tasks || []).map((t) => ({
                   ...t,
-                  tags: Array.isArray(t.tags) ? t.tags : [],
-                  activityType: t.activityType || "",
+                  tags: normalizeTaskTags(t.tags),
                   comments: Array.isArray(t.comments)
                     ? t.comments.map((c) => ({
                         ...c,
@@ -2619,7 +2632,8 @@
     let editingTaskId = null;
     let tempCoverImageData = "";
     let tempCoverColor = "#111111";
-    let tempSelectedTags = [];
+    let tempBoardCoverImage = "";
+    let tempModalTags = [];
     let tempModalComments = [];
     let tempAttachmentObj = null;
     let tempUserAvatar = "";
@@ -2930,7 +2944,11 @@
       updateAuthVisibility();
     });
 
-    /* NAVEGAÇÃO ENTRE HOME E PÁGINA DO QUADRO */
+    /* NAVEGAÇÃO ENTRE HOME, QUADRO E PÁGINA PRÓPRIA DE CONFIGURAÇÃO */
+    let returnScreenFromSettings = "home";
+    const accountSections = ["profile", "security", "notifications", "customization"];
+    let activeAccountSection = "profile";
+
     function goHome() {
       state.screen = "home";
       state.selectedTableTaskId = null;
@@ -2968,39 +2986,35 @@
       }
     }
 
-    document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
-    document.getElementById("backFromBoardBtn").addEventListener("click", goHome);
-
-    /* MENU DE ÍCONES DA CONTA PERTO DE SAIR (NÃO FIXO NO ZOOM) */
-    const accountDrawerEl = document.getElementById("accountDrawerPanel");
-    const accountSections = ["profile", "security", "notifications", "customization"];
-    let activeAccountSection = "profile";
-
-    function openAccountSection(secName) {
-      const sameSection = !accountDrawerEl.classList.contains("hidden") && activeAccountSection === secName;
-      if (sameSection) {
-        accountDrawerEl.classList.add("hidden");
-        document.querySelectorAll(".header-icon-btn").forEach((b) => b.classList.remove("active"));
-        return;
+    function openSettingsPage(secName = "profile") {
+      if (state.screen !== "settings") {
+        returnScreenFromSettings = state.screen;
       }
+      state.screen = "settings";
       activeAccountSection = secName;
-      accountDrawerEl.classList.remove("hidden");
-      document.querySelectorAll(".header-icon-btn").forEach((b) => {
-        b.classList.toggle("active", b.dataset.accountMenu === secName);
-      });
       accountSections.forEach((sec) => {
         document.getElementById(`subsec-${sec}`).classList.toggle("hidden", sec !== secName);
       });
-      syncSettingsInputs();
+      document.querySelectorAll("[data-account-menu]").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.accountMenu === secName);
+      });
+      document.getElementById("openSettingsPageBtn").classList.add("active");
+      saveState();
+      renderAll();
     }
 
-    document.querySelectorAll(".header-icon-btn[data-account-menu]").forEach((btn) => {
-      btn.addEventListener("click", () => openAccountSection(btn.dataset.accountMenu));
+    document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
+    document.getElementById("backFromBoardBtn").addEventListener("click", goHome);
+    document.getElementById("openSettingsPageBtn").addEventListener("click", () => openSettingsPage(activeAccountSection));
+    document.getElementById("backFromSettingsPageBtn").addEventListener("click", () => {
+      state.screen = returnScreenFromSettings === "board" ? "board" : "home";
+      document.getElementById("openSettingsPageBtn").classList.remove("active");
+      saveState();
+      renderAll();
     });
 
-    document.getElementById("closeAccountDrawerBtn").addEventListener("click", () => {
-      accountDrawerEl.classList.add("hidden");
-      document.querySelectorAll(".header-icon-btn").forEach((b) => b.classList.remove("active"));
+    document.querySelectorAll("[data-account-menu]").forEach((btn) => {
+      btn.addEventListener("click", () => openSettingsPage(btn.dataset.accountMenu));
     });
 
     const moodSelectEl = document.getElementById("moodSelect");
@@ -3335,6 +3349,7 @@
         name,
         desc,
         color: "#111111",
+        coverImage: "",
         members: [
           {
             id: "m_" + Date.now(),
@@ -3356,19 +3371,26 @@
     function renderBoardsList() {
       document.getElementById("boardsLimitText").textContent = `${state.boards.length} / ${MAX_BOARDS} quadros`;
       document.getElementById("boardsList").innerHTML = state.boards
-        .map((b) => `
-          <div class="board-tile" data-open-board="${b.id}">
-            <div class="board-strip"></div>
-            <div class="board-tile-body">
-              <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
-              <p class="board-tile-desc">${escapeHtml(b.desc || "Clique para abrir")}</p>
-              <div class="board-tile-foot">
-                <span>${(b.members || []).length} membro(s)</span>
-                <span style="font-weight:700;">Abrir →</span>
+        .map((b) => {
+          const bColor = /^#[0-9A-Fa-f]{6}$/.test(b.color || "") ? b.color : "#111111";
+          const coverHtml = b.coverImage
+            ? `<img src="${b.coverImage}" alt="${escapeHtml(b.name)}" class="board-cover-img" />`
+            : "";
+          return `
+            <div class="board-tile" data-open-board="${b.id}">
+              <div class="board-strip" style="background:${bColor};"></div>
+              ${coverHtml}
+              <div class="board-tile-body">
+                <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
+                <p class="board-tile-desc">${escapeHtml(b.desc || "Clique para abrir")}</p>
+                <div class="board-tile-foot">
+                  <span>${(b.members || []).length} membro(s)</span>
+                  <span style="font-weight:700;">Abrir →</span>
+                </div>
               </div>
             </div>
-          </div>
-        `)
+          `;
+        })
         .join("");
     }
 
@@ -3407,7 +3429,7 @@
       document.getElementById("tenhaEmMenteContext").textContent = context;
     }
 
-    /* DASHBOARD: GRÁFICO DE PIZZA PARA PRIORIDADES (CORES VARIADAS) + GRÁFICO DE BARRAS PARA STATUS (VERDE, AMARELO, VERMELHO, AZUL) */
+    /* DASHBOARD: GRÁFICO DE PIZZA PARA PRIORIDADES + GRÁFICO DE BARRAS PARA STATUS */
     const insightsContentEl = document.getElementById("insightsContent");
     const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
 
@@ -3424,8 +3446,7 @@
         const matchText =
           !term ||
           t.title.toLowerCase().includes(term) ||
-          (t.desc && t.desc.toLowerCase().includes(term)) ||
-          (t.activityType && t.activityType.toLowerCase().includes(term));
+          (t.desc && t.desc.toLowerCase().includes(term));
         const matchPrio = prio === "todas" || t.priority === prio;
         return matchText && matchPrio;
       });
@@ -3568,9 +3589,33 @@
         renderBarChartCard("Status (Gráfico de Barras)", statusSegments, total);
     }
 
-    /* INFORMAÇÕES DO QUADRO & GERENCIAR MEMBROS */
+    /* INFORMAÇÕES DO QUADRO (NOME, DESCRIÇÃO, COR E CAPA) & GERENCIAR MEMBROS */
     const boardEditPanelEl = document.getElementById("boardEditPanel");
     const permissionsPanelEl = document.getElementById("permissionsPanel");
+    const editBoardColorInputEl = document.getElementById("editBoardColorInput");
+    const editBoardColorHexEl = document.getElementById("editBoardColorHex");
+    const boardCoverPreviewBoxEl = document.getElementById("boardCoverPreviewBox");
+
+    function renderBoardCoverPreview() {
+      boardCoverPreviewBoxEl.innerHTML = tempBoardCoverImage
+        ? `Capa selecionada:<img src="${tempBoardCoverImage}" class="cover-preview-img" alt="Capa do quadro" />`
+        : "Nenhuma capa selecionada.";
+    }
+
+    editBoardColorInputEl.addEventListener("input", () => {
+      editBoardColorHexEl.textContent = editBoardColorInputEl.value.toUpperCase();
+    });
+
+    document.getElementById("editBoardCoverInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        tempBoardCoverImage = String(reader.result || "");
+        renderBoardCoverPreview();
+      };
+      reader.readAsDataURL(file);
+    });
 
     document.getElementById("toggleBoardEditBtn").addEventListener("click", () => {
       const board = getActiveBoard();
@@ -3582,6 +3627,12 @@
       boardEditPanelEl.classList.toggle("hidden");
       document.getElementById("editBoardNameInput").value = board.name;
       document.getElementById("editBoardDescInput").value = board.desc || "";
+      const colorHex = /^#[0-9A-Fa-f]{6}$/.test(board.color || "") ? board.color : "#111111";
+      editBoardColorInputEl.value = colorHex;
+      editBoardColorHexEl.textContent = colorHex.toUpperCase();
+      tempBoardCoverImage = board.coverImage || "";
+      document.getElementById("editBoardCoverInput").value = "";
+      renderBoardCoverPreview();
     });
 
     document.getElementById("closeBoardEditBtn").addEventListener("click", () => {
@@ -3595,6 +3646,8 @@
       if (!name) return;
       board.name = name;
       board.desc = document.getElementById("editBoardDescInput").value.trim();
+      board.color = editBoardColorInputEl.value;
+      board.coverImage = tempBoardCoverImage;
       saveState();
       boardEditPanelEl.classList.add("hidden");
       renderAll();
@@ -3740,25 +3793,6 @@
       return "";
     }
 
-    function renderCardCommentsBoxHtml(task) {
-      const comments = Array.isArray(task.comments) ? task.comments : [];
-      if (!comments.length) {
-        return `<div class="comments-box"><span class="section-sub">Sem comentários</span></div>`;
-      }
-      return `
-        <div class="comments-box">
-          <div class="comments-list">
-            ${comments.map((c) => `
-              <div class="comment-entry">
-                <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${escapeHtml(c.text)}</div>
-                <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
-              </div>
-            `).join("")}
-          </div>
-        </div>
-      `;
-    }
-
     function renderActiveView() {
       const board = getActiveBoard();
       const filtered = getFilteredBoardTasks(board);
@@ -3776,6 +3810,7 @@
       else renderGantt(board, filtered);
     }
 
+    /* NO KANBAN, O CARD NÃO MOSTRA COMENTÁRIOS NA LISTA */
     function renderKanban(board, filtered, canEdit) {
       const boardEl = document.getElementById("viewKanban");
       boardEl.innerHTML = "";
@@ -3843,11 +3878,8 @@
                     </span>
                   ` : `<span class="section-sub">Sem responsável</span>`}
                 </div>
-                <div class="card-inline-side">
-                  <div class="move-btns">
-                    <button data-edit="${task.id}">Abrir</button>
-                  </div>
-                  ${renderCardCommentsBoxHtml(task)}
+                <div class="card-footer-open">
+                  <button data-edit="${task.id}">Abrir</button>
                 </div>
               </div>
             `;
@@ -4252,44 +4284,83 @@
     /* MODAL DE TAREFA (ABRIR / EDITAR) */
     const taskDialogEl = document.getElementById("taskDialog");
     const taskFormEl = document.getElementById("taskForm");
+    const taskDescEl = document.getElementById("taskDesc");
     const taskDueDateEl = document.getElementById("taskDueDate");
     const taskAssigneeEl = document.getElementById("taskAssignee");
     const taskCoverTypeEl = document.getElementById("taskCoverType");
+    const taskCoverPaletteInputEl = document.getElementById("taskCoverPaletteInput");
+    const taskCoverPaletteHexEl = document.getElementById("taskCoverPaletteHex");
     const coverColorRowEl = document.getElementById("coverColorRow");
     const coverImageRowEl = document.getElementById("coverImageRow");
     const coverImagePreviewBoxEl = document.getElementById("coverImagePreviewBox");
     const modalCommentsListEl = document.getElementById("modalCommentsList");
+    const modalLabelsListEl = document.getElementById("modalLabelsList");
 
-    function renderSelectableTagsButtons() {
-      document.querySelectorAll("#selectableTagsRow .selectable-tag-btn").forEach((btn) => {
-        const tag = btn.dataset.tagOption;
-        btn.classList.toggle("selected", tempSelectedTags.includes(tag));
-      });
+    function autoResizeDescTextarea() {
+      taskDescEl.style.height = "auto";
+      taskDescEl.style.height = `${Math.max(58, taskDescEl.scrollHeight)}px`;
     }
 
-    document.getElementById("selectableTagsRow").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-tag-option]");
-      if (!btn) return;
-      const tag = btn.dataset.tagOption;
-      if (tempSelectedTags.includes(tag)) {
-        tempSelectedTags = tempSelectedTags.filter((t) => t !== tag);
-      } else {
-        tempSelectedTags.push(tag);
-      }
-      renderSelectableTagsButtons();
+    taskDescEl.addEventListener("input", autoResizeDescTextarea);
+
+    document.getElementById("toggleLabelDropdownBtn").addEventListener("click", () => {
+      document.getElementById("labelDropdownPanel").classList.toggle("hidden");
     });
 
-    function renderColorStripButtons() {
-      document.querySelectorAll("#colorStripOptions .color-choice-btn").forEach((btn) => {
-        btn.classList.toggle("selected", btn.dataset.coverColor === tempCoverColor);
-      });
+    function renderModalLabelsManager() {
+      if (!tempModalTags.length) {
+        modalLabelsListEl.innerHTML = `<div class="section-sub">Nenhuma etiqueta adicionada.</div>`;
+        return;
+      }
+      modalLabelsListEl.innerHTML = tempModalTags
+        .map((tag) => `
+          <div class="label-item-row" data-label-row="${tag.id}">
+            <span class="label-chip-pill" style="background:${escapeHtml(tag.color)};">${escapeHtml(tag.name)}</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <input type="color" value="${escapeHtml(tag.color)}" data-change-label-color="${tag.id}" title="Alterar cor da etiqueta" style="width:34px;height:28px;padding:1px;" />
+              <button type="button" class="danger" data-delete-label="${tag.id}">Excluir</button>
+            </div>
+          </div>
+        `)
+        .join("");
     }
 
-    document.getElementById("colorStripOptions").addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-cover-color]");
-      if (!btn) return;
-      tempCoverColor = btn.dataset.coverColor;
-      renderColorStripButtons();
+    document.getElementById("addLabelItemBtn").addEventListener("click", () => {
+      const nameInput = document.getElementById("newLabelNameInput");
+      const colorInput = document.getElementById("newLabelColorInput");
+      const labelName = nameInput.value.trim();
+      if (!labelName) return;
+
+      tempModalTags.push({
+        id: "l_" + Date.now() + "_" + Math.floor(Math.random() * 100),
+        name: labelName,
+        color: colorInput.value || "#2563EB"
+      });
+      nameInput.value = "";
+      renderModalLabelsManager();
+    });
+
+    modalLabelsListEl.addEventListener("input", (e) => {
+      const labelId = e.target.dataset.changeLabelColor;
+      if (!labelId) return;
+      const found = tempModalTags.find((t) => t.id === labelId);
+      if (found) {
+        found.color = e.target.value;
+        renderModalLabelsManager();
+      }
+    });
+
+    modalLabelsListEl.addEventListener("click", (e) => {
+      const delBtn = e.target.closest("[data-delete-label]");
+      if (!delBtn) return;
+      const labelId = delBtn.dataset.deleteLabel;
+      tempModalTags = tempModalTags.filter((t) => t.id !== labelId);
+      renderModalLabelsManager();
+    });
+
+    taskCoverPaletteInputEl.addEventListener("input", () => {
+      tempCoverColor = taskCoverPaletteInputEl.value;
+      taskCoverPaletteHexEl.textContent = tempCoverColor.toUpperCase();
     });
 
     function renderModalCommentsList() {
@@ -4423,10 +4494,13 @@
       editingTaskId = task ? task.id : null;
       document.getElementById("dialogTitle").textContent = task ? "Abrir tarefa" : "Nova tarefa";
       document.getElementById("taskTitle").value = task ? task.title : "";
-      document.getElementById("taskActivityType").value = task ? (task.activityType || "") : "";
-      document.getElementById("taskDesc").value = task ? task.desc || "" : "";
-      tempSelectedTags = task && Array.isArray(task.tags) ? [...task.tags] : [];
-      renderSelectableTagsButtons();
+      taskDescEl.value = task ? task.desc || "" : "";
+      autoResizeDescTextarea();
+
+      tempModalTags = task ? normalizeTaskTags(task.tags) : [];
+      document.getElementById("labelDropdownPanel").classList.add("hidden");
+      document.getElementById("newLabelNameInput").value = "";
+      renderModalLabelsManager();
 
       document.getElementById("taskPriority").value = task ? task.priority : "media";
       document.getElementById("taskCol").value = task ? task.col : "todo";
@@ -4438,8 +4512,9 @@
       taskAssigneeEl.value = task?.assigneeId || board.members?.[0]?.id || "";
 
       taskCoverTypeEl.value = task?.coverType || "none";
-      tempCoverColor = task?.coverColor || "#111111";
-      renderColorStripButtons();
+      tempCoverColor = /^#[0-9A-Fa-f]{6}$/.test(task?.coverColor || "") ? task.coverColor : "#111111";
+      taskCoverPaletteInputEl.value = tempCoverColor;
+      taskCoverPaletteHexEl.textContent = tempCoverColor.toUpperCase();
       tempCoverImageData = task?.coverImage || "";
       document.getElementById("taskCoverFile").value = "";
 
@@ -4457,6 +4532,7 @@
       updateCoverInputsVisibility();
       updateAttachmentHint();
       taskDialogEl.showModal();
+      setTimeout(autoResizeDescTextarea, 10);
     }
 
     document.getElementById("openNewTaskBtn").addEventListener("click", () => openTaskModal());
@@ -4481,9 +4557,8 @@
 
       const payload = {
         title,
-        activityType: document.getElementById("taskActivityType").value.trim(),
-        desc: document.getElementById("taskDesc").value.trim(),
-        tags: [...tempSelectedTags],
+        desc: taskDescEl.value.trim(),
+        tags: [...tempModalTags],
         priority: document.getElementById("taskPriority").value,
         col: document.getElementById("taskCol").value,
         dueDate: taskDueDateEl.value,
@@ -4592,8 +4667,8 @@
         return "No Dashboard, o gráfico de barras exibe o status com verde para tarefas concluídas, amarelo para tarefas em andamento, vermelho para atrasados e azul para tarefas pendentes, enquanto o gráfico de pizza mostra as prioridades com cores variadas.";
       }
 
-      if (lower.includes("calendário") || lower.includes("bloco de notas") || lower.includes("dicas") || lower.includes("relógio") || lower.includes("usuário") || lower.includes("dispositivo")) {
-        return "O Em Dia reúne calendário colorido por status, lembretes clicáveis, Meus Quadros, Bloco de Notas separado, Dicas Essenciais (modelos de organização e saúde nos estudos e trabalho), relógio digital minimalista, nome de usuário de até 12 caracteres com números e símbolos, dispositivos conectados e perfil Público ou Privado.";
+      if (lower.includes("etiqueta") || lower.includes("descrição") || lower.includes("quadro") || lower.includes("bloco de notas") || lower.includes("configura")) {
+        return "Na página inicial, Meus Quadros e Bloco de Notas ficam lado a lado separados por uma reta vertical. Ao abrir um card, a descrição cresce automaticamente conforme o texto e as etiquetas ficam em lista suspensa com opção de escrever, mudar cor e excluir. Nas informações do quadro você escolhe cor e capa, e a engrenagem abre a configuração em página própria.";
       }
 
       if (lower.includes("contato") || lower.includes("email") || lower.includes("e-mail")) {
@@ -4630,6 +4705,7 @@
       applyThemeAndAccent();
       const board = getActiveBoard();
       const myRole = getCurrentUserRole(board);
+      const isSettingsPage = state.screen === "settings";
       const isBoardPage = state.screen === "board";
 
       const handleLabel = state.user.username ? ` • @${state.user.username}` : "";
@@ -4646,10 +4722,12 @@
 
       syncSettingsInputs();
 
-      document.getElementById("homeDashboardView").classList.toggle("hidden", isBoardPage);
-      document.getElementById("boardDetailView").classList.toggle("hidden", !isBoardPage);
+      document.getElementById("settingsPageView").classList.toggle("hidden", !isSettingsPage);
+      document.getElementById("homeDashboardView").classList.toggle("hidden", isSettingsPage || isBoardPage);
+      document.getElementById("boardDetailView").classList.toggle("hidden", isSettingsPage || !isBoardPage);
+      document.getElementById("openSettingsPageBtn").classList.toggle("active", isSettingsPage);
 
-      if (!isBoardPage) {
+      if (!isSettingsPage && !isBoardPage) {
         document.getElementById("greetingMoodSubtitle").textContent =
           `Humor do dia: ${state.user.mood || "😊 Motivado(a)"}`;
         quickNotepadEl.value = state.notepadText || "";
@@ -4657,7 +4735,7 @@
         renderMiniCalendar();
         renderDueSoonReminders();
         renderBoardsList();
-      } else {
+      } else if (!isSettingsPage && isBoardPage) {
         document.getElementById("openNewTaskBtn").disabled = !canEditTasks(board);
         document.getElementById("activeBoardTitle").textContent = board.name;
         document.getElementById("activeBoardDesc").textContent = board.desc || "";
