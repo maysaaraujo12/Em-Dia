@@ -18,10 +18,8 @@
       --mist: #EFEFEF;
       --sand: #CCCCCC;
       --border: #E2E2E2;
-      --danger: #111111;
-      --ok: #111111;
-      --warn: #111111;
       --active-tint: #F2F2F2;
+      --accent-color: #111111;
     }
 
     body.dark-theme {
@@ -138,6 +136,34 @@
 
     button.danger:hover:not(:disabled) {
       background: var(--surface-2);
+    }
+
+    /* CORREÇÃO ORTOGRÁFICA AO DIGITAR */
+    .spellcheck-feedback {
+      margin-top: 5px;
+      padding: 6px 8px;
+      border-radius: 7px;
+      border: 1px dashed var(--text);
+      background: var(--surface-2);
+      font-size: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spell-fix-btn {
+      padding: 2px 7px;
+      font-size: 0.73rem;
+      border-radius: 6px;
+      background: #111111;
+      color: #FFFFFF;
+      border: none;
+    }
+
+    body.dark-theme .spell-fix-btn {
+      background: #FFFFFF;
+      color: #111111;
     }
 
     /* CABEÇALHO EDITORIAL */
@@ -421,7 +447,7 @@
       margin: 12px 0;
     }
 
-    /* ÁREA INTERNA PÓS-LOGIN: MOBILE, TABLET E DESKTOP */
+    /* ÁREA INTERNA PÓS-LOGIN */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -455,7 +481,7 @@
       margin: 0 auto;
       padding: 20px;
       display: grid;
-      grid-template-columns: 275px minmax(0, 1fr);
+      grid-template-columns: 285px minmax(0, 1fr);
       gap: 20px;
       align-items: start;
     }
@@ -613,15 +639,31 @@
     .greeting-banner {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--text);
+      border-left: 4px solid var(--accent-color, var(--text));
       border-radius: 12px;
       padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .minimal-digital-clock {
+      font-variant-numeric: tabular-nums;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
     }
 
     .mindset-banner {
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--text);
+      border-left: 4px solid var(--accent-color, var(--text));
       border-radius: 12px;
       padding: 14px 18px;
       display: flex;
@@ -660,7 +702,7 @@
 
     .cal-reminder-grid {
       display: grid;
-      grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+      grid-template-columns: minmax(250px, 330px) minmax(0, 1fr);
       gap: 16px;
       align-items: start;
     }
@@ -692,7 +734,7 @@
     }
 
     .cal-day {
-      min-height: 32px;
+      min-height: 34px;
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 4px;
@@ -705,8 +747,23 @@
 
     .cal-day.empty-day { background: transparent; border-color: transparent; }
     .cal-day.today-ring { outline: 2px solid var(--text); }
-    .cal-dots { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 2px; }
-    .cal-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; background: var(--text); }
+    .cal-dots { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 2px; }
+    .cal-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+    .cal-status-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .cal-status-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
 
     .reminder-box {
       border: 1px solid var(--border);
@@ -741,6 +798,63 @@
       border-color: var(--text);
       background: var(--active-tint);
       transform: translateY(-1px);
+    }
+
+    .boards-notepad-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.9fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .boards-notepad-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .notepad-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      background: var(--surface-2);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .notepad-box textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .tip-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: var(--surface-2);
+    }
+
+    .tip-card h4 {
+      margin: 0 0 6px;
+      font-size: 0.9rem;
+    }
+
+    .tip-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.45;
     }
 
     .insights-grid {
@@ -824,7 +938,7 @@
 
     .boards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 14px;
     }
 
@@ -844,7 +958,7 @@
       border-color: var(--text);
     }
 
-    .board-strip { height: 6px; width: 100%; background: var(--text); }
+    .board-strip { height: 6px; width: 100%; background: var(--accent-color, var(--text)); }
     .board-tile-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
     .board-tile-title { font-weight: 700; font-size: 0.96rem; margin: 0; }
     .board-tile-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
@@ -879,7 +993,7 @@
 
     .two-col-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
     }
 
@@ -1001,7 +1115,7 @@
       white-space: nowrap;
     }
 
-    /* ÁREA INTERNA DO CARD: FERRAMENTAS À ESQUERDA + COMENTÁRIO AO LADO DENTRO DO CARD */
+    /* ÁREA INTERNA DO CARD: FERRAMENTAS + COMENTÁRIO AO LADO */
     .card-workspace-split {
       display: grid;
       grid-template-columns: minmax(118px, 0.85fr) minmax(145px, 1.15fr);
@@ -1372,7 +1486,7 @@
       font-size: 0.84rem;
     }
 
-    /* ASSISTENTE IA SOL - CANTO INFERIOR DIREITO */
+    /* ASSISTENTE IA SOL - CANTO INFERIOR DIREITO COM ÍCONE DE SOL */
     .sol-widget-root {
       position: fixed;
       right: 20px;
@@ -1385,16 +1499,14 @@
     }
 
     .sol-fab-btn {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       background: #111111;
       color: #FFFFFF;
       border: 1px solid #111111;
       display: grid;
       place-items: center;
-      font-weight: 700;
-      font-size: 0.88rem;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     }
 
@@ -1405,7 +1517,7 @@
     }
 
     .sol-chat-panel {
-      width: 340px;
+      width: 350px;
       max-width: calc(100vw - 32px);
       background: var(--surface);
       border: 1px solid var(--border);
@@ -1512,7 +1624,7 @@
         <section id="inicio" class="hero-editorial">
           <h1>Em Dia. 😊</h1>
           <p>
-            Organização clara e sem ruído para o seu dia a dia. Um espaço minimalista em preto e branco para acompanhar quadros, prazos, lembretes e tarefas com simplicidade.
+            Organização clara e sem ruído para o seu dia a dia. Um espaço minimalista em branco e preto para acompanhar quadros, prazos, lembretes e tarefas com simplicidade.
           </p>
           <div class="hero-actions">
             <button type="button" class="primary" id="heroStartBtn">Começar agora</button>
@@ -1529,7 +1641,7 @@
           <div class="topics-grid">
             <div class="topic-card">
               <h3>O que é o aplicativo</h3>
-              <p>É um gestor de tarefas minimalista que reúne até 10 quadros, calendário colorido, lembretes, dashboard com gráficos e modos de visualização em um só lugar.</p>
+              <p>É um gestor de tarefas minimalista que reúne até 10 quadros, calendário colorido por status, lembretes, bloco de notas, dashboard com gráficos, Dicas Essenciais e modos de visualização em um só lugar.</p>
             </div>
             <div class="topic-card">
               <h3>Para que foi feito</h3>
@@ -1608,7 +1720,7 @@
                   <textarea id="contactMessage" rows="3" required placeholder="Escreva sua mensagem..."></textarea>
                 </div>
                 <button type="submit" class="primary" style="width:100%;">Enviar mensagem</button>
-                <div id="contactFeedback" class="section-sub" style="margin-top:10px;color:var(--ok);"></div>
+                <div id="contactFeedback" class="section-sub" style="margin-top:10px;"></div>
               </form>
             </div>
           </div>
@@ -1736,7 +1848,7 @@
             <span>›</span>
           </button>
           <button type="button" class="nav-btn" data-settings-section="security">
-            <span>Segurança (Senha ou PIN)</span>
+            <span>Segurança</span>
             <span>›</span>
           </button>
           <button type="button" class="nav-btn" data-settings-section="notifications">
@@ -1752,11 +1864,27 @@
         <div id="subsec-profile" class="subpanel" style="margin:6px 0 0;">
           <div class="form-row">
             <label for="profName">Nome</label>
-            <input id="profName" type="text" />
+            <input id="profName" type="text" data-spellcheck="true" />
+          </div>
+          <div class="form-row">
+            <label for="profUsername">Nome do Usuário (até 8 caracteres, números e símbolos)</label>
+            <input id="profUsername" type="text" maxlength="8" placeholder="ex.: maysa_1!" />
+            <span class="section-sub">Podem te adicionar no quadro pelo seu e-mail ou nome do usuário.</span>
           </div>
           <div class="form-row">
             <label for="profEmail">E-mail</label>
             <input id="profEmail" type="email" />
+          </div>
+          <div class="form-row">
+            <label for="profAbout">Sobre</label>
+            <textarea id="profAbout" rows="2" placeholder="Escreva um resumo sobre você..." data-spellcheck="true"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="profVisibility">Visibilidade do perfil</label>
+            <select id="profVisibility">
+              <option value="Público">Público</option>
+              <option value="Privado">Privado</option>
+            </select>
           </div>
           <div class="form-row">
             <label for="profAvatar">Foto da conta</label>
@@ -1773,6 +1901,10 @@
           <div class="form-row">
             <label for="secPin">PIN de acesso (4 a 6 dígitos)</label>
             <input id="secPin" type="password" maxlength="6" placeholder="Ex.: 1234" />
+          </div>
+          <div class="form-row">
+            <label>Dispositivos conectados à conta</label>
+            <div id="connectedDevicesList" style="display:flex;flex-direction:column;gap:6px;"></div>
           </div>
           <button type="button" class="primary" style="width:100%;" id="saveSecurityBtn">Salvar segurança</button>
         </div>
@@ -1797,9 +1929,16 @@
           <div class="form-row">
             <label for="customTheme">Tema</label>
             <select id="customTheme">
-              <option value="light">Preto e Branco Claro</option>
-              <option value="dark">Preto e Branco Escuro</option>
+              <option value="light">Tema Claro</option>
+              <option value="dark">Tema Escuro</option>
             </select>
+          </div>
+          <div class="form-row">
+            <label>Cores de destaque</label>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input id="customColorPicker" type="color" value="#111111" style="width:46px;height:36px;padding:2px;" />
+              <input id="customColorCode" type="text" placeholder="#111111" style="flex:1;min-width:110px;" />
+            </div>
           </div>
           <div class="form-row">
             <label for="customWallpaper">Papel de parede (fundo)</label>
@@ -1813,8 +1952,11 @@
       <main class="main-stack">
         <div id="homeDashboardView" class="main-stack">
           <div class="greeting-banner">
-            <strong style="font-size:1.05rem;">Que bom vê-lo novamente 😊</strong>
-            <div class="section-sub" id="greetingMoodSubtitle"></div>
+            <div>
+              <strong style="font-size:1.05rem;">Que bom vê-lo novamente 😊</strong>
+              <div class="section-sub" id="greetingMoodSubtitle"></div>
+            </div>
+            <div class="minimal-digital-clock" id="minimalDigitalClock" aria-label="Relógio digital minimalista">00:00:00</div>
           </div>
 
           <section class="section-box" aria-label="Calendário e lembretes">
@@ -1828,6 +1970,12 @@
                   </div>
                 </div>
                 <div class="mini-cal-grid" id="miniCalendarGrid"></div>
+                <div class="cal-status-legend">
+                  <span><i class="cal-dot" style="background:#2563EB;"></i> A Fazer</span>
+                  <span><i class="cal-dot" style="background:#D97706;"></i> Em Andamento</span>
+                  <span><i class="cal-dot" style="background:#16A34A;"></i> Concluído</span>
+                  <span><i class="cal-dot" style="background:#DC2626;"></i> Atrasado</span>
+                </div>
               </div>
 
               <div class="reminder-box">
@@ -1838,24 +1986,81 @@
             </div>
           </section>
 
-          <section class="section-box" aria-label="Lista de quadros">
+          <section class="section-box" aria-label="Meus Quadros e Bloco de Notas">
+            <div class="boards-notepad-grid">
+              <div>
+                <div class="section-header">
+                  <div class="section-title-group">
+                    <h2 class="section-title">Meus Quadros</h2>
+                    <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
+                  </div>
+                  <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
+                </div>
+                <div class="boards-grid" id="boardsList"></div>
+              </div>
+
+              <div class="notepad-box" aria-label="Bloco de Notas">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <h2 class="section-title">Bloco de Notas</h2>
+                  <span class="section-sub" id="notepadSavedStatus">Salvo</span>
+                </div>
+                <textarea id="quickNotepadTextarea" placeholder="Anote ideias rápidas, lembretes livres ou rascunhos..." data-spellcheck="true"></textarea>
+                <div style="display:flex;justify-content:flex-end;">
+                  <button type="button" class="primary" style="padding:6px 12px;font-size:0.8rem;" id="saveNotepadBtn">Salvar nota</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-box" aria-label="Dicas Essenciais">
             <div class="section-header">
               <div class="section-title-group">
-                <h2 class="section-title">Meus Quadros</h2>
-                <span class="section-sub" id="boardsLimitText">0 / 10 quadros</span>
+                <h2 class="section-title">Dicas Essenciais</h2>
+                <span class="section-sub">5 modelos de organização e saúde nos estudos e trabalho</span>
               </div>
-              <button type="button" class="primary" id="createBoardBtn">+ Novo quadro</button>
+              <button type="button" id="toggleEssentialTipsBtn">🙈 Ocultar Dicas Essenciais</button>
             </div>
-            <div class="boards-grid" id="boardsList"></div>
+
+            <div id="essentialTipsContent">
+              <div class="tips-grid">
+                <div class="tip-card">
+                  <h4>1. Matriz de Prioridades (Alta / Média / Baixa)</h4>
+                  <p>Classifique cada tarefa pela urgência e impacto antes de iniciar o dia para evitar gastar energia em itens secundários.</p>
+                </div>
+                <div class="tip-card">
+                  <h4>2. Blocos de Tempo (Timeboxing)</h4>
+                  <p>Reserve janelas fixas de 45 a 60 minutos para foco profundo, protegendo o horário de interrupções constantes.</p>
+                </div>
+                <div class="tip-card">
+                  <h4>3. Regra dos 3 Focos Diários</h4>
+                  <p>Escolha até 3 entregas essenciais por dia; concluir o núcleo principal gera clareza e sensação real de avanço.</p>
+                </div>
+                <div class="tip-card">
+                  <h4>4. Revisão Semanal de Prazo</h4>
+                  <p>Reserve 15 minutos no fim da semana para atualizar status, reprogramar datas e alinhar prioridades do próximo ciclo.</p>
+                </div>
+                <div class="tip-card">
+                  <h4>5. Divisão em Etapas Curtas</h4>
+                  <p>Quebre tarefas grandes em passos de até 25 minutos para reduzir a procrastinação e facilitar o início.</p>
+                </div>
+                <div class="tip-card">
+                  <h4>Saúde nos Estudos e Trabalho</h4>
+                  <p>Faça pausas a cada 50 minutos, aplique a regra 20-20-20 para os olhos, mantenha hidratação, boa postura e sono regular.</p>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
 
         <div id="boardDetailView" class="main-stack hidden">
           <section class="section-box" aria-label="Cabeçalho do quadro">
             <div class="board-toolbar">
-              <div>
-                <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
-                <span class="section-sub" id="activeBoardDesc"></span>
+              <div class="section-title-group">
+                <button type="button" id="backFromBoardBtn">← Voltar</button>
+                <div>
+                  <h2 class="section-title" id="activeBoardTitle">Quadro</h2>
+                  <span class="section-sub" id="activeBoardDesc"></span>
+                </div>
               </div>
 
               <div class="controls">
@@ -1898,11 +2103,11 @@
               <div class="two-col-grid">
                 <div class="form-row">
                   <label for="editBoardNameInput">Nome do quadro</label>
-                  <input id="editBoardNameInput" type="text" />
+                  <input id="editBoardNameInput" type="text" data-spellcheck="true" />
                 </div>
                 <div class="form-row">
                   <label for="editBoardDescInput">Descrição</label>
-                  <input id="editBoardDescInput" type="text" />
+                  <input id="editBoardDescInput" type="text" data-spellcheck="true" />
                 </div>
               </div>
               <div style="display:flex;gap:8px;justify-content:flex-end;">
@@ -1914,13 +2119,13 @@
             <div id="permissionsPanel" class="subpanel hidden" style="margin-top:14px;margin-bottom:0;">
               <h3 style="margin:0 0 6px;font-size:0.95rem;">Gerenciar membros e permissões</h3>
               <p class="section-sub" style="margin:0 0 12px;">
-                Perfis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>.
+                Perfis: <strong>Administrador</strong>, <strong>Membro</strong> e <strong>Analista</strong>. Adicione por nome, nome de usuário (até 8 caracteres) ou e-mail.
               </p>
 
               <div class="two-col-grid" style="margin-bottom:10px;">
                 <div class="form-row" style="margin-bottom:0;">
-                  <label for="newMemberName">Nome do membro</label>
-                  <input id="newMemberName" type="text" placeholder="Nome do membro" />
+                  <label for="newMemberName">Nome, @usuário ou e-mail</label>
+                  <input id="newMemberName" type="text" placeholder="Ex.: maysa_1! ou email@exemplo.com" />
                 </div>
                 <div class="form-row" style="margin-bottom:0;">
                   <label for="newMemberRole">Permissão</label>
@@ -1989,25 +2194,48 @@
     </div>
   </div>
 
-  <!-- ASSISTENTE IA SOL - CANTO INFERIOR DIREITO -->
+  <!-- ASSISTENTE IA SOL - CANTO INFERIOR DIREITO COM ÍCONE DE SOL -->
   <div class="sol-widget-root" id="solWidgetRoot">
     <div class="sol-chat-panel hidden" id="solChatPanel" role="dialog" aria-label="Assistente Sol">
       <div class="sol-chat-header">
-        <div>
-          <strong style="font-size:0.9rem;">Sol • Assistente IA</strong>
-          <div style="font-size:0.72rem;opacity:0.8;">Em Dia</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+          <div>
+            <strong style="font-size:0.9rem;">Sol • Assistente IA</strong>
+            <div style="font-size:0.72rem;opacity:0.8;">Em Dia</div>
+          </div>
         </div>
         <button type="button" id="closeSolChatBtn" style="padding:3px 8px;font-size:0.76rem;background:transparent;color:inherit;border-color:currentColor;">✕</button>
       </div>
       <div class="sol-chat-messages" id="solChatMessages"></div>
       <form class="sol-chat-form" id="solChatForm">
-        <input id="solChatInput" type="text" placeholder="Pergunte sobre o Em Dia..." required />
+        <input id="solChatInput" type="text" placeholder="Pergunte para a Sol..." required />
         <button type="submit" class="primary">Enviar</button>
       </form>
     </div>
 
-    <button type="button" class="sol-fab-btn" id="toggleSolChatBtn" aria-label="Conversar com Sol">
-      Sol
+    <button type="button" class="sol-fab-btn" id="toggleSolChatBtn" aria-label="Conversar com a assistente Sol" title="Conversar com Sol">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <path d="M12 2v2.5"></path>
+        <path d="M12 19.5V22"></path>
+        <path d="m4.93 4.93 1.77 1.77"></path>
+        <path d="m17.3 17.3 1.77 1.77"></path>
+        <path d="M2 12h2.5"></path>
+        <path d="M19.5 12H22"></path>
+        <path d="m6.7 17.3-1.77 1.77"></path>
+        <path d="m19.07 4.93-1.77 1.77"></path>
+      </svg>
     </button>
   </div>
 
@@ -2033,11 +2261,11 @@
       <h2 style="margin-top:0;font-size:1.1rem;">Novo quadro</h2>
       <div class="form-row">
         <label for="newBoardNameInput">Nome do quadro *</label>
-        <input id="newBoardNameInput" type="text" required placeholder="Digite o nome do quadro" />
+        <input id="newBoardNameInput" type="text" required placeholder="Digite o nome do quadro" data-spellcheck="true" />
       </div>
       <div class="form-row">
         <label for="newBoardDescInput">Descrição</label>
-        <input id="newBoardDescInput" type="text" placeholder="Objetivo ou contexto do quadro" />
+        <input id="newBoardDescInput" type="text" placeholder="Objetivo ou contexto do quadro" data-spellcheck="true" />
       </div>
       <div class="modal-actions">
         <button type="button" id="cancelCreateBoardBtn">Cancelar</button>
@@ -2053,12 +2281,12 @@
 
       <div class="form-row">
         <label for="taskTitle">Título *</label>
-        <input id="taskTitle" required placeholder="Título da tarefa" />
+        <input id="taskTitle" required placeholder="Título da tarefa" data-spellcheck="true" />
       </div>
 
       <div class="form-row">
         <label for="taskDesc">Descrição</label>
-        <textarea id="taskDesc" rows="2" placeholder="Detalhes..."></textarea>
+        <textarea id="taskDesc" rows="2" placeholder="Detalhes..." data-spellcheck="true"></textarea>
       </div>
 
       <div class="two-col-grid">
@@ -2134,7 +2362,7 @@
   </dialog>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v12";
+    const DB_KEY = "em_dia_workspace_v13";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
     const CONTACT_EMAIL = "maysavieiradearaujo@gmail.com";
@@ -2143,6 +2371,50 @@
       { id: "doing", title: "Em Andamento" },
       { id: "done", title: "Concluído" }
     ];
+
+    const SPELL_SUGGESTIONS = {
+      tafera: "tarefa",
+      taferas: "tarefas",
+      relatorio: "relatório",
+      reuniao: "reunião",
+      reunioes: "reuniões",
+      cronograma: "cronograma",
+      prioridade: "prioridade",
+      prioridades: "prioridades",
+      concluido: "concluído",
+      concluida: "concluída",
+      atrasado: "atrasado",
+      atrasada: "atrasada",
+      organizacao: "organização",
+      organizar: "organizar",
+      lembrete: "lembrete",
+      lembretes: "lembretes",
+      mensagem: "mensagem",
+      mensagens: "mensagens",
+      aplicativo: "aplicativo",
+      pagina: "página",
+      inicial: "inicial",
+      voce: "você",
+      tambem: "também",
+      saude: "saúde",
+      estudos: "estudos",
+      trabalho: "trabalho",
+      usuario: "usuário",
+      seguranca: "segurança",
+      dispositivo: "dispositivo",
+      dispositivos: "dispositivos",
+      publico: "público",
+      privado: "privado",
+      quadro: "quadro",
+      quadros: "quadros",
+      notas: "notas",
+      bloco: "bloco",
+      dicas: "dicas",
+      essenciais: "essenciais",
+      acontecer: "acontecer",
+      confie: "confie",
+      processo: "processo"
+    };
 
     function renderDeveloperPortraitSvg() {
       const svg = `
@@ -2235,7 +2507,10 @@
         screen: "home",
         user: {
           name: "Maysa Araújo",
+          username: "maysa_1!",
           email: "maysa@emdia.app",
+          about: "Criadora do Em Dia e assessora de imprensa no Rio de Janeiro.",
+          visibility: "Público",
           password: "1234",
           pin: "",
           avatarUrl: renderDeveloperPortraitSvg(),
@@ -2245,9 +2520,16 @@
           notifications: { push: true, email: true, desktop: false },
           customization: {
             theme: "light",
+            accentColor: "#111111",
             wallpaper: ""
-          }
+          },
+          connectedDevices: [
+            { id: "dev1", name: "Navegador Web • Desktop (Rio de Janeiro)", lastActive: "Ativo agora" },
+            { id: "dev2", name: "Dispositivo Móvel • Navegador", lastActive: "Hoje" }
+          ]
         },
+        notepadText: "",
+        essentialTipsVisible: true,
         insightsVisible: true,
         calendarOffsetMonths: 0,
         activeBoardId: "b1",
@@ -2261,9 +2543,9 @@
             desc: "Organização diária de tarefas e prazos.",
             color: "#111111",
             members: [
-              { id: "m1", name: "Maysa Araújo", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
-              { id: "m2", name: "Rafael Costa", role: "Membro", avatarUrl: "" },
-              { id: "m3", name: "Ana Paula", role: "Analista", avatarUrl: "" }
+              { id: "m1", name: "Maysa Araújo", handle: "maysa_1!", email: "maysa@emdia.app", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
+              { id: "m2", name: "Rafael Costa", handle: "rafael_2", email: "rafael@emdia.app", role: "Membro", avatarUrl: "" },
+              { id: "m3", name: "Ana Paula", handle: "ana_pa#3", email: "ana@emdia.app", role: "Analista", avatarUrl: "" }
             ],
             tasks: [
               {
@@ -2331,8 +2613,12 @@
           user: {
             ...def.user,
             ...(parsed.user || {}),
+            username: String((parsed.user?.username ?? def.user.username)).slice(0, 8),
             notifications: { ...def.user.notifications, ...(parsed.user?.notifications || {}) },
-            customization: { ...def.user.customization, ...(parsed.user?.customization || {}) }
+            customization: { ...def.user.customization, ...(parsed.user?.customization || {}) },
+            connectedDevices: Array.isArray(parsed.user?.connectedDevices) && parsed.user.connectedDevices.length
+              ? parsed.user.connectedDevices
+              : def.user.connectedDevices
           },
           boards: Array.isArray(parsed.boards) && parsed.boards.length
             ? parsed.boards.slice(0, MAX_BOARDS).map((b) => ({
@@ -2369,8 +2655,12 @@
 
     function applyThemeAndAccent() {
       const theme = state.user.customization?.theme || "light";
+      const accent = /^#[0-9A-Fa-f]{6}$/.test(state.user.customization?.accentColor || "")
+        ? state.user.customization.accentColor
+        : (theme === "dark" ? "#FFFFFF" : "#111111");
       const wallpaper = state.isAuthenticated ? (state.user.customization?.wallpaper || "") : "";
       document.body.classList.toggle("dark-theme", theme === "dark");
+      document.documentElement.style.setProperty("--accent-color", accent);
       document.body.style.backgroundImage = wallpaper ? `url("${wallpaper}")` : "";
     }
 
@@ -2457,6 +2747,69 @@
       }
       return `<span class="${sizeClass}">${escapeHtml(getInitials(name))}</span>`;
     }
+
+    /* RELÓGIO DIGITAL MINIMALISTA */
+    function updateMinimalDigitalClock() {
+      const clockEl = document.getElementById("minimalDigitalClock");
+      if (!clockEl) return;
+      const now = new Date();
+      clockEl.textContent = now.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+    }
+
+    setInterval(updateMinimalDigitalClock, 1000);
+    updateMinimalDigitalClock();
+
+    /* VERIFICAÇÃO ORTOGRÁFICA AO DIGITAR */
+    function checkSpellingAndRender(inputEl) {
+      if (!inputEl || inputEl.dataset.spellcheck !== "true") return;
+      let box = inputEl.parentElement?.querySelector(".spellcheck-feedback");
+      const raw = String(inputEl.value || "");
+      const tokens = raw.match(/[\p{L}]+/gu) || [];
+      const issues = [];
+
+      tokens.forEach((word) => {
+        const lower = word.toLowerCase();
+        if (SPELL_SUGGESTIONS[lower]) {
+          issues.push({ wrong: word, right: SPELL_SUGGESTIONS[lower] });
+        } else if (lower.length >= 4 && !/[aeiouáéíóúâêîôûãõ]/i.test(lower)) {
+          issues.push({ wrong: word, right: lower + "a" });
+        }
+      });
+
+      if (!issues.length) {
+        if (box) box.remove();
+        return;
+      }
+
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "spellcheck-feedback";
+        inputEl.insertAdjacentElement("afterend", box);
+      }
+
+      const first = issues[0];
+      box.innerHTML = `
+        <span>Texto possivelmente errado (<strong>${escapeHtml(first.wrong)}</strong>) → Correção: <strong>${escapeHtml(first.right)}</strong></span>
+        <button type="button" class="spell-fix-btn" data-fix-wrong="${escapeHtml(first.wrong)}" data-fix-right="${escapeHtml(first.right)}">Corrigir</button>
+      `;
+
+      box.querySelector(".spell-fix-btn")?.addEventListener("click", () => {
+        const escapedWrong = first.wrong.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        inputEl.value = inputEl.value.replace(new RegExp(`\\b${escapedWrong}\\b`, "i"), first.right);
+        inputEl.dispatchEvent(new Event("change", { bubbles: true }));
+        checkSpellingAndRender(inputEl);
+      });
+    }
+
+    document.addEventListener("input", (e) => {
+      if (e.target.matches("[data-spellcheck='true']")) {
+        checkSpellingAndRender(e.target);
+      }
+    });
 
     /* FORMULÁRIO DE CONTATO NA PÁGINA INICIAL */
     document.getElementById("contactMessageForm").addEventListener("submit", (e) => {
@@ -2585,6 +2938,8 @@
         board.members.unshift({
           id: "m_" + Date.now(),
           name,
+          handle: state.user.username || "",
+          email,
           role: "Administrador",
           avatarUrl: state.user.avatarUrl || ""
         });
@@ -2642,6 +2997,7 @@
     }
 
     document.getElementById("goHomeBrandBtn").addEventListener("click", goHome);
+    document.getElementById("backFromBoardBtn").addEventListener("click", goHome);
 
     /* MENU LATERAL ESQUERDO */
     const moodSelectEl = document.getElementById("moodSelect");
@@ -2664,17 +3020,65 @@
       });
     });
 
+    function renderConnectedDevices() {
+      const listEl = document.getElementById("connectedDevicesList");
+      const devices = state.user.connectedDevices || [];
+      listEl.innerHTML = devices
+        .map((d) => `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface);font-size:0.78rem;">
+            <div>
+              <strong>${escapeHtml(d.name)}</strong>
+              <div class="section-sub">${escapeHtml(d.lastActive)}</div>
+            </div>
+            ${devices.length > 1 ? `<button type="button" class="danger" data-disconnect-device="${d.id}">Desconectar</button>` : `<span class="section-sub">Atual</span>`}
+          </div>
+        `)
+        .join("");
+    }
+
+    document.getElementById("connectedDevicesList").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-disconnect-device]");
+      if (!btn) return;
+      state.user.connectedDevices = (state.user.connectedDevices || []).filter((d) => d.id !== btn.dataset.disconnectDevice);
+      saveState();
+      renderConnectedDevices();
+    });
+
     function syncSettingsInputs() {
       moodSelectEl.value = state.user.mood || "😊 Motivado(a)";
       document.getElementById("profName").value = state.user.name || "";
+      document.getElementById("profUsername").value = String(state.user.username || "").slice(0, 8);
       document.getElementById("profEmail").value = state.user.email || "";
+      document.getElementById("profAbout").value = state.user.about || "";
+      document.getElementById("profVisibility").value = state.user.visibility || "Público";
       document.getElementById("secPin").value = state.user.pin || "";
       document.getElementById("notifPush").checked = Boolean(state.user.notifications?.push);
       document.getElementById("notifEmail").checked = Boolean(state.user.notifications?.email);
       document.getElementById("notifDesktop").checked = Boolean(state.user.notifications?.desktop);
       document.getElementById("customTheme").value = state.user.customization?.theme || "light";
+      const accent = state.user.customization?.accentColor || "#111111";
+      document.getElementById("customColorPicker").value = /^#[0-9A-Fa-f]{6}$/.test(accent) ? accent : "#111111";
+      document.getElementById("customColorCode").value = accent;
       tempWallpaperData = state.user.customization?.wallpaper || "";
+      renderConnectedDevices();
     }
+
+    document.getElementById("customColorPicker").addEventListener("input", (e) => {
+      document.getElementById("customColorCode").value = e.target.value.toUpperCase();
+    });
+
+    document.getElementById("customColorCode").addEventListener("input", (e) => {
+      const val = e.target.value.trim();
+      if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+        document.getElementById("customColorPicker").value = val;
+      }
+    });
+
+    document.getElementById("profUsername").addEventListener("input", (e) => {
+      if (e.target.value.length > 8) {
+        e.target.value = e.target.value.slice(0, 8);
+      }
+    });
 
     document.getElementById("profAvatar").addEventListener("change", (e) => {
       const file = e.target.files?.[0];
@@ -2688,8 +3092,21 @@
 
     document.getElementById("saveProfileBtn").addEventListener("click", () => {
       state.user.name = document.getElementById("profName").value.trim() || state.user.name;
+      state.user.username = document.getElementById("profUsername").value.trim().slice(0, 8);
       state.user.email = document.getElementById("profEmail").value.trim() || state.user.email;
+      state.user.about = document.getElementById("profAbout").value.trim();
+      state.user.visibility = document.getElementById("profVisibility").value || "Público";
       if (tempUserAvatar) state.user.avatarUrl = tempUserAvatar;
+
+      const board = getActiveBoard();
+      const me = (board.members || []).find((m) => m.id === "m1" || m.name === state.user.name);
+      if (me) {
+        me.name = state.user.name;
+        me.handle = state.user.username;
+        me.email = state.user.email;
+        if (state.user.avatarUrl) me.avatarUrl = state.user.avatarUrl;
+      }
+
       saveState();
       renderAll();
     });
@@ -2732,8 +3149,13 @@
     });
 
     document.getElementById("saveCustomBtn").addEventListener("click", () => {
+      const typedCode = document.getElementById("customColorCode").value.trim();
+      const pickerVal = document.getElementById("customColorPicker").value;
+      const chosenColor = /^#[0-9A-Fa-f]{6}$/.test(typedCode) ? typedCode : pickerVal;
+
       state.user.customization = {
         theme: document.getElementById("customTheme").value || "light",
+        accentColor: chosenColor,
         wallpaper: tempWallpaperData
       };
       applyThemeAndAccent();
@@ -2741,7 +3163,34 @@
       renderAll();
     });
 
-    /* CALENDÁRIO PEQUENO + LEMBRETES CLICÁVEIS */
+    /* BLOCO DE NOTAS & DICAS ESSENCIAIS */
+    const quickNotepadEl = document.getElementById("quickNotepadTextarea");
+    document.getElementById("saveNotepadBtn").addEventListener("click", () => {
+      state.notepadText = quickNotepadEl.value;
+      saveState();
+      document.getElementById("notepadSavedStatus").textContent = "Salvo agora";
+    });
+
+    quickNotepadEl.addEventListener("input", () => {
+      state.notepadText = quickNotepadEl.value;
+      saveState();
+      document.getElementById("notepadSavedStatus").textContent = "Salvo";
+    });
+
+    document.getElementById("toggleEssentialTipsBtn").addEventListener("click", () => {
+      state.essentialTipsVisible = !state.essentialTipsVisible;
+      saveState();
+      renderEssentialTipsVisibility();
+    });
+
+    function renderEssentialTipsVisibility() {
+      const contentEl = document.getElementById("essentialTipsContent");
+      const btnEl = document.getElementById("toggleEssentialTipsBtn");
+      contentEl.classList.toggle("hidden", !state.essentialTipsVisible);
+      btnEl.textContent = state.essentialTipsVisible ? "🙈 Ocultar Dicas Essenciais" : "👁️ Mostrar Dicas Essenciais";
+    }
+
+    /* CALENDÁRIO COLORIDO POR STATUS + LEMBRETES CLICÁVEIS */
     document.getElementById("prevMonthBtn").addEventListener("click", () => {
       state.calendarOffsetMonths -= 1;
       saveState();
@@ -2753,6 +3202,13 @@
       saveState();
       renderMiniCalendar();
     });
+
+    function getStatusColorForTask(task) {
+      if (isTaskOverdue(task)) return "#DC2626";
+      if (task.col === "done") return "#16A34A";
+      if (task.col === "doing") return "#D97706";
+      return "#2563EB";
+    }
 
     function renderMiniCalendar() {
       const base = new Date();
@@ -2769,12 +3225,12 @@
       document.getElementById("calendarMonthLabel").textContent =
         monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
-      const tasksByDate = {};
+      const colorsByDate = {};
       state.boards.forEach((b) => {
         (b.tasks || []).forEach((t) => {
           if (!t.dueDate) return;
-          if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = 0;
-          tasksByDate[t.dueDate] += 1;
+          if (!colorsByDate[t.dueDate]) colorsByDate[t.dueDate] = [];
+          colorsByDate[t.dueDate].push(getStatusColorForTask(t));
         });
       });
 
@@ -2789,14 +3245,14 @@
         const mm = String(month + 1).padStart(2, "0");
         const dd = String(day).padStart(2, "0");
         const iso = `${year}-${mm}-${dd}`;
-        const count = tasksByDate[iso] || 0;
+        const dateColors = colorsByDate[iso] || [];
         const isToday = iso === todayIso;
 
         html += `
           <div class="cal-day ${isToday ? "today-ring" : ""}">
             <span>${day}</span>
             <div class="cal-dots">
-              ${Array.from({ length: Math.min(count, 4) }).map(() => `<span class="cal-dot"></span>`).join("")}
+              ${dateColors.slice(0, 4).map((colHex) => `<span class="cal-dot" style="background:${colHex};"></span>`).join("")}
             </div>
           </div>
         `;
@@ -2890,7 +3346,14 @@
         desc,
         color: "#111111",
         members: [
-          { id: "m_" + Date.now(), name: state.user.name || "Você", role: "Administrador", avatarUrl: state.user.avatarUrl || "" }
+          {
+            id: "m_" + Date.now(),
+            name: state.user.name || "Você",
+            handle: state.user.username || "",
+            email: state.user.email || "",
+            role: "Administrador",
+            avatarUrl: state.user.avatarUrl || ""
+          }
         ],
         tasks: []
       };
@@ -2939,13 +3402,13 @@
         message = "Respire fundo com serenidade: cada passo calmo e bem planejado coloca o seu dia nos trilhos, sem pressa excessiva, apenas com organização e constância.";
         context = `Atrasadas: ${atrasadas} • Concluídas: ${concluidas}`;
       } else if (concluidas > atrasadas) {
-        message = "continue acreditando que é capaz de fazer";
+        message = "Continue acreditando que você é capaz de fazer acontecer.";
         context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
       } else if (emAndamento >= 2 || (emAndamento > 0 && atrasadas === concluidas)) {
-        message = "confie no processo";
+        message = "Confie no processo";
         context = `Em andamento: ${emAndamento}`;
       } else {
-        message = "confie no processo";
+        message = "Confie no processo";
         context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
       }
 
@@ -3158,10 +3621,31 @@
         alert("Apenas Administradores podem adicionar membros.");
         return;
       }
-      const name = document.getElementById("newMemberName").value.trim();
+      const rawInput = document.getElementById("newMemberName").value.trim();
       const role = document.getElementById("newMemberRole").value;
-      if (!name) return;
-      board.members.push({ id: "m_" + Date.now(), name, role, avatarUrl: "" });
+      if (!rawInput) return;
+
+      const normalized = rawInput.replace(/^@/, "").toLowerCase();
+      const isMeByHandleOrEmail =
+        (state.user.username && normalized === state.user.username.toLowerCase()) ||
+        (state.user.email && normalized === state.user.email.toLowerCase());
+
+      const memberName = isMeByHandleOrEmail ? state.user.name : rawInput;
+      const memberHandle = isMeByHandleOrEmail
+        ? state.user.username
+        : (!rawInput.includes("@") ? rawInput.slice(0, 8) : "");
+      const memberEmail = rawInput.includes("@")
+        ? rawInput
+        : (isMeByHandleOrEmail ? state.user.email : "");
+
+      board.members.push({
+        id: "m_" + Date.now(),
+        name: memberName,
+        handle: memberHandle,
+        email: memberEmail,
+        role,
+        avatarUrl: isMeByHandleOrEmail ? (state.user.avatarUrl || "") : ""
+      });
       document.getElementById("newMemberName").value = "";
       saveState();
       renderMembersPanel();
@@ -3177,7 +3661,11 @@
               ${renderAvatarHtml(m.name, m.avatarUrl, "avatar-sm")}
               <div>
                 <div style="font-weight:700;font-size:0.88rem;">${escapeHtml(m.name)}</div>
-                <div class="section-sub">${escapeHtml(m.role)}</div>
+                <div class="section-sub">
+                  ${escapeHtml(m.role)}
+                  ${m.handle ? ` • @${escapeHtml(m.handle)}` : ""}
+                  ${m.email ? ` • ${escapeHtml(m.email)}` : ""}
+                </div>
               </div>
             </div>
             <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
@@ -3293,7 +3781,7 @@
 
             <div class="move-btns">
               ${canEdit && prevCol ? `<button data-move="${task.id}:${prevCol}" title="Mover para coluna anterior">←</button>` : ""}
-              ${canEdit ? `<button data-edit="${task.id}">Abrir</button>` : `<button data-edit="${task.id}">Abrir</button>`}
+              <button data-edit="${task.id}">Abrir</button>
               ${canEdit && nextCol ? `<button data-move="${task.id}:${nextCol}" title="Mover para próxima coluna">→</button>` : ""}
             </div>
           </div>
@@ -3303,7 +3791,7 @@
             <div class="comments-list">${listItems}</div>
             ${canEdit ? `
               <form class="comment-form-inline" data-comment-form="${task.id}">
-                <input type="text" name="commentText" placeholder="Comentar..." required />
+                <input type="text" name="commentText" placeholder="Comentar..." required data-spellcheck="true" />
                 <button type="submit" class="primary">Enviar</button>
               </form>
             ` : ""}
@@ -3469,7 +3957,7 @@
               </div>
               <div class="move-btns">
                 <span class="status-badge">${columnLabel(task.col)}</span>
-                ${canEdit ? `<button data-edit="${task.id}">Abrir</button>` : `<button data-edit="${task.id}">Abrir</button>`}
+                <button data-edit="${task.id}">Abrir</button>
               </div>
             </div>
           `;
@@ -3710,6 +4198,7 @@
           renderInsightsAndCharts();
           renderDueSoonReminders();
           renderTenhaEmMente(board);
+          renderMiniCalendar();
         }
         return;
       }
@@ -3733,6 +4222,7 @@
           renderInsightsAndCharts();
           renderDueSoonReminders();
           renderTenhaEmMente(board);
+          renderMiniCalendar();
         }
         return;
       }
@@ -4083,7 +4573,7 @@
     document.getElementById("searchInput").addEventListener("input", renderAll);
     document.getElementById("priorityFilter").addEventListener("change", renderAll);
 
-    /* ASSISTENTE IA SOL */
+    /* ASSISTENTE IA SOL COM DISCERNIMENTO SOBRE SITE E APLICATIVO */
     const solChatPanelEl = document.getElementById("solChatPanel");
     const solChatMessagesEl = document.getElementById("solChatMessages");
     const solChatFormEl = document.getElementById("solChatForm");
@@ -4108,33 +4598,39 @@
     }
 
     function generateSolReply(rawQuestion) {
-      const q = rawQuestion.toLowerCase();
+      const q = String(rawQuestion || "").trim();
+      const lower = q.toLowerCase();
       const board = getActiveBoard();
       const totalBoards = state.boards.length;
       const atrasadas = (board?.tasks || []).filter((t) => isTaskOverdue(t)).length;
       const concluidas = (board?.tasks || []).filter((t) => t.col === "done").length;
+      const emAndamento = (board?.tasks || []).filter((t) => t.col === "doing").length;
 
-      if (q.includes("criou") || q.includes("maysa") || q.includes("quem") || q.includes("sobre") || q.includes("aplicativo") || q.includes("propósito") || q.includes("público")) {
-        return "O Em Dia foi criado por Maysa Araújo, moradora do Rio de Janeiro, graduada em Administração Pública e assessora de imprensa no Instituto Força Jovem Bushido há 3 anos. O aplicativo reúne até 10 quadros, calendário, lembretes, Dashboard, Tenha em Mente e diferentes modos de visualização para dar clareza às prioridades sem ruído.";
+      if (lower.includes("criou") || lower.includes("maysa") || lower.includes("quem fez") || lower.includes("desenvolvedor")) {
+        return "O Em Dia foi criado por Maysa Araújo, moradora do Rio de Janeiro, graduada em Administração Pública e assessora de imprensa no Instituto Força Jovem Bushido há 3 anos, guiada pela escuta atenta, olhar investigativo e aprendizado contínuo.";
       }
 
-      if (q.includes("modo") || q.includes("kanban") || q.includes("cronograma") || q.includes("tabela") || q.includes("gantt") || q.includes("funcionalidade") || q.includes("como funciona")) {
-        return "No Em Dia você pode criar até 10 quadros, acompanhar o calendário e lembretes, gerenciar membros (Administrador, Membro e Analista) e alternar entre os modos Kanban, Cronograma, Tabela e Diagrama de Gantt. Cada card mostra a data, permite comentários datados ao lado das ferramentas e conta com o botão Abrir.";
+      if (lower.includes("o que é") || lower.includes("propósito") || lower.includes("público") || lower.includes("finalidade") || lower.includes("site") || lower.includes("página inicial")) {
+        return "Na página inicial, o Em Dia é apresentado como um gestor de tarefas minimalista em branco e preto feito para dar clareza visual às prioridades, atender profissionais, estudantes e equipes, e transformar planos em progresso contínuo.";
       }
 
-      if (q.includes("dashboard") || q.includes("gráfico") || q.includes("pizza") || q.includes("barra") || q.includes("prioridade") || q.includes("status")) {
-        return "O Dashboard mostra o resumo das tarefas, um gráfico de pizza para Prioridade (Alta, Média e Baixa) e um gráfico de barras para Status (A Fazer, Em Andamento, Concluído e Atrasado).";
+      if (lower.includes("tenha em mente") || lower.includes("mensagem") || lower.includes("atrasad") || lower.includes("concluíd") || lower.includes("processo")) {
+        return `O tópico Tenha em Mente exibe uma mensagem serena e organizadora quando há mais atrasadas do que concluídas; "Continue acreditando que você é capaz de fazer acontecer." quando há mais concluídas do que atrasadas; e "Confie no processo" quando há muitas atividades em andamento. No quadro "${board.name}", temos ${atrasadas} atrasada(s), ${concluidas} concluída(s) e ${emAndamento} em andamento.`;
       }
 
-      if (q.includes("tenha em mente") || q.includes("mensagem") || q.includes("atrasad") || q.includes("concluíd")) {
-        return `No tópico Tenha em Mente, se houver mais atividades atrasadas do que concluídas aparece uma mensagem serena e organizadora; se houver mais concluídas do que atrasadas, aparece "continue acreditando que é capaz de fazer"; e em atividades em andamento, "confie no processo". Atualmente no quadro "${board.name}" há ${atrasadas} atrasada(s) e ${concluidas} concluída(s).`;
+      if (lower.includes("dashboard") || lower.includes("pizza") || lower.includes("barra") || lower.includes("prioridade") || lower.includes("status")) {
+        return "O Dashboard reúne indicadores, um gráfico de pizza para Prioridade (Alta, Média e Baixa) e um gráfico de barras para Status (A Fazer, Em Andamento, Concluído e Atrasado).";
       }
 
-      if (q.includes("contato") || q.includes("email") || q.includes("e-mail")) {
-        return `Você pode falar diretamente pelo e-mail ${CONTACT_EMAIL} ou usar o formulário de contato na página inicial. Hoje você tem ${totalBoards} de ${MAX_BOARDS} quadros criados.`;
+      if (lower.includes("calendário") || lower.includes("bloco de notas") || lower.includes("dicas") || lower.includes("relógio") || lower.includes("cor")) {
+        return "O aplicativo conta com calendário colorido por status das tarefas, Bloco de Notas ao lado de Meus Quadros, Dicas Essenciais (5 modelos de organização e saúde nos estudos e trabalho), relógio digital minimalista, Tema Claro/Escuro, seletor e código de cor na personalização, nome de usuário de até 8 caracteres, dispositivos conectados e visibilidade Público/Privado.";
       }
 
-      return `Sou a Sol! Posso te explicar o que é o Em Dia, quem criou o aplicativo (Maysa Araújo), como funcionam os quadros, Kanban, Cronograma, Tabela, Diagrama de Gantt, Dashboard, comentários nos cards e o tópico Tenha em Mente. O que você gostaria de saber?`;
+      if (lower.includes("contato") || lower.includes("email") || lower.includes("e-mail")) {
+        return `O e-mail de contato na página inicial é ${CONTACT_EMAIL}. Você tem ${totalBoards} de ${MAX_BOARDS} quadros criados.`;
+      }
+
+      return `Analisando sua pergunta sobre "${q}": sou a Sol e posso esclarecer qualquer ponto da página inicial ou das funcionalidades do Em Dia — como criação de até 10 quadros, modos Kanban, Cronograma, Tabela e Gantt, Dashboard, Tenha em Mente, calendário por status, Bloco de Notas, Dicas Essenciais e configurações da conta. Qual dúvida específica você quer explorar?`;
     }
 
     document.getElementById("toggleSolChatBtn").addEventListener("click", () => {
@@ -4166,11 +4662,15 @@
       const myRole = getCurrentUserRole(board);
       const isBoardPage = state.screen === "board";
 
+      const handleLabel = state.user.username ? ` • @${state.user.username}` : "";
+      const visLabel = state.user.visibility ? ` • ${state.user.visibility}` : "";
+
       document.getElementById("sidebarProfile").innerHTML = `
         ${renderAvatarHtml(state.user.name, state.user.avatarUrl, "avatar-lg")}
         <div style="min-width:0;">
           <div style="font-weight:700;font-size:0.95rem;">${escapeHtml(state.user.name)}</div>
-          <div class="section-sub" style="word-break:break-word;">${escapeHtml(state.user.email)}</div>
+          <div class="section-sub" style="word-break:break-word;">${escapeHtml(state.user.email)}${escapeHtml(handleLabel)}${escapeHtml(visLabel)}</div>
+          ${state.user.about ? `<div class="section-sub" style="margin-top:4px;">${escapeHtml(state.user.about)}</div>` : ""}
         </div>
       `;
 
@@ -4182,6 +4682,8 @@
       if (!isBoardPage) {
         document.getElementById("greetingMoodSubtitle").textContent =
           `Humor do dia: ${state.user.mood || "😊 Motivado(a)"}`;
+        quickNotepadEl.value = state.notepadText || "";
+        renderEssentialTipsVisibility();
         renderMiniCalendar();
         renderDueSoonReminders();
         renderBoardsList();
