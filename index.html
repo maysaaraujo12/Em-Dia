@@ -500,6 +500,67 @@
       padding: 20px;
     }
 
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .settings-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 14px;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 16px;
+    }
+    .settings-nav-item {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 11px 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .settings-nav-item:hover,
+    .settings-nav-item.active {
+      color: var(--text);
+      background: var(--active-tint);
+      border-color: var(--border);
+    }
+    .settings-content { min-width: 0; }
+    .task-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    .task-progress-track {
+      height: 7px;
+      border-radius: 999px;
+      background: var(--border);
+      overflow: hidden;
+    }
+    .task-progress-fill {
+      height: 100%;
+      background: var(--text);
+      border-radius: 999px;
+    }
+    @media (max-width: 700px) {
+      .settings-layout { grid-template-columns: 1fr; }
+      .settings-sidebar {
+        position: static;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 0 0 12px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 767px) {
       .landing-header {
         padding: 12px 16px;
@@ -1720,10 +1781,6 @@
       </div>
 
       <div class="controls" aria-label="Menu da conta e sair">
-        <button type="button" class="header-icon-btn" data-account-menu="profile" title="Editar informações da conta" aria-label="Editar informações da conta">👤</button>
-        <button type="button" class="header-icon-btn" data-account-menu="security" title="Segurança e dispositivos conectados" aria-label="Segurança e dispositivos conectados">🔒</button>
-        <button type="button" class="header-icon-btn" data-account-menu="notifications" title="Notificações" aria-label="Notificações">🔔</button>
-        <button type="button" class="header-icon-btn" data-account-menu="customization" title="Personalização" aria-label="Personalização">🎨</button>
         <button type="button" class="header-icon-btn" id="openSettingsPageBtn" title="Configuração dos menus (página própria)" aria-label="Configuração dos menus">⚙️</button>
         <button class="ghost" id="logoutBtn" title="Sair da conta">Sair</button>
       </div>
@@ -1743,14 +1800,15 @@
             </div>
           </div>
 
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist" aria-label="Abas de configuração">
-            <button type="button" class="header-icon-btn" data-account-menu="profile" title="Editar informações da conta" aria-label="Editar informações da conta">👤</button>
-            <button type="button" class="header-icon-btn" data-account-menu="security" title="Segurança e dispositivos conectados" aria-label="Segurança e dispositivos conectados">🔒</button>
-            <button type="button" class="header-icon-btn" data-account-menu="notifications" title="Notificações" aria-label="Notificações">🔔</button>
-            <button type="button" class="header-icon-btn" data-account-menu="customization" title="Personalização" aria-label="Personalização">🎨</button>
-          </div>
-
-          <div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--border);" id="accountSummaryHeader"></div>
+          <div class="settings-layout">
+            <nav class="settings-sidebar" role="tablist" aria-label="Tipos de configuração">
+              <button type="button" class="settings-nav-item" data-account-menu="profile">Perfil da conta</button>
+              <button type="button" class="settings-nav-item" data-account-menu="security">Segurança</button>
+              <button type="button" class="settings-nav-item" data-account-menu="notifications">Notificações</button>
+              <button type="button" class="settings-nav-item" data-account-menu="customization">Personalização</button>
+            </nav>
+            <div class="settings-content">
+              <div style="display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--border);" id="accountSummaryHeader"></div>
 
           <div id="subsec-profile" class="subpanel" style="margin:0;">
             <div class="two-col-grid">
@@ -1856,6 +1914,8 @@
             </div>
             <div style="display:flex;justify-content:flex-end;">
               <button type="button" class="primary" id="saveCustomBtn">Salvar personalização</button>
+            </div>
+          </div>
             </div>
           </div>
         </div>
@@ -2013,8 +2073,18 @@
             <div class="controls" style="justify-content:space-between;margin-top:14px;">
               <div class="controls">
                 <input id="searchInput" type="search" placeholder="Buscar tarefa..." />
-                <select id="priorityFilter">
-                  <option value="todas">Todas prioridades</option>
+                <select id="assigneeFilter" aria-label="Filtrar por responsável">
+                  <option value="todos">Todos os responsáveis</option>
+                </select>
+                <select id="statusFilter" aria-label="Filtrar por status">
+                  <option value="todos">Todos os status</option>
+                  <option value="todo">A Fazer</option>
+                  <option value="doing">Em Andamento</option>
+                  <option value="done">Concluído</option>
+                  <option value="overdue">Atrasado</option>
+                </select>
+                <select id="priorityFilter" aria-label="Filtrar por prioridade">
+                  <option value="todas">Todas as prioridades</option>
                   <option value="alta">Alta</option>
                   <option value="media">Média</option>
                   <option value="baixa">Baixa</option>
@@ -2246,6 +2316,10 @@
       </div>
 
       <div class="two-col-grid">
+        <div class="form-row">
+          <label for="taskProgress">Progresso da atividade (%)</label>
+          <input id="taskProgress" type="number" min="0" max="100" step="5" value="0" />
+        </div>
         <div class="form-row">
           <label for="taskPriority">Prioridade</label>
           <select id="taskPriority">
@@ -2997,6 +3071,7 @@
       });
       document.querySelectorAll("[data-account-menu]").forEach((btn) => {
         btn.classList.toggle("active", btn.dataset.accountMenu === secName);
+        btn.setAttribute("aria-selected", btn.dataset.accountMenu === secName ? "true" : "false");
       });
       document.getElementById("openSettingsPageBtn").classList.add("active");
       saveState();
@@ -3408,18 +3483,31 @@
       const concluidas = tasks.filter((t) => t.col === "done").length;
       const emAndamento = tasks.filter((t) => t.col === "doing").length;
 
+      const has90 = (col) => tasks.some((task) =>
+        task.col === col && Number(task.progress) >= 90
+      );
+      const has90Doing = has90("doing");
+      const has90Todo = has90("todo");
+      const has90Done = has90("done");
+
       let message = "";
       let context = "";
 
-      if (atrasadas > concluidas) {
+      if (has90Todo || atrasadas > 0) {
+        message = "Respire fundo com serenidade: cada passo calmo e bem planejado coloca o seu dia nos trilhos, sem pressa excessiva, apenas com organização e constância.";
+        context = has90Todo ? "Atividade a fazer com 90% ou mais de progresso" : `Atividades atrasadas: ${atrasadas}`;
+      } else if (has90Done) {
+        message = "Continue acreditando que você é capaz de fazer acontecer.";
+        context = "Atividade concluída com 90% ou mais de progresso";
+      } else if (has90Doing) {
+        message = "Confie no processo.";
+        context = "Atividade em andamento com 90% ou mais de progresso";
+      } else if (atrasadas > concluidas) {
         message = "Respire fundo com serenidade: cada passo calmo e bem planejado coloca o seu dia nos trilhos, sem pressa excessiva, apenas com organização e constância.";
         context = `Atrasadas: ${atrasadas} • Concluídas: ${concluidas}`;
       } else if (concluidas > atrasadas) {
         message = "Continue acreditando que você é capaz de fazer acontecer.";
         context = `Concluídas: ${concluidas} • Atrasadas: ${atrasadas}`;
-      } else if (emAndamento > aFazer && emAndamento > concluidas) {
-        message = "Confie no processo.";
-        context = `Em andamento: ${emAndamento}`;
       } else {
         message = "Confie no processo.";
         context = `Em andamento: ${emAndamento} • A fazer: ${aFazer} • Concluídas: ${concluidas}`;
@@ -3442,14 +3530,30 @@
     function getFilteredBoardTasks(board) {
       const term = document.getElementById("searchInput").value.trim().toLowerCase();
       const prio = document.getElementById("priorityFilter").value;
+      const assignee = document.getElementById("assigneeFilter").value;
+      const status = document.getElementById("statusFilter").value;
       return (board.tasks || []).filter((t) => {
         const matchText =
           !term ||
-          t.title.toLowerCase().includes(term) ||
-          (t.desc && t.desc.toLowerCase().includes(term));
+          (t.title || "").toLowerCase().includes(term) ||
+          (t.desc || "").toLowerCase().includes(term);
         const matchPrio = prio === "todas" || t.priority === prio;
-        return matchText && matchPrio;
+        const matchAssignee = assignee === "todos" || (assignee === "sem-responsavel" ? !t.assigneeId : (t.assigneeId || "") === assignee);
+        const matchStatus = status === "todos" ||
+          (status === "overdue" ? isTaskOverdue(t) : t.col === status);
+        return matchText && matchPrio && matchAssignee && matchStatus;
       });
+    }
+
+    function refreshAssigneeFilter(board) {
+      const select = document.getElementById("assigneeFilter");
+      const previous = select.value;
+      const options = (board.members || []).map((member) =>
+        `<option value="${escapeHtml(member.id)}">${escapeHtml(member.name)}</option>`
+      ).join("");
+      select.innerHTML = `<option value="todos">Todos os responsáveis</option>${options}<option value="sem-responsavel">Sem responsável</option>`;
+      select.value = previous === "sem-responsavel" || previous === "todos" ||
+        (board.members || []).some((member) => member.id === previous) ? previous : "todos";
     }
 
     function renderBarChartCard(title, segments, total) {
@@ -3795,6 +3899,7 @@
 
     function renderActiveView() {
       const board = getActiveBoard();
+      refreshAssigneeFilter(board);
       const filtered = getFilteredBoardTasks(board);
       const canEdit = canEditTasks(board);
 
@@ -3869,6 +3974,10 @@
                 <div class="card-date-banner">
                   <span>📅 ${formatDateBr(task.dueDate)}</span>
                   <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
+                </div>
+                <div class="task-progress" aria-label="Progresso ${Math.max(0, Math.min(100, Number(task.progress) || 0))}%">
+                  <div style="display:flex;justify-content:space-between;gap:8px;"><span>Progresso</span><strong>${Math.max(0, Math.min(100, Number(task.progress) || 0))}%</strong></div>
+                  <div class="task-progress-track"><div class="task-progress-fill" style="width:${Math.max(0, Math.min(100, Number(task.progress) || 0))}%;"></div></div>
                 </div>
                 <div class="card-meta-row">
                   ${member ? `
@@ -4504,6 +4613,7 @@
 
       document.getElementById("taskPriority").value = task ? task.priority : "media";
       document.getElementById("taskCol").value = task ? task.col : "todo";
+      document.getElementById("taskProgress").value = Math.max(0, Math.min(100, Number(task?.progress) || 0));
       taskDueDateEl.value = task ? task.dueDate || "" : "";
 
       taskAssigneeEl.innerHTML = (board.members || [])
@@ -4561,6 +4671,7 @@
         tags: [...tempModalTags],
         priority: document.getElementById("taskPriority").value,
         col: document.getElementById("taskCol").value,
+        progress: Math.max(0, Math.min(100, Number(document.getElementById("taskProgress").value) || 0)),
         dueDate: taskDueDateEl.value,
         assigneeId: taskAssigneeEl.value,
         coverType: taskCoverTypeEl.value,
@@ -4617,6 +4728,8 @@
 
     document.getElementById("searchInput").addEventListener("input", renderAll);
     document.getElementById("priorityFilter").addEventListener("change", renderAll);
+    document.getElementById("assigneeFilter").addEventListener("change", renderAll);
+    document.getElementById("statusFilter").addEventListener("change", renderAll);
 
     /* ASSISTENTE IA SOL COM DISCERNIMENTO SOBRE SITE E APLICATIVO */
     const solChatPanelEl = document.getElementById("solChatPanel");
