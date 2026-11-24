@@ -2554,7 +2554,7 @@
           visibility: "Público",
           password: "1234",
           pin: "",
-          avatarUrl: renderDeveloperPortraitSvg(),
+          avatarUrl: "", // Inicia vazio para mostrar 👤
           mood: "😊 Motivado(a)",
           updatesConsent: false,
           privacyAccepted: false,
@@ -2802,10 +2802,10 @@
     }
 
     function renderAvatarHtml(name, avatarUrl, sizeClass = "avatar-sm") {
-      if (avatarUrl) {
-        return `<img src="${avatarUrl}" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
+      if (avatarUrl && String(avatarUrl).trim() !== "") {
+        return `<img src="${avatarUrl}" alt="${escapeHtml(name || "Perfil")}" class="${sizeClass}" />`;
       }
-      return `<span class="${sizeClass}" aria-label="${escapeHtml(name || "Usuário")}">👤</span>`;
+      return `<span class="${sizeClass} default-user-icon" aria-label="${escapeHtml(name || "Perfil")}">👤</span>`;
     }
 
     /* RELÓGIO DIGITAL MINIMALISTA */
@@ -3165,6 +3165,10 @@
       const reader = new FileReader();
       reader.onload = () => {
         tempUserAvatar = String(reader.result || "");
+        // Atualiza a pré-visualização imediatamente no cabeçalho da conta
+        state.user.avatarUrl = tempUserAvatar;
+        saveState();
+        renderAll();
       };
       reader.readAsDataURL(file);
     });
@@ -3175,7 +3179,9 @@
       state.user.email = document.getElementById("profEmail").value.trim() || state.user.email;
       state.user.about = document.getElementById("profAbout").value.trim();
       state.user.visibility = document.getElementById("profVisibility").value || "Público";
-      if (tempUserAvatar) state.user.avatarUrl = tempUserAvatar;
+      if (tempUserAvatar) {
+        state.user.avatarUrl = tempUserAvatar;
+      }
 
       const board = getActiveBoard();
       const me = (board.members || []).find((m) => m.id === "m1" || m.name === state.user.name);
@@ -3183,13 +3189,13 @@
         me.name = state.user.name;
         me.handle = state.user.username;
         me.email = state.user.email;
-        if (state.user.avatarUrl) me.avatarUrl = state.user.avatarUrl;
+        me.avatarUrl = state.user.avatarUrl || "";
       }
 
       saveState();
       renderAll();
     });
-
+    
     document.getElementById("saveSecurityBtn").addEventListener("click", () => {
       const newPass = document.getElementById("secPassword").value;
       if (newPass) state.user.password = newPass;
