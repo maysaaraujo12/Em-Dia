@@ -4114,6 +4114,71 @@
       datePopoverEl.classList.remove("hidden");
     }
 
+    function buildUsernameFromName(fullName, email) {
+      const clean = String(fullName || email?.split("@")[0] || "usuario")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9_]/g, "")
+        .slice(0, 12);
+      return clean || "usuario";
+    }
+
+    document.getElementById("googleLoginBtn").addEventListener("click", () => {
+      if (!state.user.name) state.user.name = "Usuário Google";
+      if (!state.user.email) state.user.email = "usuario.google@gmail.com";
+      state.user.username = buildUsernameFromName(state.user.name, state.user.email);
+      state.user.about = "";
+      state.user.avatarUrl = "";
+      state.isAuthenticated = true;
+      state.screen = "home";
+      saveState();
+      updateAuthVisibility();
+    });
+
+    document.getElementById("registerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!regPrivacyEl.checked) return;
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const password = document.getElementById("regPassword").value;
+      const generatedUsername = buildUsernameFromName(name, email);
+
+      state.user.name = name;
+      state.user.username = generatedUsername;
+      state.user.email = email;
+      state.user.about = "";
+      state.user.avatarUrl = "";
+      state.user.password = password;
+      state.user.updatesConsent = document.getElementById("regUpdatesConsent").checked;
+      state.user.privacyAccepted = true;
+      state.isAuthenticated = true;
+      state.screen = "home";
+
+      const board = getActiveBoard();
+      if (board) {
+        const defaultAdmin = board.members.find((m) => m.id === "m1");
+        if (defaultAdmin) {
+          defaultAdmin.name = name;
+          defaultAdmin.handle = generatedUsername;
+          defaultAdmin.email = email;
+          defaultAdmin.avatarUrl = "";
+        } else {
+          board.members.unshift({
+            id: "m_" + Date.now(),
+            name,
+            handle: generatedUsername,
+            email,
+            role: "Administrador",
+            avatarUrl: ""
+          });
+        }
+      }
+
+      saveState();
+      updateAuthVisibility();
+    });
+
     document.getElementById("popoverPrevMonth").addEventListener("click", () => {
       datePopoverMonthOffset -= 1;
       renderDatePopover();
