@@ -1817,8 +1817,8 @@
                 <input id="profName" type="text" data-spellcheck="true" />
               </div>
               <div class="form-row">
-                <label for="profUsername">Nome do Usuário (até 12 caracteres, números e símbolos)</label>
-                <input id="profUsername" type="text" maxlength="12" placeholder="ex.: maysa_01!@#" />
+                <label for="profUsername">Nome do Usuário (até 12 caracteres com números e símbolos)</label>
+                <input id="profUsername" type="text" maxlength="12" placeholder="ex.: nome_01!@#" />
               </div>
             </div>
             <div class="two-col-grid">
@@ -2803,7 +2803,7 @@
 
     function renderAvatarHtml(name, avatarUrl, sizeClass = "avatar-sm") {
       if (avatarUrl) {
-        return `<img src="${avatarUrl}" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
+        return `<img src="" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
       }
       return `<span class="${sizeClass}" aria-label="${escapeHtml(name || "Usuário")}">👤</span>`;
     }
