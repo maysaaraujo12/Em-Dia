@@ -1759,7 +1759,7 @@
       <div class="footer-grid">
         <span>2026 @ corporation</span>
         <div class="social-links">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <a href="https://instagram.com/maysaaraujo___" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <span>📷</span>
             <span>Instagram</span>
           </a>
@@ -2960,6 +2960,8 @@
       state.screen = "home";
       saveState();
       updateAuthVisibility();
+      state.user.avatarUrl = "";
+      tempUserAvatar = "";
     });
 
     document.getElementById("loginForm").addEventListener("submit", (e) => {
@@ -2992,6 +2994,8 @@
       state.user.privacyAccepted = true;
       state.isAuthenticated = true;
       state.screen = "home";
+      state.user.avatarUrl = "";
+      tempUserAvatar = "";
 
       const board = getActiveBoard();
       if (board && !board.members.some((m) => m.name.toLowerCase() === name.toLowerCase())) {
