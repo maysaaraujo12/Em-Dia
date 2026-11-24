@@ -2958,8 +2958,13 @@
       state.user.privacyAccepted = true;
       state.isAuthenticated = true;
       state.screen = "home";
-      state.user.avatarUrl = "";
+      state.user.avatarUrl = ""; about: "";
       tempUserAvatar = "";
+      state.boards = [];
+      state.activeBoardId = null;
+      state.notepadText = "";
+      
+      
 
       const board = getActiveBoard();
       if (board && !board.members.some((m) => m.name.toLowerCase() === name.toLowerCase())) {
