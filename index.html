@@ -2580,20 +2580,18 @@
         boards: [
           {
             id: "b1",
-            name: "Quadro Principal",
-            desc: "Organização diária de tarefas e prazos.",
+            name: "",
+            desc: "",
             color: "#111111",
             coverImage: "",
             members: [
               { id: "m1", name: "Maysa Araújo", handle: "maysa_01!@#", email: "maysa@emdia.app", role: "Administrador", avatarUrl: renderDeveloperPortraitSvg() },
-              { id: "m2", name: "Rafael Costa", handle: "rafael_02!", email: "rafael@emdia.app", role: "Membro", avatarUrl: "" },
-              { id: "m3", name: "Ana Paula", handle: "ana_pa#03", email: "ana@emdia.app", role: "Analista", avatarUrl: "" }
             ],
             tasks: [
               {
                 id: "t1",
-                title: "Revisar cronograma semanal",
-                desc: "Conferir prioridades e datas de entrega.",
+                title: "",
+                desc: "",
                 tags: [{ id: "l1", name: "Urgente", color: "#DC2626" }],
                 priority: "alta",
                 dueDate: addDaysIso(-1),
@@ -2604,43 +2602,9 @@
                 coverColor: "#111111",
                 coverImage: "",
                 attachment: null,
-                comments: [
-                  { id: "c1", author: "Maysa Araújo", text: "Priorizar entregas da semana.", dateLabel: getNowDateTimeLabel() }
-                ]
-              },
-              {
-                id: "t2",
-                title: "Preparar pauta de imprensa",
-                desc: "Ajustar cronograma e tabela de entregas.",
-                tags: [{ id: "l2", name: "Foco", color: "#2563EB" }],
-                priority: "media",
-                dueDate: addDaysIso(2),
-                durationDays: 4,
-                col: "doing",
-                assigneeId: "m2",
-                coverType: "color",
-                coverColor: "#2563EB",
-                coverImage: "",
-                attachment: null,
                 comments: []
               },
-              {
-                id: "t3",
-                title: "Confirmar checklist de hoje",
-                desc: "Validar entregas do dia.",
-                tags: [{ id: "l3", name: "Revisão", color: "#16A34A" }],
-                priority: "baixa",
-                dueDate: today,
-                durationDays: 2,
-                col: "done",
-                assigneeId: "m3",
-                coverType: "color",
-                coverColor: "#16A34A",
-                coverImage: "",
-                attachment: null,
-                comments: []
-              }
-            ]
+                          ]
           }
         ]
       };
