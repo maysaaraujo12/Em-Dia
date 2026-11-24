@@ -2123,7 +2123,9 @@
               <div style="display:flex;gap:8px;justify-content:flex-end;">
                 <button type="button" id="closeBoardEditBtn">Fechar</button>
                 <button type="button" class="primary" id="saveBoardInfoBtn">Salvar</button>
-                <button type="button" class="primary" id="disabled"}>Excluir Quadro</button>
+                <button type="button" class="primary" id="excludeBoardInfoBtn"}>Excluir Quadro</button>
+                ${board.board.length > 1 ? `<button class="danger" data-remove-board="${m.id}" ${allowAdmin ? "" : "disabled"}>Excluir Quadro</button>` : ""}
+
                </div>
             </div>
 
