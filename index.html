@@ -115,7 +115,6 @@
     input[type="email"],
     input[type="password"],
     input[type="date"],
-    input[type="search"],
     select,
     textarea {
       background: var(--surface);
@@ -160,21 +159,6 @@
       padding: 4px 6px;
     }
 
-    .brand-smiley {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      color: #ffffff;
-      font-size: 0.9rem;
-      font-weight: 800;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-
     .public-nav-links {
       display: flex;
       align-items: center;
@@ -201,6 +185,10 @@
     }
 
     .hero-card {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 24px;
+      align-items: center;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -218,37 +206,33 @@
       margin: 0 0 18px;
       color: var(--muted);
       font-size: 0.96rem;
-      max-width: 760px;
     }
 
-    .landing-info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
+    .digital-clock-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
     }
 
-    .landing-info-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .landing-info-box h2 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
-    }
-
-    .landing-info-box p {
-      margin: 0;
+    .digital-clock-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .digital-clock-time {
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      margin-top: 4px;
     }
 
     .landing-section {
-      margin-top: 24px;
+      margin-top: 28px;
       background: var(--surface);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius);
@@ -282,7 +266,7 @@
       max-width: 560px;
     }
 
-    /* AUTENTICAÇÃO E COOKIES */
+    /* AUTENTICAÇÃO */
     .auth-wrapper {
       max-width: 440px;
       margin: 36px auto;
@@ -333,22 +317,6 @@
       margin-top: 3px;
     }
 
-    .cookie-consent-box {
-      border: 1px solid var(--border-soft);
-      background: var(--surface-2);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .cookie-consent-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
     /* SHELL DO APLICATIVO */
     .app-topbar {
       position: sticky;
@@ -392,39 +360,9 @@
       box-shadow: var(--shadow);
     }
 
-    .home-greeting-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
     .home-header-card h1 {
       margin: 0;
       font-size: 1.35rem;
-    }
-
-    .home-clock-inline {
-      background: var(--surface-2);
-      border: 1px solid var(--border-soft);
-      border-radius: 8px;
-      padding: 8px 12px;
-      text-align: center;
-      min-width: 118px;
-    }
-
-    .home-clock-inline-label {
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .home-clock-inline-time {
-      font-size: 1.05rem;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
     }
 
     .section-sub {
@@ -452,52 +390,6 @@
       font-size: 1rem;
     }
 
-    /* DICAS ESSENCIAIS DESLIZÁVEIS */
-    .tips-carousel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .tips-carousel-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tips-carousel-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      gap: 10px;
-      scrollbar-width: thin;
-    }
-
-    .tip-slide-card {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-      background: var(--surface-2);
-      border: 1px solid var(--border-soft);
-      border-radius: 8px;
-      padding: 10px 12px;
-    }
-
-    .tip-slide-title {
-      font-weight: 800;
-      font-size: 0.84rem;
-      margin-bottom: 4px;
-    }
-
-    .tip-slide-text {
-      margin: 0;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    /* CALENDÁRIO */
     .calendar-header {
       display: flex;
       align-items: center;
@@ -529,7 +421,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     .cal-day.empty-day {
@@ -537,19 +429,20 @@
     }
 
     .cal-day.today-ring {
-      border: 2px solid var(--accent-color);
+      border-color: var(--accent-color);
       font-weight: 800;
     }
 
-    .cal-day.has-task-bg {
-      color: #ffffff;
-      font-weight: 800;
-      border-color: transparent;
+    .cal-dots {
+      display: flex;
+      gap: 2px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .cal-dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
     }
 
@@ -878,47 +771,12 @@
       min-width: 145px;
     }
 
-    /* KANBAN: MÚLTIPLAS LISTAS, RENOMEÁVEIS E ARRASTE HORIZONTAL COM CURSOR */
-    .kanban-extras-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      background: var(--surface);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius);
-      padding: 10px 12px;
-      margin-bottom: 12px;
-    }
-
-    .kanban-add-col-form {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
+    /* KANBAN */
     .kanban-board {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      align-items: flex-start;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      cursor: grab;
-      user-select: none;
-      scrollbar-width: thin;
-    }
-
-    .kanban-board.is-panning {
-      cursor: grabbing;
-    }
-
-    .kanban-board .column {
-      flex: 0 0 300px;
-      min-width: 300px;
-      user-select: auto;
+      align-items: start;
     }
 
     .column {
@@ -937,29 +795,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
       margin-bottom: 10px;
     }
 
-    .col-title-group {
-      display: flex;
+    .col-title {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      flex: 1;
-    }
-
-    .col-rename-input {
       font-weight: 800;
-      font-size: 0.9rem;
-      padding: 4px 7px;
-      background: var(--surface);
-      border: 1px solid transparent;
-      border-radius: 6px;
-    }
-
-    .col-rename-input:hover:not(:disabled),
-    .col-rename-input:focus {
-      border-color: var(--border-soft);
+      font-size: 0.92rem;
     }
 
     .count {
@@ -968,7 +812,6 @@
       border-radius: 999px;
       padding: 1px 8px;
       font-size: 0.75rem;
-      flex-shrink: 0;
     }
 
     .card {
@@ -1586,10 +1429,11 @@
     }
 
     @media (max-width: 900px) {
-      .landing-info-grid,
+      .hero-card,
       .home-widgets-grid,
       .insights-grid,
       .charts-grid,
+      .kanban-board,
       .settings-layout,
       .dev-grid {
         grid-template-columns: 1fr;
@@ -1606,7 +1450,7 @@
   <div id="publicArea">
     <header class="public-topbar">
       <button type="button" class="brand-mark" id="navHomeLink">
-        <span class="brand-smiley" aria-hidden="true">☺</span>
+        <span>✓</span>
         <span>Em Dia</span>
       </button>
 
@@ -1626,45 +1470,16 @@
         <div>
           <h1>Organize suas tarefas, prazos e quadros com clareza.</h1>
           <p>
-            Bem-vindo ao <strong>Em Dia</strong>: um espaço prático para estruturar rotinas, acompanhar prazos
-            no calendário e visualizar o andamento de cada projeto sem complicação.
+            O <strong>Em Dia</strong> reúne quadros, calendário colorido por status, lembretes de prazo,
+            bloco de notas rápido e visualizações em Kanban, Cronograma, Tabela e Gantt.
           </p>
           <button type="button" class="primary" id="heroStartBtn">Começar agora</button>
         </div>
-      </section>
 
-      <section class="landing-info-grid" aria-label="Informações do aplicativo">
-        <article class="landing-info-box">
-          <h2>O que é o aplicativo</h2>
-          <p>
-            O Em Dia é uma plataforma web de organização pessoal e de equipes que reúne quadros de tarefas,
-            calendário visual por status, lembretes de prazo, bloco de notas e assistente integrado em um único ambiente.
-          </p>
-        </article>
-
-        <article class="landing-info-box">
-          <h2>Para que serve</h2>
-          <p>
-            Serve para centralizar pendências, evitar atrasos com alertas visuais, dividir entregas em listas
-            personalizáveis e acompanhar o progresso de cada atividade em Kanban, Cronograma, Tabela ou Gantt.
-          </p>
-        </article>
-
-        <article class="landing-info-box">
-          <h2>Para qual público</h2>
-          <p>
-            Foi pensado para estudantes, profissionais autônomos, gestores, assessores, equipes criativas e
-            qualquer pessoa que queira manter a rotina diária clara e sob controle.
-          </p>
-        </article>
-
-        <article class="landing-info-box">
-          <h2>Por que usá-lo</h2>
-          <p>
-            Porque combina simplicidade de uso, leitura rápida de prioridades e prazos, múltiplas visões do
-            mesmo quadro e recursos práticos que ajudam você a manter constância no dia a dia.
-          </p>
-        </article>
+        <div class="digital-clock-box">
+          <div class="digital-clock-label">Horário atual</div>
+          <div id="minimalDigitalClock" class="digital-clock-time">--:--:--</div>
+        </div>
       </section>
 
       <section id="sobre" class="landing-section">
@@ -1715,18 +1530,6 @@
           <button type="button" id="backToLandingFromAuthBtn">← Voltar à página inicial</button>
         </div>
 
-        <div id="cookieBannerBox" class="cookie-consent-box">
-          <div style="font-size:0.82rem;font-weight:700;">Preferência de cookies</div>
-          <div class="section-sub">
-            Aceite para salvar seus dados de acesso e preferências no navegador, ou recuse cookies não essenciais.
-          </div>
-          <div class="cookie-consent-actions">
-            <button type="button" class="primary" id="acceptCookiesBtn">Aceitar cookies</button>
-            <button type="button" id="rejectCookiesBtn">Recusar cookies</button>
-          </div>
-          <div id="cookieChoiceStatus" class="section-sub"></div>
-        </div>
-
         <div class="auth-tabs">
           <button type="button" id="tabLoginBtn" class="active">Entrar</button>
           <button type="button" id="tabRegisterBtn">Criar conta</button>
@@ -1735,8 +1538,6 @@
         <div style="margin-bottom:12px;">
           <button type="button" id="googleLoginBtn" style="width:100%;">Continuar com Google</button>
         </div>
-
-        <div id="loginSavedAccountHint" class="section-sub hidden" style="margin-bottom:8px;"></div>
 
         <form id="loginForm" class="auth-form">
           <div class="field-group">
@@ -1789,7 +1590,7 @@
     <header class="app-topbar">
       <div class="app-topbar-left">
         <button type="button" class="brand-mark" id="goHomeBrandBtn">
-          <span class="brand-smiley" aria-hidden="true">☺</span>
+          <span>✓</span>
           <span>Em Dia</span>
         </button>
       </div>
@@ -1804,16 +1605,9 @@
       <!-- TELA INICIAL -->
       <section id="homeDashboardView">
         <div class="home-header-card">
-          <div class="home-greeting-row">
-            <div>
-              <h1 id="welcomeGreetingTitle">Que bom vê-lo novamente 😊</h1>
-              <div id="greetingMoodSubtitle" class="section-sub">Humor do dia: 😊 Motivado(a)</div>
-            </div>
-
-            <div class="home-clock-inline" aria-label="Relógio digital">
-              <div class="home-clock-inline-label">Horário atual</div>
-              <div id="homeDigitalClock" class="home-clock-inline-time">--:--:--</div>
-            </div>
+          <div>
+            <h1 id="welcomeGreetingTitle">Que bom vê-lo novamente 😊</h1>
+            <div id="greetingMoodSubtitle" class="section-sub">Humor do dia: 😊 Motivado(a)</div>
           </div>
 
           <div class="field-group" style="min-width:200px;">
@@ -1855,7 +1649,7 @@
             <div id="dueSoonRemindersList"></div>
           </div>
 
-          <!-- BLOCO DE NOTAS E DICAS DESLIZÁVEIS -->
+          <!-- BLOCO DE NOTAS E DICAS -->
           <div class="panel-card">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
               <h2 style="margin:0;">Bloco de Notas</h2>
@@ -1866,16 +1660,8 @@
               <button type="button" id="saveNotepadBtn">Salvar nota</button>
               <button type="button" id="toggleEssentialTipsBtn">🙈 Ocultar Dicas Essenciais</button>
             </div>
-            <div id="essentialTipsContent" style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border-soft);">
-              <div class="tips-carousel-header">
-                <strong style="font-size:0.82rem;">Dicas Essenciais</strong>
-                <div class="tips-carousel-controls">
-                  <button type="button" id="prevTipSlideBtn" title="Dica anterior">‹</button>
-                  <span id="tipSlideCounter" class="section-sub">1 / 6</span>
-                  <button type="button" id="nextTipSlideBtn" title="Próxima dica">›</button>
-                </div>
-              </div>
-              <div id="essentialTipsTrack" class="tips-carousel-track" role="region" aria-label="Carrossel de dicas essenciais"></div>
+            <div id="essentialTipsContent" class="section-sub" style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border-soft);">
+              <strong>Dicas Essenciais:</strong> Defina datas nas tarefas para acompanhar prazos no calendário e alternar entre Kanban, Cronograma, Tabela e Gantt.
             </div>
           </div>
         </div>
@@ -2029,14 +1815,6 @@
               </select>
               <button type="button" class="primary" id="openNewTaskBtn">+ Nova tarefa</button>
             </div>
-          </div>
-
-          <div id="kanbanExtrasBar" class="kanban-extras-bar hidden">
-            <div class="kanban-add-col-form">
-              <input type="text" id="newKanbanColumnInput" placeholder="Nome da nova lista..." style="width:auto;min-width:190px;" />
-              <button type="button" class="primary" id="addKanbanColumnBtn">+ Nova lista</button>
-            </div>
-            <span class="section-sub">Clique no título de qualquer lista para renomear • Arraste com o cursor para os lados para ver mais listas</span>
           </div>
 
           <div id="viewKanban" class="kanban-board"></div>
@@ -2280,8 +2058,12 @@
             </select>
           </div>
           <div class="field-group">
-            <label for="taskCol">Lista / Status</label>
-            <select id="taskCol"></select>
+            <label for="taskCol">Coluna / Status</label>
+            <select id="taskCol">
+              <option value="todo">A fazer</option>
+              <option value="doing">Em andamento</option>
+              <option value="done">Concluída</option>
+            </select>
           </div>
         </div>
 
@@ -2368,12 +2150,12 @@
   </div>
 
   <script>
-    const DB_KEY = "em_dia_workspace_v19";
+    const DB_KEY = "em_dia_workspace_v18";
     const CONTACT_EMAIL = "maysa.araujo.contato@exemplo.com";
     const MAX_BOARDS = 10;
     const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
-    const DEFAULT_COLUMNS = [
+    const COLUMNS = [
       { id: "todo", title: "A fazer" },
       { id: "doing", title: "Em andamento" },
       { id: "done", title: "Concluída" }
@@ -2382,33 +2164,6 @@
     const DEFAULT_BOARD_TAGS = [
       { id: "tag_foco", name: "Foco", color: "#2563EB" },
       { id: "tag_revisao", name: "Revisão", color: "#16A34A" }
-    ];
-
-    const ESSENTIAL_TIPS = [
-      {
-        title: "1. Crie listas sob medida no Kanban",
-        text: "Adicione quantas listas quiser no seu quadro e renomeie cada coluna clicando sobre o título para espelhar o seu fluxo real."
-      },
-      {
-        title: "2. Navegue pelas listas arrastando o cursor",
-        text: "Quando houver várias listas lado a lado no Kanban, clique e arraste com o cursor para a direita ou para a esquerda para percorrer o quadro."
-      },
-      {
-        title: "3. Leia o calendário pelas cores do fundo",
-        text: "Cada data com tarefa ganha fundo colorido conforme o status: azul para a fazer, amarelo para andamento, verde para concluída e vermelho para atrasada."
-      },
-      {
-        title: "4. Antecipe prazos com os lembretes",
-        text: "Tarefas vencendo em até 3 dias ou já atrasadas aparecem nos lembretes da Home; clique em uma delas para ir direto ao quadro e card."
-      },
-      {
-        title: "5. Use o Bloco de Notas para rascunhos rápidos",
-        text: "Anote ideias, pautas ou avisos rápidos no Bloco de Notas da Home para não perder nada enquanto alterna entre quadros e tarefas."
-      },
-      {
-        title: "6. Alterne entre Kanban, Cronograma, Tabela e Gantt",
-        text: "Mude o modo de visualização na barra do quadro para ver prazos em ordem cronológica, editar em linha na tabela ou acompanhar durações no Gantt."
-      }
     ];
 
     const EMOJI_LIST = [
@@ -2550,11 +2305,6 @@
         isAuthenticated: false,
         authTab: "login",
         screen: "home",
-        cookieConsent: null,
-        savedCredentials: {
-          email: "",
-          password: ""
-        },
         user: {
           name: "",
           username: "",
@@ -2579,7 +2329,6 @@
         },
         notepadText: "",
         essentialTipsVisible: true,
-        tipSlideIndex: 0,
         insightsVisible: true,
         calendarOffsetMonths: 0,
         activeBoardId: null,
@@ -2613,16 +2362,6 @@
       }));
     }
 
-    function normalizeBoardColumns(rawCols) {
-      if (!Array.isArray(rawCols) || !rawCols.length) {
-        return DEFAULT_COLUMNS.map((c) => ({ ...c }));
-      }
-      return rawCols.map((c, idx) => ({
-        id: c.id || ("col_" + idx + "_" + Date.now()),
-        title: String(c.title || `Lista ${idx + 1}`)
-      }));
-    }
-
     function loadState() {
       try {
         const raw = localStorage.getItem(DB_KEY);
@@ -2634,7 +2373,6 @@
               ...b,
               color: /^#[0-9A-Fa-f]{6}$/.test(b.color || "") ? b.color : "#111111",
               coverImage: b.coverImage || "",
-              columns: normalizeBoardColumns(b.columns),
               availableTags: Array.isArray(b.availableTags) && b.availableTags.length
                 ? normalizeTaskTags(b.availableTags)
                 : DEFAULT_BOARD_TAGS.map((t) => ({ ...t })),
@@ -2656,11 +2394,6 @@
         return {
           ...def,
           ...parsed,
-          cookieConsent: parsed.cookieConsent ?? null,
-          savedCredentials: {
-            email: parsed.savedCredentials?.email || parsed.user?.email || "",
-            password: parsed.savedCredentials?.password || parsed.user?.password || ""
-          },
           user: {
             ...def.user,
             ...(parsed.user || {}),
@@ -2713,18 +2446,6 @@
       return state.boards.find((b) => b.id === state.activeBoardId) || state.boards[0];
     }
 
-    function getBoardColumns(board) {
-      if (!board) return DEFAULT_COLUMNS.map((c) => ({ ...c }));
-      board.columns = normalizeBoardColumns(board.columns);
-      return board.columns;
-    }
-
-    function getDoneColumnId(board) {
-      const cols = getBoardColumns(board);
-      const doneCol = cols.find((c) => c.id === "done" || c.title.toLowerCase().includes("conclu"));
-      return doneCol ? doneCol.id : cols[cols.length - 1]?.id || "done";
-    }
-
     function getCurrentUserRole(board) {
       if (!board) return "Administrador";
       const currentName = String(state.user.name || "").trim().toLowerCase();
@@ -2764,23 +2485,18 @@
       return Math.round((utcDue - utcToday) / 86400000);
     }
 
-    function isTaskDone(task, board = null) {
-      const doneId = getDoneColumnId(board);
-      return task.col === "done" || task.col === doneId;
-    }
-
-    function isTaskOverdue(task, board = null) {
-      if (!task.dueDate || isTaskDone(task, board)) return false;
+    function isTaskOverdue(task) {
+      if (!task.dueDate || task.col === "done") return false;
       const diff = diffDaysFromToday(task.dueDate);
       return diff !== null && diff < 0;
     }
 
-    function getDeadlineInfo(task, board = null) {
+    function getDeadlineInfo(task) {
       if (!task.dueDate) {
         return { text: "Sem data", className: "due-none" };
       }
       const diff = diffDaysFromToday(task.dueDate);
-      if (isTaskDone(task, board)) {
+      if (task.col === "done") {
         return { text: `Concluída (${formatDateBr(task.dueDate)})`, className: "due-none" };
       }
       if (diff < 0) {
@@ -2813,20 +2529,20 @@
       return `<span class="${sizeClass}" aria-label="${escapeHtml(name || "Perfil")}">👤</span>`;
     }
 
-    /* RELÓGIO DIGITAL */
-    function updateDigitalClocks() {
+    /* RELÓGIO DIGITAL MINIMALISTA */
+    function updateMinimalDigitalClock() {
+      const clockEl = document.getElementById("minimalDigitalClock");
+      if (!clockEl) return;
       const now = new Date();
-      const formatted = now.toLocaleTimeString("pt-BR", {
+      clockEl.textContent = now.toLocaleTimeString("pt-BR", {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit"
       });
-      const homeClockEl = document.getElementById("homeDigitalClock");
-      if (homeClockEl) homeClockEl.textContent = formatted;
     }
 
-    setInterval(updateDigitalClocks, 1000);
-    updateDigitalClocks();
+    setInterval(updateMinimalDigitalClock, 1000);
+    updateMinimalDigitalClock();
 
     /* VERIFICAÇÃO ORTOGRÁFICA AO DIGITAR */
     function checkSpellingAndRender(inputEl) {
@@ -2893,7 +2609,7 @@
       e.target.reset();
     });
 
-    /* PÚBLICO: PÁGINA INICIAL + LOGIN (COOKIES + DADOS SALVOS) / CRIAR CONTA */
+    /* PÚBLICO: PÁGINA INICIAL + LOGIN / CRIAR CONTA */
     const publicAreaEl = document.getElementById("publicArea");
     const landingPageViewEl = document.getElementById("landingPageView");
     const authScreenEl = document.getElementById("authScreen");
@@ -2908,56 +2624,6 @@
 
     regPrivacyEl.addEventListener("change", syncRegisterPrivacyGate);
 
-    function renderCookieStatus() {
-      const statusEl = document.getElementById("cookieChoiceStatus");
-      if (!statusEl) return;
-      if (state.cookieConsent === "accepted") {
-        statusEl.textContent = "Status atual: Cookies aceitos (dados de acesso salvos)";
-      } else if (state.cookieConsent === "rejected") {
-        statusEl.textContent = "Status atual: Cookies recusados";
-      } else {
-        statusEl.textContent = "Status atual: Não definido";
-      }
-    }
-
-    function populateSavedLoginForm() {
-      const savedEmail = state.savedCredentials?.email || state.user.email || "";
-      const savedPassword = state.savedCredentials?.password || state.user.password || "";
-      const loginEmailInput = document.getElementById("loginEmail");
-      const loginPasswordInput = document.getElementById("loginPassword");
-      const hintEl = document.getElementById("loginSavedAccountHint");
-
-      loginEmailInput.value = savedEmail;
-      loginPasswordInput.value = savedPassword;
-      document.getElementById("loginSecurityRow").classList.toggle("hidden", !state.user.pin);
-
-      if (savedEmail) {
-        hintEl.textContent = `Conta salva pronta para login: ${savedEmail}`;
-        hintEl.classList.remove("hidden");
-      } else {
-        hintEl.textContent = "";
-        hintEl.classList.add("hidden");
-      }
-      renderCookieStatus();
-    }
-
-    document.getElementById("acceptCookiesBtn").addEventListener("click", () => {
-      state.cookieConsent = "accepted";
-      const emailVal = document.getElementById("loginEmail").value.trim() || state.user.email || "";
-      const passVal = document.getElementById("loginPassword").value || state.user.password || "";
-      if (emailVal || passVal) {
-        state.savedCredentials = { email: emailVal, password: passVal };
-      }
-      saveState();
-      renderCookieStatus();
-    });
-
-    document.getElementById("rejectCookiesBtn").addEventListener("click", () => {
-      state.cookieConsent = "rejected";
-      saveState();
-      renderCookieStatus();
-    });
-
     function showLandingView() {
       landingPageViewEl.classList.remove("hidden");
       authScreenEl.classList.add("hidden");
@@ -2967,7 +2633,6 @@
       landingPageViewEl.classList.add("hidden");
       authScreenEl.classList.remove("hidden");
       setAuthTab(tab);
-      populateSavedLoginForm();
       syncRegisterPrivacyGate();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -2979,9 +2644,6 @@
       document.getElementById("tabRegisterBtn").classList.toggle("active", !isLogin);
       document.getElementById("loginForm").classList.toggle("hidden", !isLogin);
       document.getElementById("registerForm").classList.toggle("hidden", isLogin);
-      if (isLogin) {
-        populateSavedLoginForm();
-      }
       syncRegisterPrivacyGate();
     }
 
@@ -2994,7 +2656,8 @@
       } else {
         publicAreaEl.classList.remove("hidden");
         appShellEl.classList.add("hidden");
-        populateSavedLoginForm();
+        document.getElementById("loginEmail").value = state.user.email || "";
+        document.getElementById("loginSecurityRow").classList.toggle("hidden", !state.user.pin);
         syncRegisterPrivacyGate();
       }
     }
@@ -3015,11 +2678,12 @@
       if (!state.user.name) state.user.name = "Usuário Google";
       if (!state.user.email) state.user.email = "usuario.google@gmail.com";
       state.user.username = buildUsernameFromName(state.user.name, state.user.email);
-      state.savedCredentials = {
-        email: state.user.email,
-        password: state.user.password || "google-auth"
-      };
-      if (!state.cookieConsent) state.cookieConsent = "accepted";
+      state.user.about = "";
+      state.user.avatarUrl = "";
+      tempUserAvatar = "";
+      state.boards = [];
+      state.activeBoardId = null;
+      state.notepadText = "";
       state.isAuthenticated = true;
       state.screen = "home";
       saveState();
@@ -3035,28 +2699,7 @@
           return;
         }
       }
-      const typedEmail = document.getElementById("loginEmail").value.trim();
-      const typedPassword = document.getElementById("loginPassword").value;
-
-      if (typedEmail) {
-        state.user.email = typedEmail;
-        if (!state.user.name) {
-          state.user.name = typedEmail.split("@")[0];
-        }
-        if (!state.user.username) {
-          state.user.username = buildUsernameFromName(state.user.name, typedEmail);
-        }
-      }
-      if (typedPassword) {
-        state.user.password = typedPassword;
-      }
-      state.savedCredentials = {
-        email: state.user.email,
-        password: state.user.password
-      };
-      if (!state.cookieConsent) {
-        state.cookieConsent = "accepted";
-      }
+      state.user.email = document.getElementById("loginEmail").value.trim() || state.user.email;
       state.isAuthenticated = true;
       state.screen = "home";
       saveState();
@@ -3078,8 +2721,6 @@
       state.user.password = password;
       state.user.updatesConsent = document.getElementById("regUpdatesConsent").checked;
       state.user.privacyAccepted = true;
-      state.savedCredentials = { email, password };
-      if (!state.cookieConsent) state.cookieConsent = "accepted";
       tempUserAvatar = "";
 
       state.boards = [];
@@ -3095,12 +2736,6 @@
     });
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
-      if (state.user.email) {
-        state.savedCredentials = {
-          email: state.user.email,
-          password: state.user.password || ""
-        };
-      }
       state.isAuthenticated = false;
       state.highlightedTaskId = null;
       regPrivacyEl.checked = false;
@@ -3281,10 +2916,6 @@
       if (tempUserAvatar) {
         state.user.avatarUrl = tempUserAvatar;
       }
-      state.savedCredentials = {
-        email: state.user.email,
-        password: state.user.password || state.savedCredentials?.password || ""
-      };
 
       state.boards.forEach((b) => {
         const me = (b.members || []).find(
@@ -3304,7 +2935,2124 @@
 
     document.getElementById("saveSecurityBtn").addEventListener("click", () => {
       const newPass = document.getElementById("secPassword").value;
-      if (newPass) {
-        state.user.password = newPass;
-        state.savedCredentials = {
-          email
+      if (newPass) state.user.password = newPass;
+      state.user.pin = document.getElementById("secPin").value.trim();
+      document.getElementById("secPassword").value = "";
+      saveState();
+      alert("Segurança salva.");
+    });
+
+    document.getElementById("saveNotifBtn").addEventListener("click", () => {
+      state.user.notifications = {
+        push: document.getElementById("notifPush").checked,
+        email: document.getElementById("notifEmail").checked,
+        desktop: document.getElementById("notifDesktop").checked
+      };
+      saveState();
+      alert("Notificações salvas.");
+    });
+
+    document.getElementById("customWallpaper").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        tempWallpaperData = String(reader.result || "");
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("clearWallpaperBtn").addEventListener("click", () => {
+      tempWallpaperData = "";
+      document.getElementById("customWallpaper").value = "";
+      state.user.customization.wallpaper = "";
+      applyThemeAndAccent();
+      saveState();
+    });
+
+    document.getElementById("saveCustomBtn").addEventListener("click", () => {
+      const typedCode = document.getElementById("customColorCode").value.trim();
+      const pickerVal = document.getElementById("customColorPicker").value;
+      const chosenColor = /^#[0-9A-Fa-f]{6}$/.test(typedCode) ? typedCode : pickerVal;
+
+      state.user.customization = {
+        theme: document.getElementById("customTheme").value || "light",
+        accentColor: chosenColor,
+        wallpaper: tempWallpaperData
+      };
+      applyThemeAndAccent();
+      saveState();
+      renderAll();
+    });
+
+    /* BLOCO DE NOTAS E DICAS */
+    const quickNotepadEl = document.getElementById("quickNotepadTextarea");
+    document.getElementById("saveNotepadBtn").addEventListener("click", () => {
+      state.notepadText = quickNotepadEl.value;
+      saveState();
+      document.getElementById("notepadSavedStatus").textContent = "Salvo agora";
+    });
+
+    quickNotepadEl.addEventListener("input", () => {
+      state.notepadText = quickNotepadEl.value;
+      saveState();
+      document.getElementById("notepadSavedStatus").textContent = "Salvo";
+    });
+
+    document.getElementById("toggleEssentialTipsBtn").addEventListener("click", () => {
+      state.essentialTipsVisible = !state.essentialTipsVisible;
+      saveState();
+      renderEssentialTipsVisibility();
+    });
+
+    function renderEssentialTipsVisibility() {
+      const contentEl = document.getElementById("essentialTipsContent");
+      const btnEl = document.getElementById("toggleEssentialTipsBtn");
+      contentEl.classList.toggle("hidden", !state.essentialTipsVisible);
+      btnEl.textContent = state.essentialTipsVisible ? "🙈 Ocultar Dicas Essenciais" : "👁️ Mostrar Dicas Essenciais";
+    }
+
+    /* CALENDÁRIO COLORIDO POR STATUS E LEMBRETES */
+    document.getElementById("prevMonthBtn").addEventListener("click", () => {
+      state.calendarOffsetMonths -= 1;
+      saveState();
+      renderMiniCalendar();
+    });
+
+    document.getElementById("nextMonthBtn").addEventListener("click", () => {
+      state.calendarOffsetMonths += 1;
+      saveState();
+      renderMiniCalendar();
+    });
+
+    function getStatusColorForTask(task) {
+      if (isTaskOverdue(task)) return "#DC2626";
+      if (task.col === "done") return "#16A34A";
+      if (task.col === "doing") return "#EAB308";
+      return "#2563EB";
+    }
+
+    function renderMiniCalendar() {
+      const base = new Date();
+      base.setDate(1);
+      base.setMonth(base.getMonth() + (state.calendarOffsetMonths || 0));
+
+      const year = base.getFullYear();
+      const month = base.getMonth();
+      const firstWeekday = base.getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayIso = getTodayIso();
+
+      const monthName = base.toLocaleDateString("pt-BR", { month: "short", year: "numeric" });
+      document.getElementById("calendarMonthLabel").textContent =
+        monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+      const colorsByDate = {};
+      state.boards.forEach((b) => {
+        (b.tasks || []).forEach((t) => {
+          if (!t.dueDate) return;
+          if (!colorsByDate[t.dueDate]) colorsByDate[t.dueDate] = [];
+          colorsByDate[t.dueDate].push(getStatusColorForTask(t));
+        });
+      });
+
+      const dows = ["D", "S", "T", "Q", "Q", "S", "S"];
+      let html = dows.map((d) => `<div class="cal-dow">${d}</div>`).join("");
+
+      for (let i = 0; i < firstWeekday; i++) {
+        html += `<div class="cal-day empty-day"></div>`;
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const mm = String(month + 1).padStart(2, "0");
+        const dd = String(day).padStart(2, "0");
+        const iso = `${year}-${mm}-${dd}`;
+        const dateColors = colorsByDate[iso] || [];
+        const isToday = iso === todayIso;
+
+        html += `
+          <div class="cal-day ${isToday ? "today-ring" : ""}">
+            <span>${day}</span>
+            <div class="cal-dots">
+              ${dateColors.slice(0, 4).map((colHex) => `<span class="cal-dot" style="background:${colHex};"></span>`).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById("miniCalendarGrid").innerHTML = html;
+    }
+
+    function renderDueSoonReminders() {
+      const listEl = document.getElementById("dueSoonRemindersList");
+      const dueSoon = [];
+
+      state.boards.forEach((b) => {
+        (b.tasks || []).forEach((t) => {
+          if (!t.dueDate || t.col === "done") return;
+          const diff = diffDaysFromToday(t.dueDate);
+          if (diff <= 3) {
+            dueSoon.push({ board: b, task: t, diff });
+          }
+        });
+      });
+
+      dueSoon.sort((a, b) => a.diff - b.diff);
+
+      if (!dueSoon.length) {
+        listEl.innerHTML = `<div class="section-sub" style="margin-top:8px;">Nenhum lembrete pendente.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = dueSoon
+        .map(({ board, task, diff }) => {
+          let label = `Faltam ${diff} ${diff === 1 ? "dia" : "dias"}`;
+          let cls = "due-upcoming";
+          if (diff < 0) {
+            const atraso = Math.abs(diff);
+            label = `ATRASADO (${atraso} ${atraso === 1 ? "dia" : "dias"})`;
+            cls = "due-late";
+          } else if (diff === 0) {
+            label = "Vence hoje";
+            cls = "due-today";
+          }
+
+          return `
+            <div class="reminder-item" data-reminder-board="${board.id}" data-reminder-task="${task.id}" role="button" tabindex="0">
+              <div>
+                <strong>${escapeHtml(task.title)}</strong>
+                <div class="section-sub">${escapeHtml(board.name)} • ${formatDateBr(task.dueDate)}</div>
+              </div>
+              <span class="due-badge ${cls}">${escapeHtml(label)}</span>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    document.getElementById("dueSoonRemindersList").addEventListener("click", (e) => {
+      const item = e.target.closest("[data-reminder-board][data-reminder-task]");
+      if (!item) return;
+      openBoardPage(item.dataset.reminderBoard, item.dataset.reminderTask);
+    });
+
+    /* CRIAR QUADRO */
+    const createBoardDialogEl = document.getElementById("createBoardDialog");
+    const createBoardFormEl = document.getElementById("createBoardForm");
+
+    document.getElementById("createBoardBtn").addEventListener("click", () => {
+      if (state.boards.length >= MAX_BOARDS) {
+        alert(`Limite máximo de ${MAX_BOARDS} quadros atingido.`);
+        return;
+      }
+      document.getElementById("newBoardNameInput").value = "";
+      document.getElementById("newBoardDescInput").value = "";
+      createBoardDialogEl.showModal();
+      document.getElementById("newBoardNameInput").focus();
+    });
+
+    document.getElementById("cancelCreateBoardBtn").addEventListener("click", () => {
+      createBoardDialogEl.close();
+    });
+
+    createBoardFormEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (state.boards.length >= MAX_BOARDS) return;
+      const name = document.getElementById("newBoardNameInput").value.trim();
+      if (!name) return;
+      const desc = document.getElementById("newBoardDescInput").value.trim() || "Clique para abrir.";
+
+      const newBoard = {
+        id: "b_" + Date.now(),
+        name,
+        desc,
+        color: "#111111",
+        coverImage: "",
+        availableTags: DEFAULT_BOARD_TAGS.map((t) => ({ ...t })),
+        members: [
+          {
+            id: "m_" + Date.now(),
+            name: state.user.name || "Você",
+            handle: state.user.username || "",
+            email: state.user.email || "",
+            role: "Administrador",
+            avatarUrl: state.user.avatarUrl || ""
+          }
+        ],
+        tasks: []
+      };
+      state.boards.push(newBoard);
+      state.activeBoardId = newBoard.id;
+      saveState();
+      createBoardDialogEl.close();
+      renderAll();
+    });
+
+    function renderBoardsList() {
+      document.getElementById("boardsLimitText").textContent = `${state.boards.length} / ${MAX_BOARDS} quadros`;
+      const listEl = document.getElementById("boardsList");
+      if (!state.boards.length) {
+        listEl.innerHTML = `<div class="section-sub" style="grid-column:1/-1;padding:12px 0;">Nenhum quadro criado ainda. Clique em <strong>+ Novo quadro</strong> para começar.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = state.boards
+        .map((b) => {
+          const bColor = /^#[0-9A-Fa-f]{6}$/.test(b.color || "") ? b.color : "#111111";
+          const coverHtml = b.coverImage
+            ? `<img src="${b.coverImage}" alt="${escapeHtml(b.name)}" class="board-cover-img" />`
+            : "";
+          return `
+            <div class="board-tile" data-open-board="${b.id}">
+              <div class="board-strip" style="background:${bColor};"></div>
+              ${coverHtml}
+              <div class="board-tile-body">
+                <h3 class="board-tile-title">${escapeHtml(b.name)}</h3>
+                <p class="board-tile-desc">${escapeHtml(b.desc || "Clique para abrir")}</p>
+                <div class="board-tile-foot">
+                  <span>${(b.members || []).length} membro(s)</span>
+                  <span style="font-weight:700;">Abrir →</span>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    document.getElementById("boardsList").addEventListener("click", (e) => {
+      const tile = e.target.closest("[data-open-board]");
+      if (!tile) return;
+      openBoardPage(tile.dataset.openBoard);
+    });
+
+    /* TÓPICO TENHA EM MENTE */
+    function renderTenhaEmMente(board) {
+      if (!board) return;
+      const tasks = board.tasks || [];
+      const total = tasks.length;
+      const atrasadas = tasks.filter((t) => isTaskOverdue(t)).length;
+      const aFazer = tasks.filter((t) => t.col === "todo").length;
+      const concluidas = tasks.filter((t) => t.col === "done").length;
+      const emAndamento = tasks.filter((t) => t.col === "doing").length;
+
+      const pctTodo = total ? Math.round((aFazer / total) * 100) : 0;
+      const pctDone = total ? Math.round((concluidas / total) * 100) : 0;
+
+      let message = "";
+      let context = "";
+
+      if (atrasadas > 0 || pctTodo >= 90) {
+        message = "Respire fundo com serenidade: cada passo calmo e bem planejado coloca o seu dia nos trilhos, sem pressa excessiva, apenas com organização e constância.";
+        context = atrasadas > 0 ? `Atividades atrasadas: ${atrasadas}` : `A fazer: ${pctTodo}%`;
+      } else if (pctDone >= 90 || (total > 0 && concluidas > atrasadas && concluidas >= emAndamento)) {
+        message = "Continue acreditando que você é capaz de fazer acontecer.";
+        context = `Concluídas: ${concluidas} (${pctDone}%)`;
+      } else if (emAndamento > 0) {
+        message = "Confie no processo.";
+        context = `Em andamento: ${emAndamento} • A fazer: ${aFazer} • Concluídas: ${concluidas}`;
+      } else {
+        message = "Confie no processo.";
+        context = total === 0 ? "Adicione sua primeira tarefa para começar" : `Total: ${total} tarefa(s)`;
+      }
+
+      document.getElementById("tenhaEmMenteMessage").textContent = message;
+      document.getElementById("tenhaEmMenteContext").textContent = context;
+    }
+
+    /* DASHBOARD */
+    const insightsContentEl = document.getElementById("insightsContent");
+    const toggleInsightsBtn = document.getElementById("toggleInsightsBtn");
+
+    toggleInsightsBtn.addEventListener("click", () => {
+      state.insightsVisible = !state.insightsVisible;
+      saveState();
+      renderInsightsAndCharts();
+    });
+
+    function getFilteredBoardTasks(board) {
+      if (!board) return [];
+      const term = document.getElementById("searchInput").value.trim().toLowerCase();
+      const prio = document.getElementById("priorityFilter").value;
+      const assignee = document.getElementById("assigneeFilter").value;
+      const status = document.getElementById("statusFilter").value;
+      return (board.tasks || []).filter((t) => {
+        const matchText =
+          !term ||
+          (t.title || "").toLowerCase().includes(term) ||
+          (t.desc || "").toLowerCase().includes(term);
+        const matchPrio = prio === "todas" || t.priority === prio;
+        const matchAssignee = assignee === "todos" || (assignee === "sem-responsavel" ? !t.assigneeId : (t.assigneeId || "") === assignee);
+        const matchStatus = status === "todos" ||
+          (status === "overdue" ? isTaskOverdue(t) : t.col === status);
+        return matchText && matchPrio && matchAssignee && matchStatus;
+      });
+    }
+
+    function refreshAssigneeFilter(board) {
+      const select = document.getElementById("assigneeFilter");
+      if (!board) {
+        select.innerHTML = `<option value="todos">Todos os responsáveis</option>`;
+        return;
+      }
+      const previous = select.value;
+      const options = (board.members || []).map((member) =>
+        `<option value="${escapeHtml(member.id)}">${escapeHtml(member.name)}</option>`
+      ).join("");
+      select.innerHTML = `<option value="todos">Todos os responsáveis</option>${options}<option value="sem-responsavel">Sem responsável</option>`;
+      select.value = previous === "sem-responsavel" || previous === "todos" ||
+        (board.members || []).some((member) => member.id === previous) ? previous : "todos";
+    }
+
+    function renderBarChartCard(title, segments, total) {
+      const pct = (val) => (total ? Math.round((val / total) * 100) : 0);
+      return `
+        <div class="chart-box">
+          <h3 class="chart-title">${escapeHtml(title)}</h3>
+          ${segments.map((s) => `
+            <div class="bar-row">
+              <div class="bar-label-line"><span>${escapeHtml(s.label)}</span><strong>${s.value} (${pct(s.value)}%)</strong></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${pct(s.value)}%;background:${s.color};"></div></div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderPieChartCard(title, segments, total) {
+      const cx = 64;
+      const cy = 64;
+      const r = 52;
+      let startAngle = -90;
+      let slicesSvg = "";
+
+      if (!total) {
+        slicesSvg = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--border-soft)" />`;
+      } else {
+        segments.forEach((seg) => {
+          if (!seg.value) return;
+          const angle = (seg.value / total) * 360;
+          if (angle >= 359.99) {
+            slicesSvg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${seg.color}" stroke="var(--surface)" stroke-width="1.5" />`;
+          } else {
+            const endAngle = startAngle + angle;
+            const startRad = (startAngle * Math.PI) / 180;
+            const endRad = (endAngle * Math.PI) / 180;
+            const x1 = cx + r * Math.cos(startRad);
+            const y1 = cy + r * Math.sin(startRad);
+            const x2 = cx + r * Math.cos(endRad);
+            const y2 = cy + r * Math.sin(endRad);
+            const largeArc = angle > 180 ? 1 : 0;
+            slicesSvg += `
+              <path
+                d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z"
+                fill="${seg.color}"
+                stroke="var(--surface)"
+                stroke-width="1.5"
+              />
+            `;
+            startAngle = endAngle;
+          }
+        });
+      }
+
+      const pct = (val) => (total ? Math.round((val / total) * 100) : 0);
+
+      return `
+        <div class="chart-box">
+          <h3 class="chart-title">${escapeHtml(title)}</h3>
+          <div class="pie-chart-layout">
+            <svg class="pie-svg" viewBox="0 0 128 128" role="img" aria-label="${escapeHtml(title)}">
+              ${slicesSvg}
+            </svg>
+            <div class="pie-legend">
+              ${segments.map((s) => `
+                <div class="pie-legend-row">
+                  <span style="display:inline-flex;align-items:center;gap:6px;">
+                    <span class="pie-swatch" style="background:${s.color};"></span>
+                    <span>${escapeHtml(s.label)}</span>
+                  </span>
+                  <strong>${s.value} (${pct(s.value)}%)</strong>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderInsightsAndCharts() {
+      toggleInsightsBtn.textContent = state.insightsVisible ? "🙈 Ocultar Dashboard" : "👁️ Mostrar Dashboard";
+      insightsContentEl.classList.toggle("hidden", !state.insightsVisible);
+      if (!state.insightsVisible) return;
+
+      const board = getActiveBoard();
+      if (!board) return;
+      const filtered = getFilteredBoardTasks(board);
+      const total = filtered.length;
+      const alta = filtered.filter((t) => t.priority === "alta").length;
+      const media = filtered.filter((t) => t.priority === "media").length;
+      const baixa = filtered.filter((t) => t.priority === "baixa").length;
+
+      const todoCount = filtered.filter((t) => t.col === "todo").length;
+      const doingCount = filtered.filter((t) => t.col === "doing").length;
+      const doneCount = filtered.filter((t) => t.col === "done").length;
+      const overdueCount = filtered.filter((t) => isTaskOverdue(t)).length;
+
+      document.getElementById("insightsSummaryText").textContent = `${total} tarefa(s)`;
+
+      document.getElementById("insightsGrid").innerHTML = `
+        <div class="insight-card">
+          <span class="insight-label">Total de Tarefas</span>
+          <span class="insight-value">${total}</span>
+          <span class="insight-meta">${board.tasks.length} no quadro</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Alta</span>
+          <span class="insight-value">${alta}</span>
+          <span class="insight-meta">Alta</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Média</span>
+          <span class="insight-value">${media}</span>
+          <span class="insight-meta">Média</span>
+        </div>
+        <div class="insight-card">
+          <span class="insight-label">Prioridade Baixa</span>
+          <span class="insight-value">${baixa}</span>
+          <span class="insight-meta">Baixa</span>
+        </div>
+      `;
+
+      const prioSegments = [
+        { label: "Alta", value: alta, color: "#E11D48" },
+        { label: "Média", value: media, color: "#7C3AED" },
+        { label: "Baixa", value: baixa, color: "#0EA5E9" }
+      ];
+
+      const statusSegments = [
+        { label: "Tarefas Concluídas", value: doneCount, color: "#16A34A" },
+        { label: "Tarefas em Andamento", value: doingCount, color: "#EAB308" },
+        { label: "Atrasados", value: overdueCount, color: "#DC2626" },
+        { label: "Tarefas Pendentes", value: todoCount, color: "#2563EB" }
+      ];
+
+      document.getElementById("chartsGrid").innerHTML =
+        renderPieChartCard("Prioridade (Gráfico de Pizza)", prioSegments, total) +
+        renderBarChartCard("Status (Gráfico de Barras)", statusSegments, total);
+    }
+
+    /* INFORMAÇÕES DO QUADRO, EXCLUIR QUADRO E MEMBROS */
+    const boardEditPanelEl = document.getElementById("boardEditPanel");
+    const permissionsPanelEl = document.getElementById("permissionsPanel");
+    const editBoardColorInputEl = document.getElementById("editBoardColorInput");
+    const editBoardColorHexEl = document.getElementById("editBoardColorHex");
+    const boardCoverPreviewBoxEl = document.getElementById("boardCoverPreviewBox");
+
+    function renderBoardCoverPreview() {
+      boardCoverPreviewBoxEl.innerHTML = tempBoardCoverImage
+        ? `Capa selecionada:<img src="${tempBoardCoverImage}" class="cover-preview-img" alt="Capa do quadro" />`
+        : "Nenhuma capa selecionada.";
+    }
+
+    editBoardColorInputEl.addEventListener("input", () => {
+      editBoardColorHexEl.textContent = editBoardColorInputEl.value.toUpperCase();
+    });
+
+    document.getElementById("editBoardCoverInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        tempBoardCoverImage = String(reader.result || "");
+        renderBoardCoverPreview();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("toggleBoardEditBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      if (!board) return;
+      if (!canManageBoard(board)) {
+        alert("Apenas Administradores podem editar as informações do quadro.");
+        return;
+      }
+      permissionsPanelEl.classList.add("hidden");
+      boardEditPanelEl.classList.toggle("hidden");
+      document.getElementById("editBoardNameInput").value = board.name;
+      document.getElementById("editBoardDescInput").value = board.desc || "";
+      const colorHex = /^#[0-9A-Fa-f]{6}$/.test(board.color || "") ? board.color : "#111111";
+      editBoardColorInputEl.value = colorHex;
+      editBoardColorHexEl.textContent = colorHex.toUpperCase();
+      tempBoardCoverImage = board.coverImage || "";
+      document.getElementById("editBoardCoverInput").value = "";
+      renderBoardCoverPreview();
+    });
+
+    document.getElementById("closeBoardEditBtn").addEventListener("click", () => {
+      boardEditPanelEl.classList.add("hidden");
+    });
+
+    document.getElementById("saveBoardInfoBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      if (!board || !canManageBoard(board)) return;
+      const name = document.getElementById("editBoardNameInput").value.trim();
+      if (!name) return;
+      board.name = name;
+      board.desc = document.getElementById("editBoardDescInput").value.trim();
+      board.color = editBoardColorInputEl.value;
+      board.coverImage = tempBoardCoverImage;
+      saveState();
+      boardEditPanelEl.classList.add("hidden");
+      renderAll();
+    });
+
+    function deleteActiveBoard() {
+      const board = getActiveBoard();
+      if (!board) return;
+      if (!canManageBoard(board)) {
+        alert("Apenas Administradores podem excluir este quadro.");
+        return;
+      }
+      const ok = confirm(`Deseja realmente excluir o quadro "${board.name}"?`);
+      if (!ok) return;
+
+      state.boards = state.boards.filter((b) => b.id !== board.id);
+      state.activeBoardId = state.boards[0]?.id || null;
+      state.selectedTableTaskId = null;
+      state.highlightedTaskId = null;
+      state.screen = "home";
+      boardEditPanelEl.classList.add("hidden");
+      permissionsPanelEl.classList.add("hidden");
+      hideDatePopover();
+
+      saveState();
+      renderAll();
+    }
+
+    document.getElementById("excludeBoardInfoBtn").addEventListener("click", deleteActiveBoard);
+    document.getElementById("deleteBoardTopBtn").addEventListener("click", deleteActiveBoard);
+
+    document.getElementById("togglePermissionsBtn").addEventListener("click", () => {
+      boardEditPanelEl.classList.add("hidden");
+      permissionsPanelEl.classList.toggle("hidden");
+      renderMembersPanel();
+    });
+
+    document.getElementById("addMemberBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      if (!board || !canManageBoard(board)) {
+        alert("Apenas Administradores podem adicionar membros.");
+        return;
+      }
+      const rawInput = document.getElementById("newMemberName").value.trim();
+      const role = document.getElementById("newMemberRole").value;
+      if (!rawInput) return;
+
+      const normalized = rawInput.replace(/^@/, "").toLowerCase();
+      const isMeByHandleOrEmail =
+        (state.user.username && normalized === state.user.username.toLowerCase()) ||
+        (state.user.email && normalized === state.user.email.toLowerCase());
+
+      const memberName = isMeByHandleOrEmail ? state.user.name : rawInput;
+      const memberHandle = isMeByHandleOrEmail
+        ? state.user.username
+        : (!rawInput.includes("@") ? rawInput.slice(0, 12) : "");
+      const memberEmail = rawInput.includes("@")
+        ? rawInput
+        : (isMeByHandleOrEmail ? state.user.email : "");
+
+      board.members.push({
+        id: "m_" + Date.now(),
+        name: memberName,
+        handle: memberHandle,
+        email: memberEmail,
+        role,
+        avatarUrl: isMeByHandleOrEmail ? (state.user.avatarUrl || "") : ""
+      });
+      document.getElementById("newMemberName").value = "";
+      saveState();
+      renderMembersPanel();
+    });
+
+    function renderMembersPanel() {
+      const board = getActiveBoard();
+      if (!board) return;
+      const allowAdmin = canManageBoard(board);
+      document.getElementById("membersList").innerHTML = (board.members || [])
+        .map((m) => `
+          <div class="member-row">
+            <div class="member-info">
+              ${renderAvatarHtml(m.name, m.avatarUrl, "avatar-sm")}
+              <div>
+                <div style="font-weight:700;font-size:0.88rem;">${escapeHtml(m.name)}</div>
+                <div class="section-sub">
+                  ${escapeHtml(m.role)}
+                  ${m.handle ? ` • @${escapeHtml(m.handle)}` : ""}
+                  ${m.email ? ` • ${escapeHtml(m.email)}` : ""}
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+              <label style="font-size:0.78rem;font-weight:600;cursor:${allowAdmin ? "pointer" : "not-allowed"};background:var(--surface-2);border:1px solid var(--border);padding:5px 8px;border-radius:6px;">
+                📷 Foto
+                <input type="file" accept="image/*" data-member-avatar="${m.id}" style="display:none;" ${allowAdmin ? "" : "disabled"} />
+              </label>
+              <select data-member-role="${m.id}" style="width:auto;" ${allowAdmin ? "" : "disabled"}>
+                <option value="Administrador" ${m.role === "Administrador" ? "selected" : ""}>Administrador</option>
+                <option value="Membro" ${m.role === "Membro" ? "selected" : ""}>Membro</option>
+                <option value="Analista" ${m.role === "Analista" ? "selected" : ""}>Analista</option>
+              </select>
+              ${board.members.length > 1 ? `<button type="button" class="danger" data-remove-member="${m.id}" ${allowAdmin ? "" : "disabled"}>Remover</button>` : ""}
+            </div>
+          </div>
+        `)
+        .join("");
+    }
+
+    document.getElementById("membersList").addEventListener("change", (e) => {
+      const board = getActiveBoard();
+      if (!board || !canManageBoard(board)) return;
+
+      const avatarMemberId = e.target.dataset.memberAvatar;
+      if (avatarMemberId) {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const member = board.members.find((m) => m.id === avatarMemberId);
+        if (!member) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          member.avatarUrl = String(reader.result || "");
+          saveState();
+          renderAll();
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
+      const roleMemberId = e.target.dataset.memberRole;
+      if (roleMemberId) {
+        const member = board.members.find((m) => m.id === roleMemberId);
+        if (member) {
+          member.role = e.target.value;
+          saveState();
+          renderAll();
+        }
+      }
+    });
+
+    document.getElementById("membersList").addEventListener("click", (e) => {
+      const remId = e.target.dataset.removeMember;
+      if (!remId) return;
+      const board = getActiveBoard();
+      if (!board || !canManageBoard(board) || board.members.length <= 1) return;
+      board.members = board.members.filter((m) => m.id !== remId);
+      saveState();
+      renderMembersPanel();
+    });
+
+    /* MODOS DE VISUALIZAÇÃO DO QUADRO */
+    const viewModeSelectEl = document.getElementById("viewModeSelect");
+    viewModeSelectEl.addEventListener("change", () => {
+      state.viewMode = viewModeSelectEl.value;
+      hideDatePopover();
+      saveState();
+      renderActiveView();
+    });
+
+    function findMember(board, assigneeId) {
+      if (!board) return null;
+      return (board.members || []).find((m) => m.id === assigneeId) || null;
+    }
+
+    function renderCoverHtml(task) {
+      if (task.coverType === "image" && task.coverImage) {
+        return `<img src="${task.coverImage}" alt="Capa" class="card-cover-img" />`;
+      }
+      if (task.coverType === "color" && task.coverColor) {
+        return `<div class="card-cover-color" style="background:${escapeHtml(task.coverColor)};"></div>`;
+      }
+      return "";
+    }
+
+    function renderActiveView() {
+      const board = getActiveBoard();
+      if (!board) return;
+      refreshAssigneeFilter(board);
+      const filtered = getFilteredBoardTasks(board);
+      const canEdit = canEditTasks(board);
+
+      viewModeSelectEl.value = state.viewMode;
+      document.getElementById("viewKanban").classList.toggle("hidden", state.viewMode !== "kanban");
+      document.getElementById("viewCronograma").classList.toggle("hidden", state.viewMode !== "cronograma");
+      document.getElementById("viewTabela").classList.toggle("hidden", state.viewMode !== "tabela");
+      document.getElementById("viewGantt").classList.toggle("hidden", state.viewMode !== "gantt");
+
+      if (state.viewMode === "kanban") renderKanban(board, filtered, canEdit);
+      else if (state.viewMode === "cronograma") renderCronograma(board, filtered);
+      else if (state.viewMode === "tabela") renderTabela(board, filtered, canEdit);
+      else renderGantt(board, filtered);
+    }
+
+    function renderKanban(board, filtered, canEdit) {
+      const boardEl = document.getElementById("viewKanban");
+      boardEl.innerHTML = "";
+
+      COLUMNS.forEach((col) => {
+        const colTasks = filtered.filter((t) => t.col === col.id);
+        const colDiv = document.createElement("section");
+        colDiv.className = "column";
+
+        colDiv.addEventListener("dragover", (e) => {
+          if (!canEdit) return;
+          e.preventDefault();
+          colDiv.classList.add("drag-over");
+        });
+        colDiv.addEventListener("dragleave", () => colDiv.classList.remove("drag-over"));
+        colDiv.addEventListener("drop", (e) => {
+          if (!canEdit) return;
+          e.preventDefault();
+          colDiv.classList.remove("drag-over");
+          moveTask(e.dataTransfer.getData("text/plain"), col.id);
+        });
+
+        colDiv.innerHTML = `
+          <div class="col-header">
+            <div class="col-title">
+              <span>${col.title}</span>
+              <span class="count">${colTasks.length}</span>
+            </div>
+          </div>
+        `;
+
+        if (!colTasks.length) {
+          colDiv.innerHTML += `<div class="empty">Nenhuma tarefa.</div>`;
+        } else {
+          colTasks.forEach((task) => {
+            const member = findMember(board, task.assigneeId);
+            const deadline = getDeadlineInfo(task);
+            const isHighlighted = state.highlightedTaskId === task.id;
+            const tags = normalizeTaskTags(task.tags);
+            const checklist = normalizeChecklist(task.checklist);
+            const doneChk = checklist.filter((i) => i.done).length;
+
+            const card = document.createElement("article");
+            card.className = `card${isHighlighted ? " target-highlight" : ""}`;
+            card.dataset.taskCardId = task.id;
+            card.draggable = canEdit;
+            card.addEventListener("dragstart", (e) => {
+              if (!canEdit) return;
+              e.dataTransfer.setData("text/plain", task.id);
+            });
+
+            card.innerHTML = `
+              ${renderCoverHtml(task)}
+              <div class="card-body">
+                <div class="card-top">
+                  <h3 class="card-title">${escapeHtml(task.title)}</h3>
+                  ${canEdit ? `<button type="button" class="danger" title="Excluir" data-delete="${task.id}">✕</button>` : ""}
+                </div>
+                ${tags.length ? `
+                  <div class="card-tags-row">
+                    ${tags.map((tag) => `<span class="card-tag-mini" style="background:${escapeHtml(tag.color)};">${escapeHtml(tag.name)}</span>`).join("")}
+                  </div>
+                ` : ""}
+                <div class="card-date-banner">
+                  <span>📅 ${formatDateBr(task.dueDate)}</span>
+                  <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
+                </div>
+                <div class="card-meta-row">
+                  ${member ? `
+                    <span class="assignee-chip">
+                      ${renderAvatarHtml(member.name, member.avatarUrl, "avatar-sm")}
+                      <span>${escapeHtml(member.name)}</span>
+                    </span>
+                  ` : `<span class="section-sub">Sem responsável</span>`}
+                  ${checklist.length ? `<span class="section-sub">☑ ${doneChk}/${checklist.length}</span>` : ""}
+                </div>
+                <div class="card-footer-open">
+                  ${canEdit ? `<button type="button" data-duplicate="${task.id}">Duplicar</button>` : ""}
+                  <button type="button" data-edit="${task.id}">Abrir</button>
+                </div>
+              </div>
+            `;
+            colDiv.appendChild(card);
+          });
+        }
+        boardEl.appendChild(colDiv);
+      });
+    }
+
+    function renderCronograma(board, filtered) {
+      const listEl = document.getElementById("viewCronograma");
+      if (!filtered.length) {
+        listEl.innerHTML = `<div class="empty">Nenhuma tarefa.</div>`;
+        return;
+      }
+
+      const sorted = [...filtered].sort((a, b) => {
+        if (!a.dueDate && !b.dueDate) return 0;
+        if (!a.dueDate) return 1;
+        if (!b.dueDate) return -1;
+        return a.dueDate.localeCompare(b.dueDate);
+      });
+
+      listEl.innerHTML = sorted
+        .map((task) => {
+          const deadline = getDeadlineInfo(task);
+          const member = findMember(board, task.assigneeId);
+          return `
+            <div class="schedule-item">
+              <div class="schedule-main">
+                <span class="schedule-date">📅 ${formatDateBr(task.dueDate)}</span>
+                <strong>${escapeHtml(task.title)}</strong>
+                <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
+                ${member ? `
+                  <span class="assignee-chip">
+                    ${renderAvatarHtml(member.name, member.avatarUrl, "avatar-sm")}
+                    <span>${escapeHtml(member.name)}</span>
+                  </span>
+                ` : `<span class="section-sub">Sem responsável</span>`}
+              </div>
+              <div>
+                <button type="button" data-edit="${task.id}">Abrir</button>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    /* TABELA */
+    const tableActionPanelEl = document.getElementById("tableRowActionPanel");
+    const datePopoverEl = document.getElementById("tableDatePopover");
+    let datePopoverTaskId = null;
+    let datePopoverMonthOffset = 0;
+
+    function hideDatePopover() {
+      datePopoverEl.classList.add("hidden");
+      datePopoverTaskId = null;
+    }
+
+    function renderDatePopover() {
+      if (!datePopoverTaskId) return;
+      const board = getActiveBoard();
+      const task = board?.tasks.find((t) => t.id === datePopoverTaskId);
+      if (!task) {
+        hideDatePopover();
+        return;
+      }
+
+      const base = new Date();
+      base.setDate(1);
+      base.setMonth(base.getMonth() + datePopoverMonthOffset);
+      const year = base.getFullYear();
+      const month = base.getMonth();
+      const firstWeekday = base.getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      const label = base.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+      document.getElementById("popoverCalMonthLabel").textContent =
+        label.charAt(0).toUpperCase() + label.slice(1);
+
+      const dows = ["D", "S", "T", "Q", "Q", "S", "S"];
+      let html = dows.map((d) => `<div class="cal-dow">${d}</div>`).join("");
+
+      for (let i = 0; i < firstWeekday; i++) {
+        html += `<div></div>`;
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const mm = String(month + 1).padStart(2, "0");
+        const dd = String(day).padStart(2, "0");
+        const iso = `${year}-${mm}-${dd}`;
+        const isSelected = task.dueDate === iso;
+        html += `
+          <button type="button" class="popover-day-btn ${isSelected ? "selected-day" : ""}" data-pick-date="${iso}">
+            ${day}
+          </button>
+        `;
+      }
+
+      document.getElementById("popoverCalGrid").innerHTML = html;
+    }
+
+    function openDatePopoverForTask(taskId, anchorEl) {
+      const board = getActiveBoard();
+      const task = board?.tasks.find((t) => t.id === taskId);
+      if (!task || !canEditTasks(board)) return;
+
+      datePopoverTaskId = taskId;
+      datePopoverMonthOffset = 0;
+      renderDatePopover();
+
+      const rect = anchorEl.getBoundingClientRect();
+      const left = Math.min(window.innerWidth - 280, Math.max(12, rect.left));
+      const top = Math.min(window.innerHeight - 290, rect.bottom + 6);
+      datePopoverEl.style.left = `${left}px`;
+      datePopoverEl.style.top = `${top}px`;
+      datePopoverEl.classList.remove("hidden");
+    }
+
+    document.getElementById("popoverPrevMonth").addEventListener("click", () => {
+      datePopoverMonthOffset -= 1;
+      renderDatePopover();
+    });
+
+    document.getElementById("popoverNextMonth").addEventListener("click", () => {
+      datePopoverMonthOffset += 1;
+      renderDatePopover();
+    });
+
+    document.getElementById("popoverCloseCal").addEventListener("click", hideDatePopover);
+
+    document.getElementById("popoverCalGrid").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-pick-date]");
+      if (!btn || !datePopoverTaskId) return;
+      const board = getActiveBoard();
+      const task = board?.tasks.find((t) => t.id === datePopoverTaskId);
+      if (task && canEditTasks(board)) {
+        task.dueDate = btn.dataset.pickDate;
+        saveState();
+        hideDatePopover();
+        renderAll();
+      }
+    });
+
+    document.getElementById("popoverClearDateBtn").addEventListener("click", () => {
+      if (!datePopoverTaskId) return;
+      const board = getActiveBoard();
+      const task = board?.tasks.find((t) => t.id === datePopoverTaskId);
+      if (task && canEditTasks(board)) {
+        task.dueDate = "";
+        saveState();
+        hideDatePopover();
+        renderAll();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!datePopoverEl.classList.contains("hidden")) {
+        if (!e.target.closest("#tableDatePopover") && !e.target.closest("[data-table-date-btn]")) {
+          hideDatePopover();
+        }
+      }
+    });
+
+    function renderTabela(board, filtered, canEdit) {
+      const tbody = document.getElementById("tasksTableBody");
+      if (!filtered.length) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty">Nenhuma tarefa encontrada.</td></tr>`;
+        tableActionPanelEl.classList.add("hidden");
+        return;
+      }
+
+      tbody.innerHTML = filtered
+        .map((task) => {
+          const deadline = getDeadlineInfo(task);
+          const selected = state.selectedTableTaskId === task.id;
+          return `
+            <tr data-table-row="${task.id}" style="${selected ? "background:var(--active-tint);" : ""}">
+              <td>
+                <input
+                  type="text"
+                  class="table-inline-input"
+                  data-table-title="${task.id}"
+                  value="${escapeHtml(task.title)}"
+                  ${canEdit ? "" : "disabled"}
+                />
+              </td>
+              <td>
+                <select class="table-inline-select" data-table-assignee="${task.id}" ${canEdit ? "" : "disabled"}>
+                  <option value="">Sem responsável</option>
+                  ${(board.members || []).map((m) => `
+                    <option value="${m.id}" ${task.assigneeId === m.id ? "selected" : ""}>${escapeHtml(m.name)}</option>
+                  `).join("")}
+                </select>
+              </td>
+              <td>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+                  <button type="button" class="date-trigger-btn" data-table-date-btn="${task.id}" ${canEdit ? "" : "disabled"}>
+                    <span>📅</span>
+                    <span>${formatDateBr(task.dueDate)}</span>
+                  </button>
+                  <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
+                </div>
+              </td>
+              <td>
+                <button type="button" data-table-open-card="${task.id}">Abrir</button>
+              </td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      const activeTask = filtered.find((t) => t.id === state.selectedTableTaskId);
+      if (activeTask && canEdit) {
+        tableActionPanelEl.classList.remove("hidden");
+        document.getElementById("tableSelectedTaskLabel").textContent = `Selecionada: ${activeTask.title}`;
+      } else {
+        tableActionPanelEl.classList.add("hidden");
+      }
+    }
+
+    const tasksTableBodyEl = document.getElementById("tasksTableBody");
+
+    tasksTableBodyEl.addEventListener("click", (e) => {
+      const openBtn = e.target.closest("[data-table-open-card]");
+      if (openBtn) {
+        e.stopPropagation();
+        const board = getActiveBoard();
+        const found = board?.tasks.find((t) => t.id === openBtn.dataset.tableOpenCard);
+        if (found) openTaskModal(found);
+        return;
+      }
+
+      const dateBtn = e.target.closest("[data-table-date-btn]");
+      if (dateBtn) {
+        e.stopPropagation();
+        const taskId = dateBtn.dataset.tableDateBtn;
+        state.selectedTableTaskId = taskId;
+        openDatePopoverForTask(taskId, dateBtn);
+        return;
+      }
+
+      const row = e.target.closest("[data-table-row]");
+      if (!row) return;
+      state.selectedTableTaskId = row.dataset.tableRow;
+      const board = getActiveBoard();
+      const activeTask = board?.tasks.find((t) => t.id === state.selectedTableTaskId);
+      if (activeTask && canEditTasks(board)) {
+        tableActionPanelEl.classList.remove("hidden");
+        document.getElementById("tableSelectedTaskLabel").textContent = `Selecionada: ${activeTask.title}`;
+      }
+    });
+
+    tasksTableBodyEl.addEventListener("change", (e) => {
+      const board = getActiveBoard();
+      if (!board || !canEditTasks(board)) return;
+
+      const titleId = e.target.dataset.tableTitle;
+      if (titleId) {
+        const task = board.tasks.find((t) => t.id === titleId);
+        const nextTitle = e.target.value.trim();
+        if (task && nextTitle) {
+          task.title = nextTitle;
+          saveState();
+          renderInsightsAndCharts();
+          renderDueSoonReminders();
+          renderTenhaEmMente(board);
+          renderMiniCalendar();
+        }
+        return;
+      }
+
+      const assigneeId = e.target.dataset.tableAssignee;
+      if (assigneeId) {
+        const task = board.tasks.find((t) => t.id === assigneeId);
+        if (task) {
+          task.assigneeId = e.target.value;
+          saveState();
+        }
+      }
+    });
+
+    document.getElementById("tableEditModalBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      const task = board?.tasks.find((t) => t.id === state.selectedTableTaskId);
+      if (task) openTaskModal(task);
+    });
+
+    document.getElementById("tableDeleteTaskBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      if (!board || !canEditTasks(board) || !state.selectedTableTaskId) return;
+      board.tasks = board.tasks.filter((t) => t.id !== state.selectedTableTaskId);
+      state.selectedTableTaskId = null;
+      saveState();
+      renderAll();
+    });
+
+    /* DIAGRAMA DE GANTT */
+    function renderGantt(board, filtered) {
+      const ganttEl = document.getElementById("viewGantt");
+      if (!filtered.length) {
+        ganttEl.innerHTML = `<div class="empty">Nenhuma tarefa no Diagrama de Gantt.</div>`;
+        return;
+      }
+
+      const startAnchor = new Date();
+      startAnchor.setDate(startAnchor.getDate() - 2);
+      const totalDaysCols = 18;
+      const dayColumns = [];
+
+      for (let i = 0; i < totalDaysCols; i++) {
+        const d = new Date(startAnchor);
+        d.setDate(startAnchor.getDate() + i);
+        const offsetMs = d.getTimezoneOffset() * 60000;
+        const iso = new Date(d.getTime() - offsetMs).toISOString().slice(0, 10);
+        const monthShort = d.toLocaleDateString("pt-BR", { month: "short" });
+        dayColumns.push({
+          iso,
+          dayNum: d.getDate(),
+          monthLabel: monthShort.charAt(0).toUpperCase() + monthShort.slice(1)
+        });
+      }
+
+      const monthSpans = [];
+      dayColumns.forEach((col) => {
+        const last = monthSpans[monthSpans.length - 1];
+        if (last && last.label === col.monthLabel) {
+          last.span += 1;
+        } else {
+          monthSpans.push({ label: col.monthLabel, span: 1 });
+        }
+      });
+
+      const rowsHtml = filtered
+        .map((task, idx) => {
+          const member = findMember(board, task.assigneeId);
+          const durationDays = Math.max(1, Number(task.durationDays) || 3);
+          const rawStartIdx = task.dueDate
+            ? dayColumns.findIndex((c) => c.iso === task.dueDate)
+            : (idx * 2) % (totalDaysCols - 2);
+          const startIdx = rawStartIdx >= 0 ? rawStartIdx : idx % Math.max(1, totalDaysCols - durationDays);
+          const endIdx = Math.min(totalDaysCols - 1, startIdx + durationDays - 1);
+
+          const barColor =
+            task.priority === "alta"
+              ? "#E11D48"
+              : task.priority === "media"
+              ? "#7C3AED"
+              : "#0EA5E9";
+
+          const dayCells = dayColumns
+            .map((_, cIdx) => {
+              const active = cIdx >= startIdx && cIdx <= endIdx;
+              return `
+                <td class="gantt-grid-cell">
+                  ${active ? `<span class="gantt-bar-segment" style="background:${barColor};"></span>` : ""}
+                </td>
+              `;
+            })
+            .join("");
+
+          return `
+            <tr>
+              <td class="gantt-task-cell" title="${escapeHtml(task.title)}">${escapeHtml(task.title)}</td>
+              <td class="gantt-meta-cell">${escapeHtml(member ? member.name : "—")}</td>
+              <td class="gantt-meta-cell">${durationDays} ${durationDays === 1 ? "dia" : "dias"}</td>
+              ${dayCells}
+            </tr>
+          `;
+        })
+        .join("");
+
+      ganttEl.innerHTML = `
+        <div class="gantt-sheet-wrap">
+          <table class="gantt-sheet">
+            <thead>
+              <tr>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:180px;">Tarefa</th>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:110px;">Responsável</th>
+                <th class="gantt-head-dark" rowspan="2" style="min-width:76px;">Duração</th>
+                ${monthSpans.map((m) => `<th class="gantt-head-dark" colspan="${m.span}">${escapeHtml(m.label)}</th>`).join("")}
+              </tr>
+              <tr>
+                ${dayColumns.map((c) => `<th class="gantt-day-cell">${c.dayNum}</th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+        <div class="gantt-legend-row">
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#E11D48;"></span> Alta</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#7C3AED;"></span> Média</span>
+          <span class="gantt-legend-item"><span class="gantt-legend-swatch" style="background:#0EA5E9;"></span> Baixa</span>
+        </div>
+      `;
+    }
+
+    /* MODAL DE TAREFA */
+    const taskDialogEl = document.getElementById("taskDialog");
+    const taskFormEl = document.getElementById("taskForm");
+    const taskDescEl = document.getElementById("taskDesc");
+    const taskDueDateEl = document.getElementById("taskDueDate");
+    const taskAssigneeEl = document.getElementById("taskAssignee");
+    const taskCoverTypeEl = document.getElementById("taskCoverType");
+    const taskCoverPaletteInputEl = document.getElementById("taskCoverPaletteInput");
+    const taskCoverPaletteHexEl = document.getElementById("taskCoverPaletteHex");
+    const coverColorRowEl = document.getElementById("coverColorRow");
+    const coverImageRowEl = document.getElementById("coverImageRow");
+    const coverImagePreviewBoxEl = document.getElementById("coverImagePreviewBox");
+    const modalCommentsListEl = document.getElementById("modalCommentsList");
+    const modalLabelsListEl = document.getElementById("modalLabelsList");
+    const modalChecklistListEl = document.getElementById("modalChecklistList");
+
+    function autoResizeDescTextarea() {
+      taskDescEl.style.height = "auto";
+      taskDescEl.style.height = `${Math.max(58, taskDescEl.scrollHeight)}px`;
+    }
+
+    taskDescEl.addEventListener("input", autoResizeDescTextarea);
+
+    /* CHECKLIST */
+    function renderModalChecklist() {
+      if (!tempModalChecklist.length) {
+        modalChecklistListEl.innerHTML = `<div class="section-sub">Nenhum item no checklist.</div>`;
+        return;
+      }
+      modalChecklistListEl.innerHTML = tempModalChecklist
+        .map((item) => `
+          <div class="checklist-row-item ${item.done ? "is-done" : ""}" data-chk-row="${item.id}">
+            <input type="checkbox" style="width:auto;" data-chk-toggle="${item.id}" ${item.done ? "checked" : ""} />
+            <input type="text" data-chk-edit="${item.id}" value="${escapeHtml(item.text)}" placeholder="Descrição do item..." />
+            <button type="button" class="danger" data-chk-delete="${item.id}" title="Remover item">✕</button>
+          </div>
+        `)
+        .join("");
+    }
+
+    document.getElementById("addChecklistItemBtn").addEventListener("click", () => {
+      const input = document.getElementById("newChecklistItemInput");
+      const text = input.value.trim();
+      if (!text) return;
+      tempModalChecklist.push({
+        id: "chk_" + Date.now() + "_" + Math.floor(Math.random() * 100),
+        text,
+        done: false
+      });
+      input.value = "";
+      renderModalChecklist();
+    });
+
+    modalChecklistListEl.addEventListener("change", (e) => {
+      const toggleId = e.target.dataset.chkToggle;
+      if (toggleId) {
+        const found = tempModalChecklist.find((i) => i.id === toggleId);
+        if (found) {
+          found.done = e.target.checked;
+          renderModalChecklist();
+        }
+      }
+    });
+
+    modalChecklistListEl.addEventListener("input", (e) => {
+      const editId = e.target.dataset.chkEdit;
+      if (editId) {
+        const found = tempModalChecklist.find((i) => i.id === editId);
+        if (found) {
+          found.text = e.target.value;
+        }
+      }
+    });
+
+    modalChecklistListEl.addEventListener("click", (e) => {
+      const delBtn = e.target.closest("[data-chk-delete]");
+      if (!delBtn) return;
+      const delId = delBtn.dataset.chkDelete;
+      tempModalChecklist = tempModalChecklist.filter((i) => i.id !== delId);
+      renderModalChecklist();
+    });
+
+    /* ETIQUETAS */
+    document.getElementById("toggleLabelDropdownBtn").addEventListener("click", () => {
+      document.getElementById("labelDropdownPanel").classList.toggle("hidden");
+    });
+
+    function getBoardAvailableTags(board) {
+      if (!board) return DEFAULT_BOARD_TAGS.map((t) => ({ ...t }));
+      if (!Array.isArray(board.availableTags) || !board.availableTags.length) {
+        board.availableTags = DEFAULT_BOARD_TAGS.map((t) => ({ ...t }));
+      }
+      return board.availableTags;
+    }
+
+    function updateLabelDropdownSummary() {
+      const summaryEl = document.getElementById("labelDropdownSummaryText");
+      if (!tempModalTags.length) {
+        summaryEl.textContent = "Selecionar ou criar etiquetas";
+      } else {
+        summaryEl.textContent = `Selecionadas (${tempModalTags.length}): ${tempModalTags.map((t) => t.name).join(", ")}`;
+      }
+    }
+
+    function renderModalLabelsManager() {
+      const board = getActiveBoard();
+      const catalog = getBoardAvailableTags(board);
+      updateLabelDropdownSummary();
+
+      if (!catalog.length) {
+        modalLabelsListEl.innerHTML = `<div class="section-sub">Nenhuma etiqueta disponível.</div>`;
+        return;
+      }
+
+      modalLabelsListEl.innerHTML = catalog
+        .map((tag) => {
+          const isChecked = tempModalTags.some((t) => t.id === tag.id);
+          return `
+            <div class="label-item-row" data-label-row="${tag.id}">
+              <input type="checkbox" style="width:auto;" data-toggle-label-select="${tag.id}" ${isChecked ? "checked" : ""} title="Selecionar etiqueta para este card" />
+              <span style="width:14px;height:14px;border-radius:50%;background:${escapeHtml(tag.color)};flex-shrink:0;"></span>
+              <input type="text" data-edit-label-name="${tag.id}" value="${escapeHtml(tag.name)}" title="Editar nome da etiqueta" />
+              <input type="color" value="${escapeHtml(tag.color)}" data-change-label-color="${tag.id}" title="Alterar cor da etiqueta" style="width:34px;height:28px;padding:1px;" />
+              <button type="button" class="danger" data-delete-label="${tag.id}" title="Excluir etiqueta">✕</button>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    document.getElementById("addLabelItemBtn").addEventListener("click", () => {
+      const board = getActiveBoard();
+      const catalog = getBoardAvailableTags(board);
+      const nameInput = document.getElementById("newLabelNameInput");
+      const colorInput = document.getElementById("newLabelColorInput");
+      const labelName = nameInput.value.trim();
+      if (!labelName) return;
+
+      const newTag = {
+        id: "l_" + Date.now() + "_" + Math.floor(Math.random() * 100),
+        name: labelName,
+        color: colorInput.value || "#2563EB"
+      };
+      catalog.push(newTag);
+      tempModalTags.push({ ...newTag });
+      nameInput.value = "";
+      saveState();
+      renderModalLabelsManager();
+    });
+
+    modalLabelsListEl.addEventListener("change", (e) => {
+      const board = getActiveBoard();
+      const catalog = getBoardAvailableTags(board);
+      const selectId = e.target.dataset.toggleLabelSelect;
+      if (selectId) {
+        const tagObj = catalog.find((t) => t.id === selectId);
+        if (!tagObj) return;
+        if (e.target.checked) {
+          if (!tempModalTags.some((t) => t.id === selectId)) {
+            tempModalTags.push({ ...tagObj });
+          }
+        } else {
+          tempModalTags = tempModalTags.filter((t) => t.id !== selectId);
+        }
+        updateLabelDropdownSummary();
+      }
+    });
+
+    modalLabelsListEl.addEventListener("input", (e) => {
+      const board = getActiveBoard();
+      const catalog = getBoardAvailableTags(board);
+
+      const editNameId = e.target.dataset.editLabelName;
+      if (editNameId) {
+        const nextName = e.target.value;
+        const catTag = catalog.find((t) => t.id === editNameId);
+        if (catTag) catTag.name = nextName;
+        const selTag = tempModalTags.find((t) => t.id === editNameId);
+        if (selTag) selTag.name = nextName;
+        updateLabelDropdownSummary();
+        return;
+      }
+
+      const colorId = e.target.dataset.changeLabelColor;
+      if (colorId) {
+        const nextColor = e.target.value;
+        const catTag = catalog.find((t) => t.id === colorId);
+        if (catTag) catTag.color = nextColor;
+        const selTag = tempModalTags.find((t) => t.id === colorId);
+        if (selTag) selTag.color = nextColor;
+        renderModalLabelsManager();
+      }
+    });
+
+    modalLabelsListEl.addEventListener("click", (e) => {
+      const delBtn = e.target.closest("[data-delete-label]");
+      if (!delBtn) return;
+      const board = getActiveBoard();
+      const labelId = delBtn.dataset.deleteLabel;
+      if (board) {
+        board.availableTags = getBoardAvailableTags(board).filter((t) => t.id !== labelId);
+      }
+      tempModalTags = tempModalTags.filter((t) => t.id !== labelId);
+      saveState();
+      renderModalLabelsManager();
+    });
+
+    taskCoverPaletteInputEl.addEventListener("input", () => {
+      tempCoverColor = taskCoverPaletteInputEl.value;
+      taskCoverPaletteHexEl.textContent = tempCoverColor.toUpperCase();
+    });
+
+    /* COMENTÁRIOS */
+    const modalNewCommentInputEl = document.getElementById("modalNewCommentInput");
+    const commentEmojiBtnEl = document.getElementById("commentEmojiBtn");
+    const commentEmojiListEl = document.getElementById("commentEmojiList");
+    const emojiOptionsGridEl = document.getElementById("emojiOptionsGrid");
+    const modalAddCommentBtnEl = document.getElementById("modalAddCommentBtn");
+
+    emojiOptionsGridEl.innerHTML = EMOJI_LIST.map((emoji) => `
+      <button type="button" class="emoji-pick-btn" data-emoji="${emoji}" title="${emoji}">
+        ${emoji}
+      </button>
+    `).join("");
+
+    commentEmojiBtnEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      commentEmojiListEl.classList.toggle("hidden");
+    });
+
+    emojiOptionsGridEl.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-emoji]");
+      if (!btn) return;
+      const emoji = btn.dataset.emoji;
+      const start = modalNewCommentInputEl.selectionStart ?? modalNewCommentInputEl.value.length;
+      const end = modalNewCommentInputEl.selectionEnd ?? modalNewCommentInputEl.value.length;
+
+      modalNewCommentInputEl.value =
+        modalNewCommentInputEl.value.slice(0, start) +
+        emoji +
+        modalNewCommentInputEl.value.slice(end);
+
+      const nextPos = start + emoji.length;
+      modalNewCommentInputEl.focus();
+      modalNewCommentInputEl.setSelectionRange(nextPos, nextPos);
+      commentEmojiListEl.classList.add("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#commentEmojiList") && !e.target.closest("#commentEmojiBtn")) {
+        commentEmojiListEl.classList.add("hidden");
+      }
+    });
+
+    document.getElementById("commentBoldBtn").addEventListener("click", () => {
+      const start = modalNewCommentInputEl.selectionStart ?? modalNewCommentInputEl.value.length;
+      const end = modalNewCommentInputEl.selectionEnd ?? modalNewCommentInputEl.value.length;
+      const selected = modalNewCommentInputEl.value.slice(start, end);
+      const wrapped = selected ? `**${selected}**` : "**texto em negrito**";
+
+      modalNewCommentInputEl.value =
+        modalNewCommentInputEl.value.slice(0, start) +
+        wrapped +
+        modalNewCommentInputEl.value.slice(end);
+
+      modalNewCommentInputEl.focus();
+      const cursorStart = start + 2;
+      const cursorEnd = selected ? start + 2 + selected.length : start + wrapped.length - 2;
+      modalNewCommentInputEl.setSelectionRange(cursorStart, cursorEnd);
+    });
+
+    function renderModalCommentsList() {
+      if (!tempModalComments.length) {
+        modalCommentsListEl.innerHTML = `<div class="section-sub">Nenhum comentário ainda.</div>`;
+        return;
+      }
+      modalCommentsListEl.innerHTML = tempModalComments
+        .map((c) => `
+          <div class="comment-entry">
+            <div class="comment-entry-top">
+              <div><strong>${escapeHtml(c.author || "Membro")}:</strong> ${formatCommentHtml(c.text)}</div>
+              <div class="comment-entry-actions">
+                <button type="button" data-edit-comment="${c.id}">Editar</button>
+                <button type="button" class="danger" data-delete-comment="${c.id}">Excluir</button>
+              </div>
+            </div>
+            <span class="comment-date-meta">${escapeHtml(c.dateLabel || getNowDateTimeLabel())}</span>
+          </div>
+        `)
+        .join("");
+    }
+
+    modalAddCommentBtnEl.addEventListener("click", () => {
+      const text = modalNewCommentInputEl.value.trim();
+      if (!text) return;
+
+      if (editingCommentId) {
+        const target = tempModalComments.find((c) => c.id === editingCommentId);
+        if (target) {
+          target.text = text;
+          target.dateLabel = `${getNowDateTimeLabel()} (editado)`;
+        }
+        editingCommentId = null;
+        modalAddCommentBtnEl.textContent = "Adicionar";
+      } else {
+        tempModalComments.push({
+          id: "c_" + Date.now(),
+          author: state.user.name || "Você",
+          text,
+          dateLabel: getNowDateTimeLabel()
+        });
+      }
+
+      modalNewCommentInputEl.value = "";
+      renderModalCommentsList();
+    });
+
+    modalCommentsListEl.addEventListener("click", (e) => {
+      const editBtn = e.target.closest("[data-edit-comment]");
+      if (editBtn) {
+        const cId = editBtn.dataset.editComment;
+        const found = tempModalComments.find((c) => c.id === cId);
+        if (!found) return;
+        editingCommentId = cId;
+        modalNewCommentInputEl.value = found.text;
+        modalAddCommentBtnEl.textContent = "Atualizar";
+        modalNewCommentInputEl.focus();
+        return;
+      }
+
+      const delBtn = e.target.closest("[data-delete-comment]");
+      if (delBtn) {
+        const cId = delBtn.dataset.deleteComment;
+        tempModalComments = tempModalComments.filter((c) => c.id !== cId);
+        if (editingCommentId === cId) {
+          editingCommentId = null;
+          modalNewCommentInputEl.value = "";
+          modalAddCommentBtnEl.textContent = "Adicionar";
+        }
+        renderModalCommentsList();
+      }
+    });
+
+    function updateTaskDateHint() {
+      const val = taskDueDateEl.value;
+      const hintEl = document.getElementById("taskDatePreviewHint");
+      if (!val) {
+        hintEl.textContent = "Sem data definida";
+        return;
+      }
+      const diff = diffDaysFromToday(val);
+      if (diff < 0) {
+        const dias = Math.abs(diff);
+        hintEl.innerHTML = `<span class="due-badge due-late">ATRASADO (${dias} ${dias === 1 ? "dia" : "dias"})</span>`;
+      } else if (diff === 0) {
+        hintEl.innerHTML = `<span class="due-badge due-today">Entrega hoje (0 dias)</span>`;
+      } else {
+        hintEl.innerHTML = `<span class="due-badge due-upcoming">Faltam ${diff} ${diff === 1 ? "dia" : "dias"}</span>`;
+      }
+    }
+
+    function updateAssigneePreview() {
+      const board = getActiveBoard();
+      const member = findMember(board, taskAssigneeEl.value);
+      const previewEl = document.getElementById("taskAssigneePreview");
+      if (!member) {
+        previewEl.innerHTML = `<span class="section-sub">Sem responsável</span>`;
+        return;
+      }
+      previewEl.innerHTML = `
+        ${renderAvatarHtml(member.name, member.avatarUrl, "avatar-md")}
+        <div>
+          <div style="font-weight:700;">${escapeHtml(member.name)}</div>
+          <div class="section-sub">${escapeHtml(member.role)}</div>
+        </div>
+      `;
+    }
+
+    function updateCoverInputsVisibility() {
+      const type = taskCoverTypeEl.value;
+      coverColorRowEl.classList.toggle("hidden", type !== "color");
+      coverImageRowEl.classList.toggle("hidden", type !== "image");
+      if (type === "image") {
+        coverImagePreviewBoxEl.innerHTML = tempCoverImageData
+          ? `Imagem selecionada:<img src="${tempCoverImageData}" class="cover-preview-img" alt="Capa" />`
+          : "Nenhuma imagem enviada.";
+      }
+    }
+
+    function updateAttachmentHint() {
+      const hint = document.getElementById("taskAttachmentHint");
+      if (!tempAttachmentObj || !tempAttachmentObj.name) {
+        hint.textContent = "Nenhum arquivo anexado";
+        return;
+      }
+      const sizeMb = (tempAttachmentObj.size / (1024 * 1024)).toFixed(2);
+      hint.textContent = `Anexo: ${tempAttachmentObj.name} (${sizeMb} MB)`;
+    }
+
+    taskDueDateEl.addEventListener("change", updateTaskDateHint);
+    taskDueDateEl.addEventListener("input", updateTaskDateHint);
+    taskAssigneeEl.addEventListener("change", updateAssigneePreview);
+    taskCoverTypeEl.addEventListener("change", updateCoverInputsVisibility);
+
+    document.getElementById("taskCoverFile").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        tempCoverImageData = String(reader.result || "");
+        updateCoverInputsVisibility();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById("taskAttachmentFile").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      if (file.size > MAX_FILE_BYTES) {
+        alert("O arquivo excede o limite de 10 MB.");
+        e.target.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        tempAttachmentObj = {
+          name: file.name,
+          size: file.size,
+          dataUrl: String(reader.result || "")
+        };
+        updateAttachmentHint();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function openTaskModal(task = null) {
+      const board = getActiveBoard();
+      if (!board) {
+        alert("Crie um quadro antes de adicionar uma tarefa.");
+        return;
+      }
+      if (!canEditTasks(board)) {
+        alert("Analistas possuem acesso apenas de visualização.");
+        return;
+      }
+
+      editingTaskId = task ? task.id : null;
+      editingCommentId = null;
+      modalAddCommentBtnEl.textContent = "Adicionar";
+      document.getElementById("dialogTitle").textContent = task ? "Abrir tarefa" : "Nova tarefa";
+      document.getElementById("taskTitle").value = task ? task.title : "";
+      taskDescEl.value = task ? task.desc || "" : "";
+      autoResizeDescTextarea();
+
+      tempModalChecklist = task ? normalizeChecklist(task.checklist) : [];
+      document.getElementById("newChecklistItemInput").value = "";
+      renderModalChecklist();
+
+      tempModalTags = task ? normalizeTaskTags(task.tags) : [];
+      const catalog = getBoardAvailableTags(board);
+      tempModalTags.forEach((tag) => {
+        if (!catalog.some((c) => c.id === tag.id)) {
+          catalog.push({ ...tag });
+        }
+      });
+      document.getElementById("labelDropdownPanel").classList.add("hidden");
+      document.getElementById("newLabelNameInput").value = "";
+      renderModalLabelsManager();
+
+      document.getElementById("taskPriority").value = task ? task.priority : "media";
+      document.getElementById("taskCol").value = task ? task.col : "todo";
+      taskDueDateEl.value = task ? task.dueDate || "" : "";
+
+      const members = Array.isArray(board.members) ? board.members : [];
+      taskAssigneeEl.innerHTML = members.length
+        ? members.map((m) => `<option value="${m.id}">${escapeHtml(m.name)} (${escapeHtml(m.role)})</option>`).join("")
+        : `<option value="">Sem responsável</option>`;
+      taskAssigneeEl.value = task?.assigneeId || members[0]?.id || "";
+
+      taskCoverTypeEl.value = task?.coverType || "none";
+      tempCoverColor = /^#[0-9A-Fa-f]{6}$/.test(task?.coverColor || "") ? task.coverColor : "#111111";
+      taskCoverPaletteInputEl.value = tempCoverColor;
+      taskCoverPaletteHexEl.textContent = tempCoverColor.toUpperCase();
+      tempCoverImageData = task?.coverImage || "";
+      document.getElementById("taskCoverFile").value = "";
+
+      tempAttachmentObj = task?.attachment ? { ...task.attachment } : null;
+      document.getElementById("taskAttachmentFile").value = "";
+
+      tempModalComments = task && Array.isArray(task.comments)
+        ? task.comments.map((c) => ({ ...c, dateLabel: c.dateLabel || getNowDateTimeLabel() }))
+        : [];
+      modalNewCommentInputEl.value = "";
+      commentEmojiListEl.classList.add("hidden");
+      renderModalCommentsList();
+
+      updateTaskDateHint();
+      updateAssigneePreview();
+      updateCoverInputsVisibility();
+      updateAttachmentHint();
+
+      if (typeof taskDialogEl.showModal === "function") {
+        if (!taskDialogEl.open) taskDialogEl.showModal();
+      } else {
+        taskDialogEl.setAttribute("open", "");
+      }
+      setTimeout(() => {
+        autoResizeDescTextarea();
+        document.getElementById("taskTitle").focus();
+      }, 10);
+    }
+
+    document.getElementById("openNewTaskBtn").addEventListener("click", () => openTaskModal());
+    document.getElementById("cancelTaskBtn").addEventListener("click", () => taskDialogEl.close());
+
+    taskFormEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const board = getActiveBoard();
+      if (!board || !canEditTasks(board)) return;
+      const title = document.getElementById("taskTitle").value.trim();
+      if (!title) return;
+
+      const pendingComment = modalNewCommentInputEl.value.trim();
+      if (pendingComment) {
+        if (editingCommentId) {
+          const target = tempModalComments.find((c) => c.id === editingCommentId);
+          if (target) {
+            target.text = pendingComment;
+            target.dateLabel = `${getNowDateTimeLabel()} (editado)`;
+          }
+          editingCommentId = null;
+        } else {
+          tempModalComments.push({
+            id: "c_" + Date.now(),
+            author: state.user.name || "Você",
+            text: pendingComment,
+            dateLabel: getNowDateTimeLabel()
+          });
+        }
+      }
+
+      const catalog = getBoardAvailableTags(board);
+      board.tasks.forEach((t) => {
+        t.tags = normalizeTaskTags(t.tags).map((existingTag) => {
+          const updated = catalog.find((c) => c.id === existingTag.id);
+          return updated ? { ...updated } : existingTag;
+        });
+      });
+
+      const payload = {
+        title,
+        desc: taskDescEl.value.trim(),
+        checklist: tempModalChecklist
+          .filter((item) => item.text.trim() !== "")
+          .map((item) => ({ ...item, text: item.text.trim() })),
+        tags: tempModalTags.map((t) => ({ ...t })),
+        priority: document.getElementById("taskPriority").value,
+        col: document.getElementById("taskCol").value,
+        dueDate: taskDueDateEl.value,
+        assigneeId: taskAssigneeEl.value,
+        coverType: taskCoverTypeEl.value,
+        coverColor: tempCoverColor,
+        coverImage: taskCoverTypeEl.value === "image" ? tempCoverImageData : "",
+        attachment: tempAttachmentObj,
+        comments: [...tempModalComments]
+      };
+
+      if (editingTaskId) {
+        const existing = board.tasks.find((t) => t.id === editingTaskId);
+        if (existing) Object.assign(existing, payload);
+      } else {
+        board.tasks.unshift({ id: "t_" + Date.now(), durationDays: 3, ...payload });
+      }
+
+      saveState();
+      taskDialogEl.close();
+      renderAll();
+    });
+
+    function moveTask(taskId, targetCol) {
+      const board = getActiveBoard();
+      if (!board || !canEditTasks(board)) return;
+      const task = board.tasks.find((t) => t.id === taskId);
+      if (!task || task.col === targetCol) return;
+      task.col = targetCol;
+      saveState();
+      renderAll();
+    }
+
+    function duplicateTask(taskId) {
+      const board = getActiveBoard();
+      if (!board || !canEditTasks(board)) return;
+      const idx = board.tasks.findIndex((t) => t.id === taskId);
+      if (idx < 0) return;
+      const original = board.tasks[idx];
+      const copy = JSON.parse(JSON.stringify(original));
+      copy.id = "t_" + Date.now() + "_" + Math.floor(Math.random() * 100);
+      copy.title = `${original.title} (Cópia)`;
+      board.tasks.splice(idx + 1, 0, copy);
+      saveState();
+      renderAll();
+    }
+
+    function handleTaskActions(e) {
+      const board = getActiveBoard();
+      if (!board) return;
+
+      const delBtn = e.target.closest("[data-delete]");
+      if (delBtn) {
+        if (!canEditTasks(board)) return;
+        const delId = delBtn.dataset.delete;
+        board.tasks = board.tasks.filter((t) => t.id !== delId);
+        if (state.selectedTableTaskId === delId) state.selectedTableTaskId = null;
+        if (state.highlightedTaskId === delId) state.highlightedTaskId = null;
+        saveState();
+        renderAll();
+        return;
+      }
+
+      const dupBtn = e.target.closest("[data-duplicate]");
+      if (dupBtn) {
+        duplicateTask(dupBtn.dataset.duplicate);
+        return;
+      }
+
+      const editBtn = e.target.closest("[data-edit]");
+      if (editBtn) {
+        const found = board.tasks.find((t) => t.id === editBtn.dataset.edit);
+        if (found) openTaskModal(found);
+      }
+    }
+
+    document.getElementById("viewKanban").addEventListener("click", handleTaskActions);
+    document.getElementById("viewCronograma").addEventListener("click", handleTaskActions);
+
+    document.getElementById("searchInput").addEventListener("input", renderAll);
+    document.getElementById("priorityFilter").addEventListener("change", renderAll);
+    document.getElementById("assigneeFilter").addEventListener("change", renderAll);
+    document.getElementById("statusFilter").addEventListener("change", renderAll);
+
+    /* ASSISTENTE IA SOL */
+    const SOL_API_KEY = "";
+    const solConversationHistory = [];
+    const solChatPanelEl = document.getElementById("solChatPanel");
+    const solChatMessagesEl = document.getElementById("solChatMessages");
+    const solChatFormEl = document.getElementById("solChatForm");
+    const solChatInputEl = document.getElementById("solChatInput");
+    let solOpenedOnce = false;
+
+    function appendSolMessage(sender, text) {
+      const div = document.createElement("div");
+      div.className = `sol-msg ${sender}`;
+      div.textContent = text;
+      solChatMessagesEl.appendChild(div);
+      solChatMessagesEl.scrollTop = solChatMessagesEl.scrollHeight;
+    }
+
+    function openSolPanel() {
+      solChatPanelEl.classList.remove("hidden");
+      if (!solOpenedOnce) {
+        solOpenedOnce = true;
+        appendSolMessage("bot", "Oi, tudo bem?! Em que posso te ajudar?");
+      }
+      solChatInputEl.focus();
+    }
+
+    function buildSiteContextSnapshot() {
+      const board = getActiveBoard();
+      const allBoardsSummary = state.boards.map((b) => {
+        const tasks = b.tasks || [];
+        return {
+          nome: b.name,
+          descricao: b.desc || "",
+          totalTarefas: tasks.length,
+          aFazer: tasks.filter((t) => t.col === "todo").length,
+          emAndamento: tasks.filter((t) => t.col === "doing").length,
+          concluidas: tasks.filter((t) => t.col === "done").length,
+          atrasadas: tasks.filter((t) => isTaskOverdue(t)).length,
+          tarefas: tasks.map((t) => ({
+            titulo: t.title,
+            status: t.col,
+            prioridade: t.priority,
+            prazo: t.dueDate || "Sem data",
+            atrasada: isTaskOverdue(t)
+          }))
+        };
+      });
+
+      return {
+        usuario: {
+          nome: state.user.name || "Usuário",
+          usuarioArroba: state.user.username || "",
+          humor: state.user.mood || ""
+        },
+        totalQuadros: state.boards.length,
+        limiteQuadros: MAX_BOARDS,
+        blocoDeNotas: state.notepadText || "",
+        quadroAtivo: board ? board.name : "Nenhum quadro aberto",
+        quadros: allBoardsSummary
+      };
+    }
+
+    function generateLocalSmartReply(rawQuestion) {
+      const q = String(rawQuestion || "").trim();
+      const lower = q.toLowerCase();
+      const snapshot = buildSiteContextSnapshot();
+      const board = getActiveBoard();
+
+      if (lower.includes("criou") || lower.includes("maysa") || lower.includes("quem fez") || lower.includes("desenvolvedor")) {
+        return "O Em Dia foi criado por Maysa Araújo, moradora do Rio de Janeiro, graduada em Administração Pública e assessora de imprensa no Instituto Força Jovem Bushido há 3 anos.";
+      }
+
+      if (lower.includes("o que é") || lower.includes("propósito") || lower.includes("público") || lower.includes("finalidade")) {
+        return "O Em Dia é um gestor de tarefas para organizar até 10 quadros, prazos, calendário colorido por status, lembretes, bloco de notas e visualizações em Kanban, Cronograma, Tabela e Gantt.";
+      }
+
+      if (lower.includes("atrasad") || lower.includes("pendent") || lower.includes("tarefa") || lower.includes("resumo") || lower.includes("quadro")) {
+        if (!snapshot.quadros.length) {
+          return "Você ainda não criou nenhum quadro. Clique em '+ Novo quadro' na tela inicial para começar a cadastrar suas tarefas.";
+        }
+        const linhas = snapshot.quadros.map((b) =>
+          `• ${b.nome}: ${b.totalTarefas} tarefa(s) (${b.aFazer} a fazer, ${b.emAndamento} em andamento, ${b.concluidas} concluída(s) e ${b.atrasadas} atrasada(s))`
+        );
+        return `Aqui está o resumo atualizado dos seus quadros:\n${linhas.join("\n")}`;
+      }
+
+      if (lower.includes("tenha em mente") || lower.includes("mensagem") || lower.includes("processo")) {
+        if (!board) return "Abra um quadro para visualizar a mensagem dinâmica do tópico Tenha em Mente.";
+        const msg = document.getElementById("tenhaEmMenteMessage")?.textContent || "Confie no processo.";
+        return `No quadro "${board.name}", a mensagem atual em Tenha em Mente é: "${msg}"`;
+      }
+
+      if (lower.includes("nota") || lower.includes("bloco")) {
+        return snapshot.blocoDeNotas
+          ? `No seu Bloco de Notas está anotado: "${snapshot.blocoDeNotas}"`
+          : "Seu Bloco de Notas está vazio no momento.";
+      }
+
+      if (lower.includes("contato") || lower.includes("email") || lower.includes("e-mail")) {
+        return `O e-mail de contato do Em Dia é ${CONTACT_EMAIL}.`;
+      }
+
+      return `Olá, ${snapshot.usuario.nome}! Você tem ${snapshot.totalQuadros} quadro(s) criado(s). Posso te informar sobre suas tarefas, prazos, atrasos, quadros, bloco de notas ou como usar qualquer recurso do Em Dia. O que você gostaria de saber?`;
+    }
+
+    async function generateSolReply(rawQuestion) {
+      const question = String(rawQuestion || "").trim();
+      const snapshot = buildSiteContextSnapshot();
+
+      if (!SOL_API_KEY) {
+        return generateLocalSmartReply(question);
+      }
+
+      solConversationHistory.push({
+        role: "user",
+        parts: [{ text: question }]
+      });
+      if (solConversationHistory.length > 10) {
+        solConversationHistory.splice(0, solConversationHistory.length - 10);
+      }
+
+      const systemInstruction = [
+        "Você é a Sol, assistente de IA do aplicativo Em Dia. Responda em português de forma clara, prestativa e objetiva.",
+        "Você pode responder qualquer pergunta geral ou sobre o site e as tarefas do usuário usando os dados reais abaixo:",
+        JSON.stringify(snapshot)
+      ].join("\n");
+
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(SOL_API_KEY)}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: systemInstruction }] },
+              contents: solConversationHistory
+            })
+          }
+        );
+        if (!response.ok) throw new Error("Erro HTTP");
+        const data = await response.json();
+        const answer = data?.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("").trim();
+        if (!answer) return generateLocalSmartReply(question);
+        solConversationHistory.push({ role: "model", parts: [{ text: answer }] });
+        return answer;
+      } catch {
+        return generateLocalSmartReply(question);
+      }
+    }
+
+    document.getElementById("toggleSolChatBtn").addEventListener("click", () => {
+      if (solChatPanelEl.classList.contains("hidden")) {
+        openSolPanel();
+      } else {
+        solChatPanelEl.classList.add("hidden");
+      }
+    });
+
+    document.getElementById("closeSolChatBtn").addEventListener("click", () => {
+      solChatPanelEl.classList.add("hidden");
+    });
+
+    solChatFormEl.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = solChatInputEl.value.trim();
+      if (!text) return;
+      appendSolMessage("user", text);
+      solChatInputEl.value = "";
+
+      const thinkingEl = document.createElement("div");
+      thinkingEl.className = "sol-msg bot";
+      thinkingEl.textContent = "Pensando...";
+      solChatMessagesEl.appendChild(thinkingEl);
+      solChatMessagesEl.scrollTop = solChatMessagesEl.scrollHeight;
+
+      const reply = await generateSolReply(text);
+      thinkingEl.remove();
+      appendSolMessage("bot", reply);
+    });
+
+    /* RENDER PRINCIPAL */
+    function renderAll() {
+      applyThemeAndAccent();
+      const board = getActiveBoard();
+      if (state.screen === "board" && !board) {
+        state.screen = "home";
+      }
+
+      const myRole = getCurrentUserRole(board);
+      const isSettingsPage = state.screen === "settings";
+      const isBoardPage = state.screen === "board" && Boolean(board);
+
+      const handleLabel = state.user.username ? ` • @${state.user.username}` : "";
+      const visLabel = state.user.visibility ? ` • ${state.user.visibility}` : "";
+
+      document.getElementById("accountSummaryHeader").innerHTML = `
+        ${renderAvatarHtml(state.user.name, state.user.avatarUrl, "avatar-lg")}
+        <div style="min-width:0;">
+          <div style="font-weight:700;font-size:0.98rem;">${escapeHtml(state.user.name || "Usuário")}</div>
+          <div class="section-sub" style="word-break:break-word;">${escapeHtml(state.user.email)}${escapeHtml(handleLabel)}${escapeHtml(visLabel)}</div>
+          ${state.user.about ? `<div class="section-sub" style="margin-top:3px;">${escapeHtml(state.user.about)}</div>` : ""}
+        </div>
+      `;
+
+      syncSettingsInputs();
+
+      document.getElementById("settingsPageView").classList.toggle("hidden", !isSettingsPage);
+      document.getElementById("homeDashboardView").classList.toggle("hidden", isSettingsPage || isBoardPage);
+      document.getElementById("boardDetailView").classList.toggle("hidden", isSettingsPage || !isBoardPage);
+      document.getElementById("openSettingsPageBtn").classList.toggle("active", isSettingsPage);
+
+      if (!isSettingsPage && !isBoardPage) {
+        const firstName = String(state.user.name || "").trim().split(/\s+/)[0];
+        document.getElementById("welcomeGreetingTitle").textContent = firstName
+          ? `Que bom vê-lo novamente, ${firstName} 😊`
+          : "Que bom vê-lo novamente, ${firstName} 😊";
+        document.getElementById("greetingMoodSubtitle").textContent =
+          `Humor do dia: ${state.user.mood || "😊 Motivado(a)"}`;
+        quickNotepadEl.value = state.notepadText || "";
+        renderEssentialTipsVisibility();
+        renderMiniCalendar();
+        renderDueSoonReminders();
+        renderBoardsList();
+      } else if (!isSettingsPage && isBoardPage && board) {
+        document.getElementById("openNewTaskBtn").disabled = !canEditTasks(board);
+        document.getElementById("activeBoardTitle").textContent = board.name;
+        document.getElementById("activeBoardDesc").textContent = board.desc || "";
+        document.getElementById("boardRoleIndicator").textContent = `Perfil: ${myRole}`;
+
+        renderTenhaEmMente(board);
+        renderInsightsAndCharts();
+        renderActiveView();
+        if (!permissionsPanelEl.classList.contains("hidden")) {
+          renderMembersPanel();
+        }
+      }
+    }
+
+    updateAuthVisibility();
+  </script>
+</body>
+</html>
