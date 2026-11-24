@@ -4835,6 +4835,16 @@
 
       syncSettingsInputs();
 
+      function buildUsernameFromName(fullName, email) {
+      const base = String(fullName || email?.split("@")[0] || "usuario")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9_]/g, "")
+        .slice(0, 12);
+      return base || "usuario";
+    }
+
       document.getElementById("settingsPageView").classList.toggle("hidden", !isSettingsPage);
       document.getElementById("homeDashboardView").classList.toggle("hidden", isSettingsPage || isBoardPage);
       document.getElementById("boardDetailView").classList.toggle("hidden", isSettingsPage || !isBoardPage);
