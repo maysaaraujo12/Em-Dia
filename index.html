@@ -2803,7 +2803,7 @@
 
     function renderAvatarHtml(name, avatarUrl, sizeClass = "avatar-sm") {
       if (avatarUrl) {
-        return `<img src="" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
+        return `<img src="&#128100" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
       }
       return `<span class="${sizeClass}" aria-label="${escapeHtml(name || "Usuário")}">👤</span>`;
     }
