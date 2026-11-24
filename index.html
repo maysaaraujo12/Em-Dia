@@ -2316,12 +2316,7 @@
         </div>
       </div>
 
-      <div class="two-col-grid">
-        <div class="form-row">
-          <label for="taskProgress">Progresso da atividade (%)</label>
-          <input id="taskProgress" type="number" min="0" max="100" step="5" value="0" />
-        </div>
-        <div class="form-row">
+              <div class="form-row">
           <label for="taskPriority">Prioridade</label>
           <select id="taskPriority">
             <option value="alta">Alta</option>
@@ -3955,10 +3950,6 @@
                   <span>📅 ${formatDateBr(task.dueDate)}</span>
                   <span class="due-badge ${deadline.className}">${escapeHtml(deadline.text)}</span>
                 </div>
-                <div class="task-progress" aria-label="Progresso ${Math.max(0, Math.min(100, Number(task.progress) || 0))}%">
-                  <div style="display:flex;justify-content:space-between;gap:8px;"><span>Progresso</span><strong>${Math.max(0, Math.min(100, Number(task.progress) || 0))}%</strong></div>
-                  <div class="task-progress-track"><div class="task-progress-fill" style="width:${Math.max(0, Math.min(100, Number(task.progress) || 0))}%;"></div></div>
-                </div>
                 <div class="card-meta-row">
                   ${member ? `
                     <span class="assignee-chip">
@@ -3967,8 +3958,9 @@
                     </span>
                   ` : `<span class="section-sub">Sem responsável</span>`}
                 </div>
-                <div class="card-footer-open">
-                  <button data-edit="${task.id}">Abrir</button>
+                <div class="card-footer-open" style="display:flex;gap:6px;justify-content:flex-end;">
+                ${canEdit ? `<button type="button" data-duplicate="${task.id}">Duplicar</button>` : ""}
+                <button type="button" data-edit="${task.id}">Abrir</button>
                 </div>
               </div>
             `;
@@ -4408,6 +4400,8 @@
             <div style="display:flex;align-items:center;gap:6px;">
               <input type="color" value="${escapeHtml(tag.color)}" data-change-label-color="${tag.id}" title="Alterar cor da etiqueta" style="width:34px;height:28px;padding:1px;" />
               <button type="button" class="danger" data-delete-label="${tag.id}">Excluir</button>
+              <button type="button" class="secundary" data-edit-label="${tag.id}">Editar</button>
+
             </div>
           </div>
         `)
