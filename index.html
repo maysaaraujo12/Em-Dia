@@ -1475,6 +1475,33 @@
           </p>
           <button type="button" class="primary" id="heroStartBtn">Começar agora</button>
         </div>
+        <section id="inicio" class="hero-card">
+          <div class="home-widgets-grid">
+          <!-- CALENDÁRIO -->
+          <div class="panel-card">
+            <div class="calendar-header">
+              <h2 style="margin:0;">Calendário</h2>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <button type="button" id="prevMonthBtn" title="Mês anterior">‹</button>
+                <span id="calendarMonthLabel" style="font-size:0.84rem;font-weight:700;min-width:86px;text-align:center;"></span>
+                <button type="button" id="nextMonthBtn" title="Próximo mês">›</button>
+              </div>
+            </div>
+            <div id="miniCalendarGrid" class="mini-calendar-grid"></div>
+            <div class="section-sub" style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+              <span><i class="cal-dot" style="background:#2563EB;display:inline-block;"></i> A fazer</span>
+              <span><i class="cal-dot" style="background:#EAB308;display:inline-block;"></i> Andamento</span>
+              <span><i class="cal-dot" style="background:#16A34A;display:inline-block;"></i> Concluída</span>
+              <span><i class="cal-dot" style="background:#DC2626;display:inline-block;"></i> Atrasada</span>
+            </div>
+          </div>
+
+          <!-- LEMBRETES -->
+          <div class="panel-card">
+            <h2>Lembretes de Prazo</h2>
+            <div class="section-sub">Tarefas vencendo em até 3 dias ou atrasadas:</div>
+            <div id="dueSoonRemindersList"></div>
+          </div>
       </section>
 
       <section id="sobre" class="landing-section">
