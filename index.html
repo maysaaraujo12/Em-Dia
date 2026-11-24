@@ -2805,7 +2805,7 @@
       if (avatarUrl) {
         return `<img src="${avatarUrl}" alt="${escapeHtml(name)}" class="${sizeClass}" />`;
       }
-      return `<span class="${sizeClass}">${escapeHtml(getInitials(name))}</span>`;
+      return `<span class="${sizeClass}" aria-label="${escapeHtml(name || "Usuário")}">👤</span>`;
     }
 
     /* RELÓGIO DIGITAL MINIMALISTA */
