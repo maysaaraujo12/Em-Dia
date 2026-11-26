@@ -1529,30 +1529,110 @@
         </div>
       </section>
 
-      <section id="contato" class="landing-section">
-        <h2>Contato</h2>
-        <p class="section-sub" style="margin-top:0;">
-          Fale diretamente pelo e-mail <strong>maysa.araujo.contato@exemplo.com</strong> ou envie uma mensagem:
-        </p>
-        <form id="contactMessageForm" class="contact-form">
-          <div class="field-group">
-            <label for="contactName">Seu nome</label>
-            <input type="text" id="contactName" required placeholder="Digite seu nome" data-spellcheck="true" />
-          </div>
-          <div class="field-group">
-            <label for="contactEmail">Seu e-mail</label>
-            <input type="email" id="contactEmail" required placeholder="voce@exemplo.com" />
-          </div>
-          <div class="field-group">
-            <label for="contactMessage">Mensagem</label>
-            <textarea id="contactMessage" rows="3" required placeholder="Escreva sua mensagem..." data-spellcheck="true"></textarea>
-          </div>
-          <div>
-            <button type="submit" class="primary">Enviar mensagem</button>
-          </div>
-          <div id="contactFeedback" class="section-sub"></div>
-        </form>
-      </section>
+      <!-- SEÇÃO DE CONTATO (SUBSTITUI A ANTIGA <section id="contato">) -->
+<section id="contato" class="contact-split-section" aria-label="Contato">
+  <div>
+    <div class="contact-left-brand">
+      <span class="brand-smiley" aria-hidden="true">☺</span>
+      <span>Em Dia</span>
+    </div>
+
+    <h2 class="contact-left-title">Traga sua ideia ou dúvida.</h2>
+
+    <p class="contact-left-desc">
+      Estamos abertos a conversas com usuários, estudantes, equipes e parceiros que desejam
+      sugerir melhorias, tirar dúvidas ou compartilhar experiências com o Em Dia.
+    </p>
+
+    <div class="contact-direct-email">
+      E-mail direto: <strong>maysa.araujo.contato@exemplo.com</strong>
+    </div>
+  </div>
+
+  <form id="contactMessageForm" class="contact-minimal-form">
+    <div class="minimal-field">
+      <div class="minimal-field-header">
+        <label for="contactName">Nome completo</label>
+        <span class="field-tag-required">Obrigatório</span>
+      </div>
+      <input
+        type="text"
+        id="contactName"
+        required
+        placeholder="Digite seu nome completo..."
+        data-spellcheck="true"
+      />
+    </div>
+
+    <div class="minimal-field">
+      <div class="minimal-field-header">
+        <label for="contactEmail">E-mail</label>
+        <span class="field-tag-required">Obrigatório</span>
+      </div>
+      <input
+        type="email"
+        id="contactEmail"
+        required
+        placeholder="voce@exemplo.com"
+      />
+    </div>
+
+    <div class="minimal-field">
+      <div class="minimal-field-header">
+        <label for="contactOrg">Organização ou projeto</label>
+        <span class="field-tag-optional">Opcional</span>
+      </div>
+      <input
+        type="text"
+        id="contactOrg"
+        placeholder="Nome da empresa, curso ou equipe..."
+        data-spellcheck="true"
+      />
+    </div>
+
+    <div class="minimal-field">
+      <div class="minimal-field-header">
+        <label for="contactInterest">Assunto de interesse</label>
+        <span class="field-tag-required">Obrigatório</span>
+      </div>
+      <select id="contactInterest" required>
+        <option value="" disabled selected>Selecione um assunto</option>
+        <option value="Dúvida sobre o aplicativo">Dúvida sobre o aplicativo</option>
+        <option value="Sugestão de melhoria">Sugestão de melhoria</option>
+        <option value="Uso em equipe ou projeto">Uso em equipe ou projeto</option>
+        <option value="Suporte técnico">Suporte técnico</option>
+        <option value="Outro assunto">Outro assunto</option>
+      </select>
+    </div>
+
+    <div class="minimal-field">
+      <div class="minimal-field-header">
+        <label for="contactMessage">Mensagem</label>
+        <span class="field-tag-required">Obrigatório</span>
+      </div>
+      <textarea
+        id="contactMessage"
+        rows="3"
+        required
+        placeholder="Escreva sua mensagem aqui..."
+        data-spellcheck="true"
+      ></textarea>
+    </div>
+
+    <div class="contact-form-footer">
+      <p class="contact-privacy-note">
+        Para dúvidas, sugestões e contato institucional. Evite incluir senhas ou dados sensíveis na mensagem.
+      </p>
+
+      <button type="submit" class="primary contact-submit-arrow-btn">
+        <span>Enviar contato</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div id="contactFeedback" class="section-sub"></div>
+  </form>
+</section>
     </main>
 
     <section id="authScreen" class="auth-wrapper hidden">
@@ -2623,21 +2703,34 @@
       }
     });
 
-    /* FORMULÁRIO DE CONTATO NA PÁGINA INICIAL */
-    document.getElementById("contactMessageForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const senderName = document.getElementById("contactName").value.trim();
-      const senderEmail = document.getElementById("contactEmail").value.trim();
-      const messageText = document.getElementById("contactMessage").value.trim();
-      if (!senderName || !senderEmail || !messageText) return;
+    /* ENVIO DO FORMULÁRIO DE CONTATO COM OS NOVOS CAMPOS */
+document.getElementById("contactMessageForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const senderName = document.getElementById("contactName").value.trim();
+  const senderEmail = document.getElementById("contactEmail").value.trim();
+  const senderOrg = document.getElementById("contactOrg").value.trim();
+  const interest = document.getElementById("contactInterest").value;
+  const messageText = document.getElementById("contactMessage").value.trim();
 
-      const subject = encodeURIComponent(`Contato Em Dia - ${senderName}`);
-      const body = encodeURIComponent(`Nome: ${senderName}\nE-mail: ${senderEmail}\n\nMensagem:\n${messageText}`);
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+  if (!senderName || !senderEmail || !interest || !messageText) return;
 
-      document.getElementById("contactFeedback").textContent =
-        `Mensagem preparada para ${CONTACT_EMAIL}.`;
-      e.target.reset();
+  const subject = encodeURIComponent(`[Em Dia - ${interest}] Contato de ${senderName}`);
+  const bodyLines = [
+    `Nome: ${senderName}`,
+    `E-mail: ${senderEmail}`,
+    senderOrg ? `Organização/Projeto: ${senderOrg}` : null,
+    `Assunto: ${interest}`,
+    "",
+    "Mensagem:",
+    messageText
+  ].filter((line) => line !== null);
+
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+  document.getElementById("contactFeedback").textContent =
+    `Mensagem preparada para ${CONTACT_EMAIL}.`;
+  e.target.reset();
+});
     });
 
     /* PÚBLICO: PÁGINA INICIAL + LOGIN / CRIAR CONTA */
